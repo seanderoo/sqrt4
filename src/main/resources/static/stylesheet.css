@@ -4,4 +4,12 @@ body {
     background: linear-gradient(to right, #185a9d, #43cea2);
     color: #fff;
     text-align: center;
+    font-family: sans-serif;
+}
+
+h1 {
+    background-color: darkblue;
+    font-style: italic;
+    padding: 20px;
+    width: 100%;
 }
