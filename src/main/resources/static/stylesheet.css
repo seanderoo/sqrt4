@@ -5,6 +5,8 @@ body {
     color: #fff;
     text-align: center;
     font-family: sans-serif;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
@@ -12,19 +14,30 @@ h1 {
     font-style: italic;
     padding: 20px;
     width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+#demo {
+    font-style: italic;
+    font-size: 1em;
+    padding: 20px;
+
+}
 
 #SollicitatieTabel {
     width: 500px;
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    margin-left: 50%;
-    margin-right: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ST {
     border: 1px solid black;
-    border-collapse: collapse;
+    border-collapse: separate;
 }
+
+
