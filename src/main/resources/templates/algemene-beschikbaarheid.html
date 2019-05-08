@@ -4,34 +4,7 @@
     <meta charset="UTF-8">
     <title>Algemene Beschikbaarheid Doorgeven</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <style>
-        table {
-            border: 1px solid black;
-            width: 70%;
-        }
-        table, tr, th {
-            border-collapse: collapse;
-            text-align: center;
-        }
-        td {
-            color: white;
-            font-size: 0.8em;
-            padding: 10px 5px;
-            text-align: center;
-        }
-        td.kanwel {
-            background-color: green;
-        }
-
-        td.kanniet {
-            background-color: red;
-        }
-
-        #knopOpslaan {
-            margin-right: 40%;
-            margin-left: 60%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
 </head>
 <body>
 <h1><i>MijnInzet - SQRT4</i></h1>
@@ -71,7 +44,6 @@
 <script>
     /*Tabel met klikbare cellen*/
     var deTabel = document.querySelector('#deTabel');
-    var geselecteerdeCellen = deTabel.getElementsByClassName('kanniet');
 
     deTabel.addEventListener('click', function(e) {
         var td = e.target;
@@ -86,7 +58,7 @@
     /*Knop voor het opslaan van data*/
     function Opslaan(){
         this.click = function() {
-            alert('Algemene beschikbaarheid is opgeslagen u_u');
+            alert('Algemene beschikbaarheid is opgeslagen');
         }
     }
 
@@ -94,7 +66,6 @@
 
     var knopElement = document.getElementById('knopOpslaan');
     knopElement.addEventListener('click', knopOpslaan.click);
-
 </script>
 </body>
 </html>
