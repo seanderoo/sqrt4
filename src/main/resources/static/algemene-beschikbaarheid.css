@@ -1,0 +1,26 @@
+table {
+    border: 1px solid black;
+    width: 70%;
+}
+table, tr, th {
+    border-collapse: collapse;
+    text-align: center;
+}
+td {
+    color: white;
+    font-size: 0.8em;
+    padding: 10px 5px;
+    text-align: center;
+}
+td.kanwel {
+    background-color: green;
+}
+
+td.kanniet {
+    background-color: red;
+}
+
+#knopOpslaan {
+    margin-right: 40%;
+    margin-left: 60%;
+}
