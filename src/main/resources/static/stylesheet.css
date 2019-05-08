@@ -13,3 +13,18 @@ h1 {
     padding: 20px;
     width: 100%;
 }
+
+
+#SollicitatieTabel {
+    width: 500px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.ST {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
