@@ -1,8 +1,8 @@
 body {
-    background: #43cea2;
-    background: -webkit-linear-gradient(to right, #185a9d, #43cea2);
-    background: linear-gradient(to right, #185a9d, #43cea2);
-    color: #fff;
+
+    /*background-image: url(images/hva background.jpg);*/
+    background-repeat: no-repeat;
+
     text-align: center;
     font-family: sans-serif;
     margin-left: auto;
@@ -11,7 +11,7 @@ body {
 
 h1 {
     background-color: darkblue;
-    font-style: italic;
+    color: white;
     padding: 20px;
     width: 100%;
     text-align: center;
@@ -20,20 +20,28 @@ h1 {
 }
 
 footer {
-    background-color: darkblue;
-    margin-top: 50px;
+    padding: 40px 0px;
+    position: absolute;
+    bottom: 0;
     text-align: center;
-    position: fixed;
     width: 100%;
-    bottom: 5px;
-    z-index: 5;
-
 }
-footer h3 {
-    display: inline-block;
-    margin: 20px 40px;
-    font-size: 14px;
+
+footer a {
+    background: darkblue;
+    border: 1px solid white;
+    border-radius: 3px;
     color: white;
+    display: inline-block;
+    margin: 10px;
+    padding: 14px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    background: white;
+    border: 1px solid darkblue;
+    color: darkblue;
 }
 
 #demo {
