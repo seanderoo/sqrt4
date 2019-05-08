@@ -1,6 +1,8 @@
 table {
     border: 1px solid black;
     width: 70%;
+    float: left;
+    margin-left: 15%;
 }
 table, tr, th {
     border-collapse: collapse;
@@ -21,6 +23,11 @@ td.kanniet {
 }
 
 #knopOpslaan {
-    margin-right: 40%;
-    margin-left: 60%;
+    margin-right: 50%;
+    margin-left: 50%;
+    margin-top: 20px;
+}
+
+#semesterSelector {
+    margin-left: 10px;
 }
