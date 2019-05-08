@@ -1,9 +1,6 @@
 package sqrt4.mijninzet.model.Users;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public abstract class User {

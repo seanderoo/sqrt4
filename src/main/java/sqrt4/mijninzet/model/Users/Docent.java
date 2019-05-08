@@ -2,8 +2,10 @@ package sqrt4.mijninzet.model.Users;
 
 import sqrt4.mijninzet.model.Voorkeur;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Docent extends User {
 
     ArrayList<Voorkeur> voorkeur;
