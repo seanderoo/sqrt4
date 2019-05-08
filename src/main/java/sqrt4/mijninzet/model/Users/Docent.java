@@ -8,9 +8,13 @@ public class Docent extends User {
 
     ArrayList<Voorkeur> voorkeur;
 
-    public Docent(int userId, String userName, String password, ArrayList<Voorkeur> voorkeur) {
-        super(userId, userName, password);
+    public Docent(ArrayList<Voorkeur> voorkeur) {
+        super();
         this.voorkeur = voorkeur;
 
+    }
+
+    public Docent() {
+        super();
     }
 }
