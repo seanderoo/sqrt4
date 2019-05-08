@@ -13,7 +13,7 @@ public class VoorkeurController {
     public String Voorkeur(HttpServletResponse response,  Model model) {
         response.addHeader("Voorbeeld1", "Voorbeeld2");
 //        model.addAttribute("voorkeuren", voorkeuren);
-        return "test";
+        return "Voorkeuren";
     }
 }
 

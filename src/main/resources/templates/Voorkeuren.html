@@ -1,12 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Voorkeuren</title>
+    <title>SQRT4  |  Kennisgebieden</title>
+    <link rel="stylesheet" type="text/css" href="static\stylesheet.css">
 </head>
 <body>
-    <p> vercsdghdrsjgrwagrae </p>
-    <p th:text="|Hello hier komen je voorkeuren, greetings from Thymeleaf|"></p>
+<header>
+    <h1>Voorkeuren</h1>
+</header>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <h2>Vakken</h2>
+            </th>
+            <th>
+                <h2>Voorkeur</h2>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="left"><h3>Programming</h3></td>
+            <td>
+                <h3>
+                    <input type="radio" name="voorkeur1"> <label for="liever niet">liever niet</label>
+                    <input type="radio" name="voorkeur1"> <label for="als het moet">als het moet</label>
+                    <input type="radio" name="voorkeur1"> <label for="graag!">graag!</label>
+                </h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="left"><h3>Databases</h3></td>
+            <td>
+                <h3>
+                    <input type="radio" name="voorkeur2"> <label for="liever niet">liever niet</label>
+                    <input type="radio" name="voorkeur2"> <label for="als het moet">als het moet</label>
+                    <input type="radio" name="voorkeur2"> <label for="graag!">graag!</label>
+                </h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="left"><h3>Object Oriented Programming</h3></td>
+            <td>
+                <h3>
+                    <input type="radio" name="voorkeur3"> <label for="liever niet">liever niet</label>
+                    <input type="radio" name="voorkeur3"> <label for="als het moet">als het moet</label>
+                    <input type="radio" name="voorkeur3"> <label for="graag!">graag!</label>
+                </h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="left"><h3>GIT</h3></td>
+            <td>
+                <h3>
+                    <input type="radio" name="voorkeur4"> <label for="liever niet">liever niet</label>
+                    <input type="radio" name="voorkeur4"> <label for="als het moet">als het moet</label>
+                    <input type="radio" name="voorkeur4"> <label for="graag!">graag!</label>
+                </h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="left"><h3>Advanced Programming</h3></td>
+            <td>
+                <h3>
+                    <input type="radio" name="voorkeur5"> <label for="liever niet">liever niet</label>
+                    <input type="radio" name="voorkeur5"> <label for="als het moet">als het moet</label>
+                    <input type="radio" name="voorkeur5"> <label for="graag!">graag!</label>
+                </h3>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <button id="knopOpslaan">Opslaan</button>
+</div>
+<footer>
+    <h3>Home</h3>
+    <h3>About</h3>
+    <h3>Contact</h3>
+</footer>
 </body>
 </html>
-

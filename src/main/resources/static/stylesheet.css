@@ -13,3 +13,30 @@ h1 {
     padding: 20px;
     width: 100%;
 }
+
+* {
+    font-family: sans-serif;
+}
+h1 {
+    background-color: darkblue;
+    color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+/*table {*/
+    /*border: 1px solid black;*/
+    /*width: 70%;*/
+/*}*/
+
+table, tr, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+td {
+    border: 1px solid black;
+    font-size: 0.8em;
+    padding: 10px 5px;
+    text-align: center;
+}
