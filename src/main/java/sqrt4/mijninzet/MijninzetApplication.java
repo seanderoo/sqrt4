@@ -3,6 +3,7 @@ package sqrt4.mijninzet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//requestMapping???("/blabla")
 @SpringBootApplication
 public class MijninzetApplication {
 
