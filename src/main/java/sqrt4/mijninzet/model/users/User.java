@@ -1,23 +1,30 @@
-package sqrt4.mijninzet.model.Users;
+package sqrt4.mijninzet.model.users;
 
 import javax.persistence.*;
 
 @Entity
+@Table(name = "User")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userId")
     private int userId;
+
+    @Column(name = "userName")
     private String userName;
+
+    @Column(name = "password")
     private String password;
 
 
  public User(int userId, String userName, String password) {
-    super();
     this.userId = userId;
     this.userName =userName;
     this.password = password;
     }
+
  public User(){
 
  }

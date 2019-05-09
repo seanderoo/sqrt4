@@ -20,7 +20,7 @@ h1 {
 }
 
 footer {
-    padding: 40px 0px;
+    padding: 40px;
     position: absolute;
     bottom: 0;
     text-align: center;
@@ -64,5 +64,3 @@ footer a:hover {
     border: 1px solid black;
     border-collapse: separate;
 }
-
-
