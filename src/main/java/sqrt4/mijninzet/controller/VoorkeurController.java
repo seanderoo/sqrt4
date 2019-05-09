@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 public class VoorkeurController {
 
     @GetMapping("/voorkeuren")
-    public String Voorkeur(HttpServletResponse response,  Model model) {
-        response.addHeader("Voorbeeld1", "Voorbeeld2");
-//        model.addAttribute("voorkeuren", voorkeuren);
+    public String Voorkeur() {
         return "voorkeuren";
     }
 }
 
-//    String voorkeuren,

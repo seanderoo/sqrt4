@@ -27,7 +27,7 @@ public class InlogController extends WebSecurityConfigurerAdapter {
     }
     @GetMapping("/test")
     public String test() {
-        User user = repo.getOne(1);
+        User user = repo.getOne(1); //code om database te intialiseren kan later weg
         return "test";
     }
 }

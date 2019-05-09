@@ -1,4 +1,4 @@
-//package sqrt4.mijninzet.Config;
+//package sqrt4.mijninzet.config;
 //
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
