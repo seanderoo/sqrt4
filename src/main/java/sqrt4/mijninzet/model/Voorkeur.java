@@ -1,11 +1,17 @@
 package sqrt4.mijninzet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@Entity
+
 public class Voorkeur {
 
+
+    @Column(name = "vak")
     private Vak vak;
+    @Id
+    @Column(name = "voorkeur")
     private int voorkeur;
 
 
