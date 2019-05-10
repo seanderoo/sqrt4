@@ -1,56 +1,38 @@
 package sqrt4.mijninzet.model.users;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "User")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userId")
-    private int userId;
+    private int id;
 
-    @Column(name = "userName")
     private String userName;
-
-    @Column(name = "password")
     private String password;
+    private String firstName;
+    private String lastName;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
 
- public User(int userId, String userName, String password) {
-    this.userId = userId;
-    this.userName =userName;
-    this.password = password;
-    }
-
- public User(){
-
- }
-
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
+    public User(int id, String userName, String password, String firstName, String lastName) {
+        this.id = id;
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User() {
     }
 }
