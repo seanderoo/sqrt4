@@ -36,7 +36,6 @@ public class Dag {
         cal.set(Calendar.YEAR, this.jaarNummer);
         cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
         cal.set(Calendar.DAY_OF_WEEK, nlDagNaarJava(dagnaam));
-        System.out.println(sdf.format(cal.getTime()));
 
         String date = sdf.format(cal.getTime());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

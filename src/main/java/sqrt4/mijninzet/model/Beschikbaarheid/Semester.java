@@ -74,4 +74,8 @@ public class Semester {
                 ",\n semesterList=" + semesterList +
                 "}";
     }
+
+    public String getSemesterNaam() {
+        return semesterNaam;
+    }
 }

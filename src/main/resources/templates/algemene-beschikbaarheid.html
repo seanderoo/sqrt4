@@ -44,10 +44,7 @@
         </tr>
     </table>
     <select id="semesterSelector">
-        <option value="2019-I">Semester: 2019-I</option>
-        <option value="2019-II">Semester: 2019-II</option>
-        <option value="2020-I">Semester: 2020-I</option>
-        <option value="2020-II">Semester: 2020-II</option>
+        <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
     </select>
     <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
