@@ -16,56 +16,52 @@ public class Dag {
     private boolean avond;
 
     public Dag(String dagnaam, int weekNummer, int jaarNummer) {
-        this.dagnaam = dagnaam;
-        this.weekNummer = weekNummer;
-        this.jaarNummer = jaarNummer;
+        this(dagnaam, weekNummer, jaarNummer, true, true, true);
         this.datum = setDatumDag(dagnaam);
-        ochtend = true;
-        middag = true;
-        avond = true;
     }
 
     public Dag(String name, int weekNummer, int jaarNummer, boolean ochtend, boolean middag, boolean avond){
         super();
+        this.dagnaam = name;
         this.weekNummer = weekNummer;
         this.jaarNummer = jaarNummer;
         this.ochtend = ochtend;
         this.middag = middag;
         this.avond = avond;
+        this.datum = setDatumDag(dagnaam);
     }
     public LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, jaarNummer);
-        cal.set(Calendar.WEEK_OF_YEAR, weekNummer);
-        cal.set(Calendar.DAY_OF_WEEK, getFunction(dagnaam));
+        cal.set(Calendar.YEAR, this.jaarNummer);
+        cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
+        cal.set(Calendar.DAY_OF_WEEK, nlDagNaarJava(dagnaam));
         System.out.println(sdf.format(cal.getTime()));
 
         String date = sdf.format(cal.getTime());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
         return localDate;
-//        System.out.println("Parsed Date?= " + date);
-
     }
-    public int getFunction(String dagNaam){
+
+    public int nlDagNaarJava(String dagNaam){
         int var = 0;
 
         switch(dagNaam){
             case "maandag":
-                var = 2;
+                var = Calendar.MONDAY;
                 break;
             case "dinsdag":
-                var = 3;
+                var = Calendar.TUESDAY;
                 break;
             case "woensdag":
-                var = 4;
+                var = Calendar.WEDNESDAY;
                 break;
             case "donderdag":
-                var = 5;
+                var = Calendar.THURSDAY;
                 break;
             case "vrijdag":
-                var = 6;
+                var = Calendar.FRIDAY;
                 break;
         }
         return var;
