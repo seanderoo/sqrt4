@@ -20,7 +20,7 @@ h1 {
 }
 
 footer {
-    position: relative;
+    z-index: 1;
     padding: 40px;
     position: absolute;
     bottom: 0;
@@ -37,13 +37,16 @@ footer a {
     margin: 10px;
     padding: 14px;
     text-decoration: none;
+    border-radius: 10px;
 }
 
 footer a:hover {
     background: white;
     border: 1px solid darkblue;
     color: darkblue;
+    border-radius: 10px;
 }
+
 
 #demo {
     font-style: italic;
@@ -65,5 +68,3 @@ footer a:hover {
     border: 1px solid black;
     border-collapse: separate;
 }
-
-

@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <title>Inlog pagina</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
 </head>
 <body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
 <h1>Welkom op de inlogpagina van MijnInzet</h1>
 <form action="#" th:action="@{/test}">
     Naam
