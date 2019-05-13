@@ -4,14 +4,16 @@
     <title>SQRT4  |  Kennisgebieden</title>
     <link rel="stylesheet" type="text/css" href="voorkeur.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
     <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
 
 </head>
 <body>
 <header>
-    <h1>Voorkeuren</h1>
+    <div th:insert="~{header::copy}">Header</div>
 </header>
+<h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan</h2>
 <div class="container">
     <table id="voorkeurTabel">

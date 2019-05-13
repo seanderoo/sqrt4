@@ -5,12 +5,14 @@
     <title>SQRT4  |  Beschikbaarheid</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
 </head>
 <body>
 <div>
 <header>
-    <h1>Algemene Beschikbaarheid</h1>
+        <div th:insert="~{header::copy}">Header</div>
 </header>
+    <h1>Algemene Beschikbaarheid</h1>
 <h2>Geef je incident op.</h2>
 <form>
     <label for="start">Datum van incident</label>
