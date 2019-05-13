@@ -20,6 +20,7 @@ h1 {
 }
 
 footer {
+    z-index: 1;
     padding: 40px;
     position: absolute;
     bottom: 0;
@@ -45,6 +46,7 @@ footer a:hover {
     color: darkblue;
     border-radius: 10px;
 }
+
 
 #demo {
     font-style: italic;
