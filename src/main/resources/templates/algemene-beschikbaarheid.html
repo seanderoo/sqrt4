@@ -12,7 +12,7 @@
     <h1>Algemene Beschikbaarheid</h1>
 </header>
 <h2>Geef je algemene beschikbaarheid op.</h2>
-<form><!--action="#" th:action="@{/bewaar/algemene-beschikbaarheid}" th:object="${}" method = post-->
+<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid}" th:object="${week}" method = post>
     <table id="deTabel">
         <tr>
             <th>maandag</th>
@@ -22,34 +22,35 @@
             <th>vrijdag</th>
         </tr>
         <tr>
-            <td class="kanwel maandag ochtend">09:00-13:00</td>
-            <td class="kanwel dinsdag ochtend">09:00-13:00</td>
-            <td class="kanwel woensdag ochtend">09:00-13:00</td>
-            <td class="kanwel donderdag ochtend">09:00-13:00</td>
-            <td class="kanwel vrijdag ochtend">09:00-13:00</td>
+            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09:00-13:00</td>
+            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend" value="1">09:00-13:00</td>
+            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend" value="1">09:00-13:00</td>
+            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend" value="1">09:00-13:00</td>
+            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend" value="1">09:00-13:00</td>
         </tr>
         <tr>
-            <td class="kanwel maandag middag">13:00-17:00</td>
-            <td class="kanwel dinsdag middag">13:00-17:00</td>
-            <td class="kanwel woensdag middag">13:00-17:00</td>
-            <td class="kanwel donderdag middag">13:00-17:00</td>
-            <td class="kanwel vrijdag middag">13:00-17:00</td>
+            <td class="kanwel maandagmiddag"><input type="hidden" name="maandagmiddag" value="1">13:00-17:00</td>
+            <td class="kanwel dinsdagmiddag"><input type="hidden" name="dinsdagmiddag" value="1">13:00-17:00</td>
+            <td class="kanwel woensdagmiddag"><input type="hidden" name="woensdagmiddag" value="1">13:00-17:00</td>
+            <td class="kanwel donderdagmiddag"><input type="hidden" name="donderdagmiddag" value="1">13:00-17:00</td>
+            <td class="kanwel vrijdagmiddag"><input type="hidden" name="vrijdagmiddag" value="1">13:00-17:00</td>
         </tr>
         <tr>
-            <td class="kanwel maandag avond">17:00-21:00</td>
-            <td class="kanwel dinsdag avond">17:00-21:00</td>
-            <td class="kanwel woensdag avond">17:00-21:00</td>
-            <td class="kanwel donderdag avond">17:00-21:00</td>
-            <td class="kanwel vrijdag avond">17:00-21:00</td>
+            <td class="kanwel maandagavond"><input type="hidden" name="maandagavond" value="1">17:00-21:00</td>
+            <td class="kanwel dinsdagavond"><input type="hidden" name="dinsdagavond" value="1">17:00-21:00</td>
+            <td class="kanwel woensdagavond"><input type="hidden" name="woensdagavond" value="1">17:00-21:00</td>
+            <td class="kanwel donderdagavond"><input type="hidden" name="donderdagavond" value="1">17:00-21:00</td>
+            <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17:00-21:00</td>
         </tr>
-    </table>
-    <select id="semesterSelector">
-        <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
-    </select>
-    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+
+            <select id="semesterSelector">
+                <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
+            </select>
+
+            <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
+
 <script>
-    /*Tabel met klikbare cellen*/
     var deTabel = document.querySelector('#deTabel');
 
     deTabel.addEventListener('click', function(e) {
@@ -57,8 +58,12 @@
         if (td.tagName === 'TD') {
             e.target.classList.toggle('kanwel');
             e.target.classList.toggle('kanniet');
-            /*Misschien ook per cell een id/class toevoegen die je kunt gebruiken om de data vervolgens op te halen met de Opslaan-knop. */
-            /*Verder ook cookies toevoegen om de selectie tussendoor op te slaan?*/
+
+            if (e.target.classList.contains('kanwel')) {
+                td.firstChild.value = '1';
+            } else {
+                td.firstChild.value = '0';
+            }
         }
     })
 
@@ -66,7 +71,6 @@
     function Opslaan(){
         this.click = function() {
             // Hier moet ik een lijst ophalen van alle de td's en hun classes. Die moeten dan via de controller in Java gezet worden.
-            // var dagEnTijd = document.querySelector("")
             alert('Algemene beschikbaarheid is opgeslagen');
         }
     }

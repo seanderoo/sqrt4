@@ -66,11 +66,44 @@ public class Dag {
         return var;
     }
 
+    public void setOchtend(boolean ochtend) {
+        this.ochtend = ochtend;
+    }
+
+    public void setMiddag(boolean middag) {
+        this.middag = middag;
+    }
+
+    public void setAvond(boolean avond) {
+        this.avond = avond;
+    }
+
+    public boolean getOchtend() {
+        return ochtend;
+    }
+
+    public boolean getMiddag() {
+        return middag;
+    }
+
+    public boolean getAvond() {
+        return avond;
+    }
+
+    public String getDagnaam() {
+        return dagnaam;
+    }
+
     @Override
     public String toString() {
         return "Dag{" +
                 "dagnaam='" + dagnaam + '\'' +
+                ", weekNummer=" + weekNummer +
+                ", jaarNummer=" + jaarNummer +
                 ", datum=" + datum +
+                ", ochtend=" + ochtend +
+                ", middag=" + middag +
+                ", avond=" + avond +
                 '}';
     }
 }

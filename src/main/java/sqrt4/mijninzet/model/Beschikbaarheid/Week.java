@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public class Week {
-    private ArrayList<Dag> week = new ArrayList<Dag>();
+    private ArrayList<Dag> week = new ArrayList<>();
     private int weekNummer;
     private int jaarNummer;
 
@@ -44,5 +44,17 @@ public class Week {
 
     public void setJaarNummer(int jaarNummer) {
         this.jaarNummer = jaarNummer;
+    }
+
+    public Dag getDag(String dagnaam) {
+        Dag dag = null;
+
+        for (Dag d : week) {
+            if (d.getDagnaam().equals(dagnaam)) {
+                dag = d;
+            }
+        }
+
+        return dag;
     }
 }

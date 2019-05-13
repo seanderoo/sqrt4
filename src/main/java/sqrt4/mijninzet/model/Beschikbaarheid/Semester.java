@@ -1,17 +1,33 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
+import sqrt4.mijninzet.model.users.User;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 
+@Entity
 public class Semester {
     private final int REG_JAAR = 52;
     private final int HALF_JAAR = 26;
     private final int SPEC_JAAR = 53;
     private final int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
+
+    @Id
     private String semesterNaam;
     private int startWeek;
     private int startJaar;
     private int eindWeek;
     private ArrayList<Week> semesterList = new ArrayList<Week>();
+
+    @ManyToOne
+    private User user;
+
+    //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
+    public Semester() {
+        this(2,1970,27);
+    }
 
     public Semester(int startWeek, int startJaar, int eindWeek) {
         this.semesterNaam = setSemesterName(startWeek, startJaar);
@@ -78,4 +94,16 @@ public class Semester {
     public String getSemesterNaam() {
         return semesterNaam;
     }
+
+    public void beschikbaarheidAanpassen(Week nieuweWeek) {
+        String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
+        for (Week week : semesterList) {
+            for (int i = 0; i < weekdagen.length; i++) {
+                week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
+                week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
+                week.getDag(weekdagen[i]).setAvond(nieuweWeek.getDag(weekdagen[i]).getAvond());
+            }
+        }
+    }
+
 }
