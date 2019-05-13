@@ -1,3 +1,5 @@
+* {box-sizing: border-box}
+
 .header {
     overflow: hidden;
     background-color: darkblue;
@@ -11,12 +13,22 @@
     float: left;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px;
     text-decoration: none;
     font-size: 17px;
+    width: 20%;
 }
 
 .header a:hover {
     background-color: white;
     color: darkblue;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
 }

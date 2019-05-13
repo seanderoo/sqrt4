@@ -6,13 +6,13 @@
     <title>SQRT4  |  Beschikbaarheid</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
 </head>
 <body>
 <header>
-    <h1>Algemene Beschikbaarheid</h1>
+    <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1 th:text="${name}"></h1>
-
+<h1>Beschikbaarheid opgeven</h1>
 <h2>Geef je algemene beschikbaarheid op.</h2>
 <form><!--action="#" th:action="@{/bewaar/algemene-beschikbaarheid}" th:object="${}" method = post-->
     <table id="deTabel">
@@ -83,7 +83,6 @@
 </script>
 </body>
 <footer>
-    <div th:insert="~{footer::copy}">Footer</div>
 </footer>
 
 </html>
