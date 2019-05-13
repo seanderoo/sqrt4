@@ -45,4 +45,15 @@ public class Week {
     public void setJaarNummer(int jaarNummer) {
         this.jaarNummer = jaarNummer;
     }
+
+    public int getDaysInTheWeek() {
+
+        int teller = 0;
+        for (Object o: week) {
+            if(o instanceof Dag){
+                teller++;
+        }
+        }
+        return teller;
+    }
 }
