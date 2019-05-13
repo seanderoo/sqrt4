@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Beschikbaarheid</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
+</head>
+<body>
+<div>
+<header>
+    <h1>Algemene Beschikbaarheid</h1>
+</header>
+<h2>Geef je incident op.</h2>
+<form>
+    <label for="start">Datum van incident</label>
+
+    <input type="date" id="start" name="trip-start"
+           value=""
+           min="" max="">
+</form>
+
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body>
+<table id="deTabel">
+    <tr>
+        <th>datum</th>
+        <th>datum</th>
+        <th>datum</th>
+        <th>datum</th>
+        <th>datum</th>
+    </tr>
+    <tr>
+        <th>maandag</th>
+        <th>dinsdag</th>
+        <th>woensdag</th>
+        <th>donderdag</th>
+        <th>vrijdag</th>
+    </tr>
+    <tr>
+        <td class="kanwel maandag ochtend">09:00-13:00</td>
+        <td class="kanwel dinsdag ochtend">09:00-13:00</td>
+        <td class="kanwel woensdag ochtend">09:00-13:00</td>
+        <td class="kanwel donderdag ochtend">09:00-13:00</td>
+        <td class="kanwel vrijdag ochtend">09:00-13:00</td>
+    </tr>
+    <tr>
+        <td class="kanwel maandag middag">13:00-17:00</td>
+        <td class="kanwel dinsdag middag">13:00-17:00</td>
+        <td class="kanwel woensdag middag">13:00-17:00</td>
+        <td class="kanwel donderdag middag">13:00-17:00</td>
+        <td class="kanwel vrijdag middag">13:00-17:00</td>
+    </tr>
+    <tr>
+        <td class="kanwel maandag avond">17:00-21:00</td>
+        <td class="kanwel dinsdag avond">17:00-21:00</td>
+        <td class="kanwel woensdag avond">17:00-21:00</td>
+        <td class="kanwel donderdag avond">17:00-21:00</td>
+        <td class="kanwel vrijdag avond">17:00-21:00</td>
+    </tr>
+</table>
+
+<button id="knopOpslaan">Opslaan</button>
+<script>
+    /*Tabel met klikbare cellen*/
+    var deTabel = document.querySelector('#deTabel');
+
+    deTabel.addEventListener('click', function(e) {
+        var td = e.target;
+        if (td.tagName === 'TD') {
+            e.target.classList.toggle('kanwel');
+            e.target.classList.toggle('kanniet');
+            /*Misschien ook per cell een id/class toevoegen die je kunt gebruiken om de data vervolgens op te halen met de Opslaan-knop. */
+            /*Verder ook cookies toevoegen om de selectie tussendoor op te slaan?*/
+        }
+    })
+
+    /*Knop voor het opslaan van data*/
+    function Opslaan(){
+        this.click = function() {
+            alert('Algemene beschikbaarheid is opgeslagen');
+        }
+    }
+
+    var knopOpslaan = new Opslaan();
+
+    var knopElement = document.getElementById('knopOpslaan');
+    knopElement.addEventListener('click', knopOpslaan.click);
+</script>
+</body>
+<footer>
+    <div th:insert="~{footer::copy}">Footer</div>
+</footer>
+
+</html>
