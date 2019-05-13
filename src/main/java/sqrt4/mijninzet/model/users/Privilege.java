@@ -1,4 +1,4 @@
-package sqrt4.mijninzet.model.Users;
+package sqrt4.mijninzet.model.users;
 
 import javax.persistence.*;
 import java.util.Collection;

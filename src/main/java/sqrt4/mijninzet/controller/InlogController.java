@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import sqrt4.mijninzet.repository.UserRepository;
-import sqrt4.mijninzet.model.Users.User;
+import sqrt4.mijninzet.model.users.User;
 
 @Controller
 public class InlogController extends WebSecurityConfigurerAdapter {
