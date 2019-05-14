@@ -23,7 +23,8 @@ public class Semester {
     private int startJaar;
     private int eindWeek;
 
-    @OneToMany(mappedBy = "semester")
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.PERSIST)
+    @OrderBy("jaarNummer asc, weekNummer asc")
     private List<Week> semesterList;
 
     @ManyToOne

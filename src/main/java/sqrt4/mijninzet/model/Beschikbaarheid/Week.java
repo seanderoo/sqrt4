@@ -15,7 +15,7 @@ public class Week {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "week")
+    @OneToMany(mappedBy = "week", cascade = CascadeType.PERSIST)
     private List<Dag> week;
 
     private int weekNummer;
