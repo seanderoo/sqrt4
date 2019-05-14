@@ -33,11 +33,4 @@ public class InlogController extends WebSecurityConfigurerAdapter {
         User user = repo.getOne(1); //code om database te intialiseren kan later weg
         return "test";
     }
-    //deze merthode geeft een boolean terug die je dan weer kunt gebruiken in de methode 'inlog' om een inloggen-gelukt
-    // of een inloggen-mislukt pagina te laten zien.
-    public boolean checkLogin(User user) {
-        Session session = sessionFactory.openSession();
-        boolean inlogCorrect = false;
-        return inlogCorrect;
-    }
 }
