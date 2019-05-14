@@ -1,12 +1,10 @@
 package sqrt4.mijninzet.model.users;
 
-import org.springframework.context.annotation.Bean;
+import sqrt4.mijninzet.model.Vacature;
 
 import javax.persistence.*;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class User {
@@ -19,7 +17,6 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-
     @ManyToMany
     @JoinTable(
             name = "users_roles",

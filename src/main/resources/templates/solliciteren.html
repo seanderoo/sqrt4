@@ -13,40 +13,62 @@
 </header>
 <h1>Solliciteren</h1>
 <h2>Solliciteer hier op vacatures:</h2>
-    <table id="SollicitatieTabel">
-        <tr class="ST">
-            <th class="ST"><h3>Vacature</h3></th>
-            <th class="ST"><h3>Solliciteren</h3></th>
-        </tr>
-        <tr class="ST">
-            <td class="ST"><a href="https://en.wikipedia.org/wiki/Computer_programming" target="_blank">Programming</a></td>
-            <td class="ST">
-                <p>
-                <input type="radio" name="Programming" value="ja"> ja
-                <input type="radio" name="Programming" value="nee"> nee
-                </p>
-            </td>
-        </tr>
-        <tr class="ST">
-            <td class="ST"><a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">OOP</a></td>
-            <td class="ST">
-                <p>
-                <input type="radio" name="OOP" value="ja"> ja
-                <input type="radio" name="OOP" value="nee"> nee
-                </p>
-            </td>
-        </tr>
-        <tr class="ST">
-            <td class="ST"><a href="https://nl.wikipedia.org/wiki/Categorie:Quizmaster" target="_blank">Project Quizmaster</a></td>
-            <td class="ST">
-                <p>
-                <input type="radio" name="Quizmaster" value="ja"> ja
-                <input type="radio" name="Quizmaster" value="nee"> nee<br>
-                </p>
-            </td>
-        </tr>
-    </table>
-<br/>
+<!--    <table id="SollicitatieTabel">-->
+<!--        <tr class="ST">-->
+<!--            <th class="ST"><h3>Vacature</h3></th>-->
+<!--            <th class="ST"><h3>Solliciteren</h3></th>-->
+<!--        </tr>-->
+<!--        <tr class="ST">-->
+<!--            <td class="ST"><a href="https://en.wikipedia.org/wiki/Computer_programming" target="_blank">Programming</a></td>-->
+<!--            <td class="ST">-->
+<!--                <p>-->
+<!--                <input type="radio" name="Programming" value="ja"> ja-->
+<!--                <input type="radio" name="Programming" value="nee"> nee-->
+<!--                </p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr class="ST">-->
+<!--            <td class="ST"><a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">OOP</a></td>-->
+<!--            <td class="ST">-->
+<!--                <p>-->
+<!--                <input type="radio" name="OOP" value="ja"> ja-->
+<!--                <input type="radio" name="OOP" value="nee"> nee-->
+<!--                </p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr class="ST">-->
+<!--            <td class="ST"><a href="https://nl.wikipedia.org/wiki/Categorie:Quizmaster" target="_blank">Project Quizmaster</a></td>-->
+<!--            <td class="ST">-->
+<!--                <p>-->
+<!--                <input type="radio" name="Quizmaster" value="ja"> ja-->
+<!--                <input type="radio" name="Quizmaster" value="nee"> nee<br>-->
+<!--                </p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--<br/>-->
+<table>
+    <thead>
+    <tr>
+        <th>Vacature</th>
+        <th>Aantal Uren</th>
+        <th>Vereisten</th>
+        <th>Omschrijving</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr th:if="${vacatures.empty}">-->
+<!--        <td colspan="4">Geen openstaande vacatures beschikbaar</td>-->
+<!--    </tr>-->
+    <tr th:each="vacature: ${vacatures}">
+        <td><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
+        <td><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
+        <td><span th:text="${vacature.eisen}">Vereisten </span></td>
+        <td><span th:text="${vacature.omschrijving}">Omschrijving </span></td>
+    </tr>
+    </tbody>
+</table>
+
 <button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Sollicitatie opslaan</button>
 <p id="sollicitatieOpgeslagen"></p>
 

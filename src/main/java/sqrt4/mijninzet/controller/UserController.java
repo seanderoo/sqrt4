@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.users.Role;
 import sqrt4.mijninzet.model.users.User;
 import sqrt4.mijninzet.repository.RoleRepository;
@@ -22,6 +23,7 @@ public class UserController {
     RoleRepository roleRepository;
 
     @GetMapping("/nieuwe-gebruiker")
+    //kun je mbv @RequestParam de gekozen rol uitlezen? (Karin)
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
