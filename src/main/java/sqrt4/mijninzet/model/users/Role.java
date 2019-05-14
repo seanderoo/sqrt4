@@ -1,5 +1,7 @@
 package sqrt4.mijninzet.model.users;
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,7 +15,7 @@ public class Role {
 
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private Collection<sqrt4.mijninzet.model.users.User> users;
+    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(
@@ -22,5 +24,19 @@ public class Role {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Collection<sqrt4.mijninzet.model.users.Privilege> privileges;
+    private Collection<Privilege> privileges;
+
+    public Role() {
+    }
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

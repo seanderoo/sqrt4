@@ -11,7 +11,7 @@ public class Semester {
     private final int HALF_JAAR = 26;
     private final int SPEC_JAAR = 53;
     private final int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
-    @Id
+
     private String semesterNaam;
     private int startWeek;
     private int startJaar;

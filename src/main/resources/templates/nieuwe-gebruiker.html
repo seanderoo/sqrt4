@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Niewe Gebruiker</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="form-karin.css">
+
+</head>
+<body>
+<h1>Niewe Gebruiker toevoegen</h1>
+<form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
+    Voornaam
+    <input type="text" th:name="firstName" size="40" required> <br>
+    Achternaam
+    <input type="text" th:name="lastName" size="40" required> <br>
+    Inlognaam
+    <input type="text" th:name="userName" size="40" required> <br>
+    Wachtwoord
+    <input type="password" th:name="password" size="40" required> <br>
+    Herhaal wachtwoord
+    <input type="password" size="40" required> <br>
+    Kies een Rol
+    <input list="roles">
+    <datalist id="roles">
+        <option th:each="role : ${roles}"
+                th:value="${role.name}"
+                th:text="${role.name}"></option>
+    </datalist> <br>
+    <input type="submit" value="Nieuwe gebruiker aanmaken"/>
+</form>
+</body>
+</html>
