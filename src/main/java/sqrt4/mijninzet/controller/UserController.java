@@ -22,6 +22,7 @@ public class UserController {
     RoleRepository roleRepository;
 
     @GetMapping("/nieuwe-gebruiker")
+    //kun je mbv @RequestParam de gekozen rol uitlezen? (Karin)
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);

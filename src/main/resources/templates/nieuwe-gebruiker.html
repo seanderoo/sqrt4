@@ -9,7 +9,8 @@
 
 </head>
 <body>
-<h1>Niewe Gebruiker toevoegen</h1>
+<h1>Nieuwe Gebruiker toevoegen</h1>
+<div id="nieuwegebruikerform">
 <form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
     Voornaam
     <input type="text" th:name="firstName" size="40" required> <br>
@@ -30,5 +31,6 @@
     </datalist> <br>
     <input type="submit" value="Nieuwe gebruiker aanmaken"/>
 </form>
+</div>
 </body>
 </html>

@@ -17,3 +17,6 @@ input[value=Inloggen] {
     font-size: 0.6em;
 }
 
+#nieuwegebruikerform {
+    .center
+}
