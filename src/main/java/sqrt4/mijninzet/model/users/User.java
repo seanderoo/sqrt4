@@ -1,6 +1,9 @@
 package sqrt4.mijninzet.model.users;
 
+import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -14,6 +17,9 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+
+    @OneToMany
+    private Collection<Semester> semesters = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
