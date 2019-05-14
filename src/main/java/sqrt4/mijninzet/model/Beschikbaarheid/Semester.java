@@ -1,9 +1,7 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
-import sqrt4.mijninzet.model.users.User;
+import sqrt4.mijninzet.model.User;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.ArrayList;
 
 

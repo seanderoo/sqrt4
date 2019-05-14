@@ -1,15 +1,8 @@
-package sqrt4.mijninzet.model.users;
-
-import org.springframework.context.annotation.Bean;
-
-import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
+package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class User {
