@@ -23,8 +23,8 @@ public class User {
     private String firstName;
     private String lastName;
 
-//    @OneToMany
-//    private Collection<Semester> semesters = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Semester> semesters;
 
     @ManyToMany
     @JoinTable(
@@ -41,6 +41,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        semesters = new ArrayList<>();
         roles = new ArrayList<>();
     }
 

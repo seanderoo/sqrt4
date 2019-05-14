@@ -1,19 +1,46 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
+import org.hibernate.annotations.Generated;
+
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-
+@Entity
 public class Week {
-    private ArrayList<Dag> week = new ArrayList<>();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @OneToMany(mappedBy = "week")
+    private List<Dag> week;
+
     private int weekNummer;
     private int jaarNummer;
+
+    @ManyToOne
+    @JoinColumn
+    private Semester semester;
 
 
     public Week(int weekNummer, int jaarNummer){
         super();
         this.weekNummer = weekNummer;
         this.jaarNummer = jaarNummer;
+        week = new ArrayList<>();
+        week.add(new Dag("maandag", weekNummer, jaarNummer));
+        week.add(new Dag("dinsdag", weekNummer, jaarNummer));
+        week.add(new Dag("woensdag", weekNummer, jaarNummer));
+        week.add(new Dag("donderdag", weekNummer, jaarNummer));
+        week.add(new Dag("vrijdag", weekNummer,jaarNummer));
+    }
+
+    public Week() {
+        this(1,2019);
+        week = new ArrayList<>();
         week.add(new Dag("maandag", weekNummer, jaarNummer));
         week.add(new Dag("dinsdag", weekNummer, jaarNummer));
         week.add(new Dag("woensdag", weekNummer, jaarNummer));
