@@ -2,26 +2,47 @@ package sqrt4.mijninzet.model.Beschikbaarheid;
 
 import sqrt4.mijninzet.model.User;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-
+@Entity
 public class Semester {
     private final int REG_JAAR = 52;
     private final int HALF_JAAR = 26;
     private final int SPEC_JAAR = 53;
     private final int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private String semesterNaam;
     private int startWeek;
     private int startJaar;
     private int eindWeek;
-    private ArrayList<Week> semesterList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "semester")
+    private List<Week> semesterList;
+
+    @ManyToOne
+    @JoinColumn
     private User user;
 
     //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
     public Semester() {
         this(2,1970,27);
+        semesterList = new ArrayList<>();
+
+        for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
+            semesterList.add(new Week(startWeek + i, startJaar));
+            if (semesterList.get(i).getWeekNummer() > wekenInJaar(startJaar)) {
+                semesterList.get(i).setWeekNummer(semesterList.get(i).getWeekNummer() - wekenInJaar(startJaar));
+                semesterList.get(i).setJaarNummer(startJaar + 1);
+            }
+        }
+
     }
 
     public Semester(int startWeek, int startJaar, int eindWeek) {
@@ -29,6 +50,8 @@ public class Semester {
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
+        semesterList = new ArrayList<>();
+
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
             semesterList.add(new Week(startWeek + i, startJaar));
             if (semesterList.get(i).getWeekNummer() > wekenInJaar(startJaar)) {
@@ -80,7 +103,7 @@ public class Semester {
                 "semesterNaam='" + semesterNaam + "\'" +
                 ",\n startWeek=" + startWeek +
                 ",\n startJaar=" + startJaar +
-                ",\n eindJaar=" + semesterList.get(semesterList.size()-1).getJaarNummer() +
+                ",\n eindJaar=" + semesterList.get(semesterList.size() - 1).getJaarNummer() +
                 ",\n eindWeek=" + eindWeek +
                 ",\n semesterList=" + semesterList +
                 "}";
@@ -100,5 +123,4 @@ public class Semester {
             }
         }
     }
-
 }

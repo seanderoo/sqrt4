@@ -2,13 +2,22 @@ package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-
+@Entity
 public class Dag {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn
+    private Week week;
+
     private String dagnaam;
     private int weekNummer;
     private int jaarNummer;
@@ -32,6 +41,8 @@ public class Dag {
         this.avond = avond;
         this.datum = setDatumDag(dagnaam);
     }
+
+    public Dag() {}
 
     public LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

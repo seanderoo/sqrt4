@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-//import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
+import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import java.util.List;
 @Controller
 public class AlgemeneBeschikbaarheidController {
 
-//    @Autowired
-//    AlgemeneBeschikbaarheidRepository repo;
+    @Autowired
+    AlgemeneBeschikbaarheidRepository repo;
 
     @GetMapping("/algemene-beschikbaarheid")
     public String AlgemeneBeschikbaarheid(Model model, @RequestParam(value = "name", required = false,
@@ -65,7 +65,7 @@ public class AlgemeneBeschikbaarheidController {
                                                 HttpServletRequest request){
 
         System.out.println(request.getParameterMap().entrySet());
-        Week algemeneWeek = new Week(0,0);
+        Week algemeneWeek = new Week();
 
         algemeneWeek.getDag("maandag").setOchtend(maOBeschikbaar);
         algemeneWeek.getDag("maandag").setMiddag(maMBeschikbaar);
@@ -89,10 +89,10 @@ public class AlgemeneBeschikbaarheidController {
 
         Semester semester = new Semester();
         semester.beschikbaarheidAanpassen(algemeneWeek);
-//        System.out.println(semester);
+        System.out.println(semester);
 
 
-//        repo.save(semester);
+        repo.save(semester);
         return "algemene-beschikbaarheid"; //Is de pagina waar je vervolgens heengestuurd wordt?
 
     }
