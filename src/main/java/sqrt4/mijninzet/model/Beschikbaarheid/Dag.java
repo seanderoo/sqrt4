@@ -1,10 +1,12 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+
 
 public class Dag {
     private String dagnaam;
@@ -30,13 +32,13 @@ public class Dag {
         this.avond = avond;
         this.datum = setDatumDag(dagnaam);
     }
+
     public LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, this.jaarNummer);
         cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
         cal.set(Calendar.DAY_OF_WEEK, nlDagNaarJava(dagnaam));
-        System.out.println(sdf.format(cal.getTime()));
 
         String date = sdf.format(cal.getTime());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

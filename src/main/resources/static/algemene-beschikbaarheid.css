@@ -4,6 +4,7 @@ table {
     width: 70%;
     float: left;
     margin-left: 15%;
+
 }
 table, tr, th {
     border-collapse: collapse;
@@ -12,7 +13,7 @@ table, tr, th {
 td {
     color: white;
     font-size: 0.8em;
-    padding: 10px 5px;
+    padding: 6px 5px;
     text-align: center;
 }
 td.kanwel {
