@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
 
-@Entity
+
 public class Semester {
     private final int REG_JAAR = 52;
     private final int HALF_JAAR = 26;
