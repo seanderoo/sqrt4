@@ -11,6 +11,7 @@ public class VoorkeurController {
 
     @GetMapping("/voorkeuren")
     public String Voorkeur() {
+
         return "voorkeuren";
     }
 }

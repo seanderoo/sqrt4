@@ -1,21 +1,20 @@
 package sqrt4.mijninzet.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-
+@Entity
 public class Voorkeur {
 
-
-    @Column(name = "vak")
-    private Vak vak;
     @Id
-    @Column(name = "voorkeur")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    private Vak vak;
     private int voorkeur;
 
 
-    public Voorkeur(Vak vak, int voorkeur){
+    public Voorkeur(int id, Vak vak, int voorkeur){
+        this.id = id;
         this.vak = vak;
         this.voorkeur = voorkeur;
     }

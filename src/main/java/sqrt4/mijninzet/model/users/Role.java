@@ -3,6 +3,7 @@ package sqrt4.mijninzet.model.users;
 import javax.persistence.*;
 import java.util.Collection;
 
+
 @Entity
 public class Role {
 
@@ -12,7 +13,7 @@ public class Role {
 
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private Collection<sqrt4.mijninzet.model.users.User> users;
 
     @ManyToMany
     @JoinTable(
@@ -21,5 +22,5 @@ public class Role {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
+    private Collection<sqrt4.mijninzet.model.users.Privilege> privileges;
 }

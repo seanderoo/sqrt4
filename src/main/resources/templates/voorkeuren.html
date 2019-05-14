@@ -81,9 +81,19 @@
         </tbody>
     </table>
     <br/>
-    <button id="knopOpslaan">Opslaan</button>
+    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </div>
 </body>
-<footer>
-</footer>
+<script>
+    function Opslaan(){
+        this.click = function() {
+            alert('Voorkeur is opgeslagen');
+        }
+    }
+
+    var knopOpslaan = new Opslaan();
+
+    var knopElement = document.getElementById('knopOpslaan');
+    knopElement.addEventListener('click', knopOpslaan.click);
+</script>
 </html>
