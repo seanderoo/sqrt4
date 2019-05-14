@@ -15,24 +15,11 @@
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan</h2>
 <div class="container">
-    <p th:text="'Welkom ' + ${name}"></p>
-
-
-
-    <table id="voorkeurTabel">
-        <thead>
-        <tr>
-            <th>
-                <h2>Vakken</h2>
-            </th>
-            <th>
-                <h2>Voorkeur</h2>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="left"><h3>Programming</h3></td>
+    <br>
+    <form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
+        <table>
+        <tr th:each="vakken: ${vak}">
+            <td th:text="{vakNaam}" />
             <td>
                 <h3>
                     <input type="radio" name="voorkeur1"> <label for="liever niet">liever niet</label>
@@ -41,50 +28,79 @@
                 </h3>
             </td>
         </tr>
-        <tr>
-            <td class="left"><h3>Databases</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur2"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur2"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur2"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>Object Oriented Programming</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur3"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur3"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur3"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>GIT</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur4"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur4"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur4"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>Advanced Programming</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur5"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur5"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur5"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <br/>
-    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+        </table>
+        <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+    </form>
+
+
+
+
+    <!--<table id="voorkeurTabel">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>-->
+                <!--<h2>Vakken</h2>-->
+            <!--</th>-->
+            <!--<th>-->
+                <!--<h2>Voorkeur</h2>-->
+            <!--</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td class="left"><h3>Programming</h3></td>-->
+            <!--<td>-->
+                <!--<h3>-->
+                    <!--<input type="radio" name="voorkeur1"> <label for="liever niet">liever niet</label>-->
+                    <!--<input type="radio" name="voorkeur1"> <label for="als het moet">als het moet</label>-->
+                    <!--<input type="radio" name="voorkeur1"> <label for="graag!">graag!</label>-->
+                <!--</h3>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="left"><h3>Databases</h3></td>-->
+            <!--<td>-->
+                <!--<h3>-->
+                    <!--<input type="radio" name="voorkeur2"> <label for="liever niet">liever niet</label>-->
+                    <!--<input type="radio" name="voorkeur2"> <label for="als het moet">als het moet</label>-->
+                    <!--<input type="radio" name="voorkeur2"> <label for="graag!">graag!</label>-->
+                <!--</h3>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="left"><h3>Object Oriented Programming</h3></td>-->
+            <!--<td>-->
+                <!--<h3>-->
+                    <!--<input type="radio" name="voorkeur3"> <label for="liever niet">liever niet</label>-->
+                    <!--<input type="radio" name="voorkeur3"> <label for="als het moet">als het moet</label>-->
+                    <!--<input type="radio" name="voorkeur3"> <label for="graag!">graag!</label>-->
+                <!--</h3>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="left"><h3>GIT</h3></td>-->
+            <!--<td>-->
+                <!--<h3>-->
+                    <!--<input type="radio" name="voorkeur4"> <label for="liever niet">liever niet</label>-->
+                    <!--<input type="radio" name="voorkeur4"> <label for="als het moet">als het moet</label>-->
+                    <!--<input type="radio" name="voorkeur4"> <label for="graag!">graag!</label>-->
+                <!--</h3>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="left"><h3>Advanced Programming</h3></td>-->
+            <!--<td>-->
+                <!--<h3>-->
+                    <!--<input type="radio" name="voorkeur5"> <label for="liever niet">liever niet</label>-->
+                    <!--<input type="radio" name="voorkeur5"> <label for="als het moet">als het moet</label>-->
+                    <!--<input type="radio" name="voorkeur5"> <label for="graag!">graag!</label>-->
+                <!--</h3>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+    <!--<br/>-->
+    <!--<button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>-->
 </div>
 </body>
 <script>

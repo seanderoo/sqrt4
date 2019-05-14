@@ -1,6 +1,7 @@
 package sqrt4.mijninzet.model.users;
 
 import org.springframework.context.annotation.Bean;
+import sqrt4.mijninzet.model.Vak;
 
 import javax.persistence.*;
 import java.util.ArrayDeque;
@@ -28,6 +29,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
 
 
     public User(String userName, String password, String firstName, String lastName) {
