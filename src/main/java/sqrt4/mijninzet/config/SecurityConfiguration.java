@@ -16,12 +16,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/index", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/voorkeuren")    //Pagina zichtbaar na succesvol inloggen
                 .loginPage("/login")
-                .permitAll()
+                .defaultSuccessUrl("/home")    //Pagina zichtbaar na succesvol inloggen
                 .and()
                 .logout()
                 .permitAll();
