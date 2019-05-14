@@ -1,8 +1,7 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
+import sqrt4.mijninzet.model.User;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.ArrayList;
 
 
@@ -17,6 +16,13 @@ public class Semester {
     private int startJaar;
     private int eindWeek;
     private ArrayList<Week> semesterList = new ArrayList<>();
+
+    private User user;
+
+    //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
+    public Semester() {
+        this(2,1970,27);
+    }
 
     public Semester(int startWeek, int startJaar, int eindWeek) {
         this.semesterNaam = setSemesterName(startWeek, startJaar);
@@ -79,4 +85,20 @@ public class Semester {
                 ",\n semesterList=" + semesterList +
                 "}";
     }
+
+    public String getSemesterNaam() {
+        return semesterNaam;
+    }
+
+    public void beschikbaarheidAanpassen(Week nieuweWeek) {
+        String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
+        for (Week week : semesterList) {
+            for (int i = 0; i < weekdagen.length; i++) {
+                week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
+                week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
+                week.getDag(weekdagen[i]).setAvond(nieuweWeek.getDag(weekdagen[i]).getAvond());
+            }
+        }
+    }
+
 }

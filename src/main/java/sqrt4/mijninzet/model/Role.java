@@ -1,6 +1,4 @@
-package sqrt4.mijninzet.model.users;
-
-import org.springframework.context.annotation.Bean;
+package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
 import java.util.Collection;
