@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
+//import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import java.util.List;
 @Controller
 public class AlgemeneBeschikbaarheidController {
 
-    @Autowired
-    AlgemeneBeschikbaarheidRepository repo;
+//    @Autowired
+//    AlgemeneBeschikbaarheidRepository repo;
 
     @GetMapping("/algemene-beschikbaarheid")
     public String AlgemeneBeschikbaarheid(Model model, @RequestParam(value = "name", required = false,

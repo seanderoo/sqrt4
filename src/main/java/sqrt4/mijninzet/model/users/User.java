@@ -23,8 +23,8 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToMany
-    private Collection<Semester> semesters = new ArrayList<>();
+//    @OneToMany
+//    private Collection<Semester> semesters = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
