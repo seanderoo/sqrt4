@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
     <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
-
 </head>
 <body>
 <header>
@@ -16,74 +15,49 @@
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan</h2>
 <div class="container">
-    <table id="voorkeurTabel">
+    <br>
+    <form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
+    <table>
         <thead>
         <tr>
-            <th>
-                <h2>Vakken</h2>
-            </th>
-            <th>
-                <h2>Voorkeur</h2>
-            </th>
+            <th>Vakken</th>
+            <th>Liever niet</th>
+            <th>Als het moet</th>
+            <th>Graag</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="left"><h3>Programming</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur1"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur1"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur1"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
+        <tr th:if="${vakken.empty}">
+            <td>Geen vakken beschikbaar</td>
         </tr>
-        <tr>
-            <td class="left"><h3>Databases</h3></td>
+        <tr th:each="vak: ${vakken}">
+            <td><span th:text="${vak.vakNaam}">Vacature </span></td>
             <td>
-                <h3>
-                    <input type="radio" name="voorkeur2"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur2"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur2"> <label for="graag!">graag!</label>
-                </h3>
+                <input type="radio" th:name="${vak.vakId}"><label th:value="1"></label>
             </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>Object Oriented Programming</h3></td>
             <td>
-                <h3>
-                    <input type="radio" name="voorkeur3"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur3"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur3"> <label for="graag!">graag!</label>
-                </h3>
+                <input type="radio" th:name="${vak.vakId}"><label th:value="2"></label>
             </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>GIT</h3></td>
             <td>
-                <h3>
-                    <input type="radio" name="voorkeur4"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur4"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur4"> <label for="graag!">graag!</label>
-                </h3>
-            </td>
-        </tr>
-        <tr>
-            <td class="left"><h3>Advanced Programming</h3></td>
-            <td>
-                <h3>
-                    <input type="radio" name="voorkeur5"> <label for="liever niet">liever niet</label>
-                    <input type="radio" name="voorkeur5"> <label for="als het moet">als het moet</label>
-                    <input type="radio" name="voorkeur5"> <label for="graag!">graag!</label>
-                </h3>
+                <input type="radio" th:name="${vak.vakId}"><label th:value="3"></label>
             </td>
         </tr>
         </tbody>
     </table>
-    <br/>
-    <button id="knopOpslaan">Opslaan</button>
+    <button id="knopOpslaan" onclick="Opslaan()">Opslaan</button>
+    </form>
 </div>
 </body>
-<footer>
-</footer>
+<script>
+    function Opslaan(){
+        this.click = function() {
+            alert('Voorkeur is opgeslagen');
+        }
+    }
+
+    var knopOpslaan = new Opslaan();
+
+    var knopElement = document.getElementById('knopOpslaan');
+    knopElement.addEventListener('click', knopOpslaan.click);
+</script>
 </html>

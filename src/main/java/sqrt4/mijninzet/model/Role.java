@@ -3,6 +3,7 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 import java.util.Collection;
 
+
 @Entity
 public class Role {
 

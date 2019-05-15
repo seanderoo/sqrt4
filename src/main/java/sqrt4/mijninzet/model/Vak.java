@@ -1,8 +1,10 @@
 package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-
+@Entity
 public class Vak {
 
     @Id
@@ -19,6 +21,32 @@ public class Vak {
     public Vak(int vakId, String vakNaam, int aantalUren){
         this.vakId = vakId;
         this.vakNaam = vakNaam;
+        this.aantalUren = aantalUren;
+    }
+
+    public Vak() {}
+
+    public int getVakId() {
+        return vakId;
+    }
+
+    public void setVakId(int vakId) {
+        this.vakId = vakId;
+    }
+
+    public String getVakNaam() {
+        return vakNaam;
+    }
+
+    public void setVakNaam(String vakNaam) {
+        this.vakNaam = vakNaam;
+    }
+
+    public int getAantalUren() {
+        return aantalUren;
+    }
+
+    public void setAantalUren(int aantalUren) {
         this.aantalUren = aantalUren;
     }
 }
