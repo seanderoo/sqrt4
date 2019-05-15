@@ -1,4 +1,4 @@
-package sqrt4.mijninzet.model.users;
+package sqrt4.mijninzet.model;
 
 import org.springframework.context.annotation.Bean;
 import sqrt4.mijninzet.model.Vak;

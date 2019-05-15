@@ -24,5 +24,29 @@ public class Vak {
         this.aantalUren = aantalUren;
     }
 
+    public Vak() {}
 
+    public int getVakId() {
+        return vakId;
+    }
+
+    public void setVakId(int vakId) {
+        this.vakId = vakId;
+    }
+
+    public String getVakNaam() {
+        return vakNaam;
+    }
+
+    public void setVakNaam(String vakNaam) {
+        this.vakNaam = vakNaam;
+    }
+
+    public int getAantalUren() {
+        return aantalUren;
+    }
+
+    public void setAantalUren(int aantalUren) {
+        this.aantalUren = aantalUren;
+    }
 }
