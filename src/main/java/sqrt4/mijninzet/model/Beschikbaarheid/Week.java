@@ -13,7 +13,8 @@ public class Week {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column
+    private int week_id;
 
     @OneToMany(mappedBy = "week", cascade = CascadeType.PERSIST)
     private List<Dag> week;
@@ -22,7 +23,7 @@ public class Week {
     private int jaarNummer;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "semester_id")
     private Semester semester;
 
 
@@ -94,5 +95,29 @@ public class Week {
         }
         }
         return teller;
+    }
+
+    public int getId() {
+        return week_id;
+    }
+
+    public void setId(int id) {
+        this.week_id = id;
+    }
+
+    public List<Dag> getWeek() {
+        return week;
+    }
+
+    public void setWeek(List<Dag> week) {
+        this.week = week;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
     }
 }

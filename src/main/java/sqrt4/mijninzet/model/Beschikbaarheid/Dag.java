@@ -133,4 +133,24 @@ public class Dag {
     public int getJaarNummer() {
         return jaarNummer;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Week getWeek() {
+        return week;
+    }
+
+    public boolean isOchtend() {
+        return ochtend;
+    }
+
+    public boolean isMiddag() {
+        return middag;
+    }
+
+    public boolean isAvond() {
+        return avond;
+    }
 }

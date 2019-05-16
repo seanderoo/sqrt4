@@ -48,6 +48,7 @@
             <select id="semesterSelector">
                 <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
             </select>
+    </table>
 
             <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
