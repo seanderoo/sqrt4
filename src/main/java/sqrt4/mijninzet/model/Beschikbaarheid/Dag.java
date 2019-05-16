@@ -15,7 +15,6 @@ public class Dag {
     private int id;
 
     @ManyToOne
-    @JoinColumn
     private Week week;
 
     private String dagnaam;

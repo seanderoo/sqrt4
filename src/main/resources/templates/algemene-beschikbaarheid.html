@@ -45,6 +45,7 @@
             <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17:00-21:00</td>
         </tr>
 
+        <label for="semesterSelector">Selecteer semester</label>
             <select id="semesterSelector" name="gekozenSemester">
                 <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
             </select>

@@ -72,8 +72,6 @@ public class AlgemeneBeschikbaarheidController {
                                                 @RequestParam("vrijdagmiddag") boolean vrMBeschikbaar,
                                                 @RequestParam("vrijdagavond") boolean vrABeschikbaar,
                                                 @RequestParam("gekozenSemester") String semesternaam){
-
-//        System.out.println(request.getParameterMap().entrySet());
         Week algemeneWeek = new Week();
 
         algemeneWeek.getDag("maandag").setOchtend(maOBeschikbaar);
@@ -95,7 +93,10 @@ public class AlgemeneBeschikbaarheidController {
 
 //        System.out.println(algemeneWeek);
 //        System.out.println();
-        Semester semester = repo.findBySemesterNaamAndUser(semesternaam, currentUser);
+//        Semester semester = repo.findBySemesterNaamAndUser(semesternaam, currentUser);
+        Semester semester = new Semester();
+
+        System.out.println(semester);
 
         semester.beschikbaarheidAanpassen(algemeneWeek);
 //        System.out.println(semester); //Hier gaat 't mis omdat bij 1970 de semesterList leeg is. Is dit omdat ie de weken en dagen niet mee ophaalt?

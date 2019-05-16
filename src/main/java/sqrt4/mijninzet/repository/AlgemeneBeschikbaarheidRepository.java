@@ -1,6 +1,7 @@
 package sqrt4.mijninzet.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.User;
 
