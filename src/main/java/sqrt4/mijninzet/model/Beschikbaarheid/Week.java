@@ -1,11 +1,8 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -13,17 +10,15 @@ public class Week {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private int week_id;
+    private int id;
 
-    @OneToMany(mappedBy = "week", cascade = CascadeType.PERSIST)
-    private List<Dag> week;
+    @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Dag> dagenlijst;
 
     private int weekNummer;
     private int jaarNummer;
 
     @ManyToOne
-    @JoinColumn(name = "semester_id")
     private Semester semester;
 
 
@@ -31,29 +26,29 @@ public class Week {
         super();
         this.weekNummer = weekNummer;
         this.jaarNummer = jaarNummer;
-        week = new ArrayList<>();
-        week.add(new Dag("maandag", weekNummer, jaarNummer));
-        week.add(new Dag("dinsdag", weekNummer, jaarNummer));
-        week.add(new Dag("woensdag", weekNummer, jaarNummer));
-        week.add(new Dag("donderdag", weekNummer, jaarNummer));
-        week.add(new Dag("vrijdag", weekNummer,jaarNummer));
+        dagenlijst = new ArrayList<>();
+        dagenlijst.add(new Dag("maandag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("dinsdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("woensdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("donderdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("vrijdag", weekNummer,jaarNummer));
     }
 
     public Week() {
         this(1,2019);
-        week = new ArrayList<>();
-        week.add(new Dag("maandag", weekNummer, jaarNummer));
-        week.add(new Dag("dinsdag", weekNummer, jaarNummer));
-        week.add(new Dag("woensdag", weekNummer, jaarNummer));
-        week.add(new Dag("donderdag", weekNummer, jaarNummer));
-        week.add(new Dag("vrijdag", weekNummer,jaarNummer));
+        dagenlijst = new ArrayList<>();
+        dagenlijst.add(new Dag("maandag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("dinsdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("woensdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("donderdag", weekNummer, jaarNummer));
+        dagenlijst.add(new Dag("vrijdag", weekNummer,jaarNummer));
     }
 
 
     @Override
     public String toString() {
         return "Week{" +
-                "week=" + week +
+                "dagenlijst=" + dagenlijst +
                 ", weekNummer=" + weekNummer +
                 '}';
     }
@@ -77,7 +72,7 @@ public class Week {
     public Dag getDag(String dagnaam) {
         Dag dag = null;
 
-        for (Dag d : week) {
+        for (Dag d : dagenlijst) {
             if (d.getDagnaam().equals(dagnaam)) {
                 dag = d;
             }
@@ -89,35 +84,11 @@ public class Week {
     public int getDaysInTheWeek() {
 
         int teller = 0;
-        for (Object o: week) {
+        for (Object o: dagenlijst) {
             if(o instanceof Dag){
                 teller++;
         }
         }
         return teller;
-    }
-
-    public int getId() {
-        return week_id;
-    }
-
-    public void setId(int id) {
-        this.week_id = id;
-    }
-
-    public List<Dag> getWeek() {
-        return week;
-    }
-
-    public void setWeek(List<Dag> week) {
-        this.week = week;
-    }
-
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Semester semester) {
-        this.semester = semester;
     }
 }

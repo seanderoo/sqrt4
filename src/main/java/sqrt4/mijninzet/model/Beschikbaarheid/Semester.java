@@ -12,7 +12,6 @@ public class Semester {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name="semester_id")
     private int id;
 
     private String semesterNaam;
@@ -20,12 +19,11 @@ public class Semester {
     private int startJaar;
     private int eindWeek;
 
-    @OneToMany(mappedBy = "semester", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
     private List<Week> semesterList;
 
     @ManyToOne
-    @JoinColumn (name= "user_id")
     private User user;
 
     //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
@@ -123,29 +121,5 @@ public class Semester {
                 week.getDag(weekdagen[i]).setAvond(nieuweWeek.getDag(weekdagen[i]).getAvond());
             }
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getStartWeek() {
-        return startWeek;
-    }
-
-    public int getStartJaar() {
-        return startJaar;
-    }
-
-    public int getEindWeek() {
-        return eindWeek;
-    }
-
-    public List<Week> getSemesterList() {
-        return semesterList;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

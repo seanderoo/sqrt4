@@ -1,9 +1,10 @@
-package sqrt4.mijninzet.model;
+package sqrt4.mijninzet.config;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.UserRepository;
 
 @Service

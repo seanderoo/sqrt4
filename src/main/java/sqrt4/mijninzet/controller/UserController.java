@@ -13,34 +13,34 @@
 //
 //import java.util.List;
 //
-////@Controller
-////public class UserController {
+//@Controller
+//public class UserController {
 ////
-////    @Autowired
-////    UserRepository userRepository;
-////    @Autowired
-////    RoleRepository roleRepository;
-////
-////    @GetMapping("/nieuwe-gebruiker")
-////    //kun je mbv @RequestParam de gekozen rol uitlezen? (Karin)
-////    public String nieuweGebruiker(Model model) {
-////        List<Role> rollen = roleRepository.findAll();
-////        model.addAttribute("roles", rollen);
-////        //alles over rol hieronder mag misschien weg, zoek ik nog uit (Karin)
-//////        Role chosenRole = new Role("Docent");
-////        User user = new User("", "", "", "");
-//////        user.getRoles().add(chosenRole);
-//////        user.addRole(chosenRole);
-////        model.addAttribute("user", user);
-////        return "nieuwe-gebruiker";
-////    }
+//    @Autowired
+//    UserRepository userRepository;
+//    @Autowired
+//    RoleRepository roleRepository;
 //
-////    @PostMapping("/nieuwe-gebruiker")
-////    public String nieuweGebruiker(@ModelAttribute("user") User user) {
-////        userRepository.save(user);
-////        System.out.println(user);
-////        return "gebruiker-toegevoegd";
-////    }
+//    @GetMapping("/nieuwe-gebruiker")
+//    //kun je mbv @RequestParam de gekozen rol uitlezen? (Karin)
+//    public String nieuweGebruiker(Model model) {
+//        List<Role> rollen = roleRepository.findAll();
+//        model.addAttribute("roles", rollen);
+//        //alles over rol hieronder mag misschien weg, zoek ik nog uit (Karin)
+////        Role chosenRole = new Role("Docent");
+//        User user = new User("", "", "", "");
+////        user.getRoles().add(chosenRole);
+////        user.addRole(chosenRole);
+//        model.addAttribute("user", user);
+//        return "nieuwe-gebruiker";
+//    }
+//
+//    @PostMapping("/nieuwe-gebruiker")
+//    public String nieuweGebruiker(@ModelAttribute("user") User user) {
+//        userRepository.save(user);
+//        System.out.println(user);
+//        return "gebruiker-toegevoegd";
+//    }
 //
 //
 //}
