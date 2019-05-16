@@ -1,8 +1,9 @@
-package sqrt4.mijninzet.model;
+package sqrt4.mijninzet.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import sqrt4.mijninzet.model.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
