@@ -31,15 +31,15 @@
             <td>Geen vakken beschikbaar</td>
         </tr>
         <tr th:each="vak: ${vakken}">
-            <td class="ST"><span th:text="${vak.vakNaam}">Vacature </span></td>
+            <td class="ST"><span th:text="${vak.vakNaam}">Vacature</span></td>
             <td id="optie1">
-                <input type="radio" th:name="${vak.vakId}">
+                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="1">
             </td>
             <td id="optie2">
-                <input type="radio" th:name="${vak.vakId}">
+                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="2">
             </td>
             <td id="optie3">
-                <input type="radio" th:name="${vak.vakId}">
+                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="3">
             </td>
         </tr>
         </tbody>
