@@ -24,8 +24,8 @@ public class AlgemeneBeschikbaarheidController {
     AlgemeneBeschikbaarheidRepository repo;
 
     @GetMapping("/algemene-beschikbaarheid")
-    public String AlgemeneBeschikbaarheid(Model model, @RequestParam(value = "name", required = false,
-            defaultValue = "Karin") String name) {
+    public String AlgemeneBeschikbaarheid(Model model, @RequestParam(value = "name", required = false
+            ) String name) {
         model.addAttribute("name", name);
 
 
@@ -35,8 +35,8 @@ public class AlgemeneBeschikbaarheidController {
     @ModelAttribute("semesters")
     public List<Semester> semesters() {
         ArrayList<Semester> semesterlijst = new ArrayList<>();
-        semesterlijst.add(new Semester(4, 2020, 29));
-        semesterlijst.add(new Semester(30, 2020, 3));
+//        semesterlijst.add(new Semester(4, 2020, 29));
+//        semesterlijst.add(new Semester(30, 2020, 3));
         return semesterlijst;
     }
 

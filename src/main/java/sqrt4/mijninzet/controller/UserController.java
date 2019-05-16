@@ -12,10 +12,10 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //
 //import java.util.List;
-
+//
 //@Controller
 //public class UserController {
-//
+////
 //    @Autowired
 //    UserRepository userRepository;
 //    @Autowired
@@ -34,7 +34,7 @@
 //        model.addAttribute("user", user);
 //        return "nieuwe-gebruiker";
 //    }
-
+//
 //    @PostMapping("/nieuwe-gebruiker")
 //    public String nieuweGebruiker(@ModelAttribute("user") User user) {
 //        userRepository.save(user);

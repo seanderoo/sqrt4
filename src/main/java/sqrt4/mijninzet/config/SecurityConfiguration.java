@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import sqrt4.mijninzet.model.UserPrincipalDetailsService;
 
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -31,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/login", "/styles.css", "/js/*", "/error404/**", "/error/**", "/").permitAll()
+                .antMatchers("/", "/login", "/stylesheet.css", "/js/*", "/error404/**", "/error/**", "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -9,10 +9,6 @@ import java.util.List;
 
 @Entity
 public class Semester {
-    private final int REG_JAAR = 52;
-    private final int HALF_JAAR = 26;
-    private final int SPEC_JAAR = 53;
-    private final int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +29,7 @@ public class Semester {
 
     //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
     public Semester() {
-        this(2,1970,27);
+
         semesterList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
@@ -66,7 +62,7 @@ public class Semester {
     public String setSemesterName(int startWeek, int startJaar){
         StringBuilder sb = new StringBuilder();
         String appendix;
-        if(startWeek>HALF_JAAR){
+        if(startWeek>26){
             appendix = "II";
         } else {
             appendix = "I";
@@ -85,9 +81,12 @@ public class Semester {
     }
 
     public int wekenInJaar(int startJaar) {
+        final int REG_JAAR = 52;
+        final int SPEC_JAAR = 53;
         int aantalWeken = 0;
+        int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
         for (int jaar : SPECIAAL_JAREN) {
-            if ( startJaar == jaar ) {
+            if (startJaar == jaar ) {
                 aantalWeken = SPEC_JAAR;
                 break;
             } else {
