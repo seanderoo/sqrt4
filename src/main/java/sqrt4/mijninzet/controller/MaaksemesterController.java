@@ -29,6 +29,6 @@ public class MaaksemesterController {
                                 @RequestParam ("eindWeek") int eindWeek){
         semester = new Semester(startWeek,startJaar,eindWeek);
         abRepo.save(semester);
-        return "gebruiker-toegevoegd";
+        return "home";
     }
 }
