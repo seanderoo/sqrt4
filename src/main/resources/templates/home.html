@@ -11,7 +11,8 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Home</h1>
-<h2>Homepagina</h2>
+<h2>Homepagina welkom:</h2>
+<span th:text ="${#authentication.name}"></span>
 </body>
 <footer>
     <h6>&copy; Copyright. All Rights Reserved.</h6>
