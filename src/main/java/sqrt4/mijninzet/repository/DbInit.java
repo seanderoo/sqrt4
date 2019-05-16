@@ -40,14 +40,16 @@ public class DbInit implements CommandLineRunner {
         List<User> users = Arrays.asList(matthijs, admin);
 
         //Create vacatures
-        Vacature programmingVacature = new Vacature("Programming", "Introductie in Java Programming",
-                40, "Kennis van Java");
-        Vacature oopVavature = new Vacature("OOP", "Introductie in Object Oriented Programming",
-                40, "Kennis van Object Oriented Programming");
-        Vacature projectQuizmasterVacature = new Vacature("Project Quizmaster",
-                "Introductie projectmatig werken", 60, "Kennis van projectmatig werken");
+        Vacature coordinatorC16 = new Vacature("Coordinator Cohort 15",
+                "De boel coördineren",
+                40, "Uitstekende probleemoplossende en prioriterende vaardigheden");
+        Vacature coordinatorC17 = new Vacature("Coordinator Cohort 16",
+                "De boel coördineren",
+                40, "Uitstekende probleemoplossende en prioriterende vaardigheden");
+        Vacature productOwnerMijnInzet = new Vacature("Product Owner - Project Mijn Inzet",
+                "Het product ownen", 60, "Huub zijn");
 
-        List<Vacature> vacatures = Arrays.asList(programmingVacature, oopVavature, projectQuizmasterVacature);
+        List<Vacature> vacatures = Arrays.asList(coordinatorC16, coordinatorC17, productOwnerMijnInzet);
 
         //Create vakken
         Vak programming = new Vak("Programming", 40);

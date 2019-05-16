@@ -32,7 +32,7 @@ public class VoorkeurController {
     }
 
     @PostMapping("/voorkeuren")
-    public String voorkeurToegevoegd(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak, User user, Model model) {
+        public String voorkeurToegevoegd(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak, User user, Model model) {
         model.addAttribute("voorkeurId", voorkeur.getVoorkeurId());
         model.addAttribute("user", user.getId());
         model.addAttribute("vak", vak.getVakId());
@@ -40,7 +40,7 @@ public class VoorkeurController {
         System.out.println("Vak: " + vak.getVakId());
         System.out.println("User: " + user.getId());
         System.out.println("Voorkeur: " + voorkeur.getVoorkeur());
-//        voorkeurenRepository.save(voorkeur);
+        voorkeurenRepository.save(voorkeur);
         return "home";
     }
 }
