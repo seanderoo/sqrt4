@@ -18,8 +18,7 @@ public class Vak {
     @Column(name = "aantalUren")
     private int aantalUren;
 
-    public Vak(int vakId, String vakNaam, int aantalUren){
-        this.vakId = vakId;
+    public Vak(String vakNaam, int aantalUren){
         this.vakNaam = vakNaam;
         this.aantalUren = aantalUren;
     }
