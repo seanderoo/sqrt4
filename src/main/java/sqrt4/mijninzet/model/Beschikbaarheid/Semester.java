@@ -19,12 +19,11 @@ public class Semester {
     private int startJaar;
     private int eindWeek;
 
-    @OneToMany(mappedBy = "semester", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
     private List<Week> semesterList;
 
     @ManyToOne
-    @JoinColumn
     private User user;
 
     //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?

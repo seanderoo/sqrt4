@@ -14,7 +14,7 @@
 </header>
 <h1>Beschikbaarheid opgeven</h1>
 <h2>Geef je algemene beschikbaarheid op.</h2>
-<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid}" th:object="${week}" method = post>
+<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid}" th:object="${semester}" method = post>
     <table id="deTabel">
         <tr>
             <th>maandag</th>
@@ -45,7 +45,8 @@
             <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17:00-21:00</td>
         </tr>
 
-            <select id="semesterSelector">
+        <label for="semesterSelector">Selecteer semester</label>
+            <select id="semesterSelector" name="gekozenSemester">
                 <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
             </select>
 

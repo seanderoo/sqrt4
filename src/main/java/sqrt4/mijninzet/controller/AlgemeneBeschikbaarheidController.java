@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
+import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Controller
 public class AlgemeneBeschikbaarheidController {
+    private User currentUser = new User("linusband", "123","Linus","Band"); //Moet eigenlijk aan de ingelogde user gekoppeld worden.
 
     @Autowired
     AlgemeneBeschikbaarheidRepository repo;
@@ -32,11 +34,19 @@ public class AlgemeneBeschikbaarheidController {
         return "algemene-beschikbaarheid";
     }
 
+    @ModelAttribute("semester")
+    public Semester semester() {
+        Semester semester = new Semester();
+        return semester;
+    }
+
     @ModelAttribute("semesters")
     public List<Semester> semesters() {
-        ArrayList<Semester> semesterlijst = new ArrayList<>();
-//        semesterlijst.add(new Semester(4, 2020, 29));
-//        semesterlijst.add(new Semester(30, 2020, 3));
+        currentUser.setId(1);
+        List<Semester> semesterlijst = repo.findAllByUser(currentUser); //neemt deze wel de weken en dagen mee?
+//        List<Semester> semesterlijst = new ArrayList<>();
+        semesterlijst.add(new Semester(4, 2020, 29));
+        semesterlijst.add(new Semester(30, 2020, 3));
         return semesterlijst;
     }
 
@@ -62,9 +72,7 @@ public class AlgemeneBeschikbaarheidController {
                                                 @RequestParam("vrijdagochtend") boolean vrOBeschikbaar,
                                                 @RequestParam("vrijdagmiddag") boolean vrMBeschikbaar,
                                                 @RequestParam("vrijdagavond") boolean vrABeschikbaar,
-                                                HttpServletRequest request){
-
-        System.out.println(request.getParameterMap().entrySet());
+                                                @RequestParam("gekozenSemester") String semesternaam){
         Week algemeneWeek = new Week();
 
         algemeneWeek.getDag("maandag").setOchtend(maOBeschikbaar);
@@ -86,10 +94,13 @@ public class AlgemeneBeschikbaarheidController {
 
 //        System.out.println(algemeneWeek);
 //        System.out.println();
-
+//        Semester semester = repo.findBySemesterNaamAndUser(semesternaam, currentUser);
         Semester semester = new Semester();
-        semester.beschikbaarheidAanpassen(algemeneWeek);
+
         System.out.println(semester);
+
+        semester.beschikbaarheidAanpassen(algemeneWeek);
+//        System.out.println(semester); //Hier gaat 't mis omdat bij 1970 de semesterList leeg is. Is dit omdat ie de weken en dagen niet mee ophaalt?
 
 
         repo.save(semester);

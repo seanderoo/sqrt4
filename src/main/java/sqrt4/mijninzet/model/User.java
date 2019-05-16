@@ -29,18 +29,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    public User(String username, String password, String roles, String permissions){
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-        this.permissions = permissions;
-        this.active = 1;
-
-    }
-
-    protected User(){}
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Semester> semesters;
 
 //    @ManyToMany
@@ -51,6 +40,16 @@ public class User {
 //            inverseJoinColumns = @JoinColumn(
 //                    name = "role_id", referencedColumnName = "id"))
 //
+public User(String username, String password, String roles, String permissions){
+    this.username = username;
+    this.password = password;
+    this.roles = roles;
+    this.permissions = permissions;
+    this.active = 1;
+
+}
+
+    protected User(){}
 
     public List<String> getRoleList(){
         if(this.roles.length() > 0){
@@ -206,5 +205,9 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
