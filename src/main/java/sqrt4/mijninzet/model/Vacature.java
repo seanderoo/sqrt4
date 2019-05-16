@@ -1,7 +1,5 @@
 package sqrt4.mijninzet.model;
 
-import sqrt4.mijninzet.model.User;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;

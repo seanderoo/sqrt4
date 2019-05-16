@@ -33,13 +33,13 @@
         <tr th:each="vak: ${vakken}">
             <td><span th:text="${vak.vakNaam}">Vacature </span></td>
             <td>
-                <input type="radio" th:name="${vak.vakId}"><label th:value="1"></label>
+                <input type="radio" th:name="${vak.vakId}" th:value="1">
             </td>
             <td>
-                <input type="radio" th:name="${vak.vakId}"><label th:value="2"></label>
+                <input type="radio" th:name="${vak.vakId}" th:value="2">
             </td>
             <td>
-                <input type="radio" th:name="${vak.vakId}"><label th:value="3"></label>
+                <input type="radio" th:name="${vak.vakId}" th:value="3">
             </td>
         </tr>
         </tbody>

@@ -2,7 +2,6 @@ package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
 
-
 @Entity
 public class Voorkeur {
     @Id
