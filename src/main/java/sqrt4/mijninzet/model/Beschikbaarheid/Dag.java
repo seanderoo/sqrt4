@@ -45,14 +45,15 @@ public class Dag {
     public Dag() {}
 
     public LocalDate setDatumDag(String dagnaam){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, this.jaarNummer);
         cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
         cal.set(Calendar.DAY_OF_WEEK, nlDagNaarJava(dagnaam));
+        cal.getFirstDayOfWeek();
 
         String date = sdf.format(cal.getTime());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         return localDate;
     }
@@ -108,6 +109,10 @@ public class Dag {
         return dagnaam;
     }
 
+    public LocalDate getDatum() {
+        return datum;
+    }
+
     @Override
     public String toString() {
         return "Dag{" +
@@ -119,5 +124,13 @@ public class Dag {
                 ", middag=" + middag +
                 ", avond=" + avond +
                 '}';
+    }
+
+    public int getWeekNummer() {
+        return weekNummer;
+    }
+
+    public int getJaarNummer() {
+        return jaarNummer;
     }
 }

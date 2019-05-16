@@ -12,28 +12,28 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<form action="/" >
+<form action="#" th:action="@{maaksemester}" th:object="${semester}" th:method="POST">
     <section id="aanvraagSem">
     <div class="container">
         <h1>Maak een semester aan</h1>
         <p>Hier is het mogelijk om een nieuw semester aan te maken. Voer hele weeknummers in.</p>
         <hr>
 
-        <label for="startjaar"><b>startjaar</b></label><br/>
-        <input type="number" placeholder="startjaar" name="startjaar" min="2019" required>
+        <label><b>startjaar</b></label><br/>
+        <input type="number" placeholder="startjaar" th:name="startJaar" min="2019" required>
 
         <br/>
         <br/>
 
-        <label for="startweek"><b>startweek</b></label><br/>
-        <input type="number" placeholder="wat is de eerste weeknummer van het semester" name="startweek" max="53"
+        <label><b>startweek</b></label><br/>
+        <input type="number" placeholder="wat is de eerste weeknummer van het semester" th:name="startWeek" max="53"
                min="1" required>
 
         <br/>
         <br/>
 
-        <label for="eindweek"><b>eindweek</b></label><br/>
-        <input type="number" placeholder="wat is de laatste week van het semester" name="eindweek" min="1" max="53"
+        <label><b>eindweek</b></label><br/>
+        <input type="number" placeholder="wat is de laatste week van het semester?" th:name="eindWeek" min="1" max="53"
                required>
 
         <div class="clearfix">
