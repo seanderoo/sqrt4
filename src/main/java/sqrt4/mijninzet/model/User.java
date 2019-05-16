@@ -206,8 +206,4 @@ public User(String username, String password, String roles, String permissions){
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }
