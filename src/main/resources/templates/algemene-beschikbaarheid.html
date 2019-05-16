@@ -49,9 +49,11 @@
             <select id="semesterSelector" name="gekozenSemester">
                 <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
             </select>
-
-            <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+    </table>
+        <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
+
+
 
 <script>
     var deTabel = document.querySelector('#deTabel');

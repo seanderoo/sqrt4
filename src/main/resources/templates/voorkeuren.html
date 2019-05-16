@@ -17,34 +17,34 @@
 <div class="container">
     <br>
     <form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
-    <table id="SollicitatieTabel">
-        <thead>
-        <tr>
-            <th>Vakken</th>
-            <th>Liever niet</th>
-            <th>Als het moet</th>
-            <th>Graag</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${vakken.empty}">
-            <td>Geen vakken beschikbaar</td>
-        </tr>
-        <tr th:each="vak: ${vakken}">
-            <td class="ST"><span th:text="${vak.vakNaam}">Vacature </span></td>
-            <td id="optie1">
-                <input type="radio" th:name="${vak.vakId}">
-            </td>
-            <td id="optie2">
-                <input type="radio" th:name="${vak.vakId}">
-            </td>
-            <td id="optie3">
-                <input type="radio" th:name="${vak.vakId}">
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <button id="knopOpslaan" onclick="Opslaan()">Opslaan</button>
+        <table id="SollicitatieTabel">
+            <thead>
+            <tr>
+                <th>Vakken</th>
+                <th>Liever niet</th>
+                <th>Als het moet</th>
+                <th>Graag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${vakken.empty}">
+                <td>Geen vakken beschikbaar</td>
+            </tr>
+            <tr th:each="vak: ${vakken}">
+                <td class="ST"><span th:text="${vak.vakNaam}">Vacature </span></td>
+                <td id="optie1">
+                    <input type="radio" th:name="${vak.vakId}">
+                </td>
+                <td id="optie2">
+                    <input type="radio" th:name="${vak.vakId}">
+                </td>
+                <td id="optie3">
+                    <input type="radio" th:name="${vak.vakId}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button id="knopOpslaan" onclick="Opslaan()">Opslaan</button>
     </form>
 </div>
 </body>
