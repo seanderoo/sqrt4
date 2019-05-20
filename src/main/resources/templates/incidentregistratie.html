@@ -15,10 +15,11 @@
 </header>
     <h1>Incidentregistratie</h1>
 <h2>Geef je incident op.</h2>
-<form id="reg_date" th:action=@{/incidentregistratie} th:object="${dag.datum}" th:method ="POST">
+<form id="reg_date" th:action=@{/incidentregistratie} th:object="${geselecteerdeWeek}" th:method ="POST">
     <label for="selectedDate">Datum van incident</label>
     <input type="date" (dd-mm-yyyy)="" id="selectedDate" name="selectedDate" value="02-04-2019">
-    <button id="ophalenWeek">Haal week op</button>
+    <button id="ophalenWeek" >Haal week
+    op</button>
 </form>
 
 </div>
@@ -29,7 +30,7 @@
 <br/>
 </body>
 
-<form id="hiddenform" action="#" th:action="@{/incidentregistratie}" th:object="${geselecteerdeWeek}" method = post>
+<form id="hiddenformIR" action="#" th:action="@{/incidentregistratie}" th:object="${geselecteerdeWeek}" method = get>
 
     <table id="deIncidentTabel">
         <tr>
@@ -76,6 +77,7 @@
 
 <button id="knopOpslaan">Opslaan</button>
 <script>
+
     /*Tabel met klikbare cellen*/
     var deTabel = document.querySelector('#deIncidentTabel');
 
