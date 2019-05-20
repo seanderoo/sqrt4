@@ -26,14 +26,14 @@
     Kies een Rol
     <input list="roles">
     <datalist id="roles">
-<!--        <select th:field="*{}">-->
+        <select th:name="roles">
         <option th:each="role : ${roles}"
                 th:value ="${role.name}"
                 th:text="${role.name}">
         </option>
-<!--        </select>-->
+        </select>
     </datalist> <br>
-    <input type="submit" onsubmit="noTypo()" value="Nieuwe gebruiker aanmaken"/>
+    <input type="submit" value="Nieuwe gebruiker aanmaken"/>
 </form>
 </div>
 </body>
