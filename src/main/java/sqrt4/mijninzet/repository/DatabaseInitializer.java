@@ -11,14 +11,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DbInit implements CommandLineRunner {
+public class DatabaseInitializer implements CommandLineRunner {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private VacatureRepository vacatureRepository;
     private VakRepository vakRepository;
 
-    public DbInit(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                  VacatureRepository vacatureRepository, VakRepository vakRepository) {
+    public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                               VacatureRepository vacatureRepository, VakRepository vakRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;

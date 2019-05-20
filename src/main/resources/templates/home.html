@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>SQRT4 | Home</title>
@@ -12,7 +13,9 @@
 </header>
 <h1>Home</h1>
 <h2>Homepagina welkom:</h2>
-<span th:text ="${#authentication.name}"></span>
+<span th:text ="${#authentication.getPrincipal()}"></span>
+<td><span sec:authentication="name"></span> </td>
+<td><span sec:authentication="principal.authorities"></span> </td>
 </body>
 <footer>
     <h6>&copy; Copyright. All Rights Reserved.</h6>
