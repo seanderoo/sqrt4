@@ -1,5 +1,6 @@
 package sqrt4.mijninzet.controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.RoleRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.util.List;
 
@@ -26,17 +29,16 @@ public class UserController {
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        //alles over rol hieronder mag misschien weg, zoek ik nog uit (Karin)
-//        Role chosenRole = new Role("Docent");
         User user = new User("", "", "", "", "", "");
-//        user.getRoles().add(chosenRole);
-//        user.addRole(chosenRole);
         model.addAttribute("user", user);
         return "nieuwe-gebruiker";
     }
 
     @PostMapping("/nieuwe-gebruiker")
     public String nieuweGebruiker(@ModelAttribute("user") User user) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setRoles(user.getRoles().toUpperCase());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         System.out.println(user);
         return "gebruiker-toegevoegd";
