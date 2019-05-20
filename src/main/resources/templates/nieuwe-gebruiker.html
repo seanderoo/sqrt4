@@ -17,20 +17,35 @@
     Achternaam
     <input type="text" th:name="lastName" size="40" required> <br>
     Inlognaam
-    <input type="text" th:name="userName" size="40" required> <br>
+    <input type="text" th:name="username" size="40" required> <br>
     Wachtwoord
-    <input type="password" th:name="password" size="40" required> <br>
+    <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required> <br>
     Herhaal wachtwoord
-    <input type="password" size="40" required> <br>
+    <input id="wachtwoord2" type="password" value="" size="40" required > <br>
+    <button onclick="noTypo()">controleer wachtwoord</button> <br>
     Kies een Rol
     <input list="roles">
     <datalist id="roles">
+<!--        <select th:field="*{}">-->
         <option th:each="role : ${roles}"
-                th:value="${role.name}"
-                th:text="${role.name}"></option>
+                th:value ="${role.name}"
+                th:text="${role.name}">
+        </option>
+<!--        </select>-->
     </datalist> <br>
-    <input type="submit" value="Nieuwe gebruiker aanmaken"/>
+    <input type="submit" onsubmit="noTypo()" value="Nieuwe gebruiker aanmaken"/>
 </form>
 </div>
 </body>
+<script>
+    function noTypo() {
+        var ww1 = document.getElementById('wachtwoord1').value;
+        var ww2 = document.getElementById('wachtwoord2').value;
+        if (ww1 != ww2) {
+            window.alert("wachtwoord niet gelijk!");
+        } else {
+            window.alert("You go girl!")
+        }
+    }
+</script>
 </html>

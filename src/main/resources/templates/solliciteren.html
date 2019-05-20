@@ -21,21 +21,24 @@
         <th>Aantal Uren</th>
         <th>Vereisten</th>
         <th>Omschrijving</th>
+        <th>Solliciteren</th>
     </tr>
     </thead>
     <tbody>
+    <p><span th:text ="${#authentication.name}"></span> </p>
     <tr th:if="${vacatures.empty}">
-        <td class="ST" colspan="4">Geen openstaande vacatures beschikbaar</td>
+        <td class="ST" colspan="5">Geen openstaande vacatures beschikbaar</td>
     </tr>
     <tr th:each="vacature: ${vacatures}">
         <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
         <td class="ST"><span th:text="${vacature.eisen}">Vereisten </span></td>
         <td class="ST"><span th:text="${vacature.omschrijving}">Omschrijving </span></td>
-        <td class="ST"><span><button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button> </span></td>
+        <td class="ST"><span> <button>Solliciteren</button> </span></td>
     </tr>
     </tbody>
 </table>
+<button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button>
     <p id="sollicitatieOpgeslagen"></p>
 </body>
 <footer>

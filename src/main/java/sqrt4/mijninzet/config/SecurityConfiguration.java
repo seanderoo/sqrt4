@@ -40,15 +40,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login")
-                .deleteCookies();
+                .deleteCookies()
+                .and()
+                .rememberMe().tokenValiditySeconds(2592000);
     }
 
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}password").roles("USER");  //.authorities("ACCESS_TEST1", "ACCESS_TEST2")
     }
 
 
@@ -57,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
-
         return daoAuthenticationProvider;
     }
 
