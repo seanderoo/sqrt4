@@ -92,8 +92,8 @@ public class AlgemeneBeschikbaarheidController {
         semester.beschikbaarheidAanpassen(algemeneWeek);
         System.out.println(semester);
 
-
-        repo.save(semester);
+//TODO: Hier moet geen nieuw semester aangemaakt worden, maar de oude aangepast worden D:<
+//        repo.save(semester);
         return "algemene-beschikbaarheid"; //Is de pagina waar je vervolgens heengestuurd wordt?
 
     }

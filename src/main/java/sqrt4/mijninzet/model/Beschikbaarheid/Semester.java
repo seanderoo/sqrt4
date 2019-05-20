@@ -1,6 +1,12 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import sqrt4.mijninzet.config.UserPrincipal;
 import sqrt4.mijninzet.model.User;
+import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
+import sqrt4.mijninzet.repository.UserRepository;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,7 +17,7 @@ import java.util.List;
 public class Semester {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String semesterNaam;
@@ -24,6 +30,7 @@ public class Semester {
     private List<Week> semesterList;
 
     @ManyToOne
+    @JoinColumn
     private User user;
 
     //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
@@ -32,10 +39,12 @@ public class Semester {
         semesterList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            semesterList.add(new Week(startWeek + i, startJaar));
-            if (semesterList.get(i).getWeekNummer() > wekenInJaar(startJaar)) {
-                semesterList.get(i).setWeekNummer(semesterList.get(i).getWeekNummer() - wekenInJaar(startJaar));
-                semesterList.get(i).setJaarNummer(startJaar + 1);
+            Week week = new Week(startWeek + i, startJaar);
+            semesterList.add(week);
+            week.setSemester(this);
+            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
+                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
+                week.setJaarNummer(startJaar + 1);
             }
         }
 
@@ -49,10 +58,12 @@ public class Semester {
         semesterList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            semesterList.add(new Week(startWeek + i, startJaar));
-            if (semesterList.get(i).getWeekNummer() > wekenInJaar(startJaar)) {
-                semesterList.get(i).setWeekNummer(semesterList.get(i).getWeekNummer() - wekenInJaar(startJaar));
-                semesterList.get(i).setJaarNummer(startJaar + 1);
+            Week week = new Week(startWeek + i, startJaar);
+            semesterList.add(week);
+            week.setSemester(this);
+            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
+                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
+                week.setJaarNummer(startJaar + 1);
             }
         }
     }
@@ -121,5 +132,9 @@ public class Semester {
                 week.getDag(weekdagen[i]).setAvond(nieuweWeek.getDag(weekdagen[i]).getAvond());
             }
         }
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
