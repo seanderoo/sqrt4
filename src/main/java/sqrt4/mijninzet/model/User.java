@@ -50,6 +50,16 @@ public User(String username, String password, String roles, String permissions){
 
 }
 
+    public User(String username, String password, String roles, String permissions, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.active = 1;
+        this.roles = roles;
+        this.permissions = permissions;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     protected User(){}
 
     public List<String> getRoleList(){
