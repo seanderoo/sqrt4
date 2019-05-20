@@ -11,10 +11,11 @@ import java.util.Calendar;
 @Entity
 public class Dag {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
+    @JoinColumn
     private Week week;
 
     private String dagnaam;
@@ -139,6 +140,10 @@ public class Dag {
 
     public Week getWeek() {
         return week;
+    }
+
+    public void setWeek(Week week) {
+        this.week = week;
     }
 
     public boolean isOchtend() {

@@ -9,7 +9,7 @@ import java.util.List;
 public class Week {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -19,6 +19,7 @@ public class Week {
     private int jaarNummer;
 
     @ManyToOne
+    @JoinColumn
     private Semester semester;
 
 
@@ -32,6 +33,7 @@ public class Week {
         dagenlijst.add(new Dag("woensdag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("donderdag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("vrijdag", weekNummer,jaarNummer));
+        setWeekVoorDagen();
     }
 
     public Week() {
@@ -42,6 +44,7 @@ public class Week {
         dagenlijst.add(new Dag("woensdag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("donderdag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("vrijdag", weekNummer,jaarNummer));
+        setWeekVoorDagen();
     }
 
 
@@ -90,5 +93,15 @@ public class Week {
         }
         }
         return teller;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
+    private void setWeekVoorDagen() {
+        for (Dag dag : dagenlijst) {
+            dag.setWeek(this);
+        }
     }
 }
