@@ -3,6 +3,7 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Vak {
@@ -48,4 +49,16 @@ public class Vak {
     public void setAantalUren(int aantalUren) {
         this.aantalUren = aantalUren;
     }
+
+    @Override
+    public String toString() {
+        return "Vak{" +
+                "vakId=" + vakId +
+                ", vakNaam='" + vakNaam + '\'' +
+                ", aantalUren=" + aantalUren +
+                '}';
+    }
 }
+
+
+

@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SQRT4  |  Kennisgebieden</title>
-    <link rel="stylesheet" type="text/css" href="voorkeur.css">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+    <!--<link rel="stylesheet" type="text/css" href="voorkeur.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="stylesheet.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="header-stylesheet.css">-->
     <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
 </head>
@@ -14,40 +14,22 @@
 </header>
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan</h2>
-<div class="container">
-    <br>
-    <form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
-    <table id="SollicitatieTabel">
-        <thead>
-        <tr>
-            <th>Vakken</th>
-            <th>Liever niet</th>
-            <th>Als het moet</th>
-            <th>Graag</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${vakken.empty}">
-            <td>Geen vakken beschikbaar</td>
-        </tr>
-        <tr th:each="vak: ${vakken}">
-            <td class="ST"><span th:text="${vak.vakNaam}">Vacature</span></td>
-            <td id="optie1">
-                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="1">
-            </td>
-            <td id="optie2">
-                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="2">
-            </td>
-            <td id="optie3">
-                <input type="radio" th:field="*{voorkeur}" th:name="${vak.vakId}" th:value="3">
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <button id="knopOpslaan" onclick="Opslaan()">Opslaan</button>
-    </form>
-</div>
+
+<form th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
+    <legend>Vakken</legend>
+    <ul th:each="vak : ${vakken}">
+        <li th:text="${vak.vakNaam}"></li>
+        <div>
+            <input type="radio" th:name="${vak.vakId}" value="1"><label>liever niet</label>
+            <input type="radio" th:name="${vak.vakId}" value="2"><label>als het moet</label>
+            <input type="radio" th:name="${vak.vakId}" value="3"><label>graag</label>
+            <br>
+        </div>
+    </ul>
+<button id="knopOpslaan" onclick="Opslaan()">Opslaan</button>
+</form>
 </body>
+
 <script>
     function Opslaan(){
         this.click = function() {
