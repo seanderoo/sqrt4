@@ -15,7 +15,7 @@
 </header>
     <h1>Incidentregistratie</h1>
 <h2>Geef je incident op.</h2>
-<form id="reg_date" th:action=@{/incidentregistratie} th:object="${geselecteerdeWeek}" th:method ="POST">
+    <form id="reg_date" th:action=@{"/incidentregistratie"} th:object="${geselecteerdeWeek}" th:method="POST">
     <label for="selectedDate">Datum van incident</label>
     <input type="date" (dd-mm-yyyy)="" id="selectedDate" name="selectedDate" value="02-04-2019">
     <button id="ophalenWeek" >Haal week
@@ -30,12 +30,10 @@
 <br/>
 </body>
 
-<form id="hiddenformIR" action="#" th:action="@{/incidentregistratie}" th:object="${geselecteerdeWeek}" method="GET">
+<form id="hiddenformIR" action="#" th:action=@{/incidentregistratie/huidigeWeek} th:object="${huidigeWeek}"
+      method="GET">
 
     <table id="deIncidentTabel">
-        <tr th:if="${geselecteerdeWeek.empty}">
-            <td>Er is nog geen semester aangemaakt!</td>
-        </tr>
         <tr>
             <th>Maandag</th>
             <th>Dinsdag</th>
@@ -44,11 +42,11 @@
             <th>Vrijdag</th>
         </tr>
         <tr>
-            <th th:name="${geselecteerdeWeek.getDag('maandag')}">datum</th>
-            <th th:name="${geselecteerdeWeek.getDag('dinsdag')}">datum</th>
-            <th th:name="${geselecteerdeWeek.getDag('woensdag')}">datum</th>
-            <th th:name="${geselecteerdeWeek.getDag('donderdag')}">datum</th>
-            <th th:name="${geselecteerdeWeek.getDag('vrijdag')}">datum</th>
+            <th th:datetime="${maandagdatum}">datum</th>
+            <th th:datetime="${dinsdagdatum}">datum</th>
+            <th th:datetime="${woensdagdatum}">datum</th>
+            <th th:datetime="${donderdagdatum}">datum</th>
+            <th th:datetime="${vrijdagdatum}">datum</th>
         </tr>
         <tr>
             <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09.00 - 13.00</td>
