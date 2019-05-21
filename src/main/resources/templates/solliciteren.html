@@ -13,7 +13,7 @@
 </header>
 <h1>Solliciteren</h1>
 <h2>Solliciteer hier op vacatures:</h2>
-
+<form action="#" th:action="@{/sollicitaties/opgeslagen}" th:object="${vacature}" th:method="POST">
 <table id="SollicitatieTabel">
     <thead>
     <tr class="ST">
@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <p><span th:text ="${#authentication.name}"></span> </p>
+    <span th:text ="${#authentication.name}"></span>
     <tr th:if="${vacatures.empty}">
         <td class="ST" colspan="5">Geen openstaande vacatures beschikbaar</td>
     </tr>
@@ -34,10 +34,11 @@
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
         <td class="ST"><span th:text="${vacature.eisen}">Vereisten </span></td>
         <td class="ST"><span th:text="${vacature.omschrijving}">Omschrijving </span></td>
-        <td class="ST"><span> <button>Solliciteren</button> </span></td>
+        <td class="ST"><span> <button type="submit">Solliciteren</button> </span></td>
     </tr>
     </tbody>
 </table>
+</form>
 <button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button>
     <p id="sollicitatieOpgeslagen"></p>
 </body>

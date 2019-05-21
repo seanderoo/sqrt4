@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 
 @Controller
-public class UserController {
+public class NieuweGebruikerController {
 
     @Autowired
     UserRepository userRepository;
@@ -39,6 +39,7 @@ public class UserController {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(1);
         userRepository.save(user);
         System.out.println(user);
         return "gebruiker-toegevoegd";

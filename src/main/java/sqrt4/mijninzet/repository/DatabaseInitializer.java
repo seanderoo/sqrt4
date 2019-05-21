@@ -3,6 +3,7 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vacature;
 import sqrt4.mijninzet.model.Vak;
@@ -16,13 +17,15 @@ public class DatabaseInitializer implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
     private VacatureRepository vacatureRepository;
     private VakRepository vakRepository;
+    private RoleRepository roleRepository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                               VacatureRepository vacatureRepository, VakRepository vakRepository) {
+                               VacatureRepository vacatureRepository, VakRepository vakRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -31,7 +34,17 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.userRepository.deleteAll();
         this.vacatureRepository.deleteAll();
         this.vakRepository.deleteAll();
+        this.roleRepository.deleteAll();
 
+
+        //create rollen
+        Role god = new Role("Admin");
+        Role docent = new Role("Docent");
+        Role manager = new Role("Manager");
+        Role coordinator = new Role("Coordinator");
+        Role administrator = new Role("God");
+
+        List<Role> rollen = Arrays.asList(god, docent, manager, coordinator, administrator);
 
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "USER","","Matthijs","Verkaaik");
@@ -62,5 +75,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
+        this.roleRepository.saveAll(rollen);
+
     }
 }
