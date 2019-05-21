@@ -5,7 +5,6 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -32,14 +31,6 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Semester> semesters;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = @JoinColumn(
-//                    name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "role_id", referencedColumnName = "id"))
-//
 public User(String username, String password, String roles, String permissions){
     this.username = username;
     this.password = password;
@@ -147,65 +138,6 @@ public User(String username, String password, String roles, String permissions){
         this.semesters = semesters;
     }
 
-
-
-    //private Collection<Role> roles;
-
-
-//    public User(String userName, String password, String firstName, String lastName) {
-//        this.username = userName;
-//        this.password = password;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        semesters = new ArrayList<>();
-//        roles = new ArrayList<>();
-//    }
-
-//    public User() {
-//    }
-//
-//    public void addRole(Role role) {
-//        roles.add(role);
-//    }
-//    public String getUserName() {
-//        return username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public Collection<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setUserName(String userName) {
-//        this.username = userName;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
-//
-//    public void setRoles(Collection<Role> roles) {
-//        this.roles = roles;
-//    }
 
     @Override
     public String toString() {
