@@ -28,15 +28,14 @@
     <input id="wachtwoord2" type="password" value="" size="40" required > <br>
     <button onclick="noTypo()">controleer wachtwoord</button> <br>
     Kies een Rol
-    <input list="roles">
-    <datalist id="roles">
-        <select th:name="roles">
-        <option th:each="role : ${roles}"
-                th:value ="${role.name}"
-                th:text="${role.name}">
+    <select th:name="roles">
+        <option value=""></option>
+            <option th:each="role : ${roles}"
+                th:value ="${role.getName()}"
+                th:text="${role.getName()}">
         </option>
-        </select>
-    </datalist> <br>
+    </select>
+    <br>
     <input type="submit" value="Nieuwe gebruiker aanmaken"/>
 </form>
 </div>

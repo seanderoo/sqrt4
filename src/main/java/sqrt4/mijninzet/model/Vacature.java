@@ -76,4 +76,12 @@ public class Vacature {
     public void setDocenten(Collection<User> docenten) {
         this.docenten = docenten;
     }
+
+    @Override
+    public String toString() {
+        return "Vacature{" +
+                "id=" + id +
+                ", vacatureNaam='" + vacatureNaam + '\'' +
+                '}';
+    }
 }
