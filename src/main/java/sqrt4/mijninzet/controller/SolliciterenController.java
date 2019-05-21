@@ -28,7 +28,7 @@ public class SolliciterenController {
         return "solliciteren";
     }
 
-    @PostMapping("/sollicitaties/opgeslagen")
+    @PostMapping("/sollicitaties-opgeslagen")
     public String sollicitatiesOpgeslagen(@ModelAttribute("vacature") Vacature vacature, Model model) {
         model.addAttribute("vacature", vacature);
         System.out.println(vacature);
