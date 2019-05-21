@@ -1,27 +1,43 @@
 <!DOCTYPE html>
+<html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
+
 <div class="navbar" id="header" th:fragment="copy">
-    <a href="index.html">Home</a>
+    <a href="Home">Home</a>
     <a href="voorkeuren">Kennis administreren</a>
     <a href="solliciteren">Solliciteren</a>
     <div class="dropdown">
-        <button class="dropbtn">Beschikbaarheden<i class="fa fa-caret-down"></i></button>
+        <button class="dropbtn">Beschikbaarheden
+            <i class="fa fa-caret-down"></i>
+        </button>
         <div class="dropdown-content">
             <a href="algemene-beschikbaarheid">Algemene beschikbaarheid</a>
             <a href="incidentregistratie">Incidentregistratie</a>
         </div>
     </div>
-    <a href="/maaksemester">Maak een semester aan</a>
-    <a href="/logout">Uitloggen</a>
+    <div class="dropdown">
+        <button class="dropbtn">Administratie
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/maaksemester">Maak een semester aan</a>
+            <a href="nieuwe-gebruiker">Maak een nieuwe gebruiker aan</a>
+        </div>
+    </div>
 
+    <a href="/logout">Uitloggen</a>
 </div>
+
 </body>
 </html>
+
+
 
 
 
