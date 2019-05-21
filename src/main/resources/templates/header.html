@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,7 +21,7 @@
             <a href="incidentregistratie">Incidentregistratie</a>
         </div>
     </div>
-    <div class="dropdown">
+    <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
         <button class="dropbtn">Administratie
             <i class="fa fa-caret-down"></i>
         </button>
