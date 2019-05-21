@@ -13,9 +13,7 @@
 </header>
 <h1>Home</h1>
 <h2>Homepagina welkom:</h2>
-<span th:text ="${#authentication.getPrincipal()}"></span>
-<td><span sec:authentication="name"></span> </td>
-<td><span sec:authentication="principal.authorities"></span> </td>
+<p><span th:text ="${user.getFirstName()}"></span> <span th:text ="${user.getLastName()}"></span></p>
 </body>
 <footer>
     <h6>&copy; Copyright. All Rights Reserved.</h6>
