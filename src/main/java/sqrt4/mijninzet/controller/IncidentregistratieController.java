@@ -58,6 +58,17 @@ public class IncidentregistratieController {
         return "incidentregistratie";
     }
 
+    @GetMapping(value = "/incidentregistratie/huidigeWeek")
+    public String opgehaaldeWeek(Week huidigeWeek, Model model) {
+        model.addAttribute("huidigeWeek", huidigeWeek);
+        model.addAttribute("maandagdatum", huidigeWeek.getDag("maandag").getDatum());
+        model.addAttribute("dinsdagdatum", huidigeWeek.getDag("dinsdag").getDatum());
+        model.addAttribute("woensdagdatum", huidigeWeek.getDag("woensdag").getDatum());
+        model.addAttribute("donderdagdatum", huidigeWeek.getDag("donderdag").getDatum());
+        model.addAttribute("vrijdagdatum", huidigeWeek.getDag("vrijdag").getDatum());
+        return "incidentregistratie";
+    }
+
 //    @GetMapping(value = "/incidentregistratie")
 //    public String zoekSelectedWeek (String dag, Model model){
 //

@@ -23,6 +23,7 @@ public class HomeController {
     public String Home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
+        System.out.println(userName);
         User activeUser = userRepository.findByUsername(userName);
         model.addAttribute("user", activeUser);
         System.out.println(activeUser);
