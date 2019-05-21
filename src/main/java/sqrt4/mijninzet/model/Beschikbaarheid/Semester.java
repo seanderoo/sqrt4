@@ -45,6 +45,7 @@ public class Semester {
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
                 week.setJaarNummer(startJaar + 1);
+                week.pasWeekNummerDagenAan(week.getWeekNummer());
             }
         }
 
@@ -64,6 +65,7 @@ public class Semester {
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
                 week.setJaarNummer(startJaar + 1);
+                week.pasWeekNummerDagenAan(week.getWeekNummer());
             }
         }
     }
@@ -136,5 +138,17 @@ public class Semester {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Week getFirstWeek() {
+        return semesterList.get(0);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

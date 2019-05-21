@@ -80,7 +80,6 @@ public class Week {
                 dag = d;
             }
         }
-
         return dag;
     }
 
@@ -102,6 +101,12 @@ public class Week {
     private void setWeekVoorDagen() {
         for (Dag dag : dagenlijst) {
             dag.setWeek(this);
+        }
+    }
+
+    public void pasWeekNummerDagenAan(int nieuwNummer) {
+        for (Dag dag : dagenlijst) {
+            dag.setWeekNummer(nieuwNummer);
         }
     }
 }
