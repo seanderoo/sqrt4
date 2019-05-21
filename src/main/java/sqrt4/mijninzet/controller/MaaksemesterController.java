@@ -31,10 +31,11 @@ public class MaaksemesterController {
 
     @PostMapping("/maaksemester")
     public String nieuwSemester(@ModelAttribute("semester") Semester semester,
+                                @RequestParam("cohortNummer") int cohortNummer,
                                 @RequestParam ("startJaar") int startJaar,
                                 @RequestParam("startWeek") int startWeek,
                                 @RequestParam ("eindWeek") int eindWeek){
-        semester = new Semester(startWeek,startJaar,eindWeek);
+        semester = new Semester(cohortNummer, startWeek, startJaar, eindWeek);
         semester.setUser(voegActiveUserToe());
         abRepo.save(semester);
         return "home";

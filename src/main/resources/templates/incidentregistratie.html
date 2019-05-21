@@ -30,9 +30,12 @@
 <br/>
 </body>
 
-<form id="hiddenformIR" action="#" th:action="@{/incidentregistratie}" th:object="${geselecteerdeWeek}" method = get>
+<form id="hiddenformIR" action="#" th:action="@{/incidentregistratie}" th:object="${geselecteerdeWeek}" method="GET">
 
     <table id="deIncidentTabel">
+        <tr th:if="${geselecteerdeWeek.empty}">
+            <td>Er is nog geen semester aangemaakt!</td>
+        </tr>
         <tr>
             <th>Maandag</th>
             <th>Dinsdag</th>
@@ -41,11 +44,11 @@
             <th>Vrijdag</th>
         </tr>
         <tr>
-            <th>datum</th>
-            <th>datum</th>
-            <th>datum</th>
-            <th>datum</th>
-            <th>datum</th>
+            <th th:name="${geselecteerdeWeek.getDag('maandag')}">datum</th>
+            <th th:name="${geselecteerdeWeek.getDag('dinsdag')}">datum</th>
+            <th th:name="${geselecteerdeWeek.getDag('woensdag')}">datum</th>
+            <th th:name="${geselecteerdeWeek.getDag('donderdag')}">datum</th>
+            <th th:name="${geselecteerdeWeek.getDag('vrijdag')}">datum</th>
         </tr>
         <tr>
             <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09.00 - 13.00</td>

@@ -50,8 +50,8 @@ public class Semester {
 
     }
 
-    public Semester(int startWeek, int startJaar, int eindWeek) {
-        this.semesterNaam = setSemesterName(startWeek, startJaar);
+    public Semester(int cohortNaam, int startWeek, int startJaar, int eindWeek) {
+        this.semesterNaam = setSemesterName(cohortNaam);
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
@@ -69,15 +69,11 @@ public class Semester {
     }
     // Wellicht heroverwegen om semesternaam vrij in te vullen, dit kan in de toekomst worden gebruikt voor elke
     // periode die er is, namelijk cohorten of langere/ kortere periodes. Voorbeeld: periode wk 40-2019 tot en met wk 6-2020
-    public String setSemesterName(int startWeek, int startJaar){
+    public String setSemesterName(int cohortNummer) {
         StringBuilder sb = new StringBuilder();
-        String appendix;
-        if(startWeek>26){
-            appendix = "II";
-        } else {
-            appendix = "I";
-        }
-        return sb.append(startJaar).append("-").append(appendix).toString();
+        String appendix = "Cohort";
+
+        return sb.append(appendix).append(" ").append(cohortNummer).toString();
     }
 
     public int numberOfWeeks(int startWeek, int eindWeek){

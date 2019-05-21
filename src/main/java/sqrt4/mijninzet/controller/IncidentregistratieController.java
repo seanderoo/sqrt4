@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
+import sqrt4.mijninzet.repository.WeekRepository;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -24,6 +25,9 @@ public class IncidentregistratieController {
 
     @Autowired
     IncidentregistratieRepository repo;
+
+    @Autowired
+    WeekRepository repoWeek;
 
     @GetMapping("/incidentregistratie")
     public String Incidentregistratie(){
@@ -46,10 +50,10 @@ public class IncidentregistratieController {
     public String zoekWeekOp (@RequestParam("selectedDate") String gekozendatum, Model model){
         gekozenDag = gekozendatum;
         LocalDate date = LocalDate.parse(gekozenDag);
-        Dag temp = repo.findDagByDatum(date);
-        int weekNr = temp.getWeekNummer();
-        int weekJr = temp.getJaarNummer();
-        Week tempWeek = repo.findByJaarNummerAndWeekNummer(weekJr,weekNr);
+        Dag tempDag = repo.findDagByDatum(date);
+        int weekNr = tempDag.getWeekNummer();
+        int weekJr = tempDag.getJaarNummer();
+        Week tempWeek = repoWeek.findByJaarNummerAndWeekNummer(weekJr, weekNr);
         model.addAttribute("geselecteerdeWeek" , tempWeek);
         return "incidentregistratie";
     }

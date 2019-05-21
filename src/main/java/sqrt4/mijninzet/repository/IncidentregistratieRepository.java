@@ -9,6 +9,4 @@ import java.time.LocalDate;
 public interface IncidentregistratieRepository extends JpaRepository<Dag, Integer> {
 
     Dag findDagByDatum(LocalDate date);
-
-    Week findByJaarNummerAndWeekNummer(int jaarNr, int weekNr);
 }
