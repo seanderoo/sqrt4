@@ -12,9 +12,9 @@ public class Voorkeur {
     private User user;
     @OneToOne
     private Vak vak;
-    private int voorkeur;
+    private String voorkeur;
 
-    public Voorkeur(int voorkeurId, User user, Vak vak, int voorkeur) {
+    public Voorkeur(int voorkeurId, User user, Vak vak, String voorkeur) {
         this.voorkeurId = voorkeurId;
         this.user = user;
         this.vak = vak;
@@ -48,11 +48,11 @@ public class Voorkeur {
         this.vak = vak;
     }
 
-    public int getVoorkeur() {
+    public String getVoorkeur() {
         return voorkeur;
     }
 
-    public void setVoorkeur(int voorkeur) {
+    public void setVoorkeur(String voorkeur) {
         this.voorkeur = voorkeur;
     }
 }

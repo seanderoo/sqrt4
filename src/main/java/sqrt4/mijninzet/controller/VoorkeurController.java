@@ -6,20 +6,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import sqrt4.mijninzet.model.User;
+import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class VoorkeurController {
 
     @Autowired
-    VakRepository repository;
+    private VakRepository repository;
     @Autowired
-    VoorkeurenRepository voorkeurenRepository;
+    private VoorkeurenRepository voorkeurenRepository;
 
     @GetMapping("/voorkeuren")
     public String getVakken(Model model) {
@@ -31,15 +32,25 @@ public class VoorkeurController {
     }
 
     @PostMapping("/voorkeuren")
-    public String voorkeurToegevoegd(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak, User user, Model model) {
-        model.addAttribute("voorkeurId", voorkeur.getVoorkeurId());
-        model.addAttribute("user", voorkeur.getUser());
-        model.addAttribute("vak", voorkeur.getVak());
-        model.addAttribute("voorkeur", voorkeur.getVoorkeur());
-        System.out.println("Vak: " + voorkeur.getVak());
-        System.out.println("User: " + voorkeur.getUser());
-        System.out.println("Voorkeur: " + voorkeur.getVoorkeur());
-        voorkeurenRepository.save(voorkeur);
+    public String voorkeurToegevoegd(@RequestParam Map<String, String> allParams,
+                                     @ModelAttribute("voorkeur") Voorkeur voorkeur) {
+        List<Vak> vakken = repository.findAll();
+
+        for (Vak vak: vakken) {
+            String key = null;
+            for (String k : allParams.keySet()) {
+                int sleutel = Integer.parseInt(k);
+                System.out.println("is dit mijn value? " + allParams.get(k));
+                if (vak.getVakId() == sleutel) {
+                    key = k;
+                }
+            }
+            Voorkeur voorkeur1 = new Voorkeur();
+            voorkeur1.setVak(vak);
+            voorkeur1.setVoorkeur(allParams.get(key));
+            voorkeurenRepository.save(voorkeur1);
+        }
+        System.out.println(allParams.entrySet());
         return ("voorkeuren-toegevoegd");
     }
 }
