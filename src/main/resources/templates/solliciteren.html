@@ -29,7 +29,7 @@
     <tr th:if="${vacatures.empty}">
         <td class="ST" colspan="5">Geen openstaande vacatures beschikbaar</td>
     </tr>
-    <tr th:each="vacature: ${vacatures}">
+    <tr th:each="vacature: ${vacatures}" th:selected="vacature">
         <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
         <td class="ST"><span th:text="${vacature.eisen}">Vereisten </span></td>

@@ -25,12 +25,9 @@ public class NieuweGebruikerController {
     RoleRepository roleRepository;
 
     @GetMapping("/nieuwe-gebruiker")
-    //kun je mbv @RequestParam de gekozen rol uitlezen? (Karin)
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        User user = new User("", "", "", "", "", "");
-        model.addAttribute("user", user);
         return "nieuwe-gebruiker";
     }
 
@@ -41,7 +38,6 @@ public class NieuweGebruikerController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        System.out.println(user);
         return "gebruiker-toegevoegd";
     }
 

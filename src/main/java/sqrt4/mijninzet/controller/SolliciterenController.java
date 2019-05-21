@@ -4,6 +4,7 @@ package sqrt4.mijninzet.controller;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.GetMapping;
+        import org.springframework.web.bind.annotation.ModelAttribute;
         import org.springframework.web.bind.annotation.PostMapping;
         import sqrt4.mijninzet.model.Vacature;
         import sqrt4.mijninzet.repository.VacatureRepository;
@@ -28,8 +29,9 @@ public class SolliciterenController {
     }
 
     @PostMapping("/sollicitaties/opgeslagen")
-    public String sollicitatiesOpgeslagen() {
-
+    public String sollicitatiesOpgeslagen(@ModelAttribute("vacature") Vacature vacature, Model model) {
+        model.addAttribute("vacature", vacature);
+        System.out.println(vacature);
         return "sollicitaties-opgeslagen";
     }
 }
