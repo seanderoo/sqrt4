@@ -21,6 +21,10 @@
     <input type="text" th:name="lastName" size="40" required> <br>
     Inlognaam
     <input type="text" th:name="username" size="40" required> <br>
+    Wachtwoord
+    <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required> <br>
+    Herhaal wachtwoord
+    <input id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"> <br>
     Kies een Rol
     <select th:name="roles">
         <option value=""></option>
@@ -28,12 +32,7 @@
                 th:value ="${role.getName()}"
                 th:text="${role.getName()}">
         </option>
-    </select>
-    Wachtwoord
-    <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required> <br>
-    Herhaal wachtwoord
-    <input id="wachtwoord2" type="password" value="" size="40" required > <br>
-    <br>
+    </select>  <br>
     <input type="submit" value="Nieuwe gebruiker aanmaken" onclick="noTypo()"/>
 </form>
 </div>
@@ -43,7 +42,7 @@
         var ww1 = document.getElementById('wachtwoord1').value;
         var ww2 = document.getElementById('wachtwoord2').value;
         if (ww1 != ww2) {
-            document.write("klopt niet!!!");
+            alert("klopt niet!!!");
         }
     }
 </script>
