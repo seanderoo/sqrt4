@@ -18,14 +18,19 @@
         <h1>Maak een semester aan</h1>
         <p>Hier is het mogelijk om een nieuw semester aan te maken. Voer hele weeknummers in.</p>
         <hr>
+        <label><b>Cohortnaam:</b></label><br/>
+        <input type="number" placeholder="nummer van het cohort" th:name="cohortNummer" min="1" required>
 
-        <label><b>startjaar</b></label><br/>
+        <br/>
+        <br/>
+
+        <label><b>startjaar:</b></label><br/>
         <input type="number" placeholder="startjaar" th:name="startJaar" min="2019" required>
 
         <br/>
         <br/>
 
-        <label><b>startweek</b></label><br/>
+        <label><b>startweek:</b></label><br/>
         <input type="number" placeholder="wat is de eerste weeknummer van het semester" th:name="startWeek" max="53"
                min="1" required>
 
