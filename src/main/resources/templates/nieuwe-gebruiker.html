@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <title>Niewe Gebruiker</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="form-karin.css">
 
 </head>
 <body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
 <h1>Nieuwe Gebruiker toevoegen</h1>
 <div id="nieuwegebruikerform">
 <form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
@@ -26,14 +30,14 @@
     Kies een Rol
     <input list="roles">
     <datalist id="roles">
-<!--        <select th:field="*{}">-->
+        <select th:name="roles">
         <option th:each="role : ${roles}"
                 th:value ="${role.name}"
                 th:text="${role.name}">
         </option>
-<!--        </select>-->
+        </select>
     </datalist> <br>
-    <input type="submit" onsubmit="noTypo()" value="Nieuwe gebruiker aanmaken"/>
+    <input type="submit" value="Nieuwe gebruiker aanmaken"/>
 </form>
 </div>
 </body>
