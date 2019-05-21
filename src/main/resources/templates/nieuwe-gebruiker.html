@@ -10,6 +10,9 @@
 
 </head>
 <body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
 <h1>Nieuwe Gebruiker toevoegen</h1>
 <div id="nieuwegebruikerform">
 <form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">

@@ -29,6 +29,7 @@ public class SolliciterenController {
 
     @PostMapping("/sollicitaties/opgeslagen")
     public String sollicitatiesOpgeslagen() {
+
         return "sollicitaties-opgeslagen";
     }
 }
