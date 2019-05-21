@@ -18,7 +18,9 @@
     <div id="semesterSelectorDiv">
         <label for="semesterSelector">Selecteer cohort</label><br/>
     <select id="semesterSelector" name="gekozenSemester">
-        <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"></option>
+        <option value="" ></option>
+        <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"
+                th:value="${semester.getSemesterNaam()}"></option>
     </select>
     </div>
 

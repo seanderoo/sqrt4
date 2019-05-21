@@ -146,6 +146,10 @@ public class Dag {
         this.week = week;
     }
 
+    public void setWeekNummer(int weekNummer) {
+        this.weekNummer = weekNummer;
+    }
+
     public boolean isOchtend() {
         return ochtend;
     }

@@ -46,7 +46,6 @@ public class MaaksemesterController {
     private User voegActiveUserToe(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        User activeUser = userRepo.findByUsername(userName);
-        return activeUser;
+        return userRepo.findByUsername(userName);
     }
 }
