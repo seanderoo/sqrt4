@@ -1,8 +1,6 @@
 package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Entity
 public class Vacature {
@@ -15,16 +13,12 @@ public class Vacature {
     private String omschrijving;
     private int aantalUren;
     private String eisen;
-    @ManyToMany
-    @JoinTable
-    private Collection<User> docenten;
 
     public Vacature(String vacatureNaam, String omschrijving, int aantalUren, String eisen) {
         this.vacatureNaam = vacatureNaam;
         this.omschrijving = omschrijving;
         this.aantalUren = aantalUren;
         this.eisen = eisen;
-        docenten = new ArrayList<>();
     }
     public Vacature() {
     }
@@ -69,13 +63,6 @@ public class Vacature {
         this.eisen = eisen;
     }
 
-    public Collection<User> getDocenten() {
-        return docenten;
-    }
-
-    public void setDocenten(Collection<User> docenten) {
-        this.docenten = docenten;
-    }
 
     @Override
     public String toString() {
