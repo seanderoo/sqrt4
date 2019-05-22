@@ -6,35 +6,35 @@ import javax.persistence.*;
 public class Sollicitatie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int sollicitatieId;
 
     @ManyToOne
     @JoinColumn
-    private User docent;
+    private User user;
 
     @ManyToOne
     @JoinColumn
     private Vacature vacature;
 
-    public Sollicitatie(User docent, Vacature vacature) {
-        this.docent = docent;
+    public Sollicitatie(User user, Vacature vacature) {
+        this.user = user;
         this.vacature = vacature;
     }
 
-    public int getId() {
-        return id;
+    public int getSollicitatieId() {
+        return sollicitatieId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSollicitatieId(int sollicitatieId) {
+        this.sollicitatieId = sollicitatieId;
     }
 
-    public User getDocent() {
-        return docent;
+    public User getUser() {
+        return user;
     }
 
-    public void setDocent(User docent) {
-        this.docent = docent;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Vacature getVacature() {
@@ -48,8 +48,8 @@ public class Sollicitatie {
     @Override
     public String toString() {
         return "Sollicitatie{" +
-                "id=" + id +
-                ", docent=" + docent +
+                "sollicitatieId=" + sollicitatieId +
+                ", user=" + user +
                 ", vacature=" + vacature +
                 '}';
     }
