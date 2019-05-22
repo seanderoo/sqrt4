@@ -22,12 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class AlgemeneBeschikbaarheidController {
+public class AlgemeneBeschikbaarheidController extends AbstractController {
 
     @Autowired
     AlgemeneBeschikbaarheidRepository algBesRepo;
-    @Autowired
-    UserRepository userRepo;
 
     @GetMapping("/algemene-beschikbaarheid")
     public String AlgemeneBeschikbaarheid(Model model,
@@ -104,11 +102,5 @@ public class AlgemeneBeschikbaarheidController {
 
         algBesRepo.save(semester);
         return "algemene-beschikbaarheid"; //Is de pagina waar je vervolgens heengestuurd wordt?
-    }
-
-    private User voegActiveUserToe(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        return userRepo.findByUsername(userName);
     }
 }
