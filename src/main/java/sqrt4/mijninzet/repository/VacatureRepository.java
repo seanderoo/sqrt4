@@ -6,4 +6,6 @@ import sqrt4.mijninzet.model.Vacature;
 
 @Repository
 public interface VacatureRepository extends JpaRepository<Vacature, Integer> {
+
+    Vacature findByVacatureNaam(String vacatureNaam);
 }

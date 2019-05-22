@@ -21,6 +21,8 @@ public class SolliciterenController {
     public String getVacatures(Model model) {
         List<Vacature> vacatures = repository.findAll();
         model.addAttribute("vacatures", vacatures);
+        Vacature testVacature = new Vacature();
+        model.addAttribute(testVacature);
         return "solliciteren";
     }
     @PostMapping("/solliciteren")
@@ -28,10 +30,11 @@ public class SolliciterenController {
         return "solliciteren";
     }
 
-    @PostMapping("/sollicitaties-opgeslagen")
-    public String sollicitatiesOpgeslagen(@ModelAttribute("vacature") Vacature vacature, Model model) {
-        model.addAttribute("vacature", vacature);
-        System.out.println(vacature);
-        return "sollicitaties-opgeslagen";
+    @PostMapping("/sollicitaties-details")
+    public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
+        Vacature gekozenVacature = repository.findByVacatureNaam(vacature.getVacatureNaam());
+        model.addAttribute("vacature", gekozenVacature);
+        System.out.println(gekozenVacature);
+        return "sollicitaties-details";
     }
 }
