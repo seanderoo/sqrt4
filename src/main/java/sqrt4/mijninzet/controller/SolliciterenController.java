@@ -12,7 +12,7 @@ package sqrt4.mijninzet.controller;
         import java.util.List;
 
 @Controller
-public class SolliciterenController {
+public class SolliciterenController extends AbstractController{
 
     @Autowired
     VacatureRepository repository;
@@ -25,16 +25,25 @@ public class SolliciterenController {
         model.addAttribute(testVacature);
         return "solliciteren";
     }
-    @PostMapping("/solliciteren")
-    public String solliciteren() {
-        return "solliciteren";
-    }
 
-    @PostMapping("/sollicitaties-details")
+    @GetMapping("/sollicitaties-details")
     public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
         Vacature gekozenVacature = repository.findByVacatureNaam(vacature.getVacatureNaam());
         model.addAttribute("vacature", gekozenVacature);
         System.out.println(gekozenVacature);
         return "sollicitaties-details";
+    }
+//    @PostMapping("/sollicitaties-details")
+//    public String sollicitatieOpslaan(@ModelAttribute("vacature") Vacature vacature, Model model) {
+//        Vacature gekozenVacature = repository.findByVacatureNaam(vacature.getVacatureNaam());
+//        model.addAttribute("vacature", gekozenVacature);
+//        System.out.println(gekozenVacature);
+//        return "sollicitaties-details";
+//    }
+
+    @GetMapping("/sollicitaties")
+    public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
+        System.out.println(vacatureId);
+        return "sollicitaties";
     }
 }

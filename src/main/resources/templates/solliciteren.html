@@ -13,14 +13,12 @@
 </header>
 <h1>Solliciteren</h1>
 <h2>Solliciteer hier op vacatures:</h2>
-<form action="#" th:action="@{/sollicitaties-details}" th:object="${vacature}" th:method="POST">
+<form action="#" th:action="@{/sollicitaties-details}" th:object="${vacature}" th:method="GET">
 <table id="SollicitatieTabel">
     <thead>
     <tr class="ST">
         <th>Vacature</th>
         <th>Aantal Uren</th>
-        <th>Vereisten</th>
-<!--        <th>Omschrijving</th>-->
         <th>Meer info en solliciteren</th>
     </tr>
     </thead>
@@ -31,8 +29,6 @@
     <tr th:each="vacature: ${vacatures}">
         <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
-        <td class="ST"><span th:text="${vacature.eisen}">Vereisten </span></td>
-<!--        <td class="ST"><span th:text="${vacature.omschrijving}">Omschrijving </span></td>-->
         <td class="ST"><span > <input type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam"/> </span></td>
     </tr>
     </tbody>
