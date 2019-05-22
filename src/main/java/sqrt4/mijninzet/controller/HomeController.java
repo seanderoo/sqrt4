@@ -25,7 +25,6 @@ public class HomeController {
         String userName = auth.getName();
         User activeUser = userRepository.findByUsername(userName);
         model.addAttribute("user", activeUser);
-        System.out.println(auth.getAuthorities());
         return "home";
     }
 }
