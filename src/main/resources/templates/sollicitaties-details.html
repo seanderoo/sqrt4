@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sollicitaties Opgeslagen</title>
+    <title>SQRT4  |  Solliciteren</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
-
 </head>
+
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Bedankt voor uw sollicitatie.</h1>
+<h1>Bedankt voor uw interesse.</h1>
 <p>
-<h2>U heeft op de volgende Taken (Vacatures) gesolliciteerd</h2>
+<h2>Meer info over de vacature <span th:text="${vacature.vacatureNaam}"/> :</h2>
 </p>
 
 </body>

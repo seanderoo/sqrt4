@@ -15,12 +15,10 @@ import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 
 @Controller
-public class MaaksemesterController {
+public class MaaksemesterController extends AbstractController {
 
     @Autowired
     AlgemeneBeschikbaarheidRepository abRepo;
-    @Autowired
-    UserRepository userRepo;
 
     @GetMapping("/admin/maaksemester")
     public String Maaksemester( Model model, Semester semester){
@@ -40,11 +38,5 @@ public class MaaksemesterController {
         abRepo.save(semester);
         model.addAttribute("user", voegActiveUserToe());
         return "/home";
-    }
-
-    private User voegActiveUserToe(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        return userRepo.findByUsername(userName);
     }
 }
