@@ -16,12 +16,12 @@ public class VacatureController extends AbstractController{
     @Autowired
     VacatureRepository vacrepo;
 
-    @GetMapping("/nieuwe-vacature")
+    @GetMapping("/admin/nieuwe-vacature")
     public String nieuweVacature(){
-    return "nieuwe-vacature";
+    return "/nieuwe-vacature";
     }
 
-    @PostMapping("/nieuwe-vacature")
+    @PostMapping("/admin/nieuwe-vacature")
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
         vacature.setVacatureNaam(vacature.getVacatureNaam());
         vacature.setOmschrijving(vacature.getOmschrijving());
