@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Nieuwe vacature</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Nieuwe vacature toevoegen</h1>
+<p>
+<h2>Vul hier de gegevens in van de nieuwe vacature:</h2>
+</p>
+<!--<form action="#" th:action="@{/vacature-toevoegen}" th:object="${vacature}" th:method="GET">-->
+<div id="nieuweVacatureForm">
+    <form action="#" th:action="@{/nieuwe-vacature}" th:object="${vacature}" th:method="POST">
+        Vacaturenaam
+        <input type="text" th:name="vacatureNaam" size="40" required> <br>
+        Omschrijving
+        <input type="text" th:name="omschrijving" size="40" required> <br>
+        Aantal Uren
+        <input type="text" th:name="aantalUren" size="40" required> <br>
+        Eisen
+        <input id="text" type="text" th:name="eisen" value="" size="40" required> <br>
+        <br>
+        <input type="submit" value="Nieuwe vacature aanmaken" onclick="noTypo()"/>
+    </form>
+</div>
+
+</body>
+</html>
