@@ -15,7 +15,7 @@
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan</h2>
 <form th:action="@{/voorkeuren}" th:object="${voorkeur}" th:method="POST">
-<table id="SollicitatieTabel">
+<table border="1">
     <tr>
         <th><strong>Vakken</strong></th>
         <th><strong>Liever niet</strong></th>
@@ -24,9 +24,9 @@
     </tr>
     <tr th:each="vak : ${vakken}">
         <td th:text="${vak.vakNaam}"></td>
-        <td><input type="radio" th:name="${vak.vakId}" value="1"></td>
-        <td><input type="radio" th:name="${vak.vakId}" value="2"></td>
-        <td><input type="radio" th:name="${vak.vakId}" value="3"></td>
+        <td><input type="radio" th:name="${vak.vakId}" th:value="1"></td>
+        <td><input type="radio" th:name="${vak.vakId}" th:value="2"></td>
+        <td><input type="radio" th:name="${vak.vakId}" th:value="3"></td>
     </tr>
 </table>
 <br>

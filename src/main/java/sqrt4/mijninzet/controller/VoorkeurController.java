@@ -1,8 +1,6 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,33 +10,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
-import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-public class VoorkeurController {
+public class VoorkeurController extends AbstractController {
 
     @Autowired
-    private VakRepository repository;
+    private VakRepository vakRepository;
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/voorkeuren")
     public String getVakken(Model model) {
-        List<Vak> vakken = repository.findAll();
+        List<Vak> vakken = vakRepository.findAll();
         model.addAttribute("vakken", vakken);
-        return ("voorkeuren");
+        return "voorkeuren";
     }
 
     @PostMapping("/voorkeuren")
     public String voorkeurToegevoegd(@RequestParam Map<String, String> allParams,
                                      @ModelAttribute("voorkeur") Voorkeur voorkeur) {
-        List<Vak> vakken = repository.findAll();
+        List<Vak> vakken = vakRepository.findAll();
 
         for (Vak vak: vakken) {
             String key = null;
@@ -53,17 +48,10 @@ public class VoorkeurController {
             voorkeur1.setVoorkeur(allParams.get(key));
             voorkeur1.setUser(voegActiveUserToe());
 
-            if (allParams.get(key) != null) {
-                voorkeurenRepository.save(voorkeur1);
-            }
+            voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
+            voorkeurenRepository.save(voorkeur1);
         }
         return "voorkeuren";
-    }
-
-    private User voegActiveUserToe(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        return userRepository.findByUsername(userName);
     }
 }
 
