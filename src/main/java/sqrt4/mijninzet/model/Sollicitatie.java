@@ -21,6 +21,9 @@ public class Sollicitatie {
         this.vacature = vacature;
     }
 
+    public Sollicitatie() {
+    }
+
     public int getSollicitatieId() {
         return sollicitatieId;
     }
