@@ -21,7 +21,7 @@ public class VacatureController extends AbstractController{
     return "/nieuwe-vacature";
     }
 
-    @PostMapping("/admin/nieuwe-vacature")
+    @PostMapping("/admin/vacature-toegevoegd")
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
         vacature.setVacatureNaam(vacature.getVacatureNaam());
         vacature.setOmschrijving(vacature.getOmschrijving());

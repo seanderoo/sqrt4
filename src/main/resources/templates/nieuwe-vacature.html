@@ -16,7 +16,7 @@
 </p>
 <!--<form action="#" th:action="@{/vacature-toevoegen}" th:object="${vacature}" th:method="GET">-->
 <div id="nieuweVacatureForm">
-    <form action="#" th:action="@{/nieuwe-vacature}" th:object="${vacature}" th:method="POST">
+    <form action="#" th:action="@{/admin/vacature-toegevoegd}" th:object="${vacature}" th:method="POST">
         Vacaturenaam
         <input type="text" th:name="vacatureNaam" size="40" required> <br>
         Omschrijving
@@ -26,7 +26,7 @@
         Eisen
         <input id="text" type="text" th:name="eisen" value="" size="40" required> <br>
         <br>
-        <input type="submit" value="Nieuwe vacature aanmaken" onclick="noTypo()"/>
+        <input type="submit" value="Vacature opslaan"/>
     </form>
 </div>
 
