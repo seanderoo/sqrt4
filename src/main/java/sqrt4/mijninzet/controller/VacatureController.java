@@ -23,10 +23,6 @@ public class VacatureController extends AbstractController{
 
     @PostMapping("/admin/vacature-toegevoegd")
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
-        vacature.setVacatureNaam(vacature.getVacatureNaam());
-        vacature.setOmschrijving(vacature.getOmschrijving());
-        vacature.setAantalUren(vacature.getAantalUren());
-        vacature.setEisen(vacature.getVacatureNaam());
         vacrepo.save(vacature);
         return "/vacature-toegevoegd";
     }
