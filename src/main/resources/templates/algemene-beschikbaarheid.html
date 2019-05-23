@@ -14,17 +14,19 @@
 </header>
 <h1>Beschikbaarheid opgeven</h1>
 <h2>Geef je algemene beschikbaarheid op.</h2>
-<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid}" th:object="${semester}" method = post>
+
+<form action="#" th:action="@{/algemene-beschikbaarheid-ander-cohort}" th:object="${standaardWeek}" method = post>
     <div id="semesterSelectorDiv">
         <label for="semesterSelector">Selecteer cohort</label><br/>
-    <select id="semesterSelector" name="gekozenSemester">
-        <option value="" ></option>
-        <option th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"
-                th:value="${semester.getSemesterNaam()}"></option>
+    <select id="semesterSelector" name="gekozenSemester" onchange="haalCohortOp(this.value)">
+        <option id="semesterOptie" th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"
+                th:value="${semester.getSemesterNaam()}" th:name="${actiefSemester}"></option>
     </select>
     </div>
+</form>
 
-
+<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid-updaten}" th:object="${standaardWeek}" method = post>
+    <input id="copycat" type="hidden" name="gekozenSemester" value="">
     <table id="deTabel">
         <tr>
             <th>maandag</th>
@@ -34,25 +36,25 @@
             <th>vrijdag</th>
         </tr>
         <tr>
-            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09:00-13:00</td>
-            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend" value="1">09:00-13:00</td>
-            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend" value="1">09:00-13:00</td>
-            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend" value="1">09:00-13:00</td>
-            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend" value="1">09:00-13:00</td>
+            <td th:class="*{getMaandag().ochtend}"><input type="hidden" name="maandagochtend" th:value="*{getMaandag().ochtend}">09:00-13:00</td>
+            <td th:class="*{getDinsdag().ochtend}"><input type="hidden" name="dinsdagochtend" th:value="*{getDinsdag().ochtend}">09:00-13:00</td>
+            <td th:class="*{getWoensdag().ochtend}"><input type="hidden" name="woensdagochtend" th:value="*{getWoensdag().ochtend}">09:00-13:00</td>
+            <td th:class="*{getDonderdag().ochtend}"><input type="hidden" name="donderdagochtend" th:value="*{getDonderdag().ochtend}">09:00-13:00</td>
+            <td th:class="*{getVrijdag().ochtend}"><input type="hidden" name="vrijdagochtend" th:value="*{getVrijdag().ochtend}">09:00-13:00</td>
         </tr>
         <tr>
-            <td class="kanwel maandagmiddag"><input type="hidden" name="maandagmiddag" value="1">13:00-17:00</td>
-            <td class="kanwel dinsdagmiddag"><input type="hidden" name="dinsdagmiddag" value="1">13:00-17:00</td>
-            <td class="kanwel woensdagmiddag"><input type="hidden" name="woensdagmiddag" value="1">13:00-17:00</td>
-            <td class="kanwel donderdagmiddag"><input type="hidden" name="donderdagmiddag" value="1">13:00-17:00</td>
-            <td class="kanwel vrijdagmiddag"><input type="hidden" name="vrijdagmiddag" value="1">13:00-17:00</td>
+            <td th:class="*{getMaandag().middag}"><input type="hidden" name="maandagmiddag" th:value="*{getMaandag().middag}">13:00-17:00</td>
+            <td th:class="*{getDinsdag().middag}"><input type="hidden" name="dinsdagmiddag" th:value="*{getDinsdag().middag}">13:00-17:00</td>
+            <td th:class="*{getWoensdag().middag}"><input type="hidden" name="woensdagmiddag" th:value="*{getWoensdag().middag}">13:00-17:00</td>
+            <td th:class="*{getDonderdag().middag}"><input type="hidden" name="donderdagmiddag" th:value="*{getDonderdag().middag}">13:00-17:00</td>
+            <td th:class="*{getVrijdag().middag}"><input type="hidden" name="vrijdagmiddag" th:value="*{getVrijdag().middag}">13:00-17:00</td>
         </tr>
         <tr>
-            <td class="kanwel maandagavond"><input type="hidden" name="maandagavond" value="1">17:00-21:00</td>
-            <td class="kanwel dinsdagavond"><input type="hidden" name="dinsdagavond" value="1">17:00-21:00</td>
-            <td class="kanwel woensdagavond"><input type="hidden" name="woensdagavond" value="1">17:00-21:00</td>
-            <td class="kanwel donderdagavond"><input type="hidden" name="donderdagavond" value="1">17:00-21:00</td>
-            <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17:00-21:00</td>
+            <td th:class="*{getMaandag().avond}"><input type="hidden" name="maandagavond" th:value="*{getMaandag().avond}">17:00-21:00</td>
+            <td th:class="*{getDinsdag().avond}"><input type="hidden" name="dinsdagavond" th:value="*{getDinsdag().avond}">17:00-21:00</td>
+            <td th:class="*{getWoensdag().avond}"><input type="hidden" name="woensdagavond" th:value="*{getWoensdag().avond}">17:00-21:00</td>
+            <td th:class="*{getDonderdag().avond}"><input type="hidden" name="donderdagavond" th:value="*{getDonderdag().avond}">17:00-21:00</td>
+            <td th:class="*{getVrijdag().avond}"><input type="hidden" name="vrijdagavond" th:value="*{getVrijdag().avond}">17:00-21:00</td>
         </tr>
     </table>
         <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
@@ -66,17 +68,44 @@
     deTabel.addEventListener('click', function(e) {
         var td = e.target;
         if (td.tagName === 'TD') {
-            e.target.classList.toggle('kanwel');
-            e.target.classList.toggle('kanniet');
+            e.target.classList.toggle('true');
+            e.target.classList.toggle('false');
 
-            if (e.target.classList.contains('kanwel')) {
-                td.firstChild.value = '1';
+            if (e.target.classList.contains('true')) {
+                td.firstChild.value = 'true';
             } else {
-                td.firstChild.value = '0';
+                td.firstChild.value = 'false';
             }
         }
         console.log(td.firstChild.value);
     })
+
+    //Dit zorgt ervoor dat de twee formulieren gekoppeld zijn.
+    var copycat = document.querySelector('#copycat');
+    var semesterSelector = document.querySelector('#semesterSelector')
+    copycat.value = semesterSelector.options[semesterSelector.selectedIndex].value;
+
+
+
+    //AJAX
+
+    // function haalCohortOp(str) {
+    //     var request;
+    //     if(window.XMLHttpRequest) {
+    //         request = new XMLHttpRequest();
+    //     } else {
+    //         request = new ActiveXObject("Microsoft.XMLHTTP");
+    //     }
+    //     request.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             copycat.value = this.responseText;
+    //         }
+    //     };
+    //     request.open("GET", "URL", true);
+    //     request.post;
+    // }
+
+
 
     /*Knop voor het opslaan van data*/
     function Opslaan(){
