@@ -1,16 +1,16 @@
 package sqrt4.mijninzet.controller;
 
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import sqrt4.mijninzet.model.Sollicitatie;
-        import sqrt4.mijninzet.model.Vacature;
-        import sqrt4.mijninzet.repository.SollicitatieRepository;
-        import sqrt4.mijninzet.repository.VacatureRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import sqrt4.mijninzet.model.Sollicitatie;
+import sqrt4.mijninzet.model.Vacature;
+import sqrt4.mijninzet.repository.SollicitatieRepository;
+import sqrt4.mijninzet.repository.VacatureRepository;
 
-        import java.util.List;
+import java.util.List;
 
 @Controller
 public class SolliciterenController extends AbstractController{
@@ -36,7 +36,13 @@ public class SolliciterenController extends AbstractController{
         System.out.println(gekozenVacature);
         return "sollicitaties-details";
     }
-
+//    @PostMapping("/sollicitaties-details")
+//    public String sollicitatieOpslaan(@ModelAttribute("vacature") Vacature vacature, Model model) {
+//        Vacature gekozenVacature = repository.findByVacatureNaam(vacature.getVacatureNaam());
+//        model.addAttribute("vacature", gekozenVacature);
+//        System.out.println(gekozenVacature);
+//        return "sollicitaties-details";
+//    }
 
     @GetMapping("/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
@@ -45,5 +51,12 @@ public class SolliciterenController extends AbstractController{
         solrepo.save(sollicitatie);
         System.out.println(vacatureId);
         return "sollicitaties-overzicht";
+    }
+
+    @GetMapping("/nieuwe-vacature")
+    public String nieuweVacature(@ModelAttribute("vacature") Vacature vacature, Model model){
+
+
+
     }
 }
