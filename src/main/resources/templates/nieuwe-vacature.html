@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Nieuwe vacature</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+</head>
+
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Nieuwe vacature toevoegen</h1>
+<p>
+<h2>Vul hier de gegevens in van de nieuwe vacature:</h2>
+</p>
+<!--<form action="#" th:action="@{/vacature-toevoegen}" th:object="${vacature}" th:method="GET">-->
+    <table id="SollicitatieTabel">
+        <thead>
+        <tr class="ST">
+            <th>Vacature</th>
+            <th>Aantal Uren</th>
+            <th>Vereisten</th>
+            <th>Omschrijving</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+<!--            <td class="ST"><span th:text="${vacature.vacatureNaam}"></span></td>-->
+<!--            <td class="ST"><span th:text="${vacature.aantalUren}"></span></td>-->
+<!--            <td class="ST"><span th:text="${vacature.eisen}"> </span></td>-->
+<!--            <td class="ST"><span th:text="${vacature.omschrijving}"> </span></td>-->
+        </tr>
+        </tbody>
+    </table>
+<!--    <button type="submit" th:value="${vacature.id}" th:name="id">Solliciteren</button>-->
+    <button><a href="/solliciteren">Terug naar overzicht Vacatures</a> </button>
+</form>
+
+</body>
+</html>

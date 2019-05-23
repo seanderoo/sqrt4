@@ -36,13 +36,7 @@ public class SolliciterenController extends AbstractController{
         System.out.println(gekozenVacature);
         return "sollicitaties-details";
     }
-//    @PostMapping("/sollicitaties-details")
-//    public String sollicitatieOpslaan(@ModelAttribute("vacature") Vacature vacature, Model model) {
-//        Vacature gekozenVacature = repository.findByVacatureNaam(vacature.getVacatureNaam());
-//        model.addAttribute("vacature", gekozenVacature);
-//        System.out.println(gekozenVacature);
-//        return "sollicitaties-details";
-//    }
+
 
     @GetMapping("/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
