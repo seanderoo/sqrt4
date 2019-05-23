@@ -13,8 +13,4 @@ public class LoginController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public String inlogError() {
-//        return "login";
-//    }
 }

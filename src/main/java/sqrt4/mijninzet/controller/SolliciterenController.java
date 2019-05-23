@@ -53,10 +53,4 @@ public class SolliciterenController extends AbstractController{
         return "sollicitaties-overzicht";
     }
 
-    @GetMapping("/nieuwe-vacature")
-    public String nieuweVacature(@ModelAttribute("vacature") Vacature vacature, Model model){
-
-
-
-    }
 }

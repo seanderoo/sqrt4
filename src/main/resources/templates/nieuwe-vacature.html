@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
 </head>
-
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
@@ -16,27 +15,20 @@
 <h2>Vul hier de gegevens in van de nieuwe vacature:</h2>
 </p>
 <!--<form action="#" th:action="@{/vacature-toevoegen}" th:object="${vacature}" th:method="GET">-->
-    <table id="SollicitatieTabel">
-        <thead>
-        <tr class="ST">
-            <th>Vacature</th>
-            <th>Aantal Uren</th>
-            <th>Vereisten</th>
-            <th>Omschrijving</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-<!--            <td class="ST"><span th:text="${vacature.vacatureNaam}"></span></td>-->
-<!--            <td class="ST"><span th:text="${vacature.aantalUren}"></span></td>-->
-<!--            <td class="ST"><span th:text="${vacature.eisen}"> </span></td>-->
-<!--            <td class="ST"><span th:text="${vacature.omschrijving}"> </span></td>-->
-        </tr>
-        </tbody>
-    </table>
-<!--    <button type="submit" th:value="${vacature.id}" th:name="id">Solliciteren</button>-->
-    <button><a href="/solliciteren">Terug naar overzicht Vacatures</a> </button>
-</form>
+<div id="nieuweVacatureForm">
+    <form action="#" th:action="@{/nieuwe-vacature}" th:object="${vacature}" th:method="POST">
+        Vacaturenaam
+        <input type="text" th:name="vacatureNaam" size="40" required> <br>
+        Omschrijving
+        <input type="text" th:name="omschrijving" size="40" required> <br>
+        Aantal Uren
+        <input type="text" th:name="aantalUren" size="40" required> <br>
+        Eisen
+        <input id="text" type="text" th:name="eisen" value="" size="40" required> <br>
+        <br>
+        <input type="submit" value="Nieuwe vacature aanmaken" onclick="noTypo()"/>
+    </form>
+</div>
 
 </body>
 </html>
