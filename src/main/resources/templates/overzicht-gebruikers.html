@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overzicht Gebruikers</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Overzicht Gebruikers</h1>
+<table id="OverzichtGebruikers">
+    <thead>
+    <tr class="ST">
+        <th>Id</th>
+        <th>Voornaam</th>
+        <th>Achternaam</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gebruiker: ${gebruikers}">
+        <td class="ST"><span th:text="${gebruiker.getId()}">Voornaam </span></td>
+        <td class="ST"><span th:text="${gebruiker.getFirstName()}">Voornaam </span></td>
+        <td class="ST"><span th:text="${gebruiker.getLastName()}">Achternaam </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
