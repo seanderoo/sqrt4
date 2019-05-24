@@ -15,6 +15,27 @@
 <p>
 <h2>U heeft gesolliciteerd op de volgende vacatures:</h2>
 </p>
-
+<form action="#" th:action="@{/sollicitaties-details}" th:object="${sollicitatie}" th:method="GET">
+    <table id="SollicitatieTabel">
+        <thead>
+        <tr class="ST">
+            <th>Vacature</th>
+            <th>Aantal Uren</th>
+            <th>Meer info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${sollicitaties.empty}">
+            <td class="ST" colspan="3">Geen openstaande vacatures beschikbaar</td>
+        </tr>
+        <tr th:each="vacature: ${sollicitaties}">
+            <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
+            <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
+            <td class="ST"><span > <input type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam"/> </span></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<button><a href="/solliciteren">Terug naar overzicht Vacatures</a> </button>
 </body>
 </html>
