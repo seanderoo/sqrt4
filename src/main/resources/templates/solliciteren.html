@@ -29,7 +29,7 @@
     <tr th:each="vacature: ${vacatures}">
         <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
-        <td class="ST"><span > <input type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam"/> </span></td>
+        <td class="ST"><span > <button type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam">Meer informatie</button> </span></td>
     </tr>
     </tbody>
 </table>
