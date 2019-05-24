@@ -1,7 +1,6 @@
 package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Voorkeur {
@@ -54,5 +53,15 @@ public class Voorkeur {
 
     public void setVoorkeur(String voorkeur) {
         this.voorkeur = voorkeur;
+    }
+
+    @Override
+    public String toString() {
+        return "Voorkeur{" +
+                "voorkeurId=" + voorkeurId +
+                ", user=" + user +
+                ", vak=" + vak +
+                ", voorkeur='" + voorkeur + '\'' +
+                '}';
     }
 }
