@@ -48,8 +48,10 @@ public class VoorkeurController extends AbstractController {
             voorkeur1.setVoorkeur(allParams.get(key));
             voorkeur1.setUser(voegActiveUserToe());
 
-            voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
-            voorkeurenRepository.save(voorkeur1);
+            if (allParams.get(key) != null) {
+                voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
+                voorkeurenRepository.save(voorkeur1);
+            }
         }
         return "voorkeuren";
     }
