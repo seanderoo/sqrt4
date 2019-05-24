@@ -5,6 +5,7 @@ package sqrt4.mijninzet.controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.GetMapping;
         import org.springframework.web.bind.annotation.ModelAttribute;
+        import org.springframework.web.bind.annotation.PathVariable;
         import sqrt4.mijninzet.model.Sollicitatie;
         import sqrt4.mijninzet.model.User;
         import sqrt4.mijninzet.model.Vacature;
@@ -24,9 +25,7 @@ public class SolliciterenController extends AbstractController{
 
     @GetMapping("/solliciteren")
     public String getVacatures(Model model) {
-        model.addAttribute("vacatures", nogNietGesolliciteerd());
-        Vacature testVacature = new Vacature();
-        model.addAttribute(testVacature);
+        model.addAttribute("vacatures", welNietGesolliciteerd("vacatures"));
         return "solliciteren";
     }
 
@@ -34,29 +33,36 @@ public class SolliciterenController extends AbstractController{
     public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
         Vacature gekozenVacature = vacrepo.findByVacatureNaam(vacature.getVacatureNaam());
         model.addAttribute("vacature", gekozenVacature);
-        System.out.println(gekozenVacature);
         return "sollicitaties-details";
     }
 
     @GetMapping("/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
         Sollicitatie sollicitatie = new Sollicitatie(voegActiveUserToe(), vacrepo.findById(vacatureId.getId()));
-        System.out.println(sollicitatie);
         solrepo.save(sollicitatie);
-        System.out.println(vacatureId);
+        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
         return "sollicitaties-overzicht";
     }
 
-    //lijst van vacatures waar huidige gebruiker nog niet op gesolliciteerd heeft
-    public List<Vacature> nogNietGesolliciteerd() {
-        List<Vacature> vacatures = vacrepo.findAll();
+    //lijst van vacatures waar huidige gebruiker al wel of nog niet op gesolliciteerd heeft. Input bepaalt welke lijst
+    //returned wordt
+    public List<Vacature> welNietGesolliciteerd(String keuze) {
+        List<Vacature> gesolliciteerdeVacatures = new ArrayList<>();
+        List<Vacature> openVacatures = vacrepo.findAll();
         List<Sollicitatie> sollicitaties = solrepo.findAll();
         long userId = voegActiveUserToe().getId();
         for (Sollicitatie sol: sollicitaties) {
             if (userId == sol.getUser().getId()) {
-                vacatures.remove(sol.getVacature());
+                openVacatures.remove(sol.getVacature());
+                gesolliciteerdeVacatures.add(sol.getVacature());
             }
         }
-        return vacatures;
+        switch (keuze) {
+            case "vacatures":
+                return openVacatures;
+            case "sollicitaties":
+                return gesolliciteerdeVacatures;
+        }
+        return null;
     }
 }
