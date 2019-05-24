@@ -9,16 +9,16 @@
 <body>
 
 <div class="navbar" id="header" th:fragment="copy">
-    <a href="home">Home</a>
-    <a href="voorkeuren">Kennis administreren</a>
-    <a href="solliciteren">Solliciteren</a>
+    <a href="/home">Home</a>
+    <a href="/voorkeuren">Kennis administreren</a>
+    <a href="/solliciteren">Solliciteren</a>
     <div class="dropdown">
         <button class="dropbtn">Beschikbaarheden
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="algemene-beschikbaarheid">Algemene beschikbaarheid</a>
-            <a href="incidentregistratie">Incidentregistratie</a>
+            <a href="/algemene-beschikbaarheid">Algemene beschikbaarheid</a>
+            <a href="/incidentregistratie">Incidentregistratie</a>
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
@@ -26,12 +26,12 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/maaksemester">Maak een semester aan</a>
-            <a href="nieuwe-gebruiker">Maak een nieuwe gebruiker aan</a>
+            <a href="/admin/maaksemester">Maak een semester aan</a>
+            <a href="/admin/nieuwe-gebruiker">Maak een nieuwe gebruiker aan</a>
+            <a href="/admin/nieuwe-vacature">Maak een nieuwe vacature aan</a>
         </div>
     </div>
-
-    <a href="/logout">Uitloggen</a>
+            <a style="float:right" href="/logout" >Uitloggen</a>
 </div>
 
 </body>

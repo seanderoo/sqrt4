@@ -3,10 +3,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Niewe Gebruiker</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="form-karin.css">
+    <title>Nieuwe Gebruiker</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
 
 </head>
 <body>
@@ -15,29 +15,47 @@
 </header>
 <h1>Nieuwe Gebruiker toevoegen</h1>
 <div id="nieuwegebruikerform">
-<form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
-    Voornaam
-    <input type="text" th:name="firstName" size="40" required> <br>
-    Achternaam
-    <input type="text" th:name="lastName" size="40" required> <br>
-    Inlognaam
-    <input type="text" th:name="username" size="40" required> <br>
-    Wachtwoord
-    <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required> <br>
-    Herhaal wachtwoord
-    <input id="wachtwoord2" type="password" value="" size="40" required > <br>
-    <button onclick="noTypo()">controleer wachtwoord</button> <br>
-    Kies een Rol
-    <select th:name="roles">
-        <option value=""></option>
-            <option th:each="role : ${roles}"
-                th:value ="${role.getName()}"
-                th:text="${role.getName()}">
-        </option>
-    </select>
-    <br>
-    <input type="submit" value="Nieuwe gebruiker aanmaken"/>
-</form>
+    <form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
+        <table>
+            <tr>
+                <td> <label>Voornaam</label></td>
+                <td><input type="text" th:name="firstName" size="40" required></td>
+            </tr>
+       <tr>
+           <td><label>Achternaam</label></td>
+           <td><input type="text" th:name="lastName" size="40" required></td>
+       </tr>
+           <tr>
+               <td><label>Inlognaam</label></td>
+               <td> <input type="text" th:name="username" size="40" required></td>
+           </tr>
+            <tr>
+                <td><label>Wachtwoord</label></td>
+                <td> <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
+            </tr>
+            <tr>
+                <td>  <label>Herhaal wachtwoord</label></td>
+                <td>   <input id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+            </tr>
+            <tr>
+                <td> <label>Kies een Rol</label></td>
+                <td>     <select th:name="roles">
+                    <option value=""></option>
+                    <option th:each="role : ${roles}"
+                            th:value="${role.getName()}"
+                            th:text="${role.getName()}">
+                    </option>
+                </select></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Nieuwe gebruiker aanmaken" onclick="noTypo()"/></td>
+
+            </tr>
+
+        </table>
+
+    </form>
 </div>
 </body>
 <script>
@@ -45,9 +63,7 @@
         var ww1 = document.getElementById('wachtwoord1').value;
         var ww2 = document.getElementById('wachtwoord2').value;
         if (ww1 != ww2) {
-            window.alert("wachtwoord niet gelijk!");
-        } else {
-            window.alert("You go girl!")
+            alert("Wachtwoorden komen niet overeen!!!");
         }
     }
 </script>

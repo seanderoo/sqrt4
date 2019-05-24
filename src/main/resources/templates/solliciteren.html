@@ -13,34 +13,31 @@
 </header>
 <h1>Solliciteren</h1>
 <h2>Solliciteer hier op vacatures:</h2>
-<form action="#" th:action="@{/sollicitaties/opgeslagen}" th:object="${vacature}" th:method="POST">
+<form action="#" th:action="@{/sollicitaties-details}" th:object="${vacature}" th:method="GET">
 <table id="SollicitatieTabel">
     <thead>
     <tr class="ST">
         <th>Vacature</th>
         <th>Aantal Uren</th>
-        <th>Vereisten</th>
-        <th>Omschrijving</th>
-        <th>Solliciteren</th>
+        <th>Meer info en solliciteren</th>
     </tr>
     </thead>
     <tbody>
-    <span th:text="${#authentication.name}"></span>
     <tr th:if="${vacatures.empty}">
-        <td class="ST" colspan="5">Geen openstaande vacatures beschikbaar</td>
+        <td class="ST" colspan="3">Geen openstaande vacatures beschikbaar</td>
     </tr>
-    <tr th:each="vacature: ${vacatures}" th:selected="vacature">
+    <tr th:each="vacature: ${vacatures}">
         <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
         <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
-        <td class="ST"><span th:text="${vacature.eisen}">Vereisten </span></td>
-        <td class="ST"><span th:text="${vacature.omschrijving}">Omschrijving </span></td>
-        <td class="ST"><span> <button type="submit">Solliciteren</button> </span></td>
+        <td class="ST"><span > <input type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam"/> </span></td>
     </tr>
     </tbody>
 </table>
 </form>
-<button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button>
-    <p id="sollicitatieOpgeslagen"></p>
+<!--<button> <a href="templates/sollicitaties-overzicht.html">Overzicht van uw sollicitaties</a></button>-->
+
+<!--<button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button>-->
+<!--    <p id="sollicitatieOpgeslagen"></p>-->
 </body>
 <footer>
 </footer>

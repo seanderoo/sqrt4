@@ -109,4 +109,51 @@ public class Week {
             dag.setWeekNummer(nieuwNummer);
         }
     }
+
+
+    public Dag getMaandag() {
+        Dag dag = null;
+        for (Dag d : dagenlijst) {
+            if (d.getDagnaam().equals("maandag")) {
+                dag = d;
+            }
+        }
+        return dag;
+    }
+    public Dag getDinsdag() {
+        Dag dag = null;
+        for (Dag d : dagenlijst) {
+            if (d.getDagnaam().equals("dinsdag")) {
+                dag = d;
+            }
+        }
+        return dag;
+    }
+    public Dag getWoensdag() {
+        Dag dag = null;
+        for (Dag d : dagenlijst) {
+            if (d.getDagnaam().equals("woensdag")) {
+                dag = d;
+            }
+        }
+        return dag;
+    }
+    public Dag getDonderdag() {
+        Dag dag = null;
+        for (Dag d : dagenlijst) {
+            if (d.getDagnaam().equals("donderdag")) {
+                dag = d;
+            }
+        }
+        return dag;
+    }
+    public Dag getVrijdag() {
+        Dag dag = null;
+        for (Dag d : dagenlijst) {
+            if (d.getDagnaam().equals("vrijdag")) {
+                dag = d;
+            }
+        }
+        return dag;
+    }
 }

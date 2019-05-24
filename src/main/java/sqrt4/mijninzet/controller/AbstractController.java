@@ -10,7 +10,7 @@ public abstract class AbstractController {
     @Autowired
     UserRepository userRepo;
 
-    public User voegActiveUserToe(){
+    User voegActiveUserToe(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         return userRepo.findByUsername(userName);

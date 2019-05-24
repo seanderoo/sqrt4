@@ -16,11 +16,20 @@ td {
     padding: 6px 5px;
     text-align: center;
 }
+
 td.kanwel {
     background-color: green;
 }
 
 td.kanniet {
+    background-color: red;
+}
+
+td.true {
+    background-color: green;
+}
+
+td.false {
     background-color: red;
 }
 

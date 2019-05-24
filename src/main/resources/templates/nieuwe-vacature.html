@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Nieuwe vacature</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Nieuwe vacature toevoegen</h1>
+<p>
+<h2>Vul hier de gegevens in van de nieuwe vacature:</h2>
+</p>
+<div id="nieuweVacatureForm">
+    <form action="#" th:action="@{/admin/vacature-toegevoegd}" th:object="${vacature}" th:method="POST">
+        <table>
+            <tr>
+                <td><label>Vacaturenaam</label></td>
+                <td><input type="text" th:name="vacatureNaam" size="40" required></td>
+            </tr>
+           <tr>
+               <td><label>Omschrijving</label></td>
+               <td><input type="text" th:name="omschrijving" size="40" required></td>
+           </tr>
+           <tr>
+               <td><label>Aantal uren</label></td>
+               <td><input type="text" th:name="aantalUren" size="40" required></td>
+           </tr>
+           <tr>
+               <td><label>Eisen</label></td>
+               <td><input type="text" th:name="eisen" value="" size="40" required></td>
+           </tr>
+           <tr>
+               <td></td><td> <input type="submit" value="Vacature opslaan"/></td>
+           </tr>
+
+        </table>
+
+    </form>
+</div>
+
+</body>
+</html>

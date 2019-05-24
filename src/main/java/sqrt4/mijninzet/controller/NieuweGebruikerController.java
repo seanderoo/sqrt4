@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
@@ -24,11 +25,11 @@ public class NieuweGebruikerController {
     @Autowired
     RoleRepository roleRepository;
 
-    @GetMapping("/nieuwe-gebruiker")
+    @GetMapping("/admin/nieuwe-gebruiker")
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        return "nieuwe-gebruiker";
+        return "/nieuwe-gebruiker";
     }
 
     @PostMapping("/nieuwe-gebruiker")
@@ -38,7 +39,7 @@ public class NieuweGebruikerController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        return "gebruiker-toegevoegd";
+        return "/gebruiker-toegevoegd";
     }
 
 

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sqrt4.mijninzet.config.UserPrincipal;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
@@ -21,13 +20,13 @@ public class MaaksemesterController extends AbstractController {
     @Autowired
     AlgemeneBeschikbaarheidRepository abRepo;
 
-    @GetMapping("/maaksemester")
+    @GetMapping("/admin/maaksemester")
     public String Maaksemester( Model model, Semester semester){
-        return "maaksemester";
+        return "/maaksemester";
     }
     Semester semester = new Semester();
 
-    @PostMapping("/maaksemester")
+    @PostMapping("/admin/maaksemester")
     public String nieuwSemester(Model model,
                                 @ModelAttribute("semester") Semester semester,
                                 @RequestParam("cohortNummer") int cohortNummer,
@@ -38,6 +37,6 @@ public class MaaksemesterController extends AbstractController {
         semester.setUser(voegActiveUserToe());
         abRepo.save(semester);
         model.addAttribute("user", voegActiveUserToe());
-        return "home";
+        return "/home";
     }
 }
