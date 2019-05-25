@@ -20,19 +20,21 @@
         <table>
             <tr>
                 <td><label>Vacaturenaam</label></td>
-                <td><input type="text" th:name="vacatureNaam" size="40" required></td>
+                <td><input type="text" th:name="vacatureNaam" maxlength="255" required></td>
             </tr>
            <tr>
+
                <td><label>Omschrijving</label></td>
-               <td><input type="text" th:name="omschrijving" size="40" required></td>
+               <td><textarea onblur="textCounter(this,this.form.counter,255);" onkeyup="textCounter(this,this.form.counter,255);" input type="text" class="omschrijving" th:name="omschrijving" maxlength="255" required></textarea></td>
+               <td><input class="max255" onblur="textCounter(this.form.recipients,this,255);" disabled  onfocus="this.blur();" tabindex="999" maxlength="3" size="3" value="255" name="counter"></td>
            </tr>
            <tr>
                <td><label>Aantal uren</label></td>
-               <td><input type="text" th:name="aantalUren" size="40" required></td>
+               <td><input type="text" th:name="aantalUren" required></td>
            </tr>
            <tr>
                <td><label>Eisen</label></td>
-               <td><input type="text" th:name="eisen" value="" size="40" required></td>
+               <td><textarea input type="text" th:name="eisen" value=""  maxlength="255" required></textarea></td>
            </tr>
            <tr>
                <td></td><td> <input type="submit" value="Vacature opslaan"/></td>
@@ -44,4 +46,18 @@
 </div>
 
 </body>
+<script>
+    function textCounter( field, countfield, maxlimit ) {
+        if ( field.value.length > maxlimit ) {
+            field.value = field.value.substring( 0, maxlimit );
+            field.blur();
+            field.focus();
+            return false;
+        } else {
+            countfield.value = maxlimit - field.value.length;
+        }
+    }
+
+</script>
+
 </html>
