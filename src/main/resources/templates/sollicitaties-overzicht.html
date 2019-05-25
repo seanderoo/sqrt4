@@ -21,12 +21,12 @@
         <tr class="ST">
             <th>Vacature</th>
             <th>Aantal Uren</th>
-            <th>Meer info</th>
+            <th>Meer info en afmelden</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${sollicitaties.empty}">
-            <td class="ST" colspan="3">Geen openstaande vacatures beschikbaar</td>
+            <td class="ST" colspan="3">U heeft nog op geen enkele vacature gesolliciteerd</td>
         </tr>
         <tr th:each="vacature: ${sollicitaties}">
             <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
