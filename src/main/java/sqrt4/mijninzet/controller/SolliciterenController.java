@@ -44,6 +44,12 @@ public class SolliciterenController extends AbstractController{
         return "sollicitaties-overzicht";
     }
 
+    @GetMapping("/sollicitaties-overzicht")
+    public String getSollicitaties(Model model) {
+        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
+        return "sollicitaties-overzicht";
+    }
+
     //lijst van vacatures waar huidige gebruiker al wel of nog niet op gesolliciteerd heeft. Input bepaalt welke lijst
     //returned wordt
     public List<Vacature> welNietGesolliciteerd(String keuze) {

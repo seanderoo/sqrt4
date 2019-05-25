@@ -21,17 +21,17 @@
         <tr class="ST">
             <th>Vacature</th>
             <th>Aantal Uren</th>
-            <th>Meer info</th>
+            <th>Meer info en afmelden</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${sollicitaties.empty}">
-            <td class="ST" colspan="3">Geen openstaande vacatures beschikbaar</td>
+            <td class="ST" colspan="3">U heeft nog op geen enkele vacature gesolliciteerd</td>
         </tr>
         <tr th:each="vacature: ${sollicitaties}">
             <td class="ST"><span th:text="${vacature.vacatureNaam}">Vacature </span></td>
             <td class="ST"><span th:text="${vacature.aantalUren}">Aantal Uren </span></td>
-            <td class="ST"><span > <input type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam"/> </span></td>
+            <td class="ST"><span > <button type="submit" th:value="${vacature.vacatureNaam}" th:name="vacatureNaam">Meer info</button> </span></td>
         </tr>
         </tbody>
     </table>

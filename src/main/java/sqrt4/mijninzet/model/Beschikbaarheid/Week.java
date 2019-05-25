@@ -37,7 +37,7 @@ public class Week {
     }
 
     public Week() {
-        this(1,2019);
+        this(0,0);
         dagenlijst = new ArrayList<>();
         dagenlijst.add(new Dag("maandag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("dinsdag", weekNummer, jaarNummer));
