@@ -7,21 +7,25 @@ public class Voorkeur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int voorkeurId;
+
     @OneToOne
     private User user;
+
     @OneToOne
     private Vak vak;
-    private String voorkeur;
 
-    public Voorkeur(int voorkeurId, User user, Vak vak, String voorkeur) {
+    private int voorkeurGebruiker;
+
+    public Voorkeur(int voorkeurId, User user, Vak vak, int voorkeurGebruiker) {
         this.voorkeurId = voorkeurId;
         this.user = user;
         this.vak = vak;
-        this.voorkeur = voorkeur;
+        this.voorkeurGebruiker = voorkeurGebruiker;
     }
 
-    public Voorkeur() {
-    }
+    public Voorkeur(User user) { this(); }
+
+    public Voorkeur() { super();   }
 
     public int getVoorkeurId() {
         return voorkeurId;
@@ -47,12 +51,12 @@ public class Voorkeur {
         this.vak = vak;
     }
 
-    public String getVoorkeur() {
-        return voorkeur;
+    public int getVoorkeurGebruiker() {
+        return voorkeurGebruiker;
     }
 
-    public void setVoorkeur(String voorkeur) {
-        this.voorkeur = voorkeur;
+    public void setVoorkeurGebruiker(int voorkeurGebruiker) {
+        this.voorkeurGebruiker = voorkeurGebruiker;
     }
 
     @Override
@@ -61,7 +65,7 @@ public class Voorkeur {
                 "voorkeurId=" + voorkeurId +
                 ", user=" + user +
                 ", vak=" + vak +
-                ", voorkeur='" + voorkeur + '\'' +
+                ", voorkeur='" + voorkeurGebruiker + '\'' +
                 '}';
     }
 }
