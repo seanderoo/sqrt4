@@ -24,7 +24,7 @@ public class Vak {
         this.aantalUren = aantalUren;
     }
 
-    public Vak() {}
+    public Vak() { super(); }
 
     public int getVakId() {
         return vakId;
