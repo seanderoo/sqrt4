@@ -29,19 +29,17 @@ public class OverzichtGebruikersController extends AbstractController{
 
     @PostMapping("/admin/overzicht-gebruikers")
     public String verwijderGebruiker( @ModelAttribute("gebruiker") User user, @RequestParam("Verwijder") Long userId, Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         User activeUser = userRepository.findByUsername(userName);
-        
-        if(userId != activeUser.getId()){
+        if(userId == activeUser.getId()){
+            List<User> users = userRepository.findAll();
+            model.addAttribute("gebruikers", users);
             return "overzicht-gebruikers";
         }
-        else {
-            userRepository.deleteById(userId);
-        }
+        userRepository.deleteById(userId);
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
         return "overzicht-gebruikers";
     }
 }
