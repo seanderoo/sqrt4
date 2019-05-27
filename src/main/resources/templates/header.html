@@ -32,6 +32,15 @@
             <a href="/admin/nieuwe-vacature">Maak een nieuwe vacature aan</a>
         </div>
     </div>
+    <div sec:authorize="hasAuthority('ROLEMANAGER')" class="dropdown">
+        <button class="dropbtn">Managen
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/manager/vak-aanmaken">Maak vak aan</a>
+            <a href="/manager/vak-rooster">Maak rooster voor vak</a>
+        </div>
+    </div>
             <a style="float:right" href="/logout" >Uitloggen</a>
 </div>
 
