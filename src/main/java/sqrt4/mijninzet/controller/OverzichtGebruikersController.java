@@ -28,7 +28,7 @@ public class OverzichtGebruikersController extends AbstractController{
     }
 
     @PostMapping("/admin/overzicht-gebruikers")
-    public String verwijderGebruiker( @ModelAttribute("gebruiker") User user, @RequestParam("Verwijder") Long userId, Model model) {
+    public String verwijderGebruiker(@RequestParam("Verwijder") Long userId, Model model) {
         User activeUser = voegActiveUserToe();
         if(userId == activeUser.getId()){
             List<User> users = userRepository.findAll();
