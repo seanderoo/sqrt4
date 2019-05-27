@@ -24,11 +24,22 @@ public class VoorkeurController extends AbstractController {
     private VoorkeurenRepository voorkeurenRepository;
 
     @GetMapping("/voorkeuren")
-    public String getVakken(Model model) {
+    public String getVakken(Model model, Vak vak) {
         List<Vak> vakkenLijst = vakRepository.findAll();
         Voorkeur voorkeur = new Voorkeur();
+
+
+        Voorkeur databaseVoorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vakkenLijst.get(0), voegActiveUserToe());
+
+
+        if (databaseVoorkeur == null) {
+            model.addAttribute("voorkeur", voorkeur);
+        } else {
+            model.addAttribute("voorkeur", databaseVoorkeur);
+        }
+
         model.addAttribute("vakkenLijst", vakkenLijst);
-        model.addAttribute("voorkeur", voorkeur);
+
         return "voorkeuren";
     }
 
@@ -43,25 +54,3 @@ public class VoorkeurController extends AbstractController {
         return "voorkeuren";
     }
 }
-
-//    List<Vak> vakken = vakRepository.findAll(); // pas aan voorkeurRepo
-//
-//        for (Vak vak: vakken) {
-//                String key = null;
-//                for (String k : allParams.keySet()) {
-//                int sleutel = Integer.parseInt(k);
-//                if (vak.getVakId() == sleutel) {
-//                key = k;
-//                }
-//                }
-//                Voorkeur voorkeur1 = new Voorkeur();
-//                voorkeur1.setVak(vak);
-//                voorkeur1.setVoorkeur(allParams.get(key));
-//                voorkeur1.setUser(voegActiveUserToe());
-//
-//                if (allParams.get(key) != null) {
-//                voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
-//                voorkeurenRepository.save(voorkeur1);
-//                }
-//                }
-//                return "voorkeuren";
