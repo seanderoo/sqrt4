@@ -12,4 +12,5 @@ public interface VoorkeurenRepository extends JpaRepository<Voorkeur, Integer> {
     @Transactional
     void deleteByVak_VakIdAndUser(int vakId, User user);
 
+    Voorkeur findByVak_VakIdAndUser(int vakId, User user);
 }
