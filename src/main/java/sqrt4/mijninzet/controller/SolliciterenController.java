@@ -38,8 +38,18 @@ public class SolliciterenController extends AbstractController{
 
     @GetMapping("/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
+        List<Sollicitatie> overzicht = solrepo.findAll();
         Sollicitatie sollicitatie = new Sollicitatie(voegActiveUserToe(), vacrepo.findById(vacatureId.getId()));
-        solrepo.save(sollicitatie);
+        boolean reedsGesolliciteerd = false;
+        for (int i = 0; i < overzicht.size(); i++) {
+            if (overzicht.get(i).getVacature().getId() == vacatureId.getId()
+                    &&
+                    overzicht.get(i).getUser().getId() == sollicitatie.getUser().getId())
+                reedsGesolliciteerd = true;
+        } 
+        if (!reedsGesolliciteerd){
+            solrepo.save(sollicitatie);
+        }
         model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
         return "sollicitaties-overzicht";
     }
