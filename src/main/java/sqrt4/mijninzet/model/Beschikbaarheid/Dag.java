@@ -81,6 +81,10 @@ public class Dag {
         return var;
     }
 
+    public int getBooleanAsInt(boolean value) {
+        return value ? 1 : 0;
+    }
+
     public void setOchtend(boolean ochtend) {
         this.ochtend = ochtend;
     }
@@ -95,6 +99,18 @@ public class Dag {
 
     public boolean getOchtend() {
         return ochtend;
+    }
+
+    public int getOchtendAsInt() {
+        return ochtend ? 1 : 0;
+    }
+
+    public int getMiddagAsINt() {
+        return middag ? 1 : 0;
+    }
+
+    public int getAvondAsInt() {
+        return avond ? 1 : 0;
     }
 
     public boolean getMiddag() {

@@ -49,8 +49,9 @@ public class DatabaseInitializer implements CommandLineRunner {
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "USER", "", "Matthijs", "Verkaaik");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin");
+        User floris = new User("Floris", passwordEncoder.encode("1"), "ADMIN", "", "Floris", "van Andel");
 
-        List<User> users = Arrays.asList(matthijs, admin);
+        List<User> users = Arrays.asList(matthijs, admin, floris);
 
         //Create vacatures
         Vacature coordinatorC16 = new Vacature("Coordinator Cohort 15",

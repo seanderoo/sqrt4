@@ -15,7 +15,7 @@
 </header>
     <h1>Incidentregistratie</h1>
 <h2>Geef je incident op.</h2>
-    <form id="reg_date" th:action=@{"/incidentregistratie"} th:object="${geselecteerdeWeek}" th:method="POST">
+    <form id="reg_date" th:action=@{incidentregistratie} th:object="${geselecteerdeWeek}" th:method="POST">
     <label for="selectedDate">Datum van incident</label>
     <input type="date" (dd-mm-yyyy)="" id="selectedDate" name="selectedDate" value="02-04-2019">
     <button id="ophalenWeek" >Haal week
@@ -30,7 +30,7 @@
 <br/>
 </body>
 
-<form id="hiddenformIR" action="#" th:action=@{/incidentregistratie/huidigeWeek} th:object="${huidigeWeek}"
+<form id="hiddenformIR" action="#" th:action=@{/incidentregistratie} th:object="${geselecteerdeWeek}"
       method="GET">
 
     <table id="deIncidentTabel">
@@ -42,19 +42,33 @@
             <th>Vrijdag</th>
         </tr>
         <tr>
-            <th th:datetime="${maandagdatum}">datum</th>
-            <th th:datetime="${dinsdagdatum}">datum</th>
-            <th th:datetime="${woensdagdatum}">datum</th>
-            <th th:datetime="${donderdagdatum}">datum</th>
-            <th th:datetime="${vrijdagdatum}">datum</th>
+            <th style="color: black" th:text="${maandagdatum}">datum</th>
+            <th style="color: black" th:text="${dinsdagdatum}">datum</th>
+            <th style="color: black" th:text="${woensdagdatum}">datum</th>
+            <th style="color: black" th:text="${donderdagdatum}">datum</th>
+            <th style="color: black" th:text="${vrijdagdatum}">datum</th>
         </tr>
         <tr>
-            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend" value="1">09.00 - 13
+            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend"
+                                                     th:value="${maandagochtend}">09.00 - 13
+                .00
+            </td>
+            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend"
+                                                     th:value="${dinsdagochtend}"
+            >09.00
+                - 13
                 .00</td>
-            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend" value="1">09.00 - 13.00</td>
+            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend"
+                                                      th:value="${woensdagochtend}">09.00 - 13.00
+            </td>
+            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend"
+                                                       th:value="${donderdagochtend}">09.00
+                - 13
+                .00
+            </td>
+            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend"
+                                                     th:value="${vrijdagochtend}">09.00 - 13.00
+            </td>
         </tr>
         <tr>
         <td class="kanwel maandagmiddag"><input type="hidden" name="maandagmiddag" value="1">13.00 - 17.00</td>
@@ -81,6 +95,14 @@
 
     /*Tabel met klikbare cellen*/
     var deTabel = document.querySelector('#deIncidentTabel');
+
+
+    deTabel.addEventListener('load', function (s) {
+        var tdload = s.target
+        if (td.tagName === 'TD') {
+            e.target.classList.toggle()
+        }
+    )
 
     deTabel.addEventListener('click', function(e) {
         var td = e.target;
