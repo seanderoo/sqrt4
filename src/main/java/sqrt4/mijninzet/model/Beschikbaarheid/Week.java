@@ -1,6 +1,8 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
+import sqrt4.mijninzet.model.User;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,9 @@ public class Week {
 
     private int weekNummer;
     private int jaarNummer;
+
+    @OneToOne(mappedBy = "week")
+    User user;
 
     @ManyToOne
     @JoinColumn
@@ -155,5 +160,9 @@ public class Week {
             }
         }
         return dag;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

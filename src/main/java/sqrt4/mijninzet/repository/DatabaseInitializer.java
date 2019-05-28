@@ -3,6 +3,7 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vacature;
@@ -18,14 +19,17 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VacatureRepository vacatureRepository;
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
+    private AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                               VacatureRepository vacatureRepository, VakRepository vakRepository, RoleRepository roleRepository) {
+                               VacatureRepository vacatureRepository, VakRepository vakRepository,
+                               RoleRepository roleRepository, AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
+        this.algemeneBeschikbaarheidRepository = algemeneBeschikbaarheidRepository;
     }
 
     @Override
@@ -35,6 +39,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vacatureRepository.deleteAll();
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
+        this.algemeneBeschikbaarheidRepository.deleteAll();
 
 
         //create rollen
@@ -73,11 +78,15 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
 
+        //Create Semester
+        Semester semester = new Semester(20,2020,20,21);
+
         //save to db
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
         this.roleRepository.saveAll(rollen);
+        this.algemeneBeschikbaarheidRepository.save(semester);
 
     }
 }

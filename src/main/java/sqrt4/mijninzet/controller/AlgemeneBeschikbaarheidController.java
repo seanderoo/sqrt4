@@ -3,67 +3,41 @@ package sqrt4.mijninzet.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
+import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
-
-import java.util.List;
+import sqrt4.mijninzet.repository.WeekRepository;
 
 @Controller
 public class AlgemeneBeschikbaarheidController extends AbstractController {
-    private static final int EERSTE_SEMESTER = 0;
+    public static final int NUMMER_ALGEMENE_WEEK = 0;
 
     @Autowired
-    AlgemeneBeschikbaarheidRepository algBesRepo;
+    WeekRepository weekRepo;
 
     @GetMapping("/docent/algemene-beschikbaarheid")
-    public String AlgemeneBeschikbaarheid(@RequestParam(name = "gekozenSemester", required = false) String actiefSemester,
-                                          Model model) {
-        Semester cohort = algBesRepo.findBySemesterNaamAndUser(actiefSemester, voegActiveUserToe());
+    public String AlgemeneBeschikbaarheid(Model model) {
+        Week algemeneWeek = new Week();
 
-        if (cohort == null) {
-            cohort = algBesRepo.findAllByUser(voegActiveUserToe()).get(EERSTE_SEMESTER);
+        try{
+            algemeneWeek = weekRepo.findByWeekNummerAndUser(NUMMER_ALGEMENE_WEEK,voegActiveUserToe());
+        } catch (Exception e) {
+            System.out.println(e.getCause());
         }
 
-        System.out.println("dit is het cohort: " + cohort);
-        //Dit hieronder werkt nog niet.
-        Week standaardWeek = null;
-        try {
-            standaardWeek = cohort.getFirstWeek();
-            System.out.println("dit is de eerste week: " + standaardWeek);
-        } catch (NullPointerException e) {
-            standaardWeek = new Week();
-            System.out.println("standaard week opgehaald");
+        if (algemeneWeek == null) {
+            algemeneWeek = new Week();
         }
-        model.addAttribute("standaardWeek", standaardWeek);
-        model.addAttribute("actiefSemester", actiefSemester);
+            algemeneWeek.setUser(voegActiveUserToe());
+            weekRepo.save(algemeneWeek);
+            System.out.println(algemeneWeek);
+
+
+        model.addAttribute("algemeneWeek", algemeneWeek);
 
         return "algemene-beschikbaarheid";
     }
 
-    @ModelAttribute("semesters")
-    public List<Semester> semesters() {
-        List<Semester> semesterlijst = algBesRepo.findAll();
-
-        return semesterlijst;
-    }
-
-    @PostMapping(value = "/docent/algemene-beschikbaarheid-ander-cohort")
-    public String anderCohortKiezen(@RequestParam("gekozenSemester") String actiefSemester,
-                                    Model model) {
-        Semester semester = algBesRepo.findBySemesterNaamAndUser(actiefSemester, voegActiveUserToe());
-        Week week = semester.getFirstWeek();
-        model.addAttribute("standaardWeek", week);
-        model.addAttribute("actiefSemester", actiefSemester);
-        return "algemene-beschikbaarheid";
-    }
-
-    @PostMapping(value = "/docent/algemene-beschikbaarheid-updaten")
-    //moet ik hier een aparte pagina voor aanmaken? Mss toch maar op beschikbaarheid blijven.
+    @PostMapping(value = "/docent/algemene-beschikbaarheid-updaten")     //moet ik hier een aparte pagina voor aanmaken? Mss toch maar op beschikbaarheid blijven.
     public String updateAlgemeneBeschikbaarheid(@RequestParam("maandagochtend") boolean maOBeschikbaar,
                                                 @RequestParam("maandagmiddag") boolean maMBeschikbaar,
                                                 @RequestParam("maandagavond") boolean maABeschikbaar,
@@ -79,10 +53,9 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
                                                 @RequestParam("vrijdagochtend") boolean vrOBeschikbaar,
                                                 @RequestParam("vrijdagmiddag") boolean vrMBeschikbaar,
                                                 @RequestParam("vrijdagavond") boolean vrABeschikbaar,
-                                                @RequestParam("gekozenSemester") String actiefSemester,
                                                 Model model) {
 
-        Week algemeneWeek = new Week();
+        Week algemeneWeek = weekRepo.findByWeekNummerAndUser(NUMMER_ALGEMENE_WEEK,voegActiveUserToe());
 
         algemeneWeek.getDag("maandag").setOchtend(maOBeschikbaar);
         algemeneWeek.getDag("maandag").setMiddag(maMBeschikbaar);
@@ -100,14 +73,9 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         algemeneWeek.getDag("vrijdag").setMiddag(vrMBeschikbaar);
         algemeneWeek.getDag("vrijdag").setAvond(vrABeschikbaar);
 
+        weekRepo.save(algemeneWeek);
+        model.addAttribute("algemeneWeek", algemeneWeek);
 
-        Semester semester = algBesRepo.findBySemesterNaamAndUser(actiefSemester, voegActiveUserToe());
-        semester.beschikbaarheidAanpassen(algemeneWeek);
-
-        algBesRepo.save(semester);
-        model.addAttribute("standaardWeek", algemeneWeek);
-        System.out.println("De geposte week heeft maandag: " + algemeneWeek.getMaandag().getOchtend());
-
-        return "algemene-beschikbaarheid"; //Is de pagina waar je vervolgens heengestuurd wordt?
+        return "algemene-beschikbaarheid";
     }
 }

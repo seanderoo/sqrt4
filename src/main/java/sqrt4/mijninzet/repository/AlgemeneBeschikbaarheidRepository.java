@@ -8,9 +8,4 @@ import sqrt4.mijninzet.model.User;
 import java.util.List;
 
 public interface AlgemeneBeschikbaarheidRepository extends JpaRepository<Semester, String> {
-
-    List<Semester> findAllByUser(User user);
-
-    Semester findBySemesterNaamAndUser(String naam, User user);
-
 }

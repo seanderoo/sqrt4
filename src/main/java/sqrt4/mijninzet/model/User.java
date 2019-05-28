@@ -2,6 +2,7 @@ package sqrt4.mijninzet.model;
 
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
+import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,8 +30,8 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Semester> semesters;
+    @OneToOne
+    private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Incident> incidentList;
@@ -135,15 +136,6 @@ public User(String username, String password, String roles, String permissions){
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public List<Semester> getSemesters() {
-        return semesters;
-    }
-
-    public void setSemesters(List<Semester> semesters) {
-        this.semesters = semesters;
-    }
-
 
     @Override
     public String toString() {
