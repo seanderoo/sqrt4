@@ -1,16 +1,8 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import sqrt4.mijninzet.config.UserPrincipal;
 import sqrt4.mijninzet.model.User;
-import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
-import sqrt4.mijninzet.repository.UserRepository;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -33,7 +25,7 @@ public class Semester {
     @JoinColumn
     private User user;
 
-    //Deze heb ik gemaakt om in de AlgemeneBeschikbaarheiddsController te werken. Is dat wel nodig?
+
     public Semester() {
 
         semesterList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package sqrt4.mijninzet.model;
 
+import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 
 import javax.persistence.*;
@@ -31,6 +32,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Semester> semesters;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Incident> incidentList;
+
+
 public User(String username, String password, String roles, String permissions){
     this.username = username;
     this.password = password;
@@ -50,7 +55,8 @@ public User(String username, String password, String roles, String permissions){
         this.lastName = lastName;
     }
 
-    protected User(){}
+    protected User() {
+    }
 
     public List<String> getRoleList(){
         if(this.roles.length() > 0){

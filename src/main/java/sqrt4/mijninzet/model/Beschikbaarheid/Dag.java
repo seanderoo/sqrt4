@@ -1,6 +1,7 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 
+import sqrt4.mijninzet.model.User;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,10 @@ public class Dag {
     @ManyToOne
     @JoinColumn
     private Week week;
+
+    @ManyToOne
+    @JoinColumn
+    private User user;
 
     private String dagnaam;
     private int weekNummer;
@@ -43,6 +48,14 @@ public class Dag {
     }
 
     public Dag() {}
+
+    public Dag(LocalDate datum, boolean ochtend, boolean middag, boolean avond) {
+        this("", 0, 0);
+        this.datum = datum;
+        this.ochtend = ochtend;
+        this.middag = middag;
+        this.avond = avond;
+    }
 
     public LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
