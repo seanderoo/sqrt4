@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Beschikbaarheid</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Beschikbaarheid opgeven</h1>
+<h2>Geef je algemene beschikbaarheid op.</h2>
+
+<form action="#" method = post>
+
+</form>
+
+<form id="roosterTest" action="#"  method = post>
+    <table id="deTabel">
+        <tr>
+            <th>maandag</th>
+            <th>dinsdag</th>
+            <th>woensdag</th>
+            <th>donderdag</th>
+            <th>vrijdag</th>
+        </tr>
+        <tr>
+            <td name="maandagochtend">09:00-13:00</td>
+            <td name="dinsdagochtend">09:00-13:00</td>
+            <td name="woensdagochtend">09:00-13:00</td>
+            <td name="donderdagochtend">09:00-13:00</td>
+            <td name="vrijdagochtend">09:00-13:00</td>
+        </tr>
+        <tr>
+            <td name="maandagmiddag">13:00-17:00</td>
+            <td name="dinsdagmiddag">13:00-17:00</td>
+            <td name="woensdagmiddag">13:00-17:00</td>
+            <td name="donderdagmiddag">13:00-17:00</td>
+            <td name="vrijdagmiddag">13:00-17:00</td>
+        </tr>
+        <tr>
+            <td name="maandagavond">17:00-21:00</td>
+            <td name="dinsdagavond">17:00-21:00</td>
+            <td name="woensdagavond">17:00-21:00</td>
+            <td name="donderdagavond">17:00-21:00</td>
+            <td name="vrijdagavond">17:00-21:00</td>
+        </tr>
+    </table>
+    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+</form>
+
+
+
+<script>
+
+
+
+</script>
+</body>
+<footer>
+</footer>
+
+</html>
