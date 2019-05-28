@@ -7,7 +7,6 @@ package sqrt4.mijninzet.controller;
         import org.springframework.web.bind.annotation.ModelAttribute;
         import org.springframework.web.bind.annotation.PathVariable;
         import sqrt4.mijninzet.model.Sollicitatie;
-        import sqrt4.mijninzet.model.User;
         import sqrt4.mijninzet.model.Vacature;
         import sqrt4.mijninzet.repository.SollicitatieRepository;
         import sqrt4.mijninzet.repository.VacatureRepository;
@@ -26,29 +25,30 @@ public class SolliciterenController extends AbstractController{
     @GetMapping("/solliciteren")
     public String getVacatures(Model model) {
         model.addAttribute("vacatures", welNietGesolliciteerd("vacatures"));
-        return "solliciteren";
+        return "vacature-overzicht";
     }
 
-    @GetMapping("/sollicitaties-details")
-    public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
+    @GetMapping("/sollicitaties-details-{overzicht}")
+    public String sollicitatieDetails(@ModelAttribute Vacature vacature,
+                                      @PathVariable String overzicht,
+                                      Model model) {
         Vacature gekozenVacature = vacrepo.findByVacatureNaam(vacature.getVacatureNaam());
         model.addAttribute("vacature", gekozenVacature);
+        model.addAttribute("soort", overzicht);
         return "sollicitaties-details";
     }
 
     @GetMapping("/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
-        List<Sollicitatie> overzicht = solrepo.findAll();
-        Sollicitatie sollicitatie = new Sollicitatie(voegActiveUserToe(), vacrepo.findById(vacatureId.getId()));
-        boolean reedsGesolliciteerd = false;
-        for (int i = 0; i < overzicht.size(); i++) {
-            if (overzicht.get(i).getVacature().getId() == vacatureId.getId()
-                    &&
-                    overzicht.get(i).getUser().getId() == sollicitatie.getUser().getId())
-                reedsGesolliciteerd = true;
-        } 
-        if (!reedsGesolliciteerd){
+        Vacature vacature = vacrepo.findById(vacatureId.getId());
+        Sollicitatie sollicitatie;
+        if (solrepo.findByUserAndVacature(voegActiveUserToe(), vacature) == null) {
+            sollicitatie = new Sollicitatie(voegActiveUserToe(), vacature);
             solrepo.save(sollicitatie);
+        }
+        else {
+            sollicitatie = solrepo.findByUserAndVacature(voegActiveUserToe(), vacature);
+            solrepo.delete(sollicitatie);
         }
         model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
         return "sollicitaties-overzicht";
