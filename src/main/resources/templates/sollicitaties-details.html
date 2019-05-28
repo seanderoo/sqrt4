@@ -34,9 +34,16 @@
         </tr>
         </tbody>
     </table>
-    <button type="submit" th:value="${vacature.id}" th:name="id">Solliciteren</button>
-    <input type="button" value="Terug naar overzicht Vacatures" onclick=window.location.pathname="/solliciteren" />
-</form>
+<!--    if statement die aan de hand van de meegegeven soort kijkt welke knop ('solliciteren' of 'afmelden')
+je te zien krijgt-->
 
+    <span th:if="${soort == 'vacature-overzicht'}"><button type="submit" th:value="${vacature.id}" th:name="id">Solliciteren</button> </span>
+    <span th:if="${soort == 'sollicitatie-overzicht'}"><button type="submit" th:value="${vacature.id}" th:name="id">Afmelden</button> </span>
+
+<br>
+</form>
+<br>
+<input type="button" value="Naar overzicht Vacatures" onclick=window.location.pathname="/solliciteren" />
+<input type="button" value="Naar overzicht Sollicitaties" onclick=window.location.pathname="/sollicitaties-overzicht" />
 </body>
 </html>
