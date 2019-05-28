@@ -1,24 +1,16 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
-import sqrt4.mijninzet.repository.UserRepository;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,7 +20,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
     @Autowired
     AlgemeneBeschikbaarheidRepository algBesRepo;
 
-    @GetMapping("/algemene-beschikbaarheid")
+    @GetMapping("/docent/algemene-beschikbaarheid")
     public String AlgemeneBeschikbaarheid(@RequestParam(name = "gekozenSemester", required = false) String actiefSemester,
                                           Model model) {
         Semester cohort = algBesRepo.findBySemesterNaamAndUser(actiefSemester, voegActiveUserToe());
@@ -60,9 +52,9 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         return semesterlijst;
     }
 
-    @PostMapping(value = "/algemene-beschikbaarheid-ander-cohort")
+    @PostMapping(value = "/docent/algemene-beschikbaarheid-ander-cohort")
     public String anderCohortKiezen(@RequestParam("gekozenSemester") String actiefSemester,
-                                    Model model){
+                                    Model model) {
         Semester semester = algBesRepo.findBySemesterNaamAndUser(actiefSemester, voegActiveUserToe());
         Week week = semester.getFirstWeek();
         model.addAttribute("standaardWeek", week);
@@ -70,7 +62,8 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         return "algemene-beschikbaarheid";
     }
 
-    @PostMapping(value = "/algemene-beschikbaarheid-updaten")     //moet ik hier een aparte pagina voor aanmaken? Mss toch maar op beschikbaarheid blijven.
+    @PostMapping(value = "/docent/algemene-beschikbaarheid-updaten")
+    //moet ik hier een aparte pagina voor aanmaken? Mss toch maar op beschikbaarheid blijven.
     public String updateAlgemeneBeschikbaarheid(@RequestParam("maandagochtend") boolean maOBeschikbaar,
                                                 @RequestParam("maandagmiddag") boolean maMBeschikbaar,
                                                 @RequestParam("maandagavond") boolean maABeschikbaar,

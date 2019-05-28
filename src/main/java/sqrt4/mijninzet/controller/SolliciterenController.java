@@ -23,20 +23,20 @@ public class SolliciterenController extends AbstractController{
     @Autowired
     SollicitatieRepository solrepo;
 
-    @GetMapping("/solliciteren")
+    @GetMapping("/docent/solliciteren")
     public String getVacatures(Model model) {
         model.addAttribute("vacatures", welNietGesolliciteerd("vacatures"));
         return "solliciteren";
     }
 
-    @GetMapping("/sollicitaties-details")
+    @GetMapping("/docent/sollicitaties-details")
     public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
         Vacature gekozenVacature = vacrepo.findByVacatureNaam(vacature.getVacatureNaam());
         model.addAttribute("vacature", gekozenVacature);
         return "sollicitaties-details";
     }
 
-    @GetMapping("/sollicitaties")
+    @GetMapping("/docent/sollicitaties")
     public String alleSollicitaties(@ModelAttribute("sollicitatie") Vacature vacatureId, Model model) {
         List<Sollicitatie> overzicht = solrepo.findAll();
         Sollicitatie sollicitatie = new Sollicitatie(voegActiveUserToe(), vacrepo.findById(vacatureId.getId()));
@@ -54,7 +54,7 @@ public class SolliciterenController extends AbstractController{
         return "sollicitaties-overzicht";
     }
 
-    @GetMapping("/sollicitaties-overzicht")
+    @GetMapping("/dpcent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
         model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
         return "sollicitaties-overzicht";

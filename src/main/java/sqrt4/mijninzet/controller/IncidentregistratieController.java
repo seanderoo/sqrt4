@@ -29,7 +29,7 @@ public class IncidentregistratieController {
     @Autowired
     WeekRepository repoWeek;
 
-    @GetMapping("/incidentregistratie")
+    @GetMapping("/docent/incidentregistratie")
     public String Incidentregistratie(){
         return "incidentregistratie";
     }
@@ -46,7 +46,7 @@ public class IncidentregistratieController {
         return dag;
     }
 
-    @PostMapping(value ="/incidentregistratie")
+    @PostMapping(value ="/docent/incidentregistratie")
     public String zoekWeekOp (@RequestParam("selectedDate") String gekozendatum, Model model){
         gekozenDag = gekozendatum;
         LocalDate date = LocalDate.parse(gekozenDag);
@@ -58,7 +58,7 @@ public class IncidentregistratieController {
         return "incidentregistratie";
     }
 
-    @GetMapping(value = "/incidentregistratie/huidigeWeek")
+    @GetMapping(value = "/docent/incidentregistratie/huidigeWeek")
     public String opgehaaldeWeek(Week huidigeWeek, Model model) {
         model.addAttribute("huidigeWeek", huidigeWeek);
         model.addAttribute("maandagdatum", huidigeWeek.getDag("maandag").getDatum());

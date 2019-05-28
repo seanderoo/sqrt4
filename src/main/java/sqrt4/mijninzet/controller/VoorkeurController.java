@@ -23,7 +23,7 @@ public class VoorkeurController extends AbstractController {
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
 
-    @GetMapping("/voorkeuren")
+    @GetMapping("/docent/voorkeuren")
     public String getVakken(Model model) {
         List<Vak> vakkenLijst = vakRepository.findAll();
         Voorkeur voorkeur = new Voorkeur();
@@ -32,7 +32,7 @@ public class VoorkeurController extends AbstractController {
         return "voorkeuren";
     }
 
-    @PostMapping("/voorkeuren")
+    @PostMapping("/docent/voorkeuren")
     public String bewaarVoorkeur(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak) {
         Voorkeur ingevuldeVoorkeur = new Voorkeur();
         ingevuldeVoorkeur.setUser(voegActiveUserToe());

@@ -10,15 +10,15 @@
 
 <div class="navbar" id="header" th:fragment="copy">
     <a href="/home">Home</a>
-    <a href="/voorkeuren">Kennis administreren</a>
-    <a href="/solliciteren">Solliciteren</a>
-    <div class="dropdown">
+    <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
+    <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
+    <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
         <button class="dropbtn">Beschikbaarheden
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/algemene-beschikbaarheid">Algemene beschikbaarheid</a>
-            <a href="/incidentregistratie">Incidentregistratie</a>
+            <a href="/docent/algemene-beschikbaarheid">Algemene beschikbaarheid</a>
+            <a href="/docent/incidentregistratie">Incidentregistratie</a>
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
