@@ -2,13 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Overzicht Gebruikers</title>
+    <title>SQRT4  |  Nieuw vak</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
-
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
+<h1>Nieuwe vak toevoegen</h1>
+<p>
+<h2>Vul hier de gegevens in van het nieuwe vak:</h2>
+</p>
+<div id="nieuwVakForm">
+    <form action="#" th:action="@{/manager/vak-toegevoegd}" th:method="POST">
+        <table>
+            <tr>
+                <td><label>Vaknaam</label></td>
+                <td><input type="text" th:name="vakNaam" required></td>
+            </tr>
+            <tr>
+                <td><label>Aantal uren</label></td>
+                <td><input type="text" th:name="aantalUren" required></td>
+            </tr>
+            <tr>
+                <td></td><td> <input type="submit" value="Vak opslaan"/></td>
+            </tr>
+
+        </table>
+
+    </form>
+</div>
 </body>
 </html>
