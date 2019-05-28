@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4  |  Beschikbaarheid</title>
+    <title>SQRT4 | Incident Registreren</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
@@ -15,12 +15,54 @@
 </header>
     <h1>Incidentregistratie</h1>
 <h2>Geef je incident op.</h2>
-    <form id="reg_date" th:action="@{/docent/incidentregistratie}" th:object="${geselecteerdeWeek}" th:method="POST">
+    <form id="reg_date" th:action="@{/docent/incidentregistratie}" th:object="${dag}" th:method="POST">
     <label for="selectedDate">Datum van incident</label>
-    <input type="date" (dd-mm-yyyy)="" id="selectedDate" name="selectedDate" value="02-04-2019">
-    <button id="ophalenWeek" >Haal week
-    op</button>
-</form>
+        <input type="date" id="selectedDate" name="datum" value="date">
+
+        <br/>
+        <br/>
+        <table id="hetIncident">
+            <tr>
+                <td th:class="*{getOchtend()}"><input type="hidden" name="ochtend"
+                                                      th:value="${dag.getOchtend()}">09.00 - 13.00
+                </td>
+            </tr>
+            <tr>
+                <td th:class="*{getMiddag()}"><input type="hidden" name="middag"
+                                                     th:value="${dag.getMiddag()}">13.00 - 17.00
+                </td>
+            </tr>
+            <tr>
+                <td th:class="*{getAvond()}"><input type="hidden" name="avond"
+                                                    th:value="${dag.getAvond()}">17.00 - 21.00
+                </td>
+            </tr>
+        </table>
+        <button id="knopOpslaan">Opslaan</button>
+
+        <table id="overzicht">
+            <tr class="ST">
+                <th>Datum Incident</th>
+                <th>Ochtend</th>
+                <th>Middag</th>
+                <th>Avond</th>
+                <th>Verwijderen</th>
+            </tr>
+            <tr th:each="incident: ${incidentLijst}">
+                <td style="color:black" th:class="${incident.getDatum()}"><span th:text="${incident.getDatum()}">Datum
+            </span></td>
+                <td th:class="${incident.isOchtend()}"></td>
+                <td th:class="${incident.isMiddag()}"></td>
+                <td th:class="${incident.isAvond()}"></td>
+                <td th:class="ST">
+                    <button type="reset" th:name="Verwijderen"
+                            th:value="${incident.getDatum()}">Verwijder
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
 
 </div>
 <br/>
@@ -30,79 +72,100 @@
 <br/>
 </body>
 
-<form id="hiddenformIR" action="#" th:action=@{/docent/incidentregistratie/huidigeWeek} th:object="${huidigeWeek}"
-      method="GET">
+<!--<form id="hiddenformIR" action="#" th:action=@{/incidentregistratie} th:object="${geselecteerdeWeek}"-->
+<!--      method="GET">-->
 
-    <table id="deIncidentTabel">
-        <tr>
-            <th>Maandag</th>
-            <th>Dinsdag</th>
-            <th>Woensdag</th>
-            <th>Donderdag</th>
-            <th>Vrijdag</th>
-        </tr>
-        <tr>
-            <th th:datetime="${maandagdatum}">datum</th>
-            <th th:datetime="${dinsdagdatum}">datum</th>
-            <th th:datetime="${woensdagdatum}">datum</th>
-            <th th:datetime="${donderdagdatum}">datum</th>
-            <th th:datetime="${vrijdagdatum}">datum</th>
-        </tr>
-        <tr>
-            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend" value="1">09.00 - 13.00</td>
-            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend" value="1">09.00 - 13
-                .00</td>
-            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend" value="1">09.00 - 13.00</td>
-        </tr>
-        <tr>
-        <td class="kanwel maandagmiddag"><input type="hidden" name="maandagmiddag" value="1">13.00 - 17.00</td>
-        <td class="kanwel dinsdagmiddag"><input type="hidden" name="dinsdagmiddag" value="1">13.00 - 17.00</td>
-        <td class="kanwel woensdagmiddag"><input type="hidden" name="woensdagmiddag" value="1">13.00 - 17.00</td>
-        <td class="kanwel donderdagmiddag"><input type="hidden" name="donderdagmiddag" value="1">13.00 - 17
-            .00</td>
-        <td class="kanwel vrijdagmiddag"><input type="hidden" name="vrijdagmiddag" value="1">13.00 - 17.00</td>
-        </tr>
-        <tr>
-            <td class="kanwel maandagavond"><input type="hidden" name="maandagavond" value="1">17.00 - 21.00</td>
-            <td class="kanwel dinsdagavond"><input type="hidden" name="dinsdagavond" value="1">17.00 - 21.00</td>
-            <td class="kanwel woensdagavond"><input type="hidden" name="woensdagavond" value="1">17.00 - 21.00</td>
-            <td class="kanwel donderdagavond"><input type="hidden" name="donderdagavond" value="1">17.00 - 21
-                .00</td>
-            <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17.00 - 21.00</td>
-        </tr>
+<!--    <table id="deIncidentTabel">-->
+<!--        <tr>-->
+<!--            <th>Maandag</th>-->
+<!--            <th>Dinsdag</th>-->
+<!--            <th>Woensdag</th>-->
+<!--            <th>Donderdag</th>-->
+<!--            <th>Vrijdag</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th style="color: black" th:text="${maandagdatum}">datum</th>-->
+<!--            <th style="color: black" th:text="${dinsdagdatum}">datum</th>-->
+<!--            <th style="color: black" th:text="${woensdagdatum}">datum</th>-->
+<!--            <th style="color: black" th:text="${donderdagdatum}">datum</th>-->
+<!--            <th style="color: black" th:text="${vrijdagdatum}">datum</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td class="kanwel maandagochtend"><input type="hidden" name="maandagochtend"-->
+<!--                                                     th:value="${maandagochtend}">09.00 - 13-->
+<!--                .00-->
+<!--            </td>-->
+<!--            <td class="kanwel dinsdagochtend"><input type="hidden" name="dinsdagochtend"-->
+<!--                                                     th:value="${dinsdagochtend}"-->
+<!--            >09.00-->
+<!--                - 13-->
+<!--                .00</td>-->
+<!--            <td class="kanwel woensdagochtend"><input type="hidden" name="woensdagochtend"-->
+<!--                                                      th:value="${woensdagochtend}">09.00 - 13.00-->
+<!--            </td>-->
+<!--            <td class="kanwel donderdagochtend"><input type="hidden" name="donderdagochtend"-->
+<!--                                                       th:value="${donderdagochtend}">09.00-->
+<!--                - 13-->
+<!--                .00-->
+<!--            </td>-->
+<!--            <td class="kanwel vrijdagochtend"><input type="hidden" name="vrijdagochtend"-->
+<!--                                                     th:value="${vrijdagochtend}">09.00 - 13.00-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--        <td class="kanwel maandagmiddag"><input type="hidden" name="maandagmiddag" value="1">13.00 - 17.00</td>-->
+<!--        <td class="kanwel dinsdagmiddag"><input type="hidden" name="dinsdagmiddag" value="1">13.00 - 17.00</td>-->
+<!--        <td class="kanwel woensdagmiddag"><input type="hidden" name="woensdagmiddag" value="1">13.00 - 17.00</td>-->
+<!--        <td class="kanwel donderdagmiddag"><input type="hidden" name="donderdagmiddag" value="1">13.00 - 17-->
+<!--            .00</td>-->
+<!--        <td class="kanwel vrijdagmiddag"><input type="hidden" name="vrijdagmiddag" value="1">13.00 - 17.00</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td class="kanwel maandagavond"><input type="hidden" name="maandagavond" value="1">17.00 - 21.00</td>-->
+<!--            <td class="kanwel dinsdagavond"><input type="hidden" name="dinsdagavond" value="1">17.00 - 21.00</td>-->
+<!--            <td class="kanwel woensdagavond"><input type="hidden" name="woensdagavond" value="1">17.00 - 21.00</td>-->
+<!--            <td class="kanwel donderdagavond"><input type="hidden" name="donderdagavond" value="1">17.00 - 21-->
+<!--                .00</td>-->
+<!--            <td class="kanwel vrijdagavond"><input type="hidden" name="vrijdagavond" value="1">17.00 - 21.00</td>-->
+<!--        </tr>-->
 
-    </table>
-</form>
+<!--    </table>-->
+<!--</form>-->
 
-<button id="knopOpslaan">Opslaan</button>
+
 <script>
 
-    /*Tabel met klikbare cellen*/
-    var deTabel = document.querySelector('#deIncidentTabel');
+    var incident = document.querySelector('#hetIncident', '#overzicht');
 
-    deTabel.addEventListener('click', function(e) {
+    incident.addEventListener('click', function (e) {
         var td = e.target;
         if (td.tagName === 'TD') {
-            e.target.classList.toggle('kanwel');
-            e.target.classList.toggle('kanniet');
-            /*Misschien ook per cell een id/class toevoegen die je kunt gebruiken om de data vervolgens op te halen met de Opslaan-knop. */
-            /*Verder ook cookies toevoegen om de selectie tussendoor op te slaan?*/
+            e.target.classList.toggle('true');
+            e.target.classList.toggle('false');
+
+            if (e.target.classList.contains('true')) {
+                td.firstChild.value = 'true';
+            } else {
+                td.firstChild.value = 'false';
+            }
         }
+        console.log(td.firstChild.value);
     })
 
-    /*Knop voor het opslaan van data*/
-    function Opslaan(){
-        this.click = function() {
-            alert('Incident is geregistreerd');
-        }
-    }
 
-    var knopOpslaan = new Opslaan();
+    // var knopOpslaan = new Opslaan();
+    // function Opslaan(){
+    //     this.click = function() {
+    //         // Hier moet ik een lijst ophalen van alle de td's en hun classes. Die moeten dan via de controller in Java gezet worden.
+    //         alert('Uw wijziging is opgeslagen');
+    //     }
+    // }
+    //
+    // var knopElement = document.getElementById('knopOpslaan');
+    // knopElement.addEventListener('click', knopOpslaan.click);
 
-    var knopElement = document.getElementById('knopOpslaan');
-    knopElement.addEventListener('click', knopOpslaan.click);
+    document.querySelector("#selectedDate").valueAsDate = new Date();
+
 </script>
 </body>
 <footer>
