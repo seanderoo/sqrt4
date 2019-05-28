@@ -26,6 +26,6 @@ public class VakController {
 
     @GetMapping("/manager/vak-rooster")
     public String vakRoosterMaken() {
-        return "vak-rooster";
+        return "/vak-rooster";
     }
 }

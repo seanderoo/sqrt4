@@ -26,14 +26,14 @@ public class SolliciterenController extends AbstractController{
     @GetMapping("/docent/solliciteren")
     public String getVacatures(Model model) {
         model.addAttribute("vacatures", welNietGesolliciteerd("vacatures"));
-        return "solliciteren";
+        return "/solliciteren";
     }
 
     @GetMapping("/docent/sollicitaties-details")
     public String sollicitatieDetails(@ModelAttribute("vacature") Vacature vacature, Model model) {
         Vacature gekozenVacature = vacrepo.findByVacatureNaam(vacature.getVacatureNaam());
         model.addAttribute("vacature", gekozenVacature);
-        return "sollicitaties-details";
+        return "/sollicitaties-details";
     }
 
     @GetMapping("/docent/sollicitaties")
@@ -51,13 +51,13 @@ public class SolliciterenController extends AbstractController{
             solrepo.save(sollicitatie);
         }
         model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
-        return "sollicitaties-overzicht";
+        return "/sollicitaties-overzicht";
     }
 
-    @GetMapping("/dpcent/sollicitaties-overzicht")
+    @GetMapping("/docent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
         model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
-        return "sollicitaties-overzicht";
+        return "/sollicitaties-overzicht";
     }
 
     //lijst van vacatures waar huidige gebruiker al wel of nog niet op gesolliciteerd heeft. Input bepaalt welke lijst

@@ -15,7 +15,7 @@
 <h1>Beschikbaarheid opgeven</h1>
 <h2>Geef je algemene beschikbaarheid op.</h2>
 
-<form action="#" th:action="@{/algemene-beschikbaarheid-ander-cohort}" th:object="${standaardWeek}" method = post>
+<form action="#" th:action="@{/docent/algemene-beschikbaarheid-ander-cohort}" th:object="${standaardWeek}" method = post>
     <div id="semesterSelectorDiv">
         <label for="semesterSelector">Selecteer cohort</label><br/>
     <select id="semesterSelector" name="gekozenSemester" onchange="haalCohortOp(this.value)">
@@ -25,7 +25,7 @@
     </div>
 </form>
 
-<form id="hiddenForm" action="#" th:action="@{/algemene-beschikbaarheid-updaten}" th:object="${standaardWeek}" method = post>
+<form id="hiddenForm" action="#" th:action="@{/docent/algemene-beschikbaarheid-updaten}" th:object="${standaardWeek}" method = post>
     <input id="copycat" type="hidden" name="gekozenSemester" value="">
     <table id="deTabel">
         <tr>

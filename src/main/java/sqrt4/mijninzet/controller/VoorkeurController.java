@@ -29,7 +29,7 @@ public class VoorkeurController extends AbstractController {
         Voorkeur voorkeur = new Voorkeur();
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("voorkeur", voorkeur);
-        return "voorkeuren";
+        return "/voorkeuren";
     }
 
     @PostMapping("/docent/voorkeuren")
@@ -40,7 +40,7 @@ public class VoorkeurController extends AbstractController {
         ingevuldeVoorkeur.setVoorkeurGebruiker(voorkeur.getVoorkeurGebruiker());
         voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
         voorkeurenRepository.save(ingevuldeVoorkeur);
-        return "voorkeuren";
+        return "/voorkeuren";
     }
 }
 
