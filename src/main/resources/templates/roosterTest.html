@@ -3,24 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4  |  Beschikbaarheid</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="algemene-beschikbaarheid.css">
-    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+    <title>SQRT4  |  Rooster</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
+<style>
+    #div1 {
+        width: 350px;
+        height: 70px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+    .div2 {
+        width: 350px;
+        height: 70px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+</style>
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Beschikbaarheid opgeven</h1>
-<h2>Geef je algemene beschikbaarheid op.</h2>
+<h1>Rooster maken</h1>
+<h2>Plaats de vakken in het gewenste dagdeel:</h2>
 
-<form action="#" method = post>
 
-</form>
-
-<form id="roosterTest" action="#"  method = post>
-    <table id="deTabel">
+<form id="div1" action="#"  method ="GET">
+    <table class="div2">
         <tr>
             <th>maandag</th>
             <th>dinsdag</th>
@@ -29,36 +40,48 @@
             <th>vrijdag</th>
         </tr>
         <tr>
-            <td name="maandagochtend">09:00-13:00</td>
-            <td name="dinsdagochtend">09:00-13:00</td>
-            <td name="woensdagochtend">09:00-13:00</td>
-            <td name="donderdagochtend">09:00-13:00</td>
-            <td name="vrijdagochtend">09:00-13:00</td>
+            <div class="div2" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"><td>Maandagochtend</td></div></td>
+            <div class="div2" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"><td>Dinsdagochtend</td></div>
+            <div class="div2" id="woensdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"><td>Woensdagochtend</td></div>
+            <div class="div2" id="donderdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"><td>Donderdagochtend</td></div>
+            <div class="div2" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"><td>Vrijdagochtend</td></div>
         </tr>
         <tr>
-            <td name="maandagmiddag">13:00-17:00</td>
-            <td name="dinsdagmiddag">13:00-17:00</td>
-            <td name="woensdagmiddag">13:00-17:00</td>
-            <td name="donderdagmiddag">13:00-17:00</td>
-            <td name="vrijdagmiddag">13:00-17:00</td>
+            <td><div id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">   </div></td>
+            <td><div id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="donderdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
         </tr>
         <tr>
-            <td name="maandagavond">17:00-21:00</td>
-            <td name="dinsdagavond">17:00-21:00</td>
-            <td name="woensdagavond">17:00-21:00</td>
-            <td name="donderdagavond">17:00-21:00</td>
-            <td name="vrijdagavond">17:00-21:00</td>
+            <td><div id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)">   </div></td>
+            <td><div id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+            <td><div id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
         </tr>
     </table>
     <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
 
-
+<br>
+<img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">
+<p id="drag2" draggable="true" ondragstart="drag(event)">Joeee</p>
 
 <script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
 
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
 
-
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
 </script>
 </body>
 <footer>
