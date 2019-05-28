@@ -32,7 +32,7 @@ public class IncidentregistratieController extends AbstractController {
     @Autowired
     UserRepository repoUser;
 
-    @GetMapping("/incidentregistratie")
+    @GetMapping("/docent/incidentregistratie")
     public String Incidentregistratie(){
         return "incidentregistratie";
     }
@@ -43,7 +43,7 @@ public class IncidentregistratieController extends AbstractController {
         return dag;
     }
 
-    @PostMapping(value = "/incidentregistratie")
+    @PostMapping(value = "/docent/incidentregistratie")
     public String registreerIncident(@RequestParam("ochtend") boolean ochtend,
                                      @RequestParam("middag") boolean middag,
                                      @RequestParam("avond") boolean avond,

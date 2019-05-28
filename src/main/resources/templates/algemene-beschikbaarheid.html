@@ -12,21 +12,10 @@
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Beschikbaarheid opgeven</h1>
-<h2>Geef je algemene beschikbaarheid op.</h2>
+<h1>Algemene beschikbaarheid opgeven</h1>
+<h2>Geef hier op op welke dagen je wel en niet kunt werken.</h2>
 
-<form action="#" th:action="@{/docent/algemene-beschikbaarheid-ander-cohort}" th:object="${standaardWeek}" method = post>
-    <div id="semesterSelectorDiv">
-        <label for="semesterSelector">Selecteer cohort</label><br/>
-    <select id="semesterSelector" name="gekozenSemester" onchange="haalCohortOp(this.value)">
-        <option id="semesterOptie" th:each="semester : ${semesters}" th:text="${semester.getSemesterNaam()}"
-                th:value="${semester.getSemesterNaam()}" th:name="${actiefSemester}"></option>
-    </select>
-    </div>
-</form>
-
-<form id="hiddenForm" action="#" th:action="@{/docent/algemene-beschikbaarheid-updaten}" th:object="${standaardWeek}" method = post>
-    <input id="copycat" type="hidden" name="gekozenSemester" value="">
+<form id="hiddenForm" action="#" th:action="@{/docent/algemene-beschikbaarheid-updaten}" th:object="${algemeneWeek}" method = post>
     <table id="deTabel">
         <tr>
             <th>maandag</th>
@@ -57,10 +46,8 @@
             <td th:class="*{getVrijdag().avond}"><input type="hidden" name="vrijdagavond" th:value="*{getVrijdag().avond}">17:00-21:00</td>
         </tr>
     </table>
-        <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
 </form>
-
-
 
 <script>
     var deTabel = document.querySelector('#deTabel');
@@ -80,38 +67,11 @@
         console.log(td.firstChild.value);
     })
 
-    //Dit zorgt ervoor dat de twee formulieren gekoppeld zijn.
-    var copycat = document.querySelector('#copycat');
-    var semesterSelector = document.querySelector('#semesterSelector')
-    copycat.value = semesterSelector.options[semesterSelector.selectedIndex].value;
-
-
-
-    //AJAX
-
-    // function haalCohortOp(str) {
-    //     var request;
-    //     if(window.XMLHttpRequest) {
-    //         request = new XMLHttpRequest();
-    //     } else {
-    //         request = new ActiveXObject("Microsoft.XMLHTTP");
-    //     }
-    //     request.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             copycat.value = this.responseText;
-    //         }
-    //     };
-    //     request.open("GET", "URL", true);
-    //     request.post;
-    // }
-
-
 
     /*Knop voor het opslaan van data*/
     function Opslaan(){
         this.click = function() {
-            // Hier moet ik een lijst ophalen van alle de td's en hun classes. Die moeten dan via de controller in Java gezet worden.
-            alert('Algemene beschikbaarheid is opgeslagen');
+            alert('Hartelijk dank!\nAlgemene beschikbaarheid is opgeslagen');
         }
     }
 
