@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Rooster</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<style>
+    .div2 {
+        width: 70px;
+        height: 35px;
+        padding: 10px;
+        border: 2px solid #aaaaaa;
+        display: table-cell;
+    }
+
+    .div3 {
+        width: 70px;
+        height: 35px;
+        padding: 10px;
+        border: 2px solid #aaaaaa;
+        display: table-cell;
+    }
+
+    .div4 {
+        width: 70px;
+        height: 35px;
+        padding: 10px;
+        border: 2px solid #aaaaaa;
+        display: table-cell;
+    }
+
+    .trow{
+        display: table-row
+    }
+
+</style>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Rooster maken</h1>
+
+
+<h2>Vakken</h2>
+<ul id="roostertest" style="list-style-type:none" th:action="@{/roostertest}" th:object="${vakkenLijst}" th:method="GET">
+    <li th:if="${vakkenLijst.empty}">
+        <td class="ST" colspan="3">Geen vakken beschikbaar</td>
+    </li>
+    <li th:each="vak: ${vakkenLijst}">
+        <td class="ST"><p th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}" draggable="true" ondragstart="drag(event)">vaknaam</p></td>
+    </li>
+
+</ul>
+<h2>Plaats de vakken in het gewenste dagdeel:</h2>
+<table>
+        <span class="trow">
+            <span class="div2" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagochtend</span>
+            <span class="div2" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagochtend</span>
+            <span class="div2" id="woensdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagochtend</span>
+            <span class="div2" id="donderdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagochtend</span>
+            <span class="div2" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagochtend</span>
+        </span>
+
+    <span class="trow">
+            <span class="div3" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagmiddag</span>
+            <span class="div3" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagmiddag</span>
+            <span class="div3" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagmiddag</span>
+            <span class="div3" id="donderdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagmiddag</span>
+            <span class="div3" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagmiddag</span>
+        </span>
+
+    <span class="trow">
+        <span class="div4" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagavond</span>
+        <span class="div4" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagavond</span>
+        <span class="div4" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagavond</span>
+        <span class="div4" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagavond</span>
+        <span class="div4" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagavond</span>
+</span>
+</table>
+
+    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+</form>
+
+<br>
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id)
+
+        // ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+
+</script>
+</body>
+<footer>
+</footer>
+
+</html>
