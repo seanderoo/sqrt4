@@ -1,6 +1,7 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
 import sqrt4.mijninzet.model.User;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,25 +23,11 @@ public class Semester {
     private List<Week> semesterList;
 
     @ManyToOne
-    @JoinColumn
     private User user;
 
 
     public Semester() {
-
-        semesterList = new ArrayList<>();
-
-        for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            Week week = new Week(startWeek + i, startJaar);
-            semesterList.add(week);
-            week.setSemester(this);
-            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
-                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
-                week.setJaarNummer(startJaar + 1);
-                week.pasWeekNummerDagenAan(week.getWeekNummer());
-            }
-        }
-
+        genereerWeken();
     }
 
     public Semester(int cohortNaam, int startWeek, int startJaar, int eindWeek) {
@@ -48,21 +35,10 @@ public class Semester {
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
-        semesterList = new ArrayList<>();
 
-        for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            Week week = new Week(startWeek + i, startJaar);
-            semesterList.add(week);
-            week.setSemester(this);
-            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
-                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
-                week.setJaarNummer(startJaar + 1);
-                week.pasWeekNummerDagenAan(week.getWeekNummer());
-            }
-        }
+        genereerWeken();
     }
-    // Wellicht heroverwegen om semesternaam vrij in te vullen, dit kan in de toekomst worden gebruikt voor elke
-    // periode die er is, namelijk cohorten of langere/ kortere periodes. Voorbeeld: periode wk 40-2019 tot en met wk 6-2020
+
     public String setSemesterName(int cohortNummer) {
         StringBuilder sb = new StringBuilder();
         String appendix = "Cohort";
@@ -70,27 +46,27 @@ public class Semester {
         return sb.append(appendix).append(" ").append(cohortNummer).toString();
     }
 
-    public int numberOfWeeks(int startWeek, int eindWeek){
-        int aantalWeken= 0;
-        if(eindWeek>startWeek){
-            aantalWeken =(eindWeek - startWeek)+1;
-        } else{
-            aantalWeken = ((wekenInJaar(startJaar)-startWeek)+1)+eindWeek;
+    private int aantalWekenInCohort(int startWeek, int eindWeek) {
+        int aantalWeken = 0;
+        if (eindWeek > startWeek) {
+            aantalWeken = (eindWeek - startWeek) + 1;
+        } else {
+            aantalWeken = ((hoeveelWekenInJaar(startJaar) - startWeek) + 1) + eindWeek;
         }
         return aantalWeken;
     }
 
-    public int wekenInJaar(int startJaar) {
-        final int REG_JAAR = 52;
-        final int SPEC_JAAR = 53;
+    private int hoeveelWekenInJaar(int startJaar) {
+        final int REGULIER_JAAR = 52;
+        final int SPECIAAL_JAAR = 53;
         int aantalWeken = 0;
-        int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
-        for (int jaar : SPECIAAL_JAREN) {
-            if (startJaar == jaar ) {
-                aantalWeken = SPEC_JAAR;
+        int[] SPECIALE_JAREN = {2015, 2020, 2026, 2032, 2037, 2043, 2048, 2054};
+        for (int jaar : SPECIALE_JAREN) {
+            if (startJaar == jaar) {
+                aantalWeken = SPECIAAL_JAAR;
                 break;
             } else {
-                aantalWeken = REG_JAAR;
+                aantalWeken = REGULIER_JAAR;
             }
 
         }
@@ -124,12 +100,27 @@ public class Semester {
         }
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    private void genereerWeken() {
+        semesterList = new ArrayList<>();
+
+        for (int i = 0; i < aantalWekenInCohort(startWeek, eindWeek); i++) {
+            Week week = new Week(startWeek + i, startJaar);
+            semesterList.add(week);
+            week.setSemester(this);
+
+            int weeknr = week.getWeekNummer();
+            int aantalWekenInJaar = hoeveelWekenInJaar(startJaar);
+
+            if (weeknr > aantalWekenInJaar) {
+                week.setWeekNummer(weeknr - aantalWekenInJaar);
+                week.setJaarNummer(startJaar + 1);
+                week.pasWeekNummerDagenAan(weeknr);
+            }
+        }
     }
 
-    public Week getFirstWeek() {
-        return semesterList.get(0);
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {

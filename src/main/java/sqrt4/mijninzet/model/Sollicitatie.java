@@ -9,11 +9,9 @@ public class Sollicitatie {
     private int sollicitatieId;
 
     @ManyToOne
-    @JoinColumn
     private User user;
 
     @ManyToOne
-    @JoinColumn
     private Vacature vacature;
 
     public Sollicitatie(User user, Vacature vacature) {

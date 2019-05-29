@@ -25,9 +25,9 @@ public class DagTest {
         Dag dagA = new Dag("maandag", 20, 2019);
         Dag dagB = new Dag("dinsdag", 12, 2015);
         Dag dagC = new Dag(a,10,2019);
-        int result = dagA.nlDagNaarJava(a);
-        int resultB = dagB.nlDagNaarJava(b);
-        int resultC = dagC.nlDagNaarJava(c);
+        int result = dagA.nederlandsDagNaarJava(a);
+        int resultB = dagB.nederlandsDagNaarJava(b);
+        int resultC = dagC.nederlandsDagNaarJava(c);
 
         //assert
         assertEquals(expectedA, result);

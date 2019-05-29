@@ -30,7 +30,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

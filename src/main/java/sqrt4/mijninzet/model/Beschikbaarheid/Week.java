@@ -21,11 +21,9 @@ public class Week {
     private int jaarNummer;
 
     @OneToOne
-    @JoinColumn
     User user;
 
     @ManyToOne
-    @JoinColumn
     private Semester semester;
 
 
@@ -33,17 +31,15 @@ public class Week {
         super();
         this.weekNummer = weekNummer;
         this.jaarNummer = jaarNummer;
-        dagenlijst = new ArrayList<>();
-        dagenlijst.add(new Dag("maandag", weekNummer, jaarNummer));
-        dagenlijst.add(new Dag("dinsdag", weekNummer, jaarNummer));
-        dagenlijst.add(new Dag("woensdag", weekNummer, jaarNummer));
-        dagenlijst.add(new Dag("donderdag", weekNummer, jaarNummer));
-        dagenlijst.add(new Dag("vrijdag", weekNummer,jaarNummer));
-        setWeekVoorDagen();
+        voegDagenToe();
     }
 
     public Week() {
         this(0,0);
+        voegDagenToe();
+    }
+
+    private void voegDagenToe() {
         dagenlijst = new ArrayList<>();
         dagenlijst.add(new Dag("maandag", weekNummer, jaarNummer));
         dagenlijst.add(new Dag("dinsdag", weekNummer, jaarNummer));
