@@ -46,18 +46,19 @@ public class DatabaseInitializer implements CommandLineRunner {
         Role god = new Role("Admin");
         Role docent = new Role("Docent");
         Role manager = new Role("Manager");
-        Role coordinator = new Role("Coordinator");
+        Role roosteraar = new Role("Roosteraar");
         Role administrator = new Role("God");
 
-        List<Role> rollen = Arrays.asList(god, docent, manager, coordinator, administrator);
+        List<Role> rollen = Arrays.asList(god, docent, manager, roosteraar, administrator);
 
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin");
         User manager1 = new User("Manager", passwordEncoder.encode("Manager123"), "MANAGER", "", "M", "Anager");
+        User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar");
 
 
-        List<User> users = Arrays.asList(matthijs, admin, manager1);
+        List<User> users = Arrays.asList(matthijs, admin, manager1, roosteraar1);
 
         //Create vacatures
         Vacature coordinatorC16 = new Vacature("Coordinator Cohort 15",

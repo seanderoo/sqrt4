@@ -10,6 +10,7 @@
 
 <div class="navbar" id="header" th:fragment="copy">
     <a href="/home">Home</a>
+    <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/maak-rooster">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
     <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
@@ -41,7 +42,8 @@
             <a href="/manager/vak-rooster">Maak rooster voor vak</a>
         </div>
     </div>
-            <a style="float:right" href="/logout" >Uitloggen</a>
+
+    <a style="float:right" href="/logout">Uitloggen</a>
 </div>
 
 </body>
