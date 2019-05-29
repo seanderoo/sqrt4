@@ -2,7 +2,6 @@ package sqrt4.mijninzet.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -19,9 +18,13 @@ public class Vak {
     @Column(name = "aantalUren")
     private int aantalUren;
 
-    public Vak(String vakNaam, int aantalUren){
+    @OneToMany(mappedBy = "vak",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Dagdeel> dagdelen = new ArrayList<>();
+
+    public Vak(String vakNaam, int aantalUren) {
         this.vakNaam = vakNaam;
         this.aantalUren = aantalUren;
+        this.dagdelen = aantalDagdelenBerekenen();
     }
 
     public Vak() { super(); }
@@ -50,6 +53,10 @@ public class Vak {
         this.aantalUren = aantalUren;
     }
 
+    public List<Dagdeel> getDagdelen(){
+        return dagdelen;
+    }
+
     @Override
     public String toString() {
         return "Vak{" +
@@ -58,7 +65,26 @@ public class Vak {
                 ", aantalUren=" + aantalUren +
                 '}';
     }
+
+    public List<Dagdeel> aantalDagdelenBerekenen(){
+        List<Dagdeel> vakDagdelen= new ArrayList();
+        final int DAGDEELUREN = 4;
+        int aantalUren = this.aantalUren;
+        int aantalDagdelen = aantalUren / DAGDEELUREN;
+        if ((aantalUren % DAGDEELUREN) < DAGDEELUREN){
+            aantalDagdelen++;
+        }
+        for (int i = 0; i == aantalDagdelen; i++) {
+            vakDagdelen.add(new Dagdeel(i));
+        }
+        return vakDagdelen;
+
+    }
+
+
 }
+
+
 
 
 
