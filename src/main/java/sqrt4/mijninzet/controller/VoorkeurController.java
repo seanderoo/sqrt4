@@ -26,42 +26,38 @@ public class VoorkeurController extends AbstractController {
     @GetMapping("/docent/voorkeuren")
     public String getVakken(Model model) {
         List<Vak> vakkenLijst = vakRepository.findAll();
+        User user = voegActiveUserToe();
+        List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
+        System.out.println(voorkeurLijst);
+
+
         Voorkeur voorkeur = new Voorkeur();
+
+        Voorkeur defaultVoorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vakkenLijst.get(0), voegActiveUserToe());
+
+        if (defaultVoorkeur == null) {
+            model.addAttribute("voorkeur", voorkeur);
+        } else {
+            model.addAttribute("voorkeur", defaultVoorkeur);
+        }
+
         model.addAttribute("vakkenLijst", vakkenLijst);
-        model.addAttribute("voorkeur", voorkeur);
+        model.addAttribute("user", user);
         return "/voorkeuren";
     }
 
     @PostMapping("/docent/voorkeuren")
-    public String bewaarVoorkeur(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak) {
+    public String bewaarVoorkeur(@ModelAttribute("voorkeur") Voorkeur voorkeur, Vak vak, Model model) {
         Voorkeur ingevuldeVoorkeur = new Voorkeur();
         ingevuldeVoorkeur.setUser(voegActiveUserToe());
         ingevuldeVoorkeur.setVak(vak);
         ingevuldeVoorkeur.setVoorkeurGebruiker(voorkeur.getVoorkeurGebruiker());
         voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
         voorkeurenRepository.save(ingevuldeVoorkeur);
+
+        List<Vak> vakkenLijst = vakRepository.findAll();
+        model.addAttribute("vakkenLijst", vakkenLijst);
+        model.addAttribute("user", voegActiveUserToe());
         return "/voorkeuren";
     }
 }
-
-//    List<Vak> vakken = vakRepository.findAll(); // pas aan voorkeurRepo
-//
-//        for (Vak vak: vakken) {
-//                String key = null;
-//                for (String k : allParams.keySet()) {
-//                int sleutel = Integer.parseInt(k);
-//                if (vak.getVakId() == sleutel) {
-//                key = k;
-//                }
-//                }
-//                Voorkeur voorkeur1 = new Voorkeur();
-//                voorkeur1.setVak(vak);
-//                voorkeur1.setVoorkeur(allParams.get(key));
-//                voorkeur1.setUser(voegActiveUserToe());
-//
-//                if (allParams.get(key) != null) {
-//                voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
-//                voorkeurenRepository.save(voorkeur1);
-//                }
-//                }
-//                return "voorkeuren";

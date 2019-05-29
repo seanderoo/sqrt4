@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SQRT4  |  Kennisgebieden</title>
+    <title>SQRT4 | Kennisgebieden</title>
     <link rel="stylesheet" type="text/css" href="/voorkeur.css">
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
-    <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16"/>
 </head>
 <body>
 <header>
@@ -15,27 +15,41 @@
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan met een cijfer tussen de 1 en 3</h2>
 
-
-
 <form action="#" th:action="@{/docent/voorkeuren}" th:object="${voorkeur}" method="POST">
+    <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
     <table id="TableFormatter">
         <tr>
-            <td><strong><label th:text="Vak" /></strong></td>
+            <td><strong><label th:text="Vak"/></strong></td>
             <td>
-                <select id="vakkenLijst" onchange="showPreference(this.value)" th:field="*{vak}">
+                <select id="vakkenLijst" onchange="getSelectedCourse()" th:field="*{vak}">
                     <option th:each="vak: ${vakkenLijst}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}">
                 </select>
             </td>
             <td><input id="voorkeurGebruiker" type="number" th:field="*{voorkeurGebruiker}" min="1" max="3"/></td>
-            <td><input type="submit" value="Opslaan" /></td>
+            <td><input type="submit" value="Opslaan"/></td>
         </tr>
     </table>
 </form>
 
 
-
 </body>
 <script>
+    function getSelectedCourse() {
+        let selectedCourse = document.getElementById("vakkenLijst").value;
+        console.log('vakId = ' + selectedCourse);
+
+        getUser();
+    }
+
+    getSelectedCourse();
+
+    function getUser() {
+        let currentUser = document.getElementById("userId").value;
+        console.log('userId = ' + currentUser);
+    }
+
+
+
     function showPreference(str) {
         let xhttp;
         if (str == "") {
@@ -44,7 +58,7 @@
         }
 
         xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange == function() {
+        xhttp.onreadystatechange == function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("voorkeurGebruiker").innerHTML = this.responseText;
             }
