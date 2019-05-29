@@ -1,19 +1,21 @@
 package sqrt4.mijninzet.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
 public class Incident {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long incidentId;
+    private LocalDate datum;
 
     @ManyToOne
     @JoinColumn
     private User user;
 
-    private LocalDate datum;
+
     private boolean ochtend;
     private boolean middag;
     private boolean avond;
@@ -32,7 +34,6 @@ public class Incident {
     @Override
     public String toString() {
         return "Incident{" +
-                "incidentId=" + incidentId +
                 ", user=" + user +
                 ", datum=" + datum +
                 ", ochtend=" + ochtend +
@@ -41,13 +42,7 @@ public class Incident {
                 '}';
     }
 
-    public Long getIncidentId() {
-        return incidentId;
-    }
 
-    public void setIncidentId(Long incidentId) {
-        this.incidentId = incidentId;
-    }
 
     public User getUser() {
         return user;

@@ -1,6 +1,5 @@
 package sqrt4.mijninzet.controller;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +8,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
-import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.Incident;
-import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
-import sqrt4.mijninzet.repository.UserRepository;;
+import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
+
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -51,15 +50,28 @@ public class IncidentregistratieController extends AbstractController {
                                      @RequestParam("datum") String datum,
                                      Model model) {
         LocalDate date = LocalDate.parse(datum);
-        System.out.println(date);
-        Incident temp = new Incident(date, ochtend, middag, avond);
-        temp.setUser(voegActiveUserToe());
-        System.out.println(temp);
-        repo.save(temp);
+        if ( repo.existsById(date) ) {
+            Incident temp = repo.findByDatum(date);
+            temp.setOchtend(ochtend);
+            temp.setMiddag(middag);
+            temp.setAvond(avond);
+            repo.save(temp);
+        } else {
+            Incident temp = new Incident(date, ochtend, middag, avond);
+            temp.setUser(voegActiveUserToe());
+            repo.save(temp);
+        }
         List<Incident> incidentList = repo.findAllByUser(voegActiveUserToe());
-        //        Collections.sort(incidentList); Hoe ging het ook alweer???
+        Collections.sort(incidentList, new IncidentComparator());
         model.addAttribute("incidentLijst", incidentList);
         return "incidentregistratie";
+    }
+
+    class IncidentComparator implements Comparator<Incident> {
+        @Override
+        public int compare(Incident a, Incident b) {
+            return a.getDatum().isBefore(b.getDatum()) ? -1 : a.getDatum().isEqual(b.getDatum()) ? 0 : 1;
+        }
     }
 
 //    @PostMapping(value = "/docent/incidentregistratie")
