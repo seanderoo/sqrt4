@@ -23,8 +23,6 @@ public class Voorkeur {
         this.voorkeurGebruiker = voorkeurGebruiker;
     }
 
-    public Voorkeur(User user) { this(); }
-
     public Voorkeur() { super();   }
 
     public int getVoorkeurId() {
