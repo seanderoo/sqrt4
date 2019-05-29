@@ -6,6 +6,7 @@ package sqrt4.mijninzet.repository;
         import sqrt4.mijninzet.model.Vak;
         import sqrt4.mijninzet.model.Voorkeur;
         import javax.transaction.Transactional;
+        import java.util.List;
 
 @Repository
 public interface VoorkeurenRepository extends JpaRepository<Voorkeur, Integer> {
@@ -17,4 +18,5 @@ public interface VoorkeurenRepository extends JpaRepository<Voorkeur, Integer> {
 
     Voorkeur findVoorkeurByUser(User user);
 
+    List<Voorkeur> findAllByUser(User user);
 }
