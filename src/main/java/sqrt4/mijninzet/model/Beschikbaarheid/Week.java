@@ -26,7 +26,7 @@ public class Week {
 
     @ManyToOne
     @JoinColumn
-    private Semester semester;
+    private Cohort cohort;
 
 
     public Week(int weekNummer, int jaarNummer){
@@ -99,8 +99,8 @@ public class Week {
         return teller;
     }
 
-    public void setSemester(Semester semester) {
-        this.semester = semester;
+    public void setCohort(Cohort cohort) {
+        this.cohort = cohort;
     }
 
     private void setWeekVoorDagen() {

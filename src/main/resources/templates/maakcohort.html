@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4  |  Maak semester aan</title>
-    <link rel="stylesheet" type="text/css" href="/maaksemester.css">
+    <title>SQRT4  |  Maak cohort aan</title>
+    <link rel="stylesheet" type="text/css" href="/maakcohort.css">
     <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
@@ -12,11 +12,11 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<form action="#" th:action="@{maaksemester}" th:object="${semester}" th:method="POST">
-    <section id="aanvraagSem">
+<form action="#" th:action="@{maakcohort}" th:object="${cohort}" th:method="POST">
+    <section id="aanvraagCohort">
     <div class="container">
-        <h1>Maak een semester aan</h1>
-        <p>Hier is het mogelijk om een nieuw semester aan te maken. Voer hele weeknummers in.</p>
+        <h1>Maak een cohort aan</h1>
+        <p>Hier is het mogelijk om een nieuw cohort aan te maken. Voer hele weeknummers in.</p>
         <hr>
         <label><b>Cohortnaam:</b></label><br/>
         <input type="number" placeholder="nummer van het cohort" th:name="cohortNummer" min="1" required>
@@ -31,14 +31,14 @@
         <br/>
 
         <label><b>startweek:</b></label><br/>
-        <input type="number" placeholder="wat is de eerste weeknummer van het semester" th:name="startWeek" max="53"
+        <input type="number" placeholder="wat is de eerste weeknummer van het cohort" th:name="startWeek" max="53"
                min="1" required>
 
         <br/>
         <br/>
 
         <label><b>eindweek</b></label><br/>
-        <input type="number" placeholder="wat is de laatste week van het semester?" th:name="eindWeek" min="1" max="53"
+        <input type="number" placeholder="wat is de laatste week van het cohort?" th:name="eindWeek" min="1" max="53"
                required>
 
         <div class="clearfix">

@@ -1,7 +1,5 @@
 package sqrt4.mijninzet.model;
 
-import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
-import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 
 import javax.persistence.*;
