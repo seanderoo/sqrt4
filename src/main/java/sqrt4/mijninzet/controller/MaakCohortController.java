@@ -1,41 +1,37 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
-import sqrt4.mijninzet.model.User;
+import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
-import sqrt4.mijninzet.repository.UserRepository;
 
 @Controller
-public class MaaksemesterController extends AbstractController {
+public class MaakCohortController extends AbstractController {
 
     @Autowired
     AlgemeneBeschikbaarheidRepository abRepo;
 
-    @GetMapping("/admin/maaksemester")
-    public String Maaksemester( Model model, Semester semester){
-        return "/maaksemester";
+    @GetMapping("/admin/maakcohort")
+    public String maakCohort( Model model, Cohort cohort){
+        return "/maakcohort";
     }
-    Semester semester = new Semester();
+    Cohort cohort = new Cohort();
 
-    @PostMapping("/admin/maaksemester")
-    public String nieuwSemester(Model model,
-                                @ModelAttribute("semester") Semester semester,
+    @PostMapping("/admin/maakcohort")
+    public String nieuwCohort(Model model,
+                                @ModelAttribute("cohort") Cohort cohort,
                                 @RequestParam("cohortNummer") int cohortNummer,
                                 @RequestParam ("startJaar") int startJaar,
                                 @RequestParam("startWeek") int startWeek,
                                 @RequestParam ("eindWeek") int eindWeek){
-        semester = new Semester(cohortNummer, startWeek, startJaar, eindWeek);
-        semester.setUser(voegActiveUserToe());
-        abRepo.save(semester);
+        cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
+        cohort.setUser(voegActiveUserToe());
+        abRepo.save(cohort);
         model.addAttribute("user", voegActiveUserToe());
         return "/home";
     }

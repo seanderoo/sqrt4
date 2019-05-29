@@ -6,34 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Semester {
+public class Cohort {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String semesterNaam;
+    private String cohortNaam;
     private int startWeek;
     private int startJaar;
     private int eindWeek;
 
-    @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
-    private List<Week> semesterList;
+    private List<Week> cohortList;
 
     @ManyToOne
     @JoinColumn
     private User user;
 
 
-    public Semester() {
+    public Cohort() {
 
-        semesterList = new ArrayList<>();
+        cohortList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
             Week week = new Week(startWeek + i, startJaar);
-            semesterList.add(week);
-            week.setSemester(this);
+            cohortList.add(week);
+            week.setCohort(this);
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
                 week.setJaarNummer(startJaar + 1);
@@ -43,17 +43,17 @@ public class Semester {
 
     }
 
-    public Semester(int cohortNaam, int startWeek, int startJaar, int eindWeek) {
-        this.semesterNaam = setSemesterName(cohortNaam);
+    public Cohort(int cohortNaam, int startWeek, int startJaar, int eindWeek) {
+        this.cohortNaam = setCohortrName(cohortNaam);
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
-        semesterList = new ArrayList<>();
+        cohortList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
             Week week = new Week(startWeek + i, startJaar);
-            semesterList.add(week);
-            week.setSemester(this);
+            cohortList.add(week);
+            week.setCohort(this);
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
                 week.setJaarNummer(startJaar + 1);
@@ -61,9 +61,9 @@ public class Semester {
             }
         }
     }
-    // Wellicht heroverwegen om semesternaam vrij in te vullen, dit kan in de toekomst worden gebruikt voor elke
+    // Wellicht heroverwegen om cohortnaam vrij in te vullen, dit kan in de toekomst worden gebruikt voor elke
     // periode die er is, namelijk cohorten of langere/ kortere periodes. Voorbeeld: periode wk 40-2019 tot en met wk 6-2020
-    public String setSemesterName(int cohortNummer) {
+    public String setCohortrName(int cohortNummer) {
         StringBuilder sb = new StringBuilder();
         String appendix = "Cohort";
 
@@ -99,23 +99,23 @@ public class Semester {
 
     @Override
     public String toString() {
-        return "Semester{\n" +
-                "semesterNaam='" + semesterNaam + "\'" +
+        return "Cohort{\n" +
+                "cohortNaam='" + cohortNaam + "\'" +
                 ",\n startWeek=" + startWeek +
                 ",\n startJaar=" + startJaar +
-                ",\n eindJaar=" + semesterList.get(semesterList.size() - 1).getJaarNummer() +
+                ",\n eindJaar=" + cohortList.get(cohortList.size() - 1).getJaarNummer() +
                 ",\n eindWeek=" + eindWeek +
-                ",\n semesterList=" + semesterList +
+                ",\n cohortList=" + cohortList +
                 "}";
     }
 
-    public String getSemesterNaam() {
-        return semesterNaam;
+    public String getCohortNaam() {
+        return cohortNaam;
     }
 
     public void beschikbaarheidAanpassen(Week nieuweWeek) {
         String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
-        for (Week week : semesterList) {
+        for (Week week : cohortList) {
             for (int i = 0; i < weekdagen.length; i++) {
                 week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
                 week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
@@ -129,7 +129,7 @@ public class Semester {
     }
 
     public Week getFirstWeek() {
-        return semesterList.get(0);
+        return cohortList.get(0);
     }
 
     public int getId() {

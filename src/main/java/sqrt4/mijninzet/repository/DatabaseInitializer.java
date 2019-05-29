@@ -3,7 +3,7 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sqrt4.mijninzet.model.Beschikbaarheid.Semester;
+import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vacature;
@@ -79,15 +79,15 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
 
-        //Create Semester
-        Semester semester = new Semester(20,2020,20,21);
+        //Create Cohort
+        Cohort cohort = new Cohort(20,20,2020,21);
 
         //save to db
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
         this.roleRepository.saveAll(rollen);
-        this.algemeneBeschikbaarheidRepository.save(semester);
+        this.algemeneBeschikbaarheidRepository.save(cohort);
 
     }
 }
