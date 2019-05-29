@@ -17,7 +17,7 @@
 
 <form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" method="POST">
     <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
-    <table id="SollicitatieTabel">
+    <table id="TableFormatter">
         <tr>
             <td><strong><label th:text="Vak"/></strong></td>
             <td>
@@ -67,6 +67,18 @@
         xhttp.send();
     }
 
+
+    // function getSelectedCourse() {
+    //     let selectedCourse = document.getElementById("vakkenLijst").value;
+    //     getSelectedPreference();
+    //     console.log(selectedCourse);
+    // }
+    // getSelectedCourse();
+    //
+    // function getSelectedPreference() {
+    //     let selectedPrefence = document.getElementById("voorkeurGebruiker").value;
+    //     console.log(selectedPrefence);
+    // }
 
 </script>
 </html>
