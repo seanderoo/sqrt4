@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4  |  Rooster</title>
+    <title>SQRT4 | Rooster</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
@@ -13,28 +13,18 @@
         width: 70px;
         height: 35px;
         padding: 10px;
-        border: 2px solid #aaaaaa;
+        border: 2px solid darkblue;
         display: table-cell;
     }
 
-    .div3 {
-        width: 70px;
-        height: 35px;
-        padding: 10px;
-        border: 2px solid #aaaaaa;
-        display: table-cell;
-    }
-
-    .div4 {
-        width: 70px;
-        height: 35px;
-        padding: 10px;
-        border: 2px solid #aaaaaa;
-        display: table-cell;
-    }
-
-    .trow{
+    .trow {
         display: table-row
+    }
+
+    #roostertabel {
+        width: 40%
+        margin-left: 30%;
+        margin-right: 30%;
     }
 
 </style>
@@ -46,44 +36,49 @@
 
 
 <h2>Vakken</h2>
-<ul id="roostertest" style="list-style-type:none" th:action="@{/roostertest}" th:object="${vakkenLijst}" th:method="GET">
+<ul id="roostertest" style="list-style-type:none" th:action="@{/roostertest}" th:object="${vakkenLijst}"
+    th:method="GET">
     <li th:if="${vakkenLijst.empty}">
         <td class="ST" colspan="3">Geen vakken beschikbaar</td>
     </li>
     <li th:each="vak: ${vakkenLijst}">
-        <td class="ST"><p th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}" draggable="true" ondragstart="drag(event)">vaknaam</p></td>
+        <td class="ST"><p th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}" draggable="true"
+                          ondragstart="drag(event)">vaknaam</p></td>
     </li>
 
 </ul>
 <h2>Plaats de vakken in het gewenste dagdeel:</h2>
-<table>
-        <span class="trow">
-            <span class="div2" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagochtend</span>
-            <span class="div2" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagochtend</span>
-            <span class="div2" id="woensdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagochtend</span>
-            <span class="div2" id="donderdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagochtend</span>
-            <span class="div2" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagochtend</span>
-        </span>
+<table id="roostertabel">
+    <div class="trow">
+        <span class="div2" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagochtend</span>
+        <span class="div2" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagochtend</span>
+        <span class="div2" id="woensdagochtend" ondrop="drop(event)"
+              ondragover="allowDrop(event)">Woensdagochtend</span>
+        <span class="div2" id="donderdagochtend" ondrop="drop(event)"
+              ondragover="allowDrop(event)">Donderdagochtend</span>
+        <span class="div2" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagochtend</span>
+    </div>
 
-    <span class="trow">
-            <span class="div3" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagmiddag</span>
-            <span class="div3" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagmiddag</span>
-            <span class="div3" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagmiddag</span>
-            <span class="div3" id="donderdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagmiddag</span>
-            <span class="div3" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagmiddag</span>
-        </span>
+    <div class="trow">
+        <span class="div2" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagmiddag</span>
+        <span class="div2" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagmiddag</span>
+        <span class="div2" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagmiddag</span>
+        <span class="div2" id="donderdagmiddag" ondrop="drop(event)"
+              ondragover="allowDrop(event)">Donderdagmiddag</span>
+        <span class="div2" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagmiddag</span>
+    </div>
 
-    <span class="trow">
-        <span class="div4" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagavond</span>
-        <span class="div4" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagavond</span>
-        <span class="div4" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagavond</span>
-        <span class="div4" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagavond</span>
-        <span class="div4" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagavond</span>
-</span>
+    <div class="trow">
+        <span class="div2" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Maandagavond</span>
+        <span class="div2" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Dinsdagavond</span>
+        <span class="div2" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Woensdagavond</span>
+        <span class="div2" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Donderdagavond</span>
+        <span class="div2" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)">Vrijdagavond</span>
+    </div>
 </table>
 
-    <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
-</form>
+<button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
+
 
 <br>
 
