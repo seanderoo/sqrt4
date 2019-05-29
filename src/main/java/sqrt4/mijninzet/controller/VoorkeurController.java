@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.VakRepository;
@@ -24,6 +25,7 @@ public class VoorkeurController extends AbstractController {
     @GetMapping("/voorkeuren")
     public String getVakken(Model model) {
         List<Vak> vakkenLijst = vakRepository.findAll();
+        User user = userRepo.findByUsername(voegActiveUserToe().getUsername());
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
         System.out.println(voorkeurLijst);
 
@@ -39,6 +41,7 @@ public class VoorkeurController extends AbstractController {
         }
 
         model.addAttribute("vakkenLijst", vakkenLijst);
+        model.addAttribute("user", user);
         return "voorkeuren";
     }
 
