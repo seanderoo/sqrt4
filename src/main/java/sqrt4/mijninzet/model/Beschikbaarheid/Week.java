@@ -20,7 +20,8 @@ public class Week {
     private int weekNummer;
     private int jaarNummer;
 
-    @OneToOne(mappedBy = "week")
+    @OneToOne
+    @JoinColumn
     User user;
 
     @ManyToOne
@@ -55,10 +56,9 @@ public class Week {
 
     @Override
     public String toString() {
-        return "Week{" +
-                "dagenlijst=" + dagenlijst +
-                ", weekNummer=" + weekNummer +
-                '}';
+        return "Week " + weekNummer + "\n" +
+                "User: " + user + "\n" +
+                "dagenlijst=" + dagenlijst + "\n";
     }
 
     public int getWeekNummer() {
@@ -164,5 +164,9 @@ public class Week {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

@@ -30,7 +30,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -145,5 +145,13 @@ public User(String username, String password, String roles, String permissions){
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public void setWeek(Week week) {
+        this.week = week;
+    }
+
+    public Week getWeek() {
+        return week;
     }
 }
