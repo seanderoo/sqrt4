@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/voorkeuren")
 public class AlgemeneController {
 
-    @RequestMapping(value="/voorkeuren/{echo}")
-    public String testRest(@PathVariable String echo) {
-        if (echo.equals("1")) {
-            return "noot";
-        }
+    @RequestMapping(value="/{user}/{vak}")
+    public String testRest(@PathVariable String user, String vak) {
+
         return "mies";
     }
+
+
 
 }
