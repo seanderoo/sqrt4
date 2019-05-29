@@ -16,11 +16,9 @@ public class Dag {
     private int id;
 
     @ManyToOne
-    @JoinColumn
     private Week week;
 
     @ManyToOne
-    @JoinColumn
     private User user;
 
     private String dagnaam;
@@ -49,20 +47,13 @@ public class Dag {
 
     public Dag() {}
 
-    public Dag(LocalDate datum, boolean ochtend, boolean middag, boolean avond) {
-        this("", 0, 0);
-        this.datum = datum;
-        this.ochtend = ochtend;
-        this.middag = middag;
-        this.avond = avond;
-    }
-
-    public LocalDate setDatumDag(String dagnaam){
+    private LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
+
         cal.set(Calendar.YEAR, this.jaarNummer);
         cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
-        cal.set(Calendar.DAY_OF_WEEK, nlDagNaarJava(dagnaam));
+        cal.set(Calendar.DAY_OF_WEEK, nederlandsDagNaarJava(dagnaam));
         cal.getFirstDayOfWeek();
 
         String date = sdf.format(cal.getTime());
@@ -71,31 +62,27 @@ public class Dag {
         return localDate;
     }
 
-    public int nlDagNaarJava(String dagNaam){
-        int var = 0;
+    public int nederlandsDagNaarJava(String dagNaam){
+        int dayNameJava = 0;
 
         switch(dagNaam){
             case "maandag":
-                var = Calendar.MONDAY;
+                dayNameJava = Calendar.MONDAY;
                 break;
             case "dinsdag":
-                var = Calendar.TUESDAY;
+                dayNameJava = Calendar.TUESDAY;
                 break;
             case "woensdag":
-                var = Calendar.WEDNESDAY;
+                dayNameJava = Calendar.WEDNESDAY;
                 break;
             case "donderdag":
-                var = Calendar.THURSDAY;
+                dayNameJava = Calendar.THURSDAY;
                 break;
             case "vrijdag":
-                var = Calendar.FRIDAY;
+                dayNameJava = Calendar.FRIDAY;
                 break;
         }
-        return var;
-    }
-
-    public int getBooleanAsInt(boolean value) {
-        return value ? 1 : 0;
+        return dayNameJava;
     }
 
     public void setOchtend(boolean ochtend) {
@@ -112,18 +99,6 @@ public class Dag {
 
     public boolean getOchtend() {
         return ochtend;
-    }
-
-    public int getOchtendAsInt() {
-        return ochtend ? 1 : 0;
-    }
-
-    public int getMiddagAsINt() {
-        return middag ? 1 : 0;
-    }
-
-    public int getAvondAsInt() {
-        return avond ? 1 : 0;
     }
 
     public boolean getMiddag() {

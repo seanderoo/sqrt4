@@ -22,75 +22,50 @@ public class Cohort {
     private List<Week> cohortList;
 
     @ManyToOne
-    @JoinColumn
     private User user;
 
 
     public Cohort() {
-
-        cohortList = new ArrayList<>();
-
-        for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            Week week = new Week(startWeek + i, startJaar);
-            cohortList.add(week);
-            week.setCohort(this);
-            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
-                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
-                week.setJaarNummer(startJaar + 1);
-                week.pasWeekNummerDagenAan(week.getWeekNummer());
-            }
-        }
-
+        genereerWeken();
     }
 
     public Cohort(int cohortNaam, int startWeek, int startJaar, int eindWeek) {
-        this.cohortNaam = setCohortrName(cohortNaam);
+        this.cohortNaam = setCohortName(cohortNaam);
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
-        cohortList = new ArrayList<>();
 
-        for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
-            Week week = new Week(startWeek + i, startJaar);
-            cohortList.add(week);
-            week.setCohort(this);
-            if (week.getWeekNummer() > wekenInJaar(startJaar)) {
-                week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
-                week.setJaarNummer(startJaar + 1);
-                week.pasWeekNummerDagenAan(week.getWeekNummer());
-            }
-        }
+        genereerWeken();
     }
-    // Wellicht heroverwegen om cohortnaam vrij in te vullen, dit kan in de toekomst worden gebruikt voor elke
-    // periode die er is, namelijk cohorten of langere/ kortere periodes. Voorbeeld: periode wk 40-2019 tot en met wk 6-2020
-    public String setCohortrName(int cohortNummer) {
+
+    public String setCohortName(int cohortNummer) {
         StringBuilder sb = new StringBuilder();
         String appendix = "Cohort";
 
         return sb.append(appendix).append(" ").append(cohortNummer).toString();
     }
 
-    public int numberOfWeeks(int startWeek, int eindWeek){
-        int aantalWeken= 0;
-        if(eindWeek>startWeek){
-            aantalWeken =(eindWeek - startWeek)+1;
-        } else{
-            aantalWeken = ((wekenInJaar(startJaar)-startWeek)+1)+eindWeek;
+    private int aantalWekenInCohort(int startWeek, int eindWeek) {
+        int aantalWeken = 0;
+        if (eindWeek > startWeek) {
+            aantalWeken = (eindWeek - startWeek) + 1;
+        } else {
+            aantalWeken = ((hoeveelWekenInJaar(startJaar) - startWeek) + 1) + eindWeek;
         }
         return aantalWeken;
     }
 
-    public int wekenInJaar(int startJaar) {
-        final int REG_JAAR = 52;
-        final int SPEC_JAAR = 53;
+    private int hoeveelWekenInJaar(int startJaar) {
+        final int REGULIER_JAAR = 52;
+        final int SPECIAAL_JAAR = 53;
         int aantalWeken = 0;
-        int [] SPECIAAL_JAREN = {2015,2020,2026,2032,2037,2043,2048,2054};
-        for (int jaar : SPECIAAL_JAREN) {
-            if (startJaar == jaar ) {
-                aantalWeken = SPEC_JAAR;
+        int[] SPECIALE_JAREN = {2015, 2020, 2026, 2032, 2037, 2043, 2048, 2054};
+        for (int jaar : SPECIALE_JAREN) {
+            if (startJaar == jaar) {
+                aantalWeken = SPECIAAL_JAAR;
                 break;
             } else {
-                aantalWeken = REG_JAAR;
+                aantalWeken = REGULIER_JAAR;
             }
 
         }
@@ -124,12 +99,27 @@ public class Cohort {
         }
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    private void genereerWeken() {
+        cohortList = new ArrayList<>();
+
+        for (int i = 0; i < aantalWekenInCohort(startWeek, eindWeek); i++) {
+            Week week = new Week(startWeek + i, startJaar);
+            cohortList.add(week);
+            week.setCohort(this);
+
+            int weeknr = week.getWeekNummer();
+            int aantalWekenInJaar = hoeveelWekenInJaar(startJaar);
+
+            if (weeknr > aantalWekenInJaar) {
+                week.setWeekNummer(weeknr - aantalWekenInJaar);
+                week.setJaarNummer(startJaar + 1);
+                week.pasWeekNummerDagenAan(weeknr);
+            }
+        }
     }
 
-    public Week getFirstWeek() {
-        return cohortList.get(0);
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {

@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SQRT4  |  Kennisgebieden</title>
-    <link rel="stylesheet" type="text/css" href="voorkeur.css">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/voorkeur.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
 </head>
@@ -17,8 +17,8 @@
 
 
 
-<form action="#" th:action="@{/voorkeuren}" th:object="${voorkeur}" method="POST">
-    <table id="SollicitatieTabel">
+<form action="#" th:action="@{/docent/voorkeuren}" th:object="${voorkeur}" method="POST">
+    <table id="TableFormatter">
         <tr>
             <td><strong><label th:text="Vak" /></strong></td>
             <td>
