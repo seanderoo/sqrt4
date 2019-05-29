@@ -46,7 +46,6 @@
                 <th>Ochtend</th>
                 <th>Middag</th>
                 <th>Avond</th>
-                <th>Verwijderen</th>
             </tr>
             <tr th:each="incident: ${incidentLijst}">
                 <td style="color:black" th:class="${incident.getDatum()}"><span th:text="${incident.getDatum()}">Datum
@@ -54,10 +53,6 @@
                 <td th:class="${incident.isOchtend()}"></td>
                 <td th:class="${incident.isMiddag()}"></td>
                 <td th:class="${incident.isAvond()}"></td>
-                <td th:class="ST">
-                    <button type="reset" th:name="Verwijderen"
-                            th:value="${incident.getDatum()}">Verwijder
-                    </button>
                 </td>
             </tr>
         </table>
