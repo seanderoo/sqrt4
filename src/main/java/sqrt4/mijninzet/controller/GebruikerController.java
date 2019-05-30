@@ -17,33 +17,12 @@ import sqrt4.mijninzet.repository.UserRepository;
 import java.util.List;
 
 @Controller
-public class GebruikerController extends AbstractController{
+public class GebruikerController extends AbstractController {
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-
-    @GetMapping("/admin/overzicht-gebruikers")
-    public String overzichtGebruikers(Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
-    }
-
-    @PostMapping("/admin/overzicht-gebruikers")
-    public String verwijderGebruiker(@RequestParam("Verwijder") Long userId, Model model) {
-        User activeUser = voegActiveUserToe();
-        if(userId == activeUser.getId()){
-            List<User> users = userRepository.findAll();
-            model.addAttribute("gebruikers", users);
-            return "overzicht-gebruikers";
-        }
-        userRepository.deleteById(userId);
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
-    }
 
     @GetMapping("/admin/nieuwe-gebruiker")
     public String nieuweGebruiker(Model model) {
@@ -60,5 +39,53 @@ public class GebruikerController extends AbstractController{
         user.setActive(1);
         userRepository.save(user);
         return "/gebruiker-toegevoegd";
+    }
+
+    @GetMapping("/admin/overzicht-gebruikers")
+    public String overzichtGebruikers(Model model) {
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
+        return "overzicht-gebruikers";
+    }
+
+    @PostMapping("/admin/overzicht-gebruikers")
+    public String verwijderGebruiker(@RequestParam(value = "Verwijder", required = false) Long userIdVerwijder,
+                                     @RequestParam(value = "Wijzig", required = false) Long userIdWijzig,
+                                     Model model) {
+        User activeUser = voegActiveUserToe();
+        if (userIdVerwijder != null) {
+            if (userIdVerwijder == activeUser.getId()) {
+                List<User> users = userRepository.findAll();
+                model.addAttribute("gebruikers", users);
+                return "/overzicht-gebruikers";
+            } else if (userIdVerwijder != activeUser.getId()) {
+                userRepository.deleteById(userIdVerwijder);
+                List<User> users = userRepository.findAll();
+                model.addAttribute("gebruikers", users);
+                return "/overzicht-gebruikers";
+            }
+        } else if (userIdWijzig != null) {
+            User user = userRepository.findUserById(userIdWijzig);
+            model.addAttribute("gebruiker", user);
+            List<Role> rollen = roleRepository.findAll();
+            model.addAttribute("roles", rollen);
+            return "/wijzig-gebruiker";
+        }
+        return "/overzicht-gebruikers";
+    }
+
+
+    @PostMapping("/admin/wijzig-gebruiker")
+    public String wijzigGebruiker(@ModelAttribute("gebruiker") User user, Model model) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setId(user.getId());
+        user.setRoles(user.getRoles().toUpperCase());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        userRepository.save(user);
+
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
+        return "overzicht-gebruikers";
     }
 }
