@@ -6,24 +6,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import sqrt4.mijninzet.model.Vacature;
 import sqrt4.mijninzet.repository.VacatureRepository;
 
-
+@RequestMapping("/admin")
 @Controller
 public class VacatureController extends AbstractController{
 
     @Autowired
     VacatureRepository vacrepo;
 
-    @GetMapping("/admin/nieuwe-vacature")
+    @GetMapping("/nieuwe-vacature")
     public String nieuweVacature(){
-    return "/nieuwe-vacature";
+    return "nieuwe-vacature";
     }
 
-    @PostMapping("/admin/vacature-toegevoegd")
+    @PostMapping("/vacature-toegevoegd")
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
         vacrepo.save(vacature);
-        return "/vacature-toegevoegd";
+        return "vacature-toegevoegd";
     }
 }
