@@ -25,7 +25,7 @@
         <br/>
 
         <label><b>startjaar:</b></label><br/>
-        <input type="number" placeholder="startjaar" th:name="startJaar" min="2019" required>
+        <input id="startjaar" type="number" placeholder="startjaar" th:name="startJaar" min="2019" required>
 
         <br/>
         <br/>
@@ -42,7 +42,7 @@
                required>
 
         <div class="clearfix">
-            <button type="submit" class="signupbtn">Maak</button>
+            <button type="submit" class="signupbtn" onclick="checkYear()">Maak</button>
             <button type="button" class="cancelbtn">Cancel</button>
         </div>
     </div>
@@ -50,4 +50,14 @@
 </form>
 
 </body>
+<script>
+    function checkYear() {
+        var startjaar = document.getElementById('startjaar').value;
+        var huidigeJaar = new Date().getFullYear();
+        if (startjaar < huidigeJaar || startjaar > 9999) {
+            alert("Kies een geldige startjaar\nHuidige jaar: " + huidigeJaar);
+        }
+    }
+</script>
+
 </html>

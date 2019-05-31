@@ -35,7 +35,7 @@
         var selectedCourse = document.getElementById("vakkenLijst").value;
         var currentUser = document.getElementById("userId").value;
         var url = '/ajax/voorkeuren/' + currentUser + '/' + selectedCourse;
-        console.log(url);
+
 
         var xhttp;
         if (selectedCourse == "") {
@@ -46,7 +46,6 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("voorkeurGebruiker").value = this.responseText;
-                console.log('dit is de response van de server: ' + this.responseText)
             }
         };
         xhttp.open("POST", url, true);

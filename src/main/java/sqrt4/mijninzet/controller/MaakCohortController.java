@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
 
+import java.time.LocalDate;
+import java.time.Year;
+
 @RequestMapping("/admin")
 @Controller
 public class MaakCohortController extends AbstractController {
@@ -28,6 +31,8 @@ public class MaakCohortController extends AbstractController {
                                 @RequestParam("startWeek") int startWeek,
                                 @RequestParam ("eindWeek") int eindWeek){
 
+
+
         try {
             cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
             cohort.setUser(voegActiveUserToe());
@@ -35,6 +40,7 @@ public class MaakCohortController extends AbstractController {
             model.addAttribute("user", voegActiveUserToe());
         } catch (Exception e) {
             System.out.println("Something went wrong... " + e.getMessage());
+            return "maakcohort";
         }
 
         model.addAttribute("user", voegActiveUserToe());
