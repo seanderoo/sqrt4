@@ -87,5 +87,9 @@ footer a:hover {
     margin: 30px;
 }
 
+.randomcontent {
+    visibility: hidden;
+}
+
 
 

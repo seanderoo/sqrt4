@@ -1,7 +1,50 @@
 <!DOCTYPE html>
 <html>
 <body>
-<a href="/home"><img src="https://media.giphy.com/media/XrNry0aqYWEhi/giphy.gif" border="0" alt="nuclear explosion"
-                     style="display:block; width:20%;height:auto; margin-left: auto; margin-right:auto "></a>
+<div class="randomcontent item1">
+    <a href="/home"><img src="https://media.giphy.com/media/XrNry0aqYWEhi/giphy.gif" border="0" alt="nuclear explosion"
+                         style="display:block; width:20%;height:auto; margin-left: auto; margin-right:auto "></a>
+</div>
+<div class="randomcontent item2">
+<span>(╯°□°）╯︵ ┻━┻</span>
+</div>
+<div class="randomcontent item3">
+<span>Uh... <br/>nee.</span>
+</div>
+
+<script>
+    if (document.getElementById)
+        document.documentElement.className = 'jsclass'; //hide content for DOM capable browsers
+
+
+    var randomcontentdisplay={
+        divholders:new Object(),
+        masterclass: "randomcontent",
+
+        init:function(){
+            if (!document.getElementById)
+                return
+            var alldivs=document.getElementsByTagName("div")
+            var randomcontentsearch=new RegExp(this.masterclass+"\\s+(item\\d+)", "i") //check for CSS class="randomcontent groupX" (x=integer)
+            for (var i=0; i<alldivs.length; i++){
+                if (randomcontentsearch.test(alldivs[i].className)){
+                    if (typeof this.divholders[RegExp.$1]=="undefined") //if array to hold this group of divs doesn't exist yet
+                        this.divholders[RegExp.$1]=new Array() //create array first
+                    this.divholders[RegExp.$1].push(alldivs[i]) //add this div to the array
+                }
+            }
+            this.showone()
+        },
+
+        showone:function(){
+            for (group in this.divholders){ //loop thru each array within object
+                var chosenOne=Math.floor(Math.random()*this.divholders[group].length) //randomly pick one entry from array
+                this.divholders[group][chosenOne].style.display="block" //display content corresponding to the chosen entry
+            }
+        }
+    }
+    randomcontentdisplay.init();
+
+</script>
 </body>
 </html>
