@@ -8,36 +8,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import sqrt4.mijninzet.model.Dagdeel;
 import sqrt4.mijninzet.model.Vak;
+import sqrt4.mijninzet.repository.DagdeelRespository;
 import sqrt4.mijninzet.repository.VakRepository;
 
 import java.util.List;
 
 @Controller
-public class RoosterTestController {
+public class LesroosterController {
 
     @Autowired
     private VakRepository vakRepository;
 
-    @GetMapping("/roostertest")
+    @Autowired
+    private DagdeelRespository dagdeelRespository;
+
+    @GetMapping("/manager/lesrooster-aanmaken")
     public String roosterTest(Model model){
         List <Vak> vakkenLijst = vakRepository.findAll();
         model.addAttribute("vakkenLijst", vakkenLijst);
-        return "/roostertest";
-    }
-
-    @PostMapping("/roostertest")
-    public String roosterTest2(@ModelAttribute("dagdeelLijst") Vak vak, Model model){
-        List <Vak> vakkenLijst = vakRepository.findAll();
-        model.addAttribute("vakkenLijst", vakkenLijst);
-        List<Dagdeel> dagdeelLijst = vak.getDagdelen();
+        List<Dagdeel> dagdeelLijst = dagdeelRespository.findAll();
         model.addAttribute("dagdeelLijst", dagdeelLijst);
-        return "/roostertest";
+        return "/lesrooster-aanmaken";
     }
 
-    @PostMapping("/roostertest-dagdelen")
-    public String roosterTest3(){
-
-        return "/roostertest";
-    }
 
 }
