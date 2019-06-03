@@ -7,13 +7,13 @@ import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 
 @RestController
-@RequestMapping("/ajax/voorkeuren")
+@RequestMapping("/ajax")
 public class AlgemeneController {
 
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
 
-    @RequestMapping(value = "/{user}/{vak}", method = RequestMethod.POST)
+    @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
         Integer preference = 0;
         try {
@@ -27,4 +27,10 @@ public class AlgemeneController {
         }
         return preference;
     }
+
+    @RequestMapping(value = "/{user}", method = RequestMethod.POST)
+    public String testRest2(@PathVariable User user) {
+        return "";
+    }
+
 }

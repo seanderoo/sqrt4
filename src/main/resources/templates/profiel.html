@@ -15,10 +15,16 @@
 </header>
 <h1>Wijzig Gegevens <span th:text="${user.getFirstName()}"/></h1>
 <div id="nieuwegebruikerform">
+    <div id="afbeeldingGebruiker">
+        <img id="" th:title="${user.getFirstName()} + ' ' + ${user.getLastName()}" th:src="${user.getProfilePic()}" alt="profile pic" width="200", height="200">
+        <br>
+        <button type="button" onclick="changeProfilePicture()">Wijzig afbeelding</button>
+    </div>
     <form action="#" th:action="@{/profiel}" th:method="POST">
-        <table>
-            <tr>
-                <td><input type="hidden" th:name="id" th:value="*{user.getId()}" size="40" required></td>
+        <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
+        <table id="TableFormatter">
+            <tr colspan="2">
+                <td><strong>Persoonsgegevens</strong></td>
             </tr>
             <tr>
                 <td> <label>Voornaam</label></td>
@@ -60,6 +66,38 @@
         if (ww1 != ww2) {
             alert("Wachtwoorden komen niet overeen!!!");
         }
+    }
+
+    function changeProfilePic() {
+        var txt;
+        var person = prompt("Please enter an image source");
+        if (person == null || person == "") {
+            txt = "User cancelled the prompt.";
+        } else {
+            txt = "het is gelukt";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+
+    function changeProfilePicture() {
+        var currentUser = document.getElementById("userId").value;
+        var url = '/ajax/profiel/' + currentUser;
+        console.log('dit is de url: ' + url)
+
+
+        var xhttp;
+        if (selectedCourse == "") {
+            document.getElementById("voorkeurGebruiker").innerHTML = "";
+            return;
+        }
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("voorkeurGebruiker").value = this.responseText;
+            }
+        };
+        xhttp.open("POST", url, true);
+        xhttp.send();
     }
 </script>
 </html>

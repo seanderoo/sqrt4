@@ -11,6 +11,7 @@
 </header>
 <h1>Voorkeuren</h1>
 <h2>Geef hier je voorkeur aan met een cijfer tussen de 1 en 3</h2>
+<h3>1 = liever niet, 2 = als het moet, 3 = graag</h3>
 
 <form action="#" th:action="@{/docent/voorkeuren}" th:object="${voorkeur}" method="POST">
     <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
