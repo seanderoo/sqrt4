@@ -25,13 +25,14 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, CohortRepository cohortRepository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository, DagdeelRespository dagdeelRespository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
         this.cohortRepository = cohortRepository;
+        this.dagdeelRespository = dagdeelRespository;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.cohortRepository.deleteAll();
-        this.dagdeelRespository.deleteAll();
+//        this.dagdeelRespository.deleteAll();
 
 
         //create rollen
