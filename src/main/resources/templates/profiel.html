@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Wijzig Gebruiker</title>
+    <title>SQRT4  |  Wijzig Gegevens</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/form-karin.css">
@@ -13,48 +13,41 @@
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Wijzig Bestaande Gebruiker <span th:text="${gebruiker.getFirstName()}"/></h1>
+<h1>Wijzig Gegevens <span th:text="${user.getFirstName()}"/></h1>
 <div id="nieuwegebruikerform">
-    <form action="#" th:action="@{/admin/wijzig-gebruiker}" th:method="POST">
+    <form action="#" th:action="@{/profiel}" th:method="POST">
         <table>
             <tr>
-                <td><input type="hidden" th:name="id" th:value="*{gebruiker.getId()}" size="40" required></td>
+                <td><input type="hidden" th:name="id" th:value="*{user.getId()}" size="40" required></td>
             </tr>
             <tr>
                 <td> <label>Voornaam</label></td>
-                <td><input type="text" th:name="firstName" size="40" required></td>
+                <td th:name="firstName" th:text="${user.getFirstName()}"></td>
             </tr>
             <tr>
                 <td><label>Achternaam</label></td>
-                <td><input type="text" th:name="lastName" size="40" required></td>
+                <td th:name="lastName" th:text="${user.getLastName()}"></td>
             </tr>
             <tr>
                 <td><label>Inlognaam</label></td>
-                <td> <input type="text" th:name="username" size="40" required></td>
+                <td th:name="username" th:text="${user.getUsername()}"></td>
             </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
                 <td> <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
             </tr>
             <tr>
-                <td>  <label>Herhaal wachtwoord</label></td>
-                <td>   <input id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+                <td><label>Herhaal wachtwoord</label></td>
+                <td><input id="wachtwoord2" type="password" value="" size="40" required onchange="noTypo()"></td>
             </tr>
             <tr>
-                <td> <label>Kies een Rol</label></td>
-                <td>     <select th:name="roles">
-                    <option value=""></option>
-                    <option th:each="role : ${roles}"
-                            th:value="${role.getName()}"
-                            th:text="${role.getName()}">
-                    </option>
-                </select></td>
+                <td> <label>Huidige Rol</label></td>
+                <td th:name="roles" th:text="${user.getRoles()}"></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Gebruiker Wijzigen" onclick="noTypo()"/></td>
+                <td><input type="submit" value="Gegevens Wijzigen" onclick="noTypo()"/></td>
             </tr>
-
         </table>
 
     </form>
