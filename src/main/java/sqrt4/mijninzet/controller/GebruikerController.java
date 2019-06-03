@@ -15,48 +15,73 @@ import java.util.List;
 
 @RequestMapping("/admin")
 @Controller
-public class GebruikerController extends AbstractController{
+public class GebruikerController extends AbstractController {
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
 
-    @GetMapping("overzicht-gebruikers")
-    public String overzichtGebruikers(Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
-    }
-
-    @PostMapping("/overzicht-gebruikers")
-    public String verwijderGebruiker(@RequestParam("Verwijder") Long userId, Model model) {
-        User activeUser = voegActiveUserToe();
-        if(userId == activeUser.getId()){
-            List<User> users = userRepository.findAll();
-            model.addAttribute("gebruikers", users);
-            return "overzicht-gebruikers";
-        }
-        userRepository.deleteById(userId);
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
-    }
-
     @GetMapping("/nieuwe-gebruiker")
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        return "nieuwe-gebruiker";
+        return "/admin/nieuwe-gebruiker";
     }
 
     @PostMapping("/nieuwe-gebruiker")
-    public String nieuweGebruiker(@ModelAttribute("user") User user) {
+    public String nieuweGebruiker(User user) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        return "gebruiker-toegevoegd";
+        return "/admin/gebruiker-toegevoegd";
+    }
+
+    @GetMapping("/overzicht-gebruikers")
+    public String overzichtGebruikers(Model model) {
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
+        return "/admin/overzicht-gebruikers";
+    }
+
+    @PostMapping("/overzicht-gebruikers")
+    public String verwijderGebruiker(@RequestParam(value = "Verwijder", required = false) Long userIdVerwijder,
+                                     @RequestParam(value = "Wijzig", required = false) Long userIdWijzig,
+                                     Model model) {
+        User activeUser = voegActiveUserToe();
+        if (userIdVerwijder != null) {
+            if (userIdVerwijder == activeUser.getId()) {
+                List<User> users = userRepository.findAll();
+                model.addAttribute("gebruikers", users);
+                return "/admin/overzicht-gebruikers";
+            } else if (userIdVerwijder != activeUser.getId()) {
+                userRepository.deleteById(userIdVerwijder);
+                List<User> users = userRepository.findAll();
+                model.addAttribute("gebruikers", users);
+                return "/admin/overzicht-gebruikers";
+            }
+        } else if (userIdWijzig != null) {
+            User user = userRepository.findUserById(userIdWijzig);
+            model.addAttribute("gebruiker", user);
+            List<Role> rollen = roleRepository.findAll();
+            model.addAttribute("roles", rollen);
+            return "/admin/wijzig-gebruiker";
+        }
+        return "/admin/overzicht-gebruikers";
+    }
+
+
+    @PostMapping("/wijzig-gebruiker")
+    public String wijzigGebruiker(User user, Model model) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setRoles(user.getRoles().toUpperCase());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        userRepository.save(user);
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
+        return "/admin/overzicht-gebruikers";
     }
 }
