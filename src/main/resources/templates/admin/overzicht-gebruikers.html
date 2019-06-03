@@ -11,7 +11,7 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Overzicht Gebruikers</h1>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek op voornaam">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek gebruiker">
 <form action = "#" th:action="@{/admin/overzicht-gebruikers}" th:method="POST">
 <table id="TableFormatter">
     <thead>
@@ -50,7 +50,7 @@
         tr = table.getElementsByTagName("tr");
         
         for (i = 0; i < tr.length; i++) {
-            occurrence = false; // Only reset to false once per row.
+            occurrence = false;
             td = tr[i].getElementsByTagName("td");
             for(var j=0; j< td.length; j++){
                 currentTd = td[j];
