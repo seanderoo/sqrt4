@@ -29,20 +29,14 @@ public class RoosterController extends AbstractController{
     @GetMapping("/manager/rooster-maken")
     public String maakRooster(Model model) {
         List<Cohort> cohorten = cohortRepo.findAll();
-        List<Vak> vakken = vakRepo.findAll();
-        List<Week> weken = weekRepo.findAll();
         model.addAttribute("cohorten", cohorten);
-        model.addAttribute("vakken", vakken);
         return "rooster-maken";
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen")
     public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
                                  Model model) {
-        model.addAttribute("cohortnaam", cohortnaam);
-        System.out.println(cohortnaam);
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
-        System.out.println(cohort);
         model.addAttribute("cohort", cohort);
         List<Vak> vakken = vakRepo.findAll();
         model.addAttribute("vakken", vakken);

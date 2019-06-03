@@ -23,16 +23,17 @@
 
 <h2>Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/></h2>
 
+<th:block th:each="week: ${weken}">
 <form id="rooster">
     <table>
         <thead id="gekozenCohort"></thead>
         <tr>
             <th>dagdeel</th>
-            <th>maandag</th>
-            <th>dinsdag</th>
-            <th>woensdag</th>
-            <th>donderdag</th>
-            <th>vrijdag</th>
+            <th th:text="${week.getMaandag().getDatum()}"></th>
+            <th th:text="${week.getDinsdag().getDatum()}">dinsdag</th>
+            <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
+            <th th:text="${week.getDonderdag().getDatum()}">donderdag</th>
+            <th th:text="${week.getVrijdag().getDatum()}">vrijdag</th>
         </tr>
         <tr>
             <td th:value="ochtend">9:00 - 13:00</td>
@@ -106,6 +107,7 @@
     </table>
     <button type="submit">Opslaan</button>
 </form>
+</th:block>
 <p>
     hier moet iets onder komen
 </p>
@@ -113,18 +115,13 @@
 </p>
 </body>
 <script>
-    var gekozenCohort;
+
     var gekozenVak;
-    // document.getElementById("selectCohort").onchange=function () {
-    //     selectCohort()
-    // };
+
     document.getElementById("maOcht").onchange=function () {
         selectVak("maOcht")
     };
-    // function selectCohort() {
-    //     gekozenCohort = document.getElementById("selectCohort").value;
-    //     document.getElementById("gekozenCohort").innerHTML="Rooster voor " + gekozenCohort;
-    // }
+
     function selectVak(periode) {
         gekozenVak = document.getElementById(periode).value;
         document.getElementById("demo").innerHTML=gekozenVak;
