@@ -1,6 +1,5 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
-import sqrt4.mijninzet.model.User;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +19,6 @@ public class Cohort {
     @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
     private List<Week> weekList;
-
-//    @ManyToOne
-//    @JoinColumn
-//    private User user;
-
 
     public Cohort() {
         genereerWeken();
@@ -124,10 +118,6 @@ public class Cohort {
         return weekList.get(lastWeekInList).getJaarNummer();
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
     public int getId() {
         return id;
     }
@@ -147,8 +137,5 @@ public class Cohort {
     public List<Week> getWeekList() {
         return weekList;
     }
-//    public User getUser() {
-//        return user;
-//    }
 }
 
