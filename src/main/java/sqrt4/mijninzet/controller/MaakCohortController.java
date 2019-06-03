@@ -5,14 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
-import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
+import sqrt4.mijninzet.repository.CohortRepository;
+
 
 @RequestMapping("/admin")
 @Controller
 public class MaakCohortController extends AbstractController {
 
     @Autowired
-    AlgemeneBeschikbaarheidRepository abRepo;
+    CohortRepository abRepo;
 
     @GetMapping("/maakcohort")
     public String maakCohort( Model model, Cohort cohort){

@@ -23,13 +23,29 @@
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
-        <button class="dropbtn">Administratie
+        <button class="dropbtn">Cohort-beheer
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
             <a href="/admin/maakcohort">Maak een cohort aan</a>
-            <a href="/admin/overzicht-gebruikers">Beheer gebruikers</a>
+            <a href="/admin/overzicht-cohort">Overzicht cohorten</a>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
+        <button class="dropbtn">Gebruikers-beheer
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/admin/overzicht-gebruikers">Overzicht gebruikers</a>
             <a href="/admin/nieuwe-gebruiker">Maak een nieuwe gebruiker aan</a>
+            <a href="/admin/wijzig-gebruiker">Wijzig een bestaande gebruiker</a>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
+        <button class="dropbtn">Vacature-beheer
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
             <a href="/admin/nieuwe-vacature">Maak een nieuwe vacature aan</a>
         </div>
     </div>
