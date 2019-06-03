@@ -27,6 +27,7 @@ public class User {
 
     private String firstName;
     private String lastName;
+    private String profilePic;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Week week;
@@ -44,7 +45,7 @@ public User(String username, String password, String roles, String permissions){
 
 }
 
-    public User(String username, String password, String roles, String permissions, String firstName, String lastName) {
+    public User(String username, String password, String roles, String permissions, String firstName, String lastName, String profilePic) {
         this.username = username;
         this.password = password;
         this.active = 1;
@@ -52,6 +53,7 @@ public User(String username, String password, String roles, String permissions){
         this.permissions = permissions;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.profilePic = "http://www.sackettwaconia.com/wp-content/uploads/default-profile.png";
     }
 
     protected User() {
@@ -133,6 +135,14 @@ public User(String username, String password, String roles, String permissions){
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
     @Override
