@@ -34,7 +34,7 @@
             <td class="ST"><span th:text="${cohort.getStartJaar()}">Startjaar </span></td>
             <td class="ST"><span th:text="${cohort.getEindWeek()}">Eindweek </span></td>
             <td class="ST"><span th:text="${cohort.getEindJaar()}">Eindjaar </span></td>
-            <td class="ST"><span th:text="${cohort.getCohortList().size()}">Eindjaar </span></td>
+            <td class="ST"><span th:text="${cohort.getWeekList().size()}">Eindjaar </span></td>
             <td class="ST">
                 <button type="submit" th:name="Verwijder" th:value="${cohort.getId()}">
                     Verwijder<span/>
