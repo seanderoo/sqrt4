@@ -22,15 +22,15 @@
             </tr>
             <tr>
                 <td> <label>Voornaam</label></td>
-                <td><input type="text" th:name="firstName" size="40" required></td>
+                <td><input type="text" th:name="firstName" th:value="*{gebruiker.getFirstName()}" size="40" required></td>
             </tr>
             <tr>
                 <td><label>Achternaam</label></td>
-                <td><input type="text" th:name="lastName" size="40" required></td>
+                <td><input type="text" th:name="lastName" th:value="*{gebruiker.getLastName()}" size="40" required></td>
             </tr>
             <tr>
                 <td><label>Inlognaam</label></td>
-                <td> <input type="text" th:name="username" size="40" required></td>
+                <td> <input type="text" th:name="username" th:value="*{gebruiker.getUsername()}" size="40" required></td>
             </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
@@ -43,7 +43,7 @@
             <tr>
                 <td> <label>Kies een Rol</label></td>
                 <td>     <select th:name="roles">
-                    <option value=""></option>
+                    <option th:value=""></option>
                     <option th:each="role : ${roles}"
                             th:value="${role.getName()}"
                             th:text="${role.getName()}">
