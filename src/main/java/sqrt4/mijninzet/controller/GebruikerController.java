@@ -26,7 +26,7 @@ public class GebruikerController extends AbstractController {
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        return "/nieuwe-gebruiker";
+        return "/admin/nieuwe-gebruiker";
     }
 
     @PostMapping("/nieuwe-gebruiker")
@@ -36,14 +36,14 @@ public class GebruikerController extends AbstractController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        return "/gebruiker-toegevoegd";
+        return "/admin/gebruiker-toegevoegd";
     }
 
     @GetMapping("/overzicht-gebruikers")
     public String overzichtGebruikers(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
+        return "/admin/overzicht-gebruikers";
     }
 
     @PostMapping("/overzicht-gebruikers")
@@ -55,21 +55,21 @@ public class GebruikerController extends AbstractController {
             if (userIdVerwijder == activeUser.getId()) {
                 List<User> users = userRepository.findAll();
                 model.addAttribute("gebruikers", users);
-                return "/overzicht-gebruikers";
+                return "/admin/overzicht-gebruikers";
             } else if (userIdVerwijder != activeUser.getId()) {
                 userRepository.deleteById(userIdVerwijder);
                 List<User> users = userRepository.findAll();
                 model.addAttribute("gebruikers", users);
-                return "/overzicht-gebruikers";
+                return "/admin/overzicht-gebruikers";
             }
         } else if (userIdWijzig != null) {
             User user = userRepository.findUserById(userIdWijzig);
             model.addAttribute("gebruiker", user);
             List<Role> rollen = roleRepository.findAll();
             model.addAttribute("roles", rollen);
-            return "/wijzig-gebruiker";
+            return "/admin/wijzig-gebruiker";
         }
-        return "/overzicht-gebruikers";
+        return "/admin/overzicht-gebruikers";
     }
 
 
@@ -82,6 +82,6 @@ public class GebruikerController extends AbstractController {
         userRepository.save(user);
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
-        return "overzicht-gebruikers";
+        return "/admin/overzicht-gebruikers";
     }
 }
