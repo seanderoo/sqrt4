@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooster aanmaken</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+
+<h2>Hier kunt u een rooster aanmaken. (Ooit)</h2>
+<form id="cohort" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:method="get">
+<table>
+    <tr>
+        <td><label>Voor welk Cohort wilt u een rooster aanmaken? </label></td>
+        <td><select id="selectCohort" th:name="cohortNaam">
+            <option>Kies een cohort</option>
+            <option th:each="cohort: ${cohorten}"
+                        th:value="${cohort.cohortNaam}"
+                        th:text="${cohort.cohortNaam}">
+            </option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><button type="submit">Kies dit cohort</button></td>
+    </tr>
+</table>
+</form>
+<script>
+
+</script>
+
+<p id="demo">
+</p>
+</body>
+<script>
+    var gekozenCohort;
+    var gekozenVak;
+    document.getElementById("selectCohort").onchange=function () {
+        selectCohort()
+    };
+    document.getElementById("maOcht").onchange=function () {
+        selectVak("maOcht")
+    };
+    function selectCohort() {
+        gekozenCohort = document.getElementById("selectCohort").value;
+        document.getElementById("gekozenCohort").innerHTML="Rooster voor " + gekozenCohort;
+    }
+    function selectVak(periode) {
+        gekozenVak = document.getElementById(periode).value;
+        document.getElementById("demo").innerHTML=gekozenVak;
+    }
+
+
+</script>
+</html>
+

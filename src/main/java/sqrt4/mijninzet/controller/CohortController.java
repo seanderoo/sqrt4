@@ -42,14 +42,15 @@ public class CohortController extends AbstractController {
 
     @PostMapping("/maakcohort")
     public String nieuwCohort(Model model,
+                              @ModelAttribute("cohort") Cohort cohort,
                               @RequestParam("cohortNummer") int cohortNummer,
                               @RequestParam("startJaar") int startJaar,
                               @RequestParam("startWeek") int startWeek,
                               @RequestParam("eindWeek") int eindWeek) {
 
         try {
-            Cohort cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
-            cohort.setUser(voegActiveUserToe());
+            cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
+//            cohort.setUser(voegActiveUserToe());
             cohortRepo.save(cohort);
             model.addAttribute("user", voegActiveUserToe());
         } catch (Exception e) {

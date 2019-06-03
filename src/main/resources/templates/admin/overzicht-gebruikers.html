@@ -11,7 +11,7 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Overzicht Gebruikers</h1>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek op voornaam">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek gebruiker">
 <form action = "#" th:action="@{/admin/overzicht-gebruikers}" th:method="POST">
 <table id="TableFormatter">
     <thead>
@@ -42,32 +42,27 @@
 </form>
 <script>
     function myFunction() {
-        var input, filter, table, tr, td1, td2, i, txtValue;
+        var input, filter, table, tr, td, i, occurrence;
+
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
         table = document.getElementById("TableFormatter");
         tr = table.getElementsByTagName("tr");
-
+        
         for (i = 0; i < tr.length; i++) {
-            td1 = tr[i].getElementsByTagName("td")[1];
-            td2 = tr[i].getElementsByTagName("td")[2];
-
-            is_present = 0;
-            if (td1) {
-                txtValue = td1.textContent || td1.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+            occurrence = false;
+            td = tr[i].getElementsByTagName("td");
+            for(var j=0; j< td.length; j++){
+                currentTd = td[j];
+                if (currentTd ) {
+                    if (currentTd.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        occurrence = true;
+                    }
                 }
             }
-            else if (td2) {
-                txtValue = td2.textContent || td2.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+            if(!occurrence){
+                tr[i].style.display = "none";
             }
         }
     }

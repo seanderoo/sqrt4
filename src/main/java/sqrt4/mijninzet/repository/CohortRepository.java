@@ -7,4 +7,5 @@ import java.time.LocalDate;
 
 public interface CohortRepository extends JpaRepository<Cohort, Integer> {
 
+    Cohort findByCohortNaam(String cohortnaam);
 }
