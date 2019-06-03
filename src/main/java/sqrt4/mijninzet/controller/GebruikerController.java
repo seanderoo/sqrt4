@@ -13,6 +13,7 @@ import sqrt4.mijninzet.repository.UserRepository;
 
 import java.util.List;
 
+@RequestMapping("/admin")
 @Controller
 public class GebruikerController extends AbstractController {
 
@@ -21,14 +22,14 @@ public class GebruikerController extends AbstractController {
     @Autowired
     RoleRepository roleRepository;
 
-    @GetMapping("/admin/nieuwe-gebruiker")
+    @GetMapping("/nieuwe-gebruiker")
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
         return "/nieuwe-gebruiker";
     }
 
-    @PostMapping("/admin/nieuwe-gebruiker")
+    @PostMapping("/nieuwe-gebruiker")
     public String nieuweGebruiker(User user) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
@@ -38,14 +39,14 @@ public class GebruikerController extends AbstractController {
         return "/gebruiker-toegevoegd";
     }
 
-    @GetMapping("/admin/overzicht-gebruikers")
+    @GetMapping("/overzicht-gebruikers")
     public String overzichtGebruikers(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
         return "overzicht-gebruikers";
     }
 
-    @PostMapping("/admin/overzicht-gebruikers")
+    @PostMapping("/overzicht-gebruikers")
     public String verwijderGebruiker(@RequestParam(value = "Verwijder", required = false) Long userIdVerwijder,
                                      @RequestParam(value = "Wijzig", required = false) Long userIdWijzig,
                                      Model model) {
@@ -72,7 +73,7 @@ public class GebruikerController extends AbstractController {
     }
 
 
-    @PostMapping("/admin/wijzig-gebruiker")
+    @PostMapping("/wijzig-gebruiker")
     public String wijzigGebruiker(User user, Model model) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());

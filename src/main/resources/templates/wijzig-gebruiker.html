@@ -42,8 +42,7 @@
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
-                <td>     <select th:name="roles">
-                    <option th:value=""></option>
+                <td> <select th:name="roles">
                     <option th:each="role : ${roles}"
                             th:value="${role.getName()}"
                             th:text="${role.getName()}">
