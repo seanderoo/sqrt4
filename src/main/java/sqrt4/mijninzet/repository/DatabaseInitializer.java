@@ -19,17 +19,17 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VacatureRepository vacatureRepository;
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
-    private AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository;
+    private CohortRepository cohortRepository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
-        this.algemeneBeschikbaarheidRepository = algemeneBeschikbaarheidRepository;
+        this.cohortRepository = cohortRepository;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vacatureRepository.deleteAll();
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
-        this.algemeneBeschikbaarheidRepository.deleteAll();
+        this.cohortRepository.deleteAll();
 
 
         //create rollen
@@ -87,7 +87,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
         this.roleRepository.saveAll(rollen);
-        this.algemeneBeschikbaarheidRepository.save(cohort);
+        this.cohortRepository.save(cohort);
 
     }
 }
