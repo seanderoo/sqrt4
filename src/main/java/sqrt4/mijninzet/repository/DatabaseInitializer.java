@@ -3,11 +3,8 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sqrt4.mijninzet.model.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
-import sqrt4.mijninzet.model.Role;
-import sqrt4.mijninzet.model.User;
-import sqrt4.mijninzet.model.Vacature;
-import sqrt4.mijninzet.model.Vak;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,16 +17,18 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
     private AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository;
+    private DagdeelRespository dagdeelRespository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository) {
+                               RoleRepository roleRepository, AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository, DagdeelRespository dagdeelRespository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
         this.algemeneBeschikbaarheidRepository = algemeneBeschikbaarheidRepository;
+        this.dagdeelRespository = dagdeelRespository;
     }
 
     @Override
@@ -40,6 +39,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.algemeneBeschikbaarheidRepository.deleteAll();
+        this.dagdeelRespository.deleteAll();
 
 
         //create rollen
@@ -73,9 +73,9 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Vacature> vacatures = Arrays.asList(coordinatorC16, coordinatorC17, productOwnerMijnInzet);
 
         //Create vakken
-        Vak programming = new Vak("Programming", 40);
-        Vak oop = new Vak("OOP", 40);
-        Vak projectQuizmaster = new Vak("Project Quizmaster", 60);
+        Vak programming = new Vak("Programming", 16);
+        Vak oop = new Vak("OOP", 16);
+        Vak projectQuizmaster = new Vak("Project Quizmaster", 12);
 
         List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
 
@@ -86,8 +86,15 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
+        for (Vak vak:vakken) {
+            vak.setDagdelen(vak.aantalDagdelenBerekenen());
+            for (Dagdeel dagdeel:vak.getDagdelen()) {
+                this.dagdeelRespository.save(dagdeel);
+            }
+        }
         this.roleRepository.saveAll(rollen);
         this.algemeneBeschikbaarheidRepository.save(cohort);
+
 
     }
 }
