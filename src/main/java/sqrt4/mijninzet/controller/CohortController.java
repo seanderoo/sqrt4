@@ -23,7 +23,7 @@ public class CohortController extends AbstractController {
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "admin/overzicht-cohort";
+        return "/admin/overzicht-cohort";
     }
 
     @PostMapping("/verwijder-cohort")
@@ -32,36 +32,35 @@ public class CohortController extends AbstractController {
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "admin/overzicht-cohort";
+        return "/admin/overzicht-cohort";
     }
 
     @GetMapping("/maakcohort")
     public String maakCohort(Model model) {
-        return "admin/maakcohort";
+        return "/admin/maakcohort";
     }
 
     @PostMapping("/maakcohort")
     public String nieuwCohort(Model model,
-                              @ModelAttribute("cohort") Cohort cohort,
                               @RequestParam("cohortNummer") int cohortNummer,
                               @RequestParam("startJaar") int startJaar,
                               @RequestParam("startWeek") int startWeek,
                               @RequestParam("eindWeek") int eindWeek) {
 
         try {
-            cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
+            Cohort cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
             cohort.setUser(voegActiveUserToe());
             cohortRepo.save(cohort);
             model.addAttribute("user", voegActiveUserToe());
         } catch (Exception e) {
             System.out.println("Something went wrong... " + e.getMessage());
-            return "admin/overzicht-cohort";
+            return "/admin/overzicht-cohort";
         }
         model.addAttribute("user", voegActiveUserToe());
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "admin/overzicht-cohort";
+        return "/admin/overzicht-cohort";
     }
 
     class CohortComparator implements Comparator<Cohort> {
