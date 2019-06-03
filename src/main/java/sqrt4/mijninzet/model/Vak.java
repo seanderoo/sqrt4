@@ -18,13 +18,17 @@ public class Vak {
     @Column(name = "aantalUren")
     private int aantalUren;
 
-    @OneToMany(mappedBy = "vak",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Dagdeel> dagdelen = new ArrayList<>();
+    @OneToMany(mappedBy = "vak",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Dagdeel> dagdelen;
+
+    public void setDagdelen(List<Dagdeel> dagdelen) {
+        this.dagdelen = dagdelen;
+    }
 
     public Vak(String vakNaam, int aantalUren) {
         this.vakNaam = vakNaam;
         this.aantalUren = aantalUren;
-        this.dagdelen = aantalDagdelenBerekenen();
+        this.dagdelen = new ArrayList();
     }
 
     public Vak() { super(); }
@@ -70,12 +74,15 @@ public class Vak {
         List<Dagdeel> vakDagdelen= new ArrayList();
         final int DAGDEELUREN = 4;
         int aantalUren = this.aantalUren;
+//        System.out.println("Het aantal uren is: "+aantalUren);
         int aantalDagdelen = aantalUren / DAGDEELUREN;
-        if ((aantalUren % DAGDEELUREN) < DAGDEELUREN){
+        if ((aantalUren % DAGDEELUREN) > 0){
             aantalDagdelen++;
         }
-        for (int i = 0; i == aantalDagdelen; i++) {
-            vakDagdelen.add(new Dagdeel(i));
+        for (int i = 1; i <= aantalDagdelen; i++) {
+            Dagdeel dagdeelX = new Dagdeel(i, this);
+//            System.out.println("DagdeelX is: "+dagdeelX);
+            vakDagdelen.add(dagdeelX);
         }
         return vakDagdelen;
 
