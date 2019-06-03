@@ -11,6 +11,7 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Overzicht Gebruikers</h1>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek op voornaam">
 <form action = "#" th:action="@{/admin/overzicht-gebruikers}" th:method="POST">
 <table id="TableFormatter">
     <thead>
@@ -23,7 +24,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="gebruiker: ${gebruikers}">
+    <tr class="ST" th:each="gebruiker: ${gebruikers}">
         <td class="ST"><span th:text="${gebruiker.getId()}">Id </span></td>
         <td class="ST"><span th:text="${gebruiker.getFirstName()}">Voornaam </span></td>
         <td class="ST"><span th:text="${gebruiker.getLastName()}">Achternaam </span></td>
@@ -39,5 +40,37 @@
     </tbody>
 </table>
 </form>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td1, td2, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("TableFormatter");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td1 = tr[i].getElementsByTagName("td")[1];
+            td2 = tr[i].getElementsByTagName("td")[2];
+
+            is_present = 0;
+            if (td1) {
+                txtValue = td1.textContent || td1.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+            else if (td2) {
+                txtValue = td2.textContent || td2.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
