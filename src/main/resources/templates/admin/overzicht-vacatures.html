@@ -28,8 +28,8 @@
         <tr th:each="vacature: ${vacatureLijst}">
             <td class="ST"><span th:text="${vacature.getVacatureNaam()}">Naam</span></td>
             <td class="ST"><span th:text="${vacature.getAantalUren()}">Aantal uren </span></td>
-            <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vacature.getId()}" >
-                Wijzig</button></td>
+            <!--            <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vacature.getId()}" >-->
+            <!--                Wijzig</button></td>-->
             <td class="ST"><button type="submit" th:name="Verwijder" th:value="${vacature.getId()}">
                 Verwijder
             </button> </td>
