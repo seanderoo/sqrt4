@@ -53,7 +53,7 @@ public User(String username, String password, String roles, String permissions){
         this.permissions = permissions;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.profilePic = "http://www.sackettwaconia.com/wp-content/uploads/default-profile.png";
+        this.profilePic = "https://marriedwiki.com/uploads/bio/2014/11/30/thumb/beyonce-knowles-260-260.jpeg";
     }
 
     protected User() {
