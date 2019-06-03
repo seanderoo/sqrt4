@@ -34,11 +34,12 @@
             </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
-                <td> <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
+                <td> <input id="wachtwoord1" type="password" th:name="password" value="" required size="40"></td>
             </tr>
             <tr>
                 <td>  <label>Herhaal wachtwoord</label></td>
                 <td>   <input id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+                <td text="" id="noMatch" style="color:red"></td>
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
@@ -66,7 +67,8 @@
         var ww1 = document.getElementById('wachtwoord1').value;
         var ww2 = document.getElementById('wachtwoord2').value;
         if (ww1 != ww2) {
-            alert("Wachtwoorden komen niet overeen!!!");
+            document.getElementById('wachtwoord2').focus();
+            document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen, flapdrol <_<";
         }
     }
 </script>
