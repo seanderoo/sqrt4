@@ -6,4 +6,5 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 
 @Repository
 public interface CohortRepository extends JpaRepository<Cohort, Integer> {
+    Cohort findByCohortNaam(String cohortnaam);
 }

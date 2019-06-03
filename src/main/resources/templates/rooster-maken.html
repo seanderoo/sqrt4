@@ -5,17 +5,8 @@
     <title>Rooster aanmaken</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
-<!--    <link rel="stylesheet" type="text/css" href="/form-karin.css">-->
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
 </head>
-<style>
-    #rooster {
-        width: 70%;
-        margin-left: 15%;
-        margin-right: 15%;
-        padding: 15px;
-        border: 1px solid darkblue;
-    }
-</style>
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
@@ -27,7 +18,7 @@
     <tr>
         <td><label>Voor welk Cohort wilt u een rooster aanmaken? </label></td>
         <td><select id="selectCohort" th:name="cohortNaam">
-            <option value=""></option>
+            <option>Kies een cohort</option>
             <option th:each="cohort: ${cohorten}"
                         th:value="${cohort.cohortNaam}"
                         th:text="${cohort.cohortNaam}">
@@ -41,89 +32,10 @@
     </tr>
 </table>
 </form>
-<form id="rooster">
-    <table>
-        <thead id="gekozenCohort"></thead>
-        <tr>
-            <th>dagdeel</th>
-            <th>maandag</th>
-            <th>dinsdag</th>
-            <th>woensdag</th>
-            <th>donderdag</th>
-            <th>vrijdag</th>
-        </tr>
-        <tr>
-            <td th:value="ochtend">9:00 - 13:00</td>
-            <td><select id="maOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-        </tr>
-        <tr>
-            <td th:value="middag">13:00 - 17:00</td>
-            <td><select id="maMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-        </tr>
-        <tr>
-            <td th:value="avond">17:00 - 21:00</td>
-            <td><select id="maAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-        </tr>
-    </table>
-    <button type="submit">Opslaan</button>
-</form>
+<script>
+
+</script>
+
 <p id="demo">
 </p>
 </body>
@@ -144,15 +56,6 @@
         gekozenVak = document.getElementById(periode).value;
         document.getElementById("demo").innerHTML=gekozenVak;
     }
-    //Er moet toch een manier zijn om alle geselecteerde vakken van alle id's in een soort loop uit te lezen?
-    //hieronder lees ik wel al alle id's uit. Nog 1 stapje...(karin)
-    var x = document.getElementById("rooster");
-    var y = x.getElementsByTagName("select");
-    var text = "";
-    for (var i = 0; i < y.length; i++) {
-        text += y.item(i).id + "<br>";
-    }
-    document.getElementById("demo").innerHTML="onderdelen: " + text;
 
 
 </script>

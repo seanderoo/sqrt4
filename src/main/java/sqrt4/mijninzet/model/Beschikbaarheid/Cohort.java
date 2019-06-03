@@ -25,6 +25,9 @@ public class Cohort {
 //    @JoinColumn
 //    private User user;
 
+    public Cohort(String cohortNaam) {
+        this.cohortNaam = cohortNaam;
+    }
 
     public Cohort() {
 
