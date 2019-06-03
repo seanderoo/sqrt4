@@ -7,4 +7,5 @@ import sqrt4.mijninzet.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
+    User findUserById(Long userId);
 }

@@ -3,18 +3,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4 | Nieuwe Gebruiker</title>
+    <title>Wijzig Gebruiker</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/form-karin.css">
+
 </head>
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Nieuwe Gebruiker toevoegen</h1>
+<h1>Wijzig Bestaande Gebruiker <span th:text="${gebruiker.getFirstName()}"/></h1>
 <div id="nieuwegebruikerform">
-    <form action="#" th:action="@{/nieuwe-gebruiker}" th:object="${user}" th:method="POST">
+    <form action="#" th:action="@{/admin/wijzig-gebruiker}"  th:method="POST">
         <table>
             <tr>
                 <td> <label>Voornaam</label></td>
@@ -48,7 +49,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Nieuwe gebruiker aanmaken" onclick="noTypo()"/></td>
+                <td><input type="submit" value="Gebruiker Wijzigen" onclick="noTypo()"/></td>
 
             </tr>
 
