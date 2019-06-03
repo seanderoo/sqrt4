@@ -19,10 +19,11 @@ public class Cohort {
 
     @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
-    private List<Week> cohortList;
+    private List<Week> weekList;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    @JoinColumn
+//    private User user;
 
 
     public Cohort() {
@@ -78,9 +79,9 @@ public class Cohort {
                 "cohortNaam='" + cohortNaam + "\'" +
                 ",\n startWeek=" + startWeek +
                 ",\n startJaar=" + startJaar +
-                ",\n eindJaar=" + cohortList.get(cohortList.size() - 1).getJaarNummer() +
+                ",\n eindJaar=" + weekList.get(weekList.size() - 1).getJaarNummer() +
                 ",\n eindWeek=" + eindWeek +
-                ",\n cohortList=" + cohortList +
+//                ",\n weekList=" + weekList +
                 "}";
     }
 
@@ -90,7 +91,7 @@ public class Cohort {
 
     public void beschikbaarheidAanpassen(Week nieuweWeek) {
         String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
-        for (Week week : cohortList) {
+        for (Week week : weekList) {
             for (int i = 0; i < weekdagen.length; i++) {
                 week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
                 week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
@@ -100,11 +101,11 @@ public class Cohort {
     }
 
     private void genereerWeken() {
-        cohortList = new ArrayList<>();
+        weekList = new ArrayList<>();
 
         for (int i = 0; i < aantalWekenInCohort(startWeek, eindWeek); i++) {
             Week week = new Week(startWeek + i, startJaar);
-            cohortList.add(week);
+            weekList.add(week);
             week.setCohort(this);
 
             int weeknr = week.getWeekNummer();
@@ -119,20 +120,16 @@ public class Cohort {
     }
 
     public int getEindJaar() {
-        int lastWeekInList = (cohortList.size() - 1);
-        return cohortList.get(lastWeekInList).getJaarNummer();
+        int lastWeekInList = (weekList.size() - 1);
+        return weekList.get(lastWeekInList).getJaarNummer();
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public int getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public int getStartWeek() {
@@ -147,8 +144,11 @@ public class Cohort {
         return eindWeek;
     }
 
-    public List<Week> getCohortList() {
-        return cohortList;
+    public List<Week> getWeekList() {
+        return weekList;
     }
+//    public User getUser() {
+//        return user;
+//    }
 }
 

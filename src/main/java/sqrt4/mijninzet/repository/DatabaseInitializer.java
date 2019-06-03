@@ -85,6 +85,9 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         //Create Cohort
         Cohort cohort = new Cohort(20,20,2020,21);
+        Cohort cohort1 = new Cohort(17, 32, 2019,52);
+        Cohort cohort2 = new Cohort(18, 2, 2020, 23);
+        List<Cohort> cohorts = Arrays.asList(cohort, cohort1, cohort2);
 
         //save to db
         this.userRepository.saveAll(users);
@@ -97,7 +100,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             }
         }
         this.roleRepository.saveAll(rollen);
-        this.cohortRepository.save(cohort);
+        this.cohortRepository.saveAll(cohorts);
 
     }
 }

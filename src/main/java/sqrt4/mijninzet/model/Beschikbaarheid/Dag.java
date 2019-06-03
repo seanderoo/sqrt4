@@ -18,8 +18,9 @@ public class Dag {
     @ManyToOne
     private Week week;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    @JoinColumn
+//    private User user;
 
     private String dagnaam;
     private int weekNummer;
@@ -50,7 +51,6 @@ public class Dag {
     private LocalDate setDatumDag(String dagnaam){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-
         cal.set(Calendar.YEAR, this.jaarNummer);
         cal.set(Calendar.WEEK_OF_YEAR, this.weekNummer);
         cal.set(Calendar.DAY_OF_WEEK, nederlandsDagNaarJava(dagnaam));
