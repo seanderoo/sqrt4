@@ -29,7 +29,7 @@ public class GebruikerController extends AbstractController {
     }
 
     @PostMapping("/admin/nieuwe-gebruiker")
-    public String nieuweGebruiker(@ModelAttribute("user") User user) {
+    public String nieuweGebruiker(User user) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -73,14 +73,12 @@ public class GebruikerController extends AbstractController {
 
 
     @PostMapping("/admin/wijzig-gebruiker")
-    public String wijzigGebruiker(@ModelAttribute("gebruiker") User user, Model model) {
+    public String wijzigGebruiker(User user, Model model) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setId(user.getId());
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
         return "overzicht-gebruikers";

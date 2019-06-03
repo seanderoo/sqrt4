@@ -15,8 +15,11 @@
 </header>
 <h1>Wijzig Bestaande Gebruiker <span th:text="${gebruiker.getFirstName()}"/></h1>
 <div id="nieuwegebruikerform">
-    <form action="#" th:action="@{/admin/wijzig-gebruiker}"  th:method="POST">
+    <form action="#" th:action="@{/admin/wijzig-gebruiker}" th:method="POST">
         <table>
+            <tr>
+                <td><input type="hidden" th:name="id" th:value="*{gebruiker.getId()}" size="40" required></td>
+            </tr>
             <tr>
                 <td> <label>Voornaam</label></td>
                 <td><input type="text" th:name="firstName" size="40" required></td>
