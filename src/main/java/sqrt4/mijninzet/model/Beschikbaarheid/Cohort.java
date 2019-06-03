@@ -117,6 +117,10 @@ public class Cohort {
             }
         }
     }
+    public int getEindJaar() {
+        int lastWeekInList = (cohortList.size()-1);
+        return cohortList.get(lastWeekInList).getJaarNummer();
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -129,4 +133,21 @@ public class Cohort {
     public User getUser() {
         return user;
     }
+
+    public int getStartWeek() {
+        return startWeek;
+    }
+
+    public int getStartJaar() {
+        return startJaar;
+    }
+
+    public int getEindWeek() {
+        return eindWeek;
+    }
+
+    public List<Week> getCohortList() {
+        return cohortList;
+    }
 }
+

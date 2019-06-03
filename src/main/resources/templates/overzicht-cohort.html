@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4 | Cohort-beheer</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Cohort-beheer</h1>
+<form action = "#" th:action="@{/admin/verwijder-cohort}" th:method="POST">
+    <table id="TableCohort">
+        <thead>
+        <tr class="ST">
+            <th>Cohortnaam</th>
+            <th>Startweek</th>
+            <th>Startjaar</th>
+            <th>Eindweek</th>
+            <th>Eindjaar</th>
+            <th>Aantal Weken</th>
+            <th>Verwijderen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${cohortLijst.isEmpty()}">
+            <td class="ST" colspan="6">Er zijn nog geen cohorten aangemaakt.</td>
+        </tr>
+        <tr th:each="cohort: ${cohortLijst}">
+            <td class="ST"><span th:text="${cohort.cohortNaam}">Cohortnaam </span></td>
+            <td class="ST"><span th:text="${cohort.getStartWeek()}">Startweek</span></td>
+            <td class="ST"><span th:text="${cohort.getStartJaar()}">Startjaar </span></td>
+            <td class="ST"><span th:text="${cohort.getEindWeek()}">Eindweek </span></td>
+            <td class="ST"><span th:text="${cohort.getEindJaar()}">Eindjaar </span></td>
+            <td class="ST"><span th:text="${cohort.getCohortList().size()}">Eindjaar </span></td>
+            <td class="ST"><button type="submit" th:name="Verwijder" th:value="${cohort.getId()}">
+                Verwijder<span/>
+            </button> </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
