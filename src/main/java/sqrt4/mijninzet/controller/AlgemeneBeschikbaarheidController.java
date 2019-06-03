@@ -5,10 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.model.User;
-import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
+@RequestMapping("/docent")
 @Controller
 public class AlgemeneBeschikbaarheidController extends AbstractController {
     public static final int NUMMER_ALGEMENE_WEEK = 0;
@@ -16,7 +15,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
     @Autowired
     WeekRepository weekRepo;
 
-    @GetMapping("/docent/algemene-beschikbaarheid")
+    @GetMapping("/algemene-beschikbaarheid")
     public String AlgemeneBeschikbaarheid(Model model) {
         Week algemeneWeek = new Week();
 
@@ -40,7 +39,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         return "algemene-beschikbaarheid";
     }
 
-    @PostMapping(value = "/docent/algemene-beschikbaarheid-updaten")     //moet ik hier een aparte pagina voor aanmaken? Mss toch maar op beschikbaarheid blijven.
+    @PostMapping(value = "/algemene-beschikbaarheid-updaten")
     public String updateAlgemeneBeschikbaarheid(@RequestParam("maandagochtend") boolean maOBeschikbaar,
                                                 @RequestParam("maandagmiddag") boolean maMBeschikbaar,
                                                 @RequestParam("maandagavond") boolean maABeschikbaar,

@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SQRT4 | Rooster</title>
+    <title>SQRT4 | Lesrooster</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <style>
     .droppable {
-        width: 70px;
+        width: 95px;
         height: 55px;
         padding: 10px;
         border: 2px solid darkblue;
@@ -27,8 +26,6 @@
         margin-right: 30%;
     }
 
-
-
 </style>
 <body>
 <header>
@@ -36,36 +33,14 @@
 </header>
 <h1>Rooster maken</h1>
 
+<h2>Dagdelen per vak:</h2>
 
-<h2>Selecteer eerst een vak</h2>
-<form id="roostertestvakken" th:action="@{/roostertest}" th:method="post">
-<!--    <div th:if="${vakkenLijst.empty}">-->
-<!--        <div colspan="3">Geen vakken beschikbaar</div>-->
-<!--    </div>-->
-    <select onchange="this.form.submit()">
-        <option text=""></option>
-    <option th:each="vak: ${vakkenLijst}" class="vak" th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}"></option>
-    </select>
-</form>
-
-<h2>Selecteer dagdelen en sleep in rooster</h2>
-<!--<div id="roostertestdagdelen" style="list-style-type:none" th:action="@{/roostertest-dagdelen}" th:method="Post">-->
-<!--    <div th:each="dagdeel: ${dagdeelLijst}">-->
-<!--        <div class="vak" th:id="${dagdeel.dagdeelNaam}" th:value="${dagdeel.dagdeelId}" th:text="${dagdeel.get}" draggable="true"-->
-<!--             ondragstart="drag(event)">vaknaam</div>-->
-<!--    </div>-->
-<!--</div>-->
-<div id="roostertestdagdelen" style="list-style-type:none" th:action="@{/roostertest}" th:object="${vakkenLijst}"
-     th:method="GET">
-    <div th:if="${vakkenLijst.empty}">
-        <div colspan="3">Geen vakken beschikbaar</div>
-    </div>
-    <div th:each="vak: ${vakkenLijst}">
-        <div class="vak" th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}" draggable="true"
-             ondragstart="drag(event)">vaknaam</div>
+<div id="roostertestdagdelen" style="list-style-type:none">
+    <div th:each="dagdeel: ${dagdeelLijst}" >
+        <div  class="dagdeel" th:id="${dagdeel.id}" th:value="${dagdeel.dagdeelNaam}" th:text="${dagdeel.getDagdeelNaam()}" draggable="true"
+             ondragstart="drag(event)">dagdeelnaam</div>
     </div>
 </div>
-
 
 <h2>Plaats de vakken in het gewenste dagdeel:</h2>
 <table id="roostertabel">
@@ -80,7 +55,7 @@
 
 
     <tr class="trow">
-        <th>Ochtond</th>
+        <th>Ochtend</th>
         <td class="droppable" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         <td class="droppable" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         <td class="droppable" id="woensdagochtend" ondrop="drop(event)"
@@ -131,6 +106,15 @@
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
     }
+
+
+    var geselecteerdVak = document.getElementById("geselecteerdVak");
+    alleDagdelen = document.getElementById("alleDagdelen");
+
+    function dagdelenTonen(element){
+        alleDagdelen.innerHTML = element + "<br>";
+    }
+
 
 </script>
 </body>

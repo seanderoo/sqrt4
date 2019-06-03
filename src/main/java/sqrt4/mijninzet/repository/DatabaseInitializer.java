@@ -3,6 +3,7 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sqrt4.mijninzet.model.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
@@ -20,16 +21,18 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
     private CohortRepository cohortRepository;
+    private DagdeelRespository dagdeelRespository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, CohortRepository cohortRepository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository, DagdeelRespository dagdeelRespository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
         this.cohortRepository = cohortRepository;
+        this.dagdeelRespository = dagdeelRespository;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.cohortRepository.deleteAll();
+        this.dagdeelRespository.deleteAll();
 
 
         //create rollen
@@ -52,10 +56,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Role> rollen = Arrays.asList(god, docent, manager, roosteraar, administrator);
 
         //create users
-        User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik");
-        User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin");
-        User manager1 = new User("Manager", passwordEncoder.encode("Manager123"), "MANAGER", "", "M", "Anager");
-        User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar");
+        User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik", "");
+        User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin", "");
+        User manager1 = new User("Manager", passwordEncoder.encode("Manager123"), "MANAGER", "", "M", "Anager", "");
+        User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
 
 
         List<User> users = Arrays.asList(matthijs, admin, manager1, roosteraar1);
@@ -73,9 +77,9 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Vacature> vacatures = Arrays.asList(coordinatorC16, coordinatorC17, productOwnerMijnInzet);
 
         //Create vakken
-        Vak programming = new Vak("Programming", 40);
-        Vak oop = new Vak("OOP", 40);
-        Vak projectQuizmaster = new Vak("Project Quizmaster", 60);
+        Vak programming = new Vak("Programming", 16);
+        Vak oop = new Vak("OOP", 16);
+        Vak projectQuizmaster = new Vak("Project Quizmaster", 12);
 
         List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
 
@@ -86,6 +90,12 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
+        for (Vak vak:vakken) {
+            vak.setDagdelen(vak.aantalDagdelenBerekenen());
+            for (Dagdeel dagdeel:vak.getDagdelen()) {
+                this.dagdeelRespository.save(dagdeel);
+            }
+        }
         this.roleRepository.saveAll(rollen);
         this.cohortRepository.save(cohort);
 
