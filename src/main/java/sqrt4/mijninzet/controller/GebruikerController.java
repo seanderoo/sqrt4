@@ -11,6 +11,7 @@ import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.RoleRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/admin")
@@ -65,8 +66,15 @@ public class GebruikerController extends AbstractController {
         } else if (userIdWijzig != null) {
             User user = userRepository.findUserById(userIdWijzig);
             model.addAttribute("gebruiker", user);
+
+            String gebruikerrol = user.getRoles();
+            gebruikerrol = hoofdletterPlusKleineLetters(gebruikerrol);
+            model.addAttribute("gebruikerrol", gebruikerrol);
+
             List<Role> rollen = roleRepository.findAll();
+            rollen = verwijderGebruikerrolUitLijst(rollen, user);
             model.addAttribute("roles", rollen);
+
             return "/admin/wijzig-gebruiker";
         }
         return "/admin/overzicht-gebruikers";
@@ -83,5 +91,23 @@ public class GebruikerController extends AbstractController {
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
         return "/admin/overzicht-gebruikers";
+    }
+
+    private List<Role> verwijderGebruikerrolUitLijst(List<Role> lijstMetRollen, User gebruiker) {
+        List<Role> lijstZonderGebruikerrol = new ArrayList<>();
+        String gebruikerrol = gebruiker.getRoles();
+        gebruikerrol = hoofdletterPlusKleineLetters(gebruikerrol);
+        for (Role rol : lijstMetRollen) {
+            if (!rol.getName().equals(gebruikerrol)) {
+                lijstZonderGebruikerrol.add(rol);
+            }
+        }
+        System.out.println(lijstZonderGebruikerrol);
+        return lijstZonderGebruikerrol;
+    }
+
+    private String hoofdletterPlusKleineLetters(String woord) {
+        woord = woord.substring(0,1).toUpperCase() + woord.substring(1).toLowerCase();
+        return woord;
     }
 }
