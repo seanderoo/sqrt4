@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
-import sqrt4.mijninzet.repository.AlgemeneBeschikbaarheidRepository;
+import sqrt4.mijninzet.repository.CohortRepository;
 
 @Controller
 public class MaakCohortController extends AbstractController {
 
     @Autowired
-    AlgemeneBeschikbaarheidRepository abRepo;
+    CohortRepository cohortRepo;
 
     @GetMapping("/admin/maakcohort")
     public String maakCohort( Model model, Cohort cohort){
@@ -30,8 +30,8 @@ public class MaakCohortController extends AbstractController {
                                 @RequestParam("startWeek") int startWeek,
                                 @RequestParam ("eindWeek") int eindWeek){
         cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
-        cohort.setUser(voegActiveUserToe());
-        abRepo.save(cohort);
+//        cohort.setUser(voegActiveUserToe());
+        cohortRepo.save(cohort);
         model.addAttribute("user", voegActiveUserToe());
         return "/home";
     }

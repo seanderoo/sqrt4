@@ -19,20 +19,20 @@ public class Cohort {
 
     @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("jaarNummer asc, weekNummer asc")
-    private List<Week> cohortList;
+    private List<Week> weekList;
 
-    @ManyToOne
-    @JoinColumn
-    private User user;
+//    @ManyToOne
+//    @JoinColumn
+//    private User user;
 
 
     public Cohort() {
 
-        cohortList = new ArrayList<>();
+        weekList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
             Week week = new Week(startWeek + i, startJaar);
-            cohortList.add(week);
+            weekList.add(week);
             week.setCohort(this);
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
@@ -48,11 +48,11 @@ public class Cohort {
         this.startWeek = startWeek;
         this.startJaar = startJaar;
         this.eindWeek = eindWeek;
-        cohortList = new ArrayList<>();
+        weekList = new ArrayList<>();
 
         for (int i = 0; i < numberOfWeeks(startWeek, eindWeek); i++) {
             Week week = new Week(startWeek + i, startJaar);
-            cohortList.add(week);
+            weekList.add(week);
             week.setCohort(this);
             if (week.getWeekNummer() > wekenInJaar(startJaar)) {
                 week.setWeekNummer(week.getWeekNummer() - wekenInJaar(startJaar));
@@ -103,9 +103,9 @@ public class Cohort {
                 "cohortNaam='" + cohortNaam + "\'" +
                 ",\n startWeek=" + startWeek +
                 ",\n startJaar=" + startJaar +
-                ",\n eindJaar=" + cohortList.get(cohortList.size() - 1).getJaarNummer() +
+                ",\n eindJaar=" + weekList.get(weekList.size() - 1).getJaarNummer() +
                 ",\n eindWeek=" + eindWeek +
-                ",\n cohortList=" + cohortList +
+//                ",\n weekList=" + weekList +
                 "}";
     }
 
@@ -115,7 +115,7 @@ public class Cohort {
 
     public void beschikbaarheidAanpassen(Week nieuweWeek) {
         String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
-        for (Week week : cohortList) {
+        for (Week week : weekList) {
             for (int i = 0; i < weekdagen.length; i++) {
                 week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
                 week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
@@ -124,19 +124,19 @@ public class Cohort {
         }
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Week getFirstWeek() {
-        return cohortList.get(0);
+        return weekList.get(0);
     }
 
     public int getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 }

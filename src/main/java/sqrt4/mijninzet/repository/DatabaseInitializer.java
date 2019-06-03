@@ -19,17 +19,17 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VacatureRepository vacatureRepository;
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
-    private AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository;
+    private CohortRepository cohortRepository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, AlgemeneBeschikbaarheidRepository algemeneBeschikbaarheidRepository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
-        this.algemeneBeschikbaarheidRepository = algemeneBeschikbaarheidRepository;
+        this.cohortRepository = cohortRepository;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vacatureRepository.deleteAll();
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
-        this.algemeneBeschikbaarheidRepository.deleteAll();
+        this.cohortRepository.deleteAll();
 
 
         //create rollen
@@ -54,7 +54,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin");
-        User manager1 = new User("Manager", passwordEncoder.encode("Manager123"), "MANAGER", "", "M", "Anager");
+        User manager1 = new User("Manager", passwordEncoder.encode("M123"), "MANAGER", "", "M", "Anager");
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar");
 
 
@@ -81,13 +81,16 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         //Create Cohort
         Cohort cohort = new Cohort(20,20,2020,21);
+        Cohort cohort1 = new Cohort(17, 32, 2019,52);
+        Cohort cohort2 = new Cohort(18, 2, 2020, 23);
+        List<Cohort> cohorts = Arrays.asList(cohort, cohort1, cohort2);
 
         //save to db
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
         this.roleRepository.saveAll(rollen);
-        this.algemeneBeschikbaarheidRepository.save(cohort);
+        this.cohortRepository.saveAll(cohorts);
 
     }
 }

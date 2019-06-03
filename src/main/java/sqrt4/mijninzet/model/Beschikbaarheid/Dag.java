@@ -19,9 +19,9 @@ public class Dag {
     @JoinColumn
     private Week week;
 
-    @ManyToOne
-    @JoinColumn
-    private User user;
+//    @ManyToOne
+//    @JoinColumn
+//    private User user;
 
     private String dagnaam;
     private int weekNummer;
