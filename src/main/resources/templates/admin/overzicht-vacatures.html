@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4 | Overzicht Vacatures</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Overzicht Vacatures</h1>
+<form action = "#" th:action="@{/admin/overzicht-vacatures}" th:method="POST">
+    <table id="TableVacatures">
+        <thead>
+        <tr class="ST">
+            <th>Naam</th>
+            <th>Aantal uren</th>
+            <th>Wijzigen</th>
+            <th>Verwijderen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${vacatureLijst.isEmpty()}">
+            <td class="ST" colspan="6">Er zijn nog geen cohorten aangemaakt.</td>
+        </tr>
+        <tr th:each="vacature: ${vacatureLijst}">
+            <td class="ST"><span th:text="${vacature.getVacatureNaam()}">Naam</span></td>
+            <td class="ST"><span th:text="${vacature.getAantalUren()}">Aantal uren </span></td>
+            <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vacature.getId()}" >
+                Wijzig</button></td>
+            <td class="ST"><button type="submit" th:name="Verwijder" th:value="${vacature.getId()}">
+                Verwijder
+            </button> </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
