@@ -74,14 +74,14 @@ public class Vak {
         List<Dagdeel> vakDagdelen= new ArrayList();
         final int DAGDEELUREN = 4;
         int aantalUren = this.aantalUren;
-        System.out.println("Het aantal uren is: "+aantalUren);
+//        System.out.println("Het aantal uren is: "+aantalUren);
         int aantalDagdelen = aantalUren / DAGDEELUREN;
         if ((aantalUren % DAGDEELUREN) > 0){
             aantalDagdelen++;
         }
         for (int i = 1; i <= aantalDagdelen; i++) {
             Dagdeel dagdeelX = new Dagdeel(i, this);
-            System.out.println("DagdeelX is: "+dagdeelX);
+//            System.out.println("DagdeelX is: "+dagdeelX);
             vakDagdelen.add(dagdeelX);
         }
         return vakDagdelen;

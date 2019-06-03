@@ -43,7 +43,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.cohortRepository.deleteAll();
-//        this.dagdeelRespository.deleteAll();
+        this.dagdeelRespository.deleteAll();
 
 
         //create rollen
