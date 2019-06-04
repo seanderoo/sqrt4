@@ -1,50 +1,46 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/error.css">
+</head>
 <body>
-<div class="randomcontent item1">
-    <a href="/home"><img src="https://media.giphy.com/media/XrNry0aqYWEhi/giphy.gif" border="0" alt="nuclear explosion"
-                         style="display:block; width:20%;height:auto; margin-left: auto; margin-right:auto "></a>
-</div>
-<div class="randomcontent item2">
-<span>(╯°□°）╯︵ ┻━┻</span>
-</div>
-<div class="randomcontent item3">
-<span>Uh... <br/>nee.</span>
-</div>
+
+<p id="pageBody"></p>
 
 <script>
-    if (document.getElementById)
-        document.documentElement.className = 'jsclass'; //hide content for DOM capable browsers
+    var randomContent = [
+        '<div class="item1">\n' +
+        '    <a href="/home"><img src="https://media.giphy.com/media/XrNry0aqYWEhi/giphy.gif" border="0" alt="nuclear explosion"\n' +
+        '                         style="display:block;\n' +
+        '                         width:20%;\n' +
+        '                         height:auto;\n' +
+        '                         margin-left: auto;\n' +
+        '                         margin-right:auto;\n' +
+        '                         margin-bottom: 0px"></a>\n' +
+        '</div>',
+        '<div id="item2" class="randomContent" style="margin-top: 0px;\n' +
+        '                font-size: 6em">\n' +
+        '    <p onclick="goHome()">(╯°□°）╯︵ ┻━┻\n</p>' +
+        '    <br/>\n' +
+        '</div>',
+        '<div id="item3">\n' +
+        '    <h2 style="font-size: 3em; margin-left: 20%" onclick="goHome()"><br/><i>uhm...</i> </h2><br/>\n' +
+        '    <h1 style="font-size: 12em; font-family: Impact; text-align: center; margin-top: 0" onclick="goHome()">NEE .</h1>\n' +
+        '    <br/>\n' +
+        '</div>'
+    ];
 
-
-    var randomcontentdisplay={
-        divholders:new Object(),
-        masterclass: "randomcontent",
-
-        init:function(){
-            if (!document.getElementById)
-                return
-            var alldivs=document.getElementsByTagName("div")
-            var randomcontentsearch=new RegExp(this.masterclass+"\\s+(item\\d+)", "i") //check for CSS class="randomcontent groupX" (x=integer)
-            for (var i=0; i<alldivs.length; i++){
-                if (randomcontentsearch.test(alldivs[i].className)){
-                    if (typeof this.divholders[RegExp.$1]=="undefined") //if array to hold this group of divs doesn't exist yet
-                        this.divholders[RegExp.$1]=new Array() //create array first
-                    this.divholders[RegExp.$1].push(alldivs[i]) //add this div to the array
-                }
-            }
-            this.showone()
-        },
-
-        showone:function(){
-            for (group in this.divholders){ //loop thru each array within object
-                var chosenOne=Math.floor(Math.random()*this.divholders[group].length) //randomly pick one entry from array
-                this.divholders[group][chosenOne].style.display="block" //display content corresponding to the chosen entry
-            }
-        }
+    function toonRandomContent(){
+        var randomItem = Math.floor(Math.random() * 3);
+        document.getElementById("pageBody").innerHTML = randomContent[randomItem];
     }
-    randomcontentdisplay.init();
 
+    function goHome(){
+        window.location.pathname = "/home"
+    }
+
+    toonRandomContent();
+    
 </script>
 </body>
 </html>
