@@ -10,8 +10,8 @@
 
 <div class="navbar" id="header" th:fragment="copy">
     <a href="/home">Home</a>
-    <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/maak-rooster">Maak het rooster</a>
-    <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
+    <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/maak-rooster">Maak Rooster</a>
+    <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis Administreren</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
     <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
         <button class="dropbtn">Beschikbaarheden
@@ -23,30 +23,29 @@
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
-        <button class="dropbtn">Cohort-beheer
+        <button class="dropbtn">Cohortbeheer
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/admin/maakcohort">Maak een cohort aan</a>
-            <a href="/admin/overzicht-cohort">Overzicht cohorten</a>
+            <a href="/admin/maakcohort">Nieuw Cohort</a>
+            <a href="/admin/overzicht-cohort">Overzicht Cohorten</a>
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
-        <button class="dropbtn">Gebruikers-beheer
+        <button class="dropbtn">Gebruikersbeheer
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/admin/overzicht-gebruikers">Beheer gebruikers</a>
-            <a href="/admin/nieuwe-gebruiker">Maak een nieuwe gebruiker aan</a>
+            <a href="/admin/nieuwe-gebruiker">Nieuwe Gebruiker</a>
+            <a href="/admin/overzicht-gebruikers">Beheer Gebruikers</a>
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEADMIN')" class="dropdown">
-        <button class="dropbtn">Vacature-beheer
+        <button class="dropbtn">Vacaturebeheer
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/admin/nieuwe-vacature">Maak een nieuwe vacature aan</a>
-            <a href="/admin/overzicht-vacatures">Overzicht van vacatures</a>
+            <a href="/admin/nieuwe-vacature">Nieuwe Vacature</a>
         </div>
     </div>
     <div sec:authorize="hasAuthority('ROLEMANAGER')" class="dropdown">
