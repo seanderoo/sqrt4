@@ -8,13 +8,30 @@
     <!--    <link rel="stylesheet" type="text/css" href="/form-karin.css">-->
 </head>
 <style>
-    #rooster {
-        width: 70%;
-        margin-left: 15%;
+
+    .roostertestdagdelen{
+    float: left;
+        width: 25%;
+        padding: 10px;
+        position: fixed;
+    }
+
+    .rooster {
+        float: right;
         margin-right: 15%;
+        width: 60%;
         padding: 15px;
         border: 1px solid darkblue;
     }
+
+    .droppable {
+        width: 95px;
+        height: 55px;
+        padding: 10px;
+        border: 1px solid darkblue;
+        display: table-cell;
+    }
+
 </style>
 <body>
 <header>
@@ -23,120 +40,103 @@
 
 <h2>Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/></h2>
 
+
+
+<div class="roostertestdagdelen" id="stickyDagdelen">
+    <h2>Dagdelen per vak:</h2>
+    <div th:each="dagdeel: ${dagdeelLijst}" >
+        <div  class="dagdeel" th:id="${dagdeel.id}" th:value="${dagdeel.dagdeelNaam}" th:text="${dagdeel.getDagdeelNaam()}" draggable="true"
+              ondragstart="drag(event)">dagdeelnaam</div>
+    </div>
+</div>
+
+<div>
+    <p></p>
+</div>
+
 <th:block th:each="week: ${weken}">
-<form id="rooster">
-    <table>
+<form>
+    <table class="rooster">
         <thead id="gekozenCohort"></thead>
         <tr>
             <th>dagdeel</th>
             <th th:text="${week.getMaandag().getDatum()}"></th>
-            <th th:text="${week.getDinsdag().getDatum()}">dinsdag</th>
-            <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
-            <th th:text="${week.getDonderdag().getDatum()}">donderdag</th>
-            <th th:text="${week.getVrijdag().getDatum()}">vrijdag</th>
+            <th th:text="${week.getDinsdag().getDatum()}"></th>
+            <th th:text="${week.getWoensdag().getDatum()}"></th>
+            <th th:text="${week.getDonderdag().getDatum()}"></th>
+            <th th:text="${week.getVrijdag().getDatum()}"></th>
         </tr>
         <tr>
             <td th:value="ochtend">9:00 - 13:00</td>
-            <td><select id="maOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrOcht" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
+            <td class="droppable" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="woensdagochtend" ondrop="drop(event)"
+                ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="donderdagochtend" ondrop="drop(event)"
+                ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         </tr>
         <tr>
             <td th:value="middag">13:00 - 17:00</td>
-            <td><select id="maMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrMid" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
+            <td class="droppable" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="donderdagmiddag" ondrop="drop(event)"
+                ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         </tr>
         <tr>
             <td th:value="avond">17:00 - 21:00</td>
-            <td><select id="maAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="diAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="woAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="doAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
-            <td><select id="vrAvo" th:name="vakken">
-                <option>Geen les</option>
-                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
-            </select> </td>
+            <td class="droppable" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            <td class="droppable" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> <button type="submit">Opslaan</button></td>
         </tr>
     </table>
-    <button type="submit">Opslaan</button>
+
 </form>
 </th:block>
-<p>
-    hier moet iets onder komen
-</p>
+<!--<p>-->
+<!--    hier moet iets onder komen-->
+<!--</p>-->
 <p id="demo">
 </p>
 </body>
-<!--<script>-->
-
-<!--    var gekozenVak;-->
-
-<!--    document.getElementById("maOcht").onchange=function () {-->
-<!--        selectVak("maOcht")-->
-<!--    };-->
-
-<!--    function selectVak(periode) {-->
-<!--        gekozenVak = document.getElementById(periode).value;-->
-<!--        document.getElementById("demo").innerHTML=gekozenVak;-->
-<!--    }-->
-<!--    //Er moet toch een manier zijn om alle geselecteerde vakken van alle id's in een soort loop uit te lezen?-->
-<!--    //hieronder lees ik wel al alle id's uit. Nog 1 stapje...(karin)-->
-<!--    var x = document.getElementById("rooster");-->
-<!--    var y = x.getElementsByTagName("select");-->
-<!--    var text = "";-->
-<!--    for (var i = 0; i < y.length; i++) {-->
-<!--        text += y.item(i).id + "<br>";-->
-<!--    }-->
-<!--    document.getElementById("demo").innerHTML="onderdelen: " + text;-->
+<script>
+    var header = document.getElementById("stickyDagdelen");
+    var sticky = header.offsetTop;
 
 
-<!--</script>-->
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id)
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+
+
+</script>
 </html>
 
