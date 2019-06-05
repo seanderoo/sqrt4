@@ -24,7 +24,7 @@
 <h2>Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/></h2>
 
 <th:block th:each="week: ${weken}">
-<form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${week}" method="post">
+<form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort.cohortNaam}" method="post">
     <table>
         <thead id="gekozenCohort"></thead>
         <tr>
@@ -37,11 +37,11 @@
         </tr>
         <tr>
             <td th:value="ochtend">9:00 - 13:00</td>
-            <td><select id="maOcht" th:name="vakken">
+            <td><select id="maOcht" name="maOcht">
                 <option>Geen les</option>
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="diOcht" th:name="vakken">
+            <td><select id="diOcht" name="diOcht">
                 <option>Geen les</option>
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
@@ -137,7 +137,7 @@
         document.getElementById("waardes").textContent="waardes: " + waarde;
     }
 
-    //th:value="${week.getMaandag().setOchtendVak("gekozenVak")}"
+    //th:value="${week.getMaandag().getOchtend.setVak("gekozenVak")}"
 </script>
 </html>
 

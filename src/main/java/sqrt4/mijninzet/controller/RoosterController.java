@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
@@ -44,7 +45,11 @@ public class RoosterController extends AbstractController{
         return "rooster-maken-cohort-gekozen";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan() {
+    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
+                              @ModelAttribute("cohort") Cohort cohort,
+                              Model model) {
+        System.out.println(cohortnaam);
+        System.out.println(cohort);
         return "rooster-maken-cohort-gekozen";
     }
 }
