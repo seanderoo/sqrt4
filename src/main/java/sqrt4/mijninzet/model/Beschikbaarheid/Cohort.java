@@ -40,7 +40,7 @@ public class Cohort {
         return sb.append(appendix).append(" ").append(cohortNummer).toString();
     }
 
-    private int aantalWekenInCohort(int startWeek, int eindWeek) {
+    public int aantalWekenInCohort(int startWeek, int eindWeek) {
         int aantalWeken = 0;
         if (eindWeek > startWeek) {
             aantalWeken = (eindWeek - startWeek) + 1;
