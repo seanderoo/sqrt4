@@ -26,9 +26,6 @@ public class Dag {
     private Dagdeel middag;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Dagdeel avond;
-//    private boolean ochtend;
-//    private boolean middag;
-//    private boolean avond;
 
     public Dag(String dagnaam, int weekNummer, int jaarNummer) {
         this(dagnaam, weekNummer, jaarNummer, true, true, true);
@@ -86,31 +83,6 @@ public class Dag {
         }
         return dayNameJava;
     }
-
-//    public void setOchtend(boolean ochtend) {
-//        this.ochtend = ochtend;
-//    }
-//
-//    public void setMiddag(boolean middag) {
-//        this.middag = middag;
-//    }
-//
-//    public void setAvond(boolean avond) {
-//        this.avond = avond;
-//    }
-//
-//    public boolean getOchtend() {
-//        return ochtend;
-//    }
-//
-//    public boolean getMiddag() {
-//        return middag;
-//    }
-//
-//    public boolean getAvond() {
-//        return avond;
-//    }
-
 
     public Dagdeel getOchtend() {
         return ochtend;
