@@ -45,11 +45,29 @@ public class RoosterController extends AbstractController{
         return "rooster-maken-cohort-gekozen";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
+    public String weekOpslaan(@RequestParam(value = "cohortNaam", required = false) String cohortnaam,
+                              @RequestParam("maOcht") String maOchtVak,
+                              @RequestParam("diOcht") String diOchtVak,
+                              @RequestParam("woOcht") String woOchtVak,
+                              @RequestParam("doOcht") String doOchtVak,
+                              @RequestParam("vrOcht") String vrOchtVak,
+                              @RequestParam("maMid") String maMidVak,
+                              @RequestParam("diMid") String diMidVak,
+                              @RequestParam("woMid") String woMidVak,
+                              @RequestParam("doMid") String doMidVak,
+                              @RequestParam("vrMid") String vrMidVak,
+                              @RequestParam("maAvo") String maAvoVak,
+                              @RequestParam("diAvo") String diAvoVak,
+                              @RequestParam("woAvo") String woAvoVak,
+                              @RequestParam("doAvo") String doAvoVak,
+                              @RequestParam("vrAvo") String vrAvoVak,
                               @ModelAttribute("cohort") Cohort cohort,
                               Model model) {
         System.out.println(cohortnaam);
         System.out.println(cohort);
+        System.out.println(maOchtVak);
+        System.out.println(diMidVak);
+        System.out.println(vrAvoVak);
         return "rooster-maken-cohort-gekozen";
     }
 }
