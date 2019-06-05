@@ -19,16 +19,16 @@ public class Vak {
     private int aantalUren;
 
     @OneToMany(mappedBy = "vak",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Dagdeel> dagdelen;
+    private List<Vakdagdeel> vakdagdelen;
 
-    public void setDagdelen(List<Dagdeel> dagdelen) {
-        this.dagdelen = dagdelen;
+    public void setVakdagdelen(List<Vakdagdeel> vakdagdelen) {
+        this.vakdagdelen = vakdagdelen;
     }
 
     public Vak(String vakNaam, int aantalUren) {
         this.vakNaam = vakNaam;
         this.aantalUren = aantalUren;
-        this.dagdelen = new ArrayList();
+        this.vakdagdelen = new ArrayList();
     }
 
     public Vak() { super(); }
@@ -57,8 +57,8 @@ public class Vak {
         this.aantalUren = aantalUren;
     }
 
-    public List<Dagdeel> getDagdelen(){
-        return dagdelen;
+    public List<Vakdagdeel> getVakdagdelen(){
+        return vakdagdelen;
     }
 
     @Override
@@ -70,8 +70,8 @@ public class Vak {
                 '}';
     }
 
-    public List<Dagdeel> aantalDagdelenBerekenen(){
-        List<Dagdeel> vakDagdelen= new ArrayList();
+    public List<Vakdagdeel> aantalDagdelenBerekenen(){
+        List<Vakdagdeel> vakDagdelen= new ArrayList();
         final int DAGDEELUREN = 4;
         int aantalUren = this.aantalUren;
 //        System.out.println("Het aantal uren is: "+aantalUren);
@@ -80,9 +80,9 @@ public class Vak {
             aantalDagdelen++;
         }
         for (int i = 1; i <= aantalDagdelen; i++) {
-            Dagdeel dagdeelX = new Dagdeel(i, this);
-//            System.out.println("DagdeelX is: "+dagdeelX);
-            vakDagdelen.add(dagdeelX);
+            Vakdagdeel vakdagdeelX = new Vakdagdeel(i, this);
+//            System.out.println("DagdeelX is: "+vakdagdeelX);
+            vakDagdelen.add(vakdagdeelX);
         }
         return vakDagdelen;
 
