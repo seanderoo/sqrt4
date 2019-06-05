@@ -34,7 +34,7 @@ public class RoosterController extends AbstractController{
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen")
-    public String wekenVanCohort(@RequestParam(value = "cohortNaam") String cohortnaam,
+    public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
                                  Model model) {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
@@ -44,8 +44,20 @@ public class RoosterController extends AbstractController{
         model.addAttribute("weken", weken);
         return "rooster-maken-cohort-gekozen";
     }
-    @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam(value = "cohortNaam", required = false) String cohortnaam,
+    @GetMapping("manager/rooster-karin")
+    public String roosterKarin(@RequestParam("cohortNaam") String cohortnaam,
+                                 Model model) {
+        Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
+        model.addAttribute("cohort", cohort);
+        List<Vak> vakken = vakRepo.findAll();
+        model.addAttribute("vakken", vakken);
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+        return "rooster-karin";
+    }
+
+    @PostMapping("manager/rooster-karin")
+    public String weekOpslaan(@RequestParam("cohortNaam") String cohortnaam,
                               @RequestParam("maOcht") String maOchtVak,
                               @RequestParam("diOcht") String diOchtVak,
                               @RequestParam("woOcht") String woOchtVak,
@@ -63,11 +75,26 @@ public class RoosterController extends AbstractController{
                               @RequestParam("vrAvo") String vrAvoVak,
                               @ModelAttribute("cohort") Cohort cohort,
                               Model model) {
+        Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
+        model.addAttribute(cohort1);
+        Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
+        Vak vakDiOcht = vakRepo.findByVakNaam(diOchtVak);
+        Vak vakWoOcht = vakRepo.findByVakNaam(woOchtVak);
+        Vak vakDoOcht = vakRepo.findByVakNaam(doOchtVak);
+        Vak vakVrOcht = vakRepo.findByVakNaam(vrOchtVak);
+        Vak vakMaMid = vakRepo.findByVakNaam(maMidVak);
+        Vak vakDiMid = vakRepo.findByVakNaam(diMidVak);
+        Vak vakWoMid = vakRepo.findByVakNaam(woMidVak);
+        Vak vakDoMid = vakRepo.findByVakNaam(doMidVak);
+        Vak vakVrMid = vakRepo.findByVakNaam(vrMidVak);
+        Vak vakMaAvo = vakRepo.findByVakNaam(maAvoVak);
+        Vak vakDiAvo = vakRepo.findByVakNaam(diAvoVak);
+        Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
+        Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
+        Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
+
         System.out.println(cohortnaam);
         System.out.println(cohort);
-        System.out.println(maOchtVak);
-        System.out.println(diMidVak);
-        System.out.println(vrAvoVak);
-        return "rooster-maken-cohort-gekozen";
+        return "rooster-karin";
     }
 }

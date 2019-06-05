@@ -26,7 +26,7 @@
 <th:block th:each="week: ${weken}">
 <form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort}" method="post">
     <table>
-        <thead id="gekozenCohort" name="cohortNaam" th:value="${cohort.cohortNaam}" th:text="${cohort.getCohortNaam()}"> </thead>
+        <thead id="gekozenCohort"><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
         <tr>
             <th>Week <span th:text="${weken.indexOf(week)+1}"></span></th>
             <th th:text="${week.getMaandag().getDatum()}">maandag</th>
