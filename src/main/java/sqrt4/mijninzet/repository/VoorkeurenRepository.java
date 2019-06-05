@@ -19,4 +19,6 @@ public interface VoorkeurenRepository extends JpaRepository<Voorkeur, Integer> {
     Voorkeur findVoorkeurByUser(User user);
 
     List<Voorkeur> findAllByUser(User user);
+
+    List<Voorkeur> findAllByVakOrderByVoorkeurGebruikerDesc(Vak vak);
 }

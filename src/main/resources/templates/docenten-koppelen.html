@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="rooster">
+    <table>
+        <thead id="gekozenCohort"></thead>
+        <tr>
+            <th>dagdeel</th>
+            <th th:text="${week.getMaandag().getDatum()}">maandag</th>
+            <th th:text="${week.getDinsdag().getDatum()}">dinsdag</th>
+            <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
+            <th th:text="${week.getDonderdag().getDatum()}">donderdag</th>
+            <th th:text="${week.getVrijdag().getDatum()}">vrijdag</th>
+        </tr>
+        <tr>
+            <td colspan="2" th:value="ochtend">9:00 - 13:00</td>
+            <td><select id="maOcht" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diOcht" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woOcht" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doOcht" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrOcht" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td colspan="2" th:value="middag">13:00 - 17:00</td>
+            <td><select id="maMid" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diMid" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woMid" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doMid" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrMid" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td colspan="2" th:value="avond">17:00 - 21:00</td>
+            <td><select id="maAvo" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diAvo" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woAvo" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doAvo" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrAvo" th:name="vakken">
+                <option>Geen les</option>
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+    </table>
+    <button type="submit">Opslaan</button>
+</form>
+</body>
+</html>
