@@ -19,9 +19,13 @@ public class Dag {
     private int weekNummer;
     private int jaarNummer;
     private LocalDate datum;
-    private boolean ochtend;
-    private boolean middag;
-    private boolean avond;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Dagdeel ochtend;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Dagdeel middag;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Dagdeel avond;
 
     public Dag(String dagnaam, int weekNummer, int jaarNummer) {
         this(dagnaam, weekNummer, jaarNummer, true, true, true);
@@ -33,9 +37,11 @@ public class Dag {
         this.dagnaam = name;
         this.weekNummer = weekNummer;
         this.jaarNummer = jaarNummer;
-        this.ochtend = ochtend;
-        this.middag = middag;
-        this.avond = avond;
+
+        this.ochtend = new Dagdeel(ochtend,this);
+        this.middag = new Dagdeel(middag,this);
+        this.avond = new Dagdeel(avond,this);
+
         this.datum = setDatumDag(dagnaam);
     }
 
@@ -78,27 +84,15 @@ public class Dag {
         return dayNameJava;
     }
 
-    public void setOchtend(boolean ochtend) {
-        this.ochtend = ochtend;
-    }
-
-    public void setMiddag(boolean middag) {
-        this.middag = middag;
-    }
-
-    public void setAvond(boolean avond) {
-        this.avond = avond;
-    }
-
-    public boolean getOchtend() {
+    public Dagdeel getOchtend() {
         return ochtend;
     }
 
-    public boolean getMiddag() {
+    public Dagdeel getMiddag() {
         return middag;
     }
 
-    public boolean getAvond() {
+    public Dagdeel getAvond() {
         return avond;
     }
 
@@ -147,15 +141,15 @@ public class Dag {
         this.weekNummer = weekNummer;
     }
 
-    public boolean isOchtend() {
-        return ochtend;
+    public void setOchtend(Dagdeel ochtend) {
+        this.ochtend = ochtend;
     }
 
-    public boolean isMiddag() {
-        return middag;
+    public void setMiddag(Dagdeel middag) {
+        this.middag = middag;
     }
 
-    public boolean isAvond() {
-        return avond;
+    public void setAvond(Dagdeel avond) {
+        this.avond = avond;
     }
 }

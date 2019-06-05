@@ -87,9 +87,13 @@ public class Cohort {
         String[] weekdagen = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
         for (Week week : weekList) {
             for (int i = 0; i < weekdagen.length; i++) {
-                week.getDag(weekdagen[i]).setOchtend(nieuweWeek.getDag(weekdagen[i]).getOchtend());
-                week.getDag(weekdagen[i]).setMiddag(nieuweWeek.getDag(weekdagen[i]).getMiddag());
-                week.getDag(weekdagen[i]).setAvond(nieuweWeek.getDag(weekdagen[i]).getAvond());
+                boolean nieuweBeschOchtend = nieuweWeek.getDag(weekdagen[i]).getOchtend().getBeschikbaar();
+                boolean nieuweBeschMiddag = nieuweWeek.getDag(weekdagen[i]).getMiddag().getBeschikbaar();
+                boolean nieuweBeschAvond = nieuweWeek.getDag(weekdagen[i]).getAvond().getBeschikbaar();
+
+                week.getDag(weekdagen[i]).getOchtend().setBeschikbaar(nieuweBeschOchtend);
+                week.getDag(weekdagen[i]).getOchtend().setBeschikbaar(nieuweBeschMiddag);
+                week.getDag(weekdagen[i]).getAvond().setBeschikbaar(nieuweBeschAvond);
             }
         }
     }
