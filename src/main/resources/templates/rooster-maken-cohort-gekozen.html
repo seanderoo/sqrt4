@@ -12,7 +12,7 @@
     .roostertestdagdelen{
     float: left;
         width: 25%;
-        padding: 10px;
+        padding: 15px;
         position: fixed;
     }
 
@@ -25,7 +25,7 @@
     }
 
     .droppable {
-        width: 95px;
+        width: 110px;
         height: 55px;
         padding: 10px;
         border: 1px solid darkblue;
@@ -40,12 +40,10 @@
 
 <h2>Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/></h2>
 
-
-
 <div class="roostertestdagdelen" id="stickyDagdelen">
     <h2>Dagdelen per vak:</h2>
-    <div th:each="dagdeel: ${dagdeelLijst}" >
-        <div  class="dagdeel" th:id="${dagdeel.id}" th:value="${dagdeel.dagdeelNaam}" th:text="${dagdeel.getDagdeelNaam()}" draggable="true"
+    <div th:each="vakdagdeel: ${dagdeelLijst}" >
+        <div  class="dagdeel" th:id="${vakdagdeel.id}" th:value="${vakdagdeel.vakdagdeelNaam}" th:text="${vakdagdeel.getVakdagdeelNaam()}" draggable="true"
               ondragstart="drag(event)">dagdeelnaam</div>
     </div>
 </div>
@@ -65,12 +63,6 @@
             <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
             <th th:text="${week.getDonderdag().getDatum()}">donderdag</th>
             <th th:text="${week.getVrijdag().getDatum()}">vrijdag</th>
-            <th>dagdeel</th>
-            <th th:text="${week.getMaandag().getDatum()}"></th>
-            <th th:text="${week.getDinsdag().getDatum()}"></th>
-            <th th:text="${week.getWoensdag().getDatum()}"></th>
-            <th th:text="${week.getDonderdag().getDatum()}"></th>
-            <th th:text="${week.getVrijdag().getDatum()}"></th>
         </tr>
         <tr>
             <td th:value="ochtend">9:00 - 13:00</td>

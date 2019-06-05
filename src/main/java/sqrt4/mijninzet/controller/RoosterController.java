@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.model.Dagdeel;
+import sqrt4.mijninzet.model.Vakdagdeel;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.CohortRepository;
-import sqrt4.mijninzet.repository.DagdeelRespository;
+import sqrt4.mijninzet.repository.VakdagdeelRespository;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
 import java.util.List;
 
 @Controller
-public class RoosterController extends AbstractController{
+public class RoosterController extends AbstractController {
 
     @Autowired
     CohortRepository cohortRepo;
@@ -28,7 +28,7 @@ public class RoosterController extends AbstractController{
     @Autowired
     WeekRepository weekRepo;
     @Autowired
-    DagdeelRespository dagdeelRespository;
+    VakdagdeelRespository dagdeelRespository;
 
     @GetMapping("/manager/rooster-maken")
     public String maakRooster(Model model) {
@@ -40,9 +40,9 @@ public class RoosterController extends AbstractController{
     @GetMapping("manager/rooster-maken-cohort-gekozen")
     public String wekenVanCohort(@RequestParam(value = "cohortNaam") String cohortnaam,
                                  Model model) {
-        List <Vak> vakkenLijst = vakRepo.findAll();
+        List<Vak> vakkenLijst = vakRepo.findAll();
         model.addAttribute("vakkenLijst", vakkenLijst);
-        List<Dagdeel> dagdeelLijst = dagdeelRespository.findAll();
+        List<Vakdagdeel> dagdeelLijst = dagdeelRespository.findAll();
         model.addAttribute("dagdeelLijst", dagdeelLijst);
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
@@ -52,6 +52,7 @@ public class RoosterController extends AbstractController{
         model.addAttribute("weken", weken);
         return "rooster-maken-cohort-gekozen";
     }
+
     @PostMapping("manager/rooster-maken-cohort-gekozen")
     public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
                               @ModelAttribute("cohort") Cohort cohort,
