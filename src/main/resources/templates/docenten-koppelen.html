@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SQRT4  |  Koppel Docenten</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
@@ -11,8 +11,9 @@
 </header>
 <h1>Koppel Docenten</h1>
 <h2>Koppel in dit scherm docenten aan de vakken</h2>
+<form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
 <table id="TableFormatter">
-    <thead></thead>
+    <thead>
     <tr>
         <th>dagdeel</th>
         <th>maandag</th>
@@ -21,6 +22,8 @@
         <th>donderdag</th>
         <th>vrijdag</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
         <td rowspan="2" th:value="ochtend">9:00 - 13:00</td>
         <td>Vak</td>
@@ -30,22 +33,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-
         <td><select id="maOch" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="diOch" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="woOch" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="doOch" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="vrOch" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="middag">13:00 - 17:00</td>
@@ -56,22 +63,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-
         <td><select id="maMid" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="diMid" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="woMid" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="doMid" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="vrMid" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="avond">17:00 - 21:00</td>
@@ -83,21 +94,30 @@
     </tr>
     <tr>
         <td><select id="maAvo" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="diAvo" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="woAvo" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="doAvo" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
         <td><select id="vrAvo" th:name="vakken">
-            <option>Kies Docent</option>
-        </select> </td>
+            <option>--Kies docent--</option>
+            <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+        </select></td>
     </tr>
+    </tbody>
 </table>
+    <br>
+    <input id="knopOpslaan" type="submit" value="Opslaan"/>
+</form>
 </body>
 </html>
