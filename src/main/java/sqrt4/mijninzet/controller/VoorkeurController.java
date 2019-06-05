@@ -30,10 +30,14 @@ public class VoorkeurController extends AbstractController {
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
         System.out.println(voorkeurLijst);
 
-
         Voorkeur voorkeur = new Voorkeur();
 
         Voorkeur defaultVoorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vakkenLijst.get(0), voegActiveUserToe());
+
+        List<Voorkeur> voorkeurList = voorkeurenRepository.findAllByVakOrderByVoorkeurGebruikerDesc(vakkenLijst.get(0));
+        for (Voorkeur voorkeur1: voorkeurList) {
+            System.out.println("Opgegeven voorkeur: " + voorkeur1.getVoorkeurGebruiker() + ", Docent: " +voorkeur1.getUser().getUsername());
+        }
 
         if (defaultVoorkeur == null) {
             model.addAttribute("voorkeur", voorkeur);
