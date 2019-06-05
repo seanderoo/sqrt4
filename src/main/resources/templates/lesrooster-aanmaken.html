@@ -36,8 +36,8 @@
 <h2>Dagdelen per vak:</h2>
 
 <div id="roostertestdagdelen" style="list-style-type:none">
-    <div th:each="dagdeel: ${dagdeelLijst}" >
-        <div  class="dagdeel" th:id="${dagdeel.id}" th:value="${dagdeel.dagdeelNaam}" th:text="${dagdeel.getDagdeelNaam()}" draggable="true"
+    <div th:each="vakdagdeel: ${vakdagdeelLijst}" >
+        <div  class="vakdagdeel" th:id="${vakdagdeel.id}" th:value="${vakdagdeel.getVakdagdeelNaam()}" th:text="${vakdagdeel.getVakdagdeelNaam()}" draggable="true"
              ondragstart="drag(event)">dagdeelnaam</div>
     </div>
 </div>
@@ -105,14 +105,6 @@
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
-    }
-
-
-    var geselecteerdVak = document.getElementById("geselecteerdVak");
-    alleDagdelen = document.getElementById("alleDagdelen");
-
-    function dagdelenTonen(element){
-        alleDagdelen.innerHTML = element + "<br>";
     }
 
 

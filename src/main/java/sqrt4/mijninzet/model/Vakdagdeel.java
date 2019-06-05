@@ -3,23 +3,23 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 
 @Entity
-public class Dagdeel {
+public class Vakdagdeel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String dagdeelNaam;
+    private String vakdagdeelNaam;
 
     @ManyToOne
     private Vak vak;
 
 
-    public Dagdeel() {
+    public Vakdagdeel() {
     }
 
-    public Dagdeel(int dagdeelNummer, Vak vak){
+    public Vakdagdeel(int vakdagdeelNummer, Vak vak){
         this.vak = vak;
-        this.dagdeelNaam = vak.getVakNaam() + ", dagdeel: "+Integer.toString(dagdeelNummer);
+        this.vakdagdeelNaam = vak.getVakNaam() + ", dagdeel: "+Integer.toString(vakdagdeelNummer);
     }
 
     public int getId() {
@@ -30,12 +30,12 @@ public class Dagdeel {
         this.id = id;
     }
 
-    public String getDagdeelNaam() {
-        return dagdeelNaam;
+    public String getVakdagdeelNaam() {
+        return vakdagdeelNaam;
     }
 
-    public void setDagdeelNaam(String dagdeelNaam) {
-        this.dagdeelNaam = dagdeelNaam;
+    public void setVakdagdeelNaam(String VakdagdeelNaam) {
+        this.vakdagdeelNaam = VakdagdeelNaam;
     }
 
     public Vak getVak() {
@@ -48,7 +48,7 @@ public class Dagdeel {
 
     @Override
     public String toString() {
-        return dagdeelNaam;
+        return vakdagdeelNaam;
     }
 }
 
