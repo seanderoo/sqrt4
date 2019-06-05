@@ -25,7 +25,8 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, CohortRepository cohortRepository, DagdeelRespository dagdeelRespository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository,
+                               DagdeelRespository dagdeelRespository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
@@ -58,7 +59,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik", "");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin", "");
-        User manager1 = new User("Manager", passwordEncoder.encode("Manager123"), "MANAGER", "", "M", "Anager", "");
+        User manager1 = new User("Manager", passwordEncoder.encode("M123"), "MANAGER", "", "M", "Anager", "");
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
 
 

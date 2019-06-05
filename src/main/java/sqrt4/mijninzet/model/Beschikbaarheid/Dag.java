@@ -18,10 +18,6 @@ public class Dag {
     @ManyToOne
     private Week week;
 
-//    @ManyToOne
-//    @JoinColumn
-//    private User user;
-
     private String dagnaam;
     private int weekNummer;
     private int jaarNummer;
@@ -29,6 +25,9 @@ public class Dag {
     private boolean ochtend;
     private boolean middag;
     private boolean avond;
+    private String ochtendVak;
+    private String middagVak;
+    private String avondVak;
 
     public Dag(String dagnaam, int weekNummer, int jaarNummer) {
         this(dagnaam, weekNummer, jaarNummer, true, true, true);
@@ -164,5 +163,29 @@ public class Dag {
 
     public boolean isAvond() {
         return avond;
+    }
+
+    public String getOchtendVak() {
+        return ochtendVak;
+    }
+
+    public void setOchtendVak(String ochtendVak) {
+        this.ochtendVak = ochtendVak;
+    }
+
+    public String getMiddagVak() {
+        return middagVak;
+    }
+
+    public void setMiddagVak(String middagVak) {
+        this.middagVak = middagVak;
+    }
+
+    public String getAvondVak() {
+        return avondVak;
+    }
+
+    public void setAvondVak(String avondVak) {
+        this.avondVak = avondVak;
     }
 }
