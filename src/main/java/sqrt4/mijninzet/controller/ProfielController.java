@@ -31,6 +31,7 @@ public class ProfielController extends AbstractController {
         user.setLastName(voegActiveUserToe().getLastName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(voegActiveUserToe().getRoles());
+        user.setProfilePic("");
         user.setActive(1);
         userRepository.save(user);
         model.addAttribute("user", user);

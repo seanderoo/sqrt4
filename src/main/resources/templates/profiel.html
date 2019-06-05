@@ -18,7 +18,7 @@
     <div id="afbeeldingGebruiker">
         <img id="" th:title="${user.getFirstName()} + ' ' + ${user.getLastName()}" th:src="${user.getProfilePic()}" alt="profile pic" width="200", height="200">
         <br>
-        <button type="button" onclick="changeProfilePicture()">Wijzig afbeelding</button>
+        <button type="button" onclick="changeProfilePic()">Wijzig afbeelding</button>
     </div>
     <form action="#" th:action="@{/profiel}" th:method="POST">
         <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
@@ -69,36 +69,29 @@
     }
 
     function changeProfilePic() {
-        var txt;
-        var person = prompt("Please enter an image source");
-        if (person == null || person == "") {
-            txt = "User cancelled the prompt.";
-        } else {
-            txt = "het is gelukt";
-        }
-        document.getElementById("demo").innerHTML = txt;
+        window.open("file:///C:/");
     }
 
-    function changeProfilePicture() {
-        var currentUser = document.getElementById("userId").value;
-        var url = '/ajax/profiel/' + currentUser;
-        console.log('dit is de url: ' + url)
-        changeProfilePic();
-
-
-        var xhttp;
-        if (selectedCourse == "") {
-            document.getElementById("voorkeurGebruiker").innerHTML = "";
-            return;
-        }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("voorkeurGebruiker").value = this.responseText;
-            }
-        };
-        xhttp.open("POST", url, true);
-        xhttp.send();
-    }
+    // function changeProfilePicture() {
+    //     var currentUser = document.getElementById("userId").value;
+    //     var url = '/ajax/profiel/' + currentUser;
+    //     console.log('dit is de url: ' + url)
+    //     changeProfilePic();
+    //
+    //
+    //     var xhttp;
+    //     if (selectedCourse == "") {
+    //         document.getElementById("voorkeurGebruiker").innerHTML = "";
+    //         return;
+    //     }
+    //     xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function () {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             document.getElementById("voorkeurGebruiker").value = this.responseText;
+    //         }
+    //     };
+    //     xhttp.open("POST", url, true);
+    //     xhttp.send();
+    // }
 </script>
 </html>
