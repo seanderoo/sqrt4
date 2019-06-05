@@ -141,5 +141,9 @@ public class Cohort {
     public List<Week> getWeekList() {
         return weekList;
     }
+
+    public void setStartWeek(int startWeek) {
+        this.startWeek = startWeek;
+    }
 }
 

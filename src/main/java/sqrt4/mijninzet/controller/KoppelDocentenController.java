@@ -10,6 +10,7 @@ import sqrt4.mijninzet.repository.CohortRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 
 @Controller
 public class KoppelDocentenController {
@@ -29,6 +30,9 @@ public class KoppelDocentenController {
 
         List<Cohort> cohortList = cohortRepository.findAllByStartJaarIsGreaterThanEqual(huidigeJaar);
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
+
+        Predicate<Cohort> condition = cohort -> cohort.getStartJaar() == huidigeJaar && cohort.getStartWeek() < huidigeWeek;
+        cohortList.removeIf(condition);
 
         model.addAttribute("cohortList", cohortList);
         model.addAttribute("docentList", docentList);
