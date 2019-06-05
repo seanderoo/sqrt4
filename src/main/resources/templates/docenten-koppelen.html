@@ -11,6 +11,13 @@
 </header>
 <h1>Koppel Docenten</h1>
 <h2>Koppel in dit scherm docenten aan de vakken</h2>
+<br>
+<select>
+    <option>--Kies Cohort--</option>
+    <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
+</select>
+<br>
+<br>
 <form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
 <table id="TableFormatter">
     <thead>
@@ -117,7 +124,7 @@
     </tbody>
 </table>
     <br>
-    <input id="knopOpslaan" type="submit" value="Opslaan"/>
+    <button id="knopVorigeWeek">Vorige Week</button>    <input id="knopOpslaan" type="submit" value="Opslaan"/>    <button id="knopVolgendeWeek">Volgende Week</button>
 </form>
 </body>
 </html>
