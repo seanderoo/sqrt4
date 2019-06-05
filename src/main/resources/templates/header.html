@@ -10,7 +10,7 @@
 
 <div class="navbar" id="header" th:fragment="copy">
     <a href="/home">Home</a>
-    <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/maak-rooster">Maak het rooster</a>
+    <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/docenten-koppelen">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
     <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">

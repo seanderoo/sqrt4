@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
+import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.CohortRepository;
 import sqrt4.mijninzet.repository.VakRepository;
@@ -31,6 +32,7 @@ public class RoosterController extends AbstractController{
         List<Cohort> cohorten = cohortRepo.findAll();
         model.addAttribute("cohorten", cohorten);
         return "rooster-maken";
+
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen")
