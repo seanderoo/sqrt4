@@ -34,7 +34,7 @@ public class RoosterController extends AbstractController{
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen")
-    public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
+    public String wekenVanCohort(@RequestParam(value = "cohortNaam") String cohortnaam,
                                  Model model) {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
@@ -42,6 +42,14 @@ public class RoosterController extends AbstractController{
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
+        return "rooster-maken-cohort-gekozen";
+    }
+    @PostMapping("manager/rooster-maken-cohort-gekozen")
+    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
+                              @ModelAttribute("cohort") Cohort cohort,
+                              Model model) {
+        System.out.println(cohortnaam);
+        System.out.println(cohort);
         return "rooster-maken-cohort-gekozen";
     }
 }

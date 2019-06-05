@@ -1,8 +1,5 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
-
-import sqrt4.mijninzet.model.User;
-
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -17,10 +14,6 @@ public class Dag {
 
     @ManyToOne
     private Week week;
-
-//    @ManyToOne
-//    @JoinColumn
-//    private User user;
 
     private String dagnaam;
     private int weekNummer;
