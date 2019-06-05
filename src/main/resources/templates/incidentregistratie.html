@@ -23,18 +23,18 @@
         <br/>
         <table id="hetIncident">
             <tr>
-                <td th:class="*{getOchtend()}"><input type="hidden" name="ochtend"
-                                                      th:value="${dag.getOchtend()}">09.00 - 13.00
+                <td th:class="*{getOchtend().getBeschikbaar()}"><input type="hidden" name="ochtend"
+                                                      th:value="${dag.getOchtend().getBeschikbaar()}">09.00 - 13.00
                 </td>
             </tr>
             <tr>
-                <td th:class="*{getMiddag()}"><input type="hidden" name="middag"
-                                                     th:value="${dag.getMiddag()}">13.00 - 17.00
+                <td th:class="*{getMiddag().getBeschikbaar()}"><input type="hidden" name="middag"
+                                                     th:value="${dag.getMiddag().getBeschikbaar()}">13.00 - 17.00
                 </td>
             </tr>
             <tr>
-                <td th:class="*{getAvond()}"><input type="hidden" name="avond"
-                                                    th:value="${dag.getAvond()}">17.00 - 21.00
+                <td th:class="*{getAvond().getBeschikbaar()}"><input type="hidden" name="avond"
+                                                    th:value="${dag.getAvond().getBeschikbaar()}">17.00 - 21.00
                 </td>
             </tr>
         </table>

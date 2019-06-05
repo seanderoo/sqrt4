@@ -25,25 +25,25 @@
             <th>vrijdag</th>
         </tr>
         <tr>
-            <td th:class="*{getMaandag().ochtend}"><input type="hidden" name="maandagochtend" th:value="*{getMaandag().ochtend}">09:00-13:00</td>
-            <td th:class="*{getDinsdag().ochtend}"><input type="hidden" name="dinsdagochtend" th:value="*{getDinsdag().ochtend}">09:00-13:00</td>
-            <td th:class="*{getWoensdag().ochtend}"><input type="hidden" name="woensdagochtend" th:value="*{getWoensdag().ochtend}">09:00-13:00</td>
-            <td th:class="*{getDonderdag().ochtend}"><input type="hidden" name="donderdagochtend" th:value="*{getDonderdag().ochtend}">09:00-13:00</td>
-            <td th:class="*{getVrijdag().ochtend}"><input type="hidden" name="vrijdagochtend" th:value="*{getVrijdag().ochtend}">09:00-13:00</td>
+            <td th:class="*{getMaandag().getOchtend().getBeschikbaar()}"><input type="hidden" name="maandagochtend" th:value="*{getMaandag().getOchtend().getBeschikbaar()}">09:00-13:00</td>
+            <td th:class="*{getDinsdag().getOchtend().getBeschikbaar()}"><input type="hidden" name="dinsdagochtend" th:value="*{getDinsdag().getOchtend().getBeschikbaar()}">09:00-13:00</td>
+            <td th:class="*{getWoensdag().getOchtend().getBeschikbaar()}"><input type="hidden" name="woensdagochtend" th:value="*{getWoensdag().getOchtend().getBeschikbaar()}">09:00-13:00</td>
+            <td th:class="*{getDonderdag().getOchtend().getBeschikbaar()}"><input type="hidden" name="donderdagochtend" th:value="*{getDonderdag().getOchtend().getBeschikbaar()}">09:00-13:00</td>
+            <td th:class="*{getVrijdag().getOchtend().getBeschikbaar()}"><input type="hidden" name="vrijdagochtend" th:value="*{getVrijdag().getOchtend().getBeschikbaar()}">09:00-13:00</td>
         </tr>
         <tr>
-            <td th:class="*{getMaandag().middag}"><input type="hidden" name="maandagmiddag" th:value="*{getMaandag().middag}">13:00-17:00</td>
-            <td th:class="*{getDinsdag().middag}"><input type="hidden" name="dinsdagmiddag" th:value="*{getDinsdag().middag}">13:00-17:00</td>
-            <td th:class="*{getWoensdag().middag}"><input type="hidden" name="woensdagmiddag" th:value="*{getWoensdag().middag}">13:00-17:00</td>
-            <td th:class="*{getDonderdag().middag}"><input type="hidden" name="donderdagmiddag" th:value="*{getDonderdag().middag}">13:00-17:00</td>
-            <td th:class="*{getVrijdag().middag}"><input type="hidden" name="vrijdagmiddag" th:value="*{getVrijdag().middag}">13:00-17:00</td>
+            <td th:class="*{getMaandag().getMiddag().getBeschikbaar()}"><input type="hidden" name="maandagmiddag" th:value="*{getMaandag().getMiddag().getBeschikbaar()}">13:00-17:00</td>
+            <td th:class="*{getDinsdag().getMiddag().getBeschikbaar()}"><input type="hidden" name="dinsdagmiddag" th:value="*{getDinsdag().getMiddag().getBeschikbaar()}">13:00-17:00</td>
+            <td th:class="*{getWoensdag().getMiddag().getBeschikbaar()}"><input type="hidden" name="woensdagmiddag" th:value="*{getWoensdag().getMiddag().getBeschikbaar()}">13:00-17:00</td>
+            <td th:class="*{getDonderdag().getMiddag().getBeschikbaar()}"><input type="hidden" name="donderdagmiddag" th:value="*{getDonderdag().getMiddag().getBeschikbaar()}">13:00-17:00</td>
+            <td th:class="*{getVrijdag().getMiddag().getBeschikbaar()}"><input type="hidden" name="vrijdagmiddag" th:value="*{getVrijdag().getMiddag().getBeschikbaar()}">13:00-17:00</td>
         </tr>
         <tr>
-            <td th:class="*{getMaandag().avond}"><input type="hidden" name="maandagavond" th:value="*{getMaandag().avond}">17:00-21:00</td>
-            <td th:class="*{getDinsdag().avond}"><input type="hidden" name="dinsdagavond" th:value="*{getDinsdag().avond}">17:00-21:00</td>
-            <td th:class="*{getWoensdag().avond}"><input type="hidden" name="woensdagavond" th:value="*{getWoensdag().avond}">17:00-21:00</td>
-            <td th:class="*{getDonderdag().avond}"><input type="hidden" name="donderdagavond" th:value="*{getDonderdag().avond}">17:00-21:00</td>
-            <td th:class="*{getVrijdag().avond}"><input type="hidden" name="vrijdagavond" th:value="*{getVrijdag().avond}">17:00-21:00</td>
+            <td th:class="*{getMaandag().getAvond().getBeschikbaar()}"><input type="hidden" name="maandagavond" th:value="*{getMaandag().getAvond().getBeschikbaar()}">17:00-21:00</td>
+            <td th:class="*{getDinsdag().getAvond().getBeschikbaar()}"><input type="hidden" name="dinsdagavond" th:value="*{getDinsdag().getAvond().getBeschikbaar()}">17:00-21:00</td>
+            <td th:class="*{getWoensdag().getAvond().getBeschikbaar()}"><input type="hidden" name="woensdagavond" th:value="*{getWoensdag().getAvond().getBeschikbaar()}">17:00-21:00</td>
+            <td th:class="*{getDonderdag().getAvond().getBeschikbaar()}"><input type="hidden" name="donderdagavond" th:value="*{getDonderdag().getAvond().getBeschikbaar()}">17:00-21:00</td>
+            <td th:class="*{getVrijdag().getAvond().getBeschikbaar()}"><input type="hidden" name="vrijdagavond" th:value="*{getVrijdag().getAvond().getBeschikbaar()}">17:00-21:00</td>
         </tr>
     </table>
     <button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>
