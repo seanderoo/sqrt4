@@ -1,6 +1,7 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.User;
@@ -39,19 +40,20 @@ public class AlgemeneController {
         return "";
     }
 
-    @RequestMapping(value = "/roosteraar/docent-koppelen/{cohort}", method = RequestMethod.POST)
+    @RequestMapping(value = "/roosteraar/docent-koppelen/{cohort}", method = RequestMethod.GET)
     public int getAantalWekenGeselecteerdeCohort(@PathVariable Cohort cohort) {
-        int aantalWeken = 0;
-        int startJaar = 0;
-        int eindJaar = 0;
-        int startWeek = 0;
-        int eindWeek = 0;
+        int aantalWeken = cohort.hoeveelWekenInJaar(cohort.getStartJaar());
+        int startJaar = cohort.getStartJaar();
+        int eindJaar = cohort.getEindJaar();
+        int startWeek = cohort.getStartWeek();
+        int eindWeek = cohort.getEindWeek();
         if (startJaar == eindJaar) {
             aantalWeken = eindWeek - startWeek;
         } else if (eindJaar > startJaar) {
-            aantalWeken = (AANTAL_WEKEN_IN_JAAR - startWeek) + eindWeek;
+            aantalWeken = (aantalWeken - startWeek) + eindWeek;
         }
         return aantalWeken;
+
     }
 
 }
