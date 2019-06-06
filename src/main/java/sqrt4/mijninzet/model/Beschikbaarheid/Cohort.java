@@ -50,7 +50,7 @@ public class Cohort {
         return aantalWeken;
     }
 
-    private int hoeveelWekenInJaar(int startJaar) {
+    public int hoeveelWekenInJaar(int startJaar) {
         final int REGULIER_JAAR = 52;
         final int SPECIAAL_JAAR = 53;
         int aantalWeken = 0;
