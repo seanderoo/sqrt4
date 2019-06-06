@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body onload="hideButton()">
+<body onload="hideButton();addWeekNumber()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
@@ -17,7 +17,10 @@
     <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
 </select>
 <br>
-<h5>Week 1</h5>
+<h5 id="weekNummer"></h5>
+<script>
+
+</script>
 <form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
 <table id="TableFormatter">
     <thead>
@@ -160,6 +163,7 @@
             counter--;
             console.log('Vorige week is geklikt, counter waarde: ' + counter);
         }
+        return counter;
     }
 
     function hideButton() {
@@ -171,8 +175,10 @@
         }
     }
 
-    function myFunction() {
-        document.getElementById("TableFormatter").innerHTML = "Hello World";
+    function addWeekNumber() {
+        var x = document.getElementById("weekNummer");
+        x.innerText = "Week " + addOrSubtractCounter();
     }
+
 </script>
 </html>
