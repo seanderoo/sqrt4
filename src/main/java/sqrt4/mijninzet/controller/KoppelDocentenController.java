@@ -29,10 +29,10 @@ public class KoppelDocentenController {
         int huidigeWeek = calendar.get(Calendar.WEEK_OF_YEAR);
 
         List<Cohort> cohortList = cohortRepository.findAllByStartJaarIsGreaterThanEqual(huidigeJaar);
-        List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
-
-        Predicate<Cohort> condition = cohort -> cohort.getStartJaar() == huidigeJaar && cohort.getStartWeek() < huidigeWeek;
+        Predicate<Cohort> condition = cohort -> cohort.getStartJaar() == huidigeJaar && cohort.getStartWeek() <= huidigeWeek;
         cohortList.removeIf(condition);
+
+        List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
 
         model.addAttribute("cohortList", cohortList);
         model.addAttribute("docentList", docentList);
