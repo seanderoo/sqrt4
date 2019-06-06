@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body>
+<body onload="hideButton()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
@@ -17,7 +17,7 @@
     <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
 </select>
 <br>
-<br>
+<h5>Week 1</h5>
 <form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
 <table id="TableFormatter">
     <thead>
@@ -124,7 +124,7 @@
     </tbody>
 </table>
     <br>
-    <button id="knopVorigeWeek">Vorige Week</button>    <input id="knopOpslaan" type="submit" value="Opslaan"/>    <button id="knopVolgendeWeek">Volgende Week</button>
+    <button id="knopVorigeWeek" onclick="myFunction();addOrSubtractCounter()">Vorige Week</button>    <input id="knopOpslaan" type="submit" value="Opslaan"/>    <button id="knopVolgendeWeek" onclick="myFunction();addOrSubtractCounter()">Volgende Week</button>
 </form>
 </body>
 
@@ -149,6 +149,30 @@
         };
         xhttp.open("GET", url, true);
         xhttp.send();
+    }
+
+    function addOrSubtractCounter() {
+        var counter = 0;
+        if (document.getElementById("knopVolgendeWeek").onclick) {
+            counter++;
+            console.log('Volgende week is geklikt, counter waarde: ' + counter);
+        } else if (document.getElementById("knopVorigeWeek").onclick) {
+            counter--;
+            console.log('Vorige week is geklikt, counter waarde: ' + counter);
+        }
+    }
+
+    function hideButton() {
+        var counter = 0;
+        if (counter == 0) {
+            document.getElementById("knopVorigeWeek").style.visibility = "hidden";
+        } else if (counter == getAmountOfWeeksCohort()) {
+            document.getElementById("knopVolgendeWeek").style.visibility = "hidden";
+        }
+    }
+
+    function myFunction() {
+        document.getElementById("TableFormatter").innerHTML = "Hello World";
     }
 </script>
 </html>
