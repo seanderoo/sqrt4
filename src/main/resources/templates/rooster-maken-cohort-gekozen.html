@@ -9,14 +9,6 @@
 </head>
 <style>
 
-    #karin {
-        width: 70%;
-        margin-left: 15%;
-        margin-right: 15%;
-        padding: 15px;
-        border: 1px solid darkblue;
-    }
-
     .roostertestdagdelen{
     float: left;
         width: 25%;
@@ -50,7 +42,7 @@
 
 <div class="roostertestdagdelen" id="stickyDagdelen">
     <h2>Dagdelen per vak:</h2>
-    <div th:each="vakdagdeel: ${dagdeelLijst}" >
+    <div th:each="vakdagdeel: ${vakdagdeelList}" >
         <div  class="dagdeel" th:id="${vakdagdeel.id}" th:value="${vakdagdeel.vakdagdeelNaam}" th:text="${vakdagdeel.getVakdagdeelNaam()}" draggable="true"
               ondragstart="drag(event)">dagdeelnaam</div>
     </div>

@@ -28,7 +28,7 @@ public class RoosterController extends AbstractController {
     @Autowired
     WeekRepository weekRepo;
     @Autowired
-    VakdagdeelRespository dagdeelRespository;
+    VakdagdeelRespository vakdagdeelRespository;
 
     @GetMapping("/manager/rooster-maken")
     public String maakRooster(Model model) {
@@ -42,19 +42,27 @@ public class RoosterController extends AbstractController {
                                  Model model) {
         List<Vak> vakkenLijst = vakRepo.findAll();
         model.addAttribute("vakkenLijst", vakkenLijst);
-        List<Vakdagdeel> dagdeelLijst = dagdeelRespository.findAll();
-        model.addAttribute("dagdeelLijst", dagdeelLijst);
+        List<Vakdagdeel> vakdagdeelList = vakdagdeelRespository.findAll();
+        model.addAttribute("vakdagdeelList", vakdagdeelList);
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
-        List<Vak> vakken = vakRepo.findAll();
-        model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
         return "rooster-maken-cohort-gekozen";
     }
+
+    @PostMapping("manager/rooster-maken-cohort-gekozen")
+    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
+                              @ModelAttribute("cohort") Cohort cohort,
+                              Model model) {
+        Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
+        model.addAttribute(cohort1);
+        return "rooster-maken-cohort-gekozen";
+    }
+
     @GetMapping("manager/rooster-karin")
     public String roosterKarin(@RequestParam("cohortNaam") String cohortnaam,
-                                 Model model) {
+                               Model model) {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
         List<Vak> vakken = vakRepo.findAll();
@@ -63,9 +71,8 @@ public class RoosterController extends AbstractController {
         model.addAttribute("weken", weken);
         return "rooster-karin";
     }
-
     @PostMapping("manager/rooster-karin")
-    public String weekOpslaan(@RequestParam("cohortNaam") String cohortnaam,
+    public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
                               @RequestParam("maOcht") String maOchtVak,
                               @RequestParam("diOcht") String diOchtVak,
                               @RequestParam("woOcht") String woOchtVak,
@@ -81,10 +88,6 @@ public class RoosterController extends AbstractController {
                               @RequestParam("woAvo") String woAvoVak,
                               @RequestParam("doAvo") String doAvoVak,
                               @RequestParam("vrAvo") String vrAvoVak,
-
-    @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
-                              @ModelAttribute("cohort") Cohort cohort,
                               Model model) {
         Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute(cohort1);
@@ -103,9 +106,14 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
-
+        List<Vak> vakken = vakRepo.findAll();
+        model.addAttribute("vakken", vakken);
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
+        model.addAttribute("weken", weken);
         System.out.println(cohortnaam);
-        System.out.println(cohort);
+        System.out.println(vakMaOcht);
+        System.out.println(vakVrAvo);
+        //if vak = null dan moet er iets ingevuld worden als 'geen les' 
         return "rooster-karin";
     }
 }
