@@ -5,7 +5,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.RoleRepository;
@@ -27,7 +30,7 @@ public class GebruikerController extends AbstractController {
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
         model.addAttribute("roles", rollen);
-        return "/admin/nieuwe-gebruiker";
+        return "admin/nieuwe-gebruiker";
     }
 
     @PostMapping("/nieuwe-gebruiker")
@@ -37,14 +40,14 @@ public class GebruikerController extends AbstractController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        return "/admin/gebruiker-toegevoegd";
+        return "admin/gebruiker-toegevoegd";
     }
 
     @GetMapping("/overzicht-gebruikers")
     public String overzichtGebruikers(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
-        return "/admin/overzicht-gebruikers";
+        return "admin/overzicht-gebruikers";
     }
 
     @PostMapping("/overzicht-gebruikers")
@@ -61,7 +64,7 @@ public class GebruikerController extends AbstractController {
                 userRepository.deleteById(userIdVerwijder);
                 List<User> users = userRepository.findAll();
                 model.addAttribute("gebruikers", users);
-                return "/admin/overzicht-gebruikers";
+                return "admin/overzicht-gebruikers";
             }
         } else if (userIdWijzig != null) {
             User user = userRepository.findUserById(userIdWijzig);
@@ -75,9 +78,9 @@ public class GebruikerController extends AbstractController {
             rollen = verwijderGebruikerrolUitLijst(rollen, user);
             model.addAttribute("roles", rollen);
 
-            return "/admin/wijzig-gebruiker";
+            return "admin/wijzig-gebruiker";
         }
-        return "/admin/overzicht-gebruikers";
+        return "admin/overzicht-gebruikers";
     }
 
 
@@ -90,7 +93,7 @@ public class GebruikerController extends AbstractController {
         userRepository.save(user);
         List<User> users = userRepository.findAll();
         model.addAttribute("gebruikers", users);
-        return "/admin/overzicht-gebruikers";
+        return "admin/overzicht-gebruikers";
     }
 
     private List<Role> verwijderGebruikerrolUitLijst(List<Role> lijstMetRollen, User gebruiker) {

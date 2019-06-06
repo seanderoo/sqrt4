@@ -18,14 +18,14 @@ public class VacatureController extends AbstractController{
 
     @GetMapping("/nieuwe-vacature")
     public String nieuweVacature(){
-    return "/admin/nieuwe-vacature";
+        return "admin/nieuwe-vacature";
     }
 
     @GetMapping("/overzicht-vacatures")
     public String overzichtVacatures(Model model){
         List<Vacature> vacaturelijst = vacrepo.findAll();
         model.addAttribute("vacatureLijst", vacaturelijst);
-        return "/admin/overzicht-vacatures";
+        return "admin/overzicht-vacatures";
     }
 
     @PostMapping("/overzicht-vacatures")
@@ -33,13 +33,13 @@ public class VacatureController extends AbstractController{
         vacrepo.deleteById(id);
         List<Vacature> vacaturelijst = vacrepo.findAll();
         model.addAttribute("vacatureLijst", vacaturelijst);
-        return "/admin/overzicht-vacatures";
+        return "admin/overzicht-vacatures";
     }
 
 
     @PostMapping("/vacature-toegevoegd")
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
         vacrepo.save(vacature);
-        return "/admin/vacature-toegevoegd";
+        return "admin/vacature-toegevoegd";
     }
 }

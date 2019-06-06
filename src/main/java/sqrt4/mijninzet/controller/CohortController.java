@@ -23,7 +23,7 @@ public class CohortController extends AbstractController {
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "/admin/overzicht-cohort";
+        return "admin/overzicht-cohort";
     }
 
     @PostMapping("/verwijder-cohort")
@@ -32,12 +32,12 @@ public class CohortController extends AbstractController {
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "/admin/overzicht-cohort";
+        return "admin/overzicht-cohort";
     }
 
     @GetMapping("/maakcohort")
     public String maakCohort(Model model) {
-        return "/admin/maakcohort";
+        return "admin/maakcohort";
     }
 
     @PostMapping("/maakcohort")
@@ -55,13 +55,13 @@ public class CohortController extends AbstractController {
             model.addAttribute("user", voegActiveUserToe());
         } catch (Exception e) {
             System.out.println("Something went wrong... " + e.getMessage());
-            return "/admin/overzicht-cohort";
+            return "admin/overzicht-cohort";
         }
         model.addAttribute("user", voegActiveUserToe());
         List<Cohort> cohorten = cohortRepo.findAll();
         Collections.sort(cohorten, new CohortComparator());
         model.addAttribute("cohortLijst", cohorten);
-        return "/admin/overzicht-cohort";
+        return "admin/overzicht-cohort";
     }
 
     class CohortComparator implements Comparator<Cohort> {

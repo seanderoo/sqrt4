@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import sqrt4.mijninzet.model.Vakdagdeel;
 import sqrt4.mijninzet.model.Vak;
-import sqrt4.mijninzet.repository.VakdagdeelRespository;
+import sqrt4.mijninzet.model.Vakdagdeel;
 import sqrt4.mijninzet.repository.VakRepository;
+import sqrt4.mijninzet.repository.VakdagdeelRespository;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class LesroosterController {
         model.addAttribute("vakkenLijst", vakkenLijst);
         List<Vakdagdeel> vakdagdeelLijst = vakdagdeelRespository.findAll();
         model.addAttribute("vakdagdeelLijst", vakdagdeelLijst);
-        return "/lesrooster-aanmaken";
+        return "lesrooster-aanmaken";
     }
 
 

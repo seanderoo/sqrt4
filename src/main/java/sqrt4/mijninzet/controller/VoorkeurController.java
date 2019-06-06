@@ -6,14 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
+
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class VoorkeurController extends AbstractController {
@@ -47,7 +46,7 @@ public class VoorkeurController extends AbstractController {
 
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", user);
-        return "/voorkeuren";
+        return "voorkeuren";
     }
 
     @PostMapping("/docent/voorkeuren")
@@ -62,6 +61,6 @@ public class VoorkeurController extends AbstractController {
         List<Vak> vakkenLijst = vakRepository.findAll();
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", voegActiveUserToe());
-        return "/voorkeuren";
+        return "voorkeuren";
     }
 }
