@@ -16,6 +16,7 @@ import sqrt4.mijninzet.repository.VakdagdeelRespository;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -106,14 +107,57 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
+        saveMaandagVakken(cohort1, vakMaOcht, vakMaMid, vakMaAvo);
+        saveDinsdagVakken(cohort1, vakDiOcht, vakDiMid, vakDiAvo);
+        saveWoensdagVakken(cohort1, vakWoOcht, vakWoMid, vakWoAvo);
+        saveDonderdagVakken(cohort1, vakDoOcht, vakDoMid, vakDoAvo);
+        saveVrijdagVakken(cohort1, vakVrOcht, vakVrMid, vakVrAvo);
         List<Vak> vakken = vakRepo.findAll();
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
-        System.out.println(cohortnaam);
-        System.out.println(vakMaOcht);
-        System.out.println(vakVrAvo);
-        //if vak = null dan moet er iets ingevuld worden als 'geen les' 
         return "rooster-karin";
     }
+
+    public void saveMaandagVakken(Cohort cohort, Vak maOcht, Vak maMid, Vak maAvo) {
+        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
+        Week week = weken.get(0);
+        week.getMaandag().getOchtend().setVak(maOcht);
+        week.getMaandag().getMiddag().setVak(maMid);
+        week.getMaandag().getAvond().setVak(maAvo);
+        weekRepo.save(week);
+    }
+    public void saveDinsdagVakken(Cohort cohort, Vak diOcht, Vak diMid, Vak diAvo) {
+        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
+        Week week = weken.get(0);
+        week.getDinsdag().getOchtend().setVak(diOcht);
+        week.getDinsdag().getMiddag().setVak(diMid);
+        week.getDinsdag().getAvond().setVak(diAvo);
+        weekRepo.save(week);
+    }
+    public void saveWoensdagVakken(Cohort cohort, Vak woOcht, Vak woMid, Vak woAvo) {
+        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
+        Week week = weken.get(0);
+        week.getWoensdag().getOchtend().setVak(woOcht);
+        week.getWoensdag().getMiddag().setVak(woMid);
+        week.getWoensdag().getAvond().setVak(woAvo);
+        weekRepo.save(week);
+    }
+    public void saveDonderdagVakken(Cohort cohort, Vak doOcht, Vak doMid, Vak doAvo) {
+        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
+        Week week = weken.get(0);
+        week.getDonderdag().getOchtend().setVak(doOcht);
+        week.getDonderdag().getMiddag().setVak(doMid);
+        week.getDonderdag().getAvond().setVak(doAvo);
+        weekRepo.save(week);
+    }
+    public void saveVrijdagVakken(Cohort cohort, Vak vrOcht, Vak vrMid, Vak vrAvo) {
+        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
+        Week week = weken.get(0);
+        week.getVrijdag().getOchtend().setVak(vrOcht);
+        week.getVrijdag().getMiddag().setVak(vrMid);
+        week.getVrijdag().getAvond().setVak(vrAvo);
+        weekRepo.save(week);
+    }
+
 }
