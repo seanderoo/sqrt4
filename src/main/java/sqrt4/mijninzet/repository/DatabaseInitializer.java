@@ -57,12 +57,17 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik", "");
+        User huub = new User("H", passwordEncoder.encode("H123"), "DOCENT", "", "Huub", "van Thienen", "");
+        User gerke = new User("G", passwordEncoder.encode("G123"), "DOCENT", "", "Gerke", "de Boer", "");
+        User lillian = new User("L", passwordEncoder.encode("L123"), "DOCENT", "", "Lilian", "Smits", "");
+        User remi = new User("Re", passwordEncoder.encode("R123"), "DOCENT", "", "Remi", "de Boer", "");
+        User ronald = new User("Ro", passwordEncoder.encode("Ro123"), "DOCENT", "", "Ronald", "Kleijn", "");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN", "", "Adje", "de Admin", "");
         User manager1 = new User("Manager", passwordEncoder.encode("M123"), "MANAGER", "", "M", "Anager", "");
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
 
 
-        List<User> users = Arrays.asList(matthijs, admin, manager1, roosteraar1);
+        List<User> users = Arrays.asList(matthijs, huub, gerke, lillian, remi, ronald, admin, manager1, roosteraar1);
 
         //Create vacatures
         Vacature coordinatorC16 = new Vacature("Coordinator Cohort 15",
@@ -84,10 +89,13 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
 
         //Create Cohort
-        Cohort cohort = new Cohort(20,20,2020,21);
-        Cohort cohort1 = new Cohort(17, 32, 2019,52);
-        Cohort cohort2 = new Cohort(18, 2, 2020, 23);
-        List<Cohort> cohorts = Arrays.asList(cohort, cohort1, cohort2);
+        Cohort cohort15 = new Cohort(15,6,2019,27);
+        Cohort cohort16 = new Cohort(16, 16, 2019,37);
+        Cohort cohort17 = new Cohort(17, 26, 2019, 47);
+        Cohort cohort18 = new Cohort(18, 36, 2019, 3);
+        Cohort cohort19 = new Cohort(19, 46, 2019, 13);
+        Cohort cohort20 = new Cohort(20, 4, 2020, 23);
+        List<Cohort> cohorts = Arrays.asList(cohort15, cohort16, cohort17, cohort18, cohort19, cohort20);
 
         //save to db
         this.userRepository.saveAll(users);

@@ -59,21 +59,21 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
 
         Week algemeneWeek = weekRepo.findByWeekNummerAndUser(NUMMER_ALGEMENE_WEEK,voegActiveUserToe());
 
-        algemeneWeek.getDag("maandag").setOchtend(maOBeschikbaar);
-        algemeneWeek.getDag("maandag").setMiddag(maMBeschikbaar);
-        algemeneWeek.getDag("maandag").setAvond(maABeschikbaar);
-        algemeneWeek.getDag("dinsdag").setOchtend(diOBeschikbaar);
-        algemeneWeek.getDag("dinsdag").setMiddag(diMBeschikbaar);
-        algemeneWeek.getDag("dinsdag").setAvond(diABeschikbaar);
-        algemeneWeek.getDag("woensdag").setOchtend(woOBeschikbaar);
-        algemeneWeek.getDag("woensdag").setMiddag(woMBeschikbaar);
-        algemeneWeek.getDag("woensdag").setAvond(woABeschikbaar);
-        algemeneWeek.getDag("donderdag").setOchtend(doOBeschikbaar);
-        algemeneWeek.getDag("donderdag").setMiddag(doMBeschikbaar);
-        algemeneWeek.getDag("donderdag").setAvond(doABeschikbaar);
-        algemeneWeek.getDag("vrijdag").setOchtend(vrOBeschikbaar);
-        algemeneWeek.getDag("vrijdag").setMiddag(vrMBeschikbaar);
-        algemeneWeek.getDag("vrijdag").setAvond(vrABeschikbaar);
+        algemeneWeek.getDag("maandag").getOchtend().setBeschikbaar(maOBeschikbaar);
+        algemeneWeek.getDag("maandag").getMiddag().setBeschikbaar(maMBeschikbaar);
+        algemeneWeek.getDag("maandag").getAvond().setBeschikbaar(maABeschikbaar);
+        algemeneWeek.getDag("dinsdag").getOchtend().setBeschikbaar(diOBeschikbaar);
+        algemeneWeek.getDag("dinsdag").getMiddag().setBeschikbaar(diMBeschikbaar);
+        algemeneWeek.getDag("dinsdag").getAvond().setBeschikbaar(diABeschikbaar);
+        algemeneWeek.getDag("woensdag").getOchtend().setBeschikbaar(woOBeschikbaar);
+        algemeneWeek.getDag("woensdag").getMiddag().setBeschikbaar(woMBeschikbaar);
+        algemeneWeek.getDag("woensdag").getAvond().setBeschikbaar(woABeschikbaar);
+        algemeneWeek.getDag("donderdag").getOchtend().setBeschikbaar(doOBeschikbaar);
+        algemeneWeek.getDag("donderdag").getMiddag().setBeschikbaar(doMBeschikbaar);
+        algemeneWeek.getDag("donderdag").getAvond().setBeschikbaar(doABeschikbaar);
+        algemeneWeek.getDag("vrijdag").getOchtend().setBeschikbaar(vrOBeschikbaar);
+        algemeneWeek.getDag("vrijdag").getMiddag().setBeschikbaar(vrMBeschikbaar);
+        algemeneWeek.getDag("vrijdag").getAvond().setBeschikbaar(vrABeschikbaar);
 
         weekRepo.save(algemeneWeek);
         model.addAttribute("algemeneWeek", algemeneWeek);

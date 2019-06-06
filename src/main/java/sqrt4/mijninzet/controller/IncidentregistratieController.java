@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
+import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Incident;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
 import sqrt4.mijninzet.repository.UserRepository;
@@ -22,7 +23,7 @@ import java.util.List;
 public class IncidentregistratieController extends AbstractController {
 
     @Autowired
-    IncidentregistratieRepository repo;
+    IncidentregistratieRepository repoIncident;
 
     @Autowired
     WeekRepository repoWeek;
@@ -32,7 +33,7 @@ public class IncidentregistratieController extends AbstractController {
 
     @GetMapping("/docent/incidentregistratie")
     public String Incidentregistratie(Model model) {
-        List<Incident> incidentList = repo.findAllByUser(voegActiveUserToe());
+        List<Incident> incidentList = repoIncident.findAllByUser(voegActiveUserToe());
         model.addAttribute("incidentLijst", incidentList);
         return "incidentregistratie";
     }
@@ -40,6 +41,9 @@ public class IncidentregistratieController extends AbstractController {
     @ModelAttribute("dag")
     public Dag dag() {
         Dag dag = new Dag();
+        dag.setOchtend(new Dagdeel(true,dag));
+        dag.setMiddag(new Dagdeel(true,dag));
+        dag.setAvond(new Dagdeel(true,dag));
         return dag;
     }
 
@@ -50,18 +54,18 @@ public class IncidentregistratieController extends AbstractController {
                                      @RequestParam("datum") String datum,
                                      Model model) {
         LocalDate date = LocalDate.parse(datum);
-        if ( repo.existsById(date) ) {
-            Incident temp = repo.findByDatum(date);
+        if ( repoIncident.existsById(date) ) {
+            Incident temp = repoIncident.findByDatum(date);
             temp.setOchtend(ochtend);
             temp.setMiddag(middag);
             temp.setAvond(avond);
-            repo.save(temp);
+            repoIncident.save(temp);
         } else {
             Incident temp = new Incident(date, ochtend, middag, avond);
             temp.setUser(voegActiveUserToe());
-            repo.save(temp);
+            repoIncident.save(temp);
         }
-        List<Incident> incidentList = repo.findAllByUser(voegActiveUserToe());
+        List<Incident> incidentList = repoIncident.findAllByUser(voegActiveUserToe());
         Collections.sort(incidentList, new IncidentComparator());
         model.addAttribute("incidentLijst", incidentList);
         return "incidentregistratie";
@@ -76,8 +80,8 @@ public class IncidentregistratieController extends AbstractController {
 
 //    @PostMapping(value = "/docent/incidentregistratie")
 //    public String verwijderIncident(@RequestParam("Verwijderen")LocalDate date, Model model){
-//        repo.deleteByDatum(date);
-//        List<Incident> incidentList = repo.findAll();
+//        repoIncident.deleteByDatum(date);
+//        List<Incident> incidentList = repoIncident.findAll();
 //        model.addAttribute("incidentLijst", incidentList);
 //        return "incidentregistratie";
 //
@@ -89,7 +93,7 @@ public class IncidentregistratieController extends AbstractController {
 //        gekozenDag = gekozendatum;
 //
 //        LocalDate date = LocalDate.parse(gekozenDag);
-//        Dag tempDag = repo.findDagByDatum(date);
+//        Dag tempDag = repoIncident.findDagByDatum(date);
 //        int weekNr = tempDag.getWeekNummer();
 //        int weekJr = tempDag.getJaarNummer();
 //        Week tempWeek = repoWeek.findByJaarNummerAndWeekNummer(weekJr, weekNr);
