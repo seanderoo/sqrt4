@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body onload="hideButton();addWeekNumber()">
+<body onload="hideVorigeWeekButton();addWeekNumber()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
@@ -17,7 +17,7 @@
     <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
 </select>
 <br>
-<h5 id="weekNummer"></h5>
+<h5 id="weekNummer" onchange="counter"></h5>
 <script>
 
 </script>
@@ -127,8 +127,14 @@
     </tbody>
 </table>
     <br>
-    <button id="knopVorigeWeek" onclick="myFunction();addOrSubtractCounter()">Vorige Week</button>    <input id="knopOpslaan" type="submit" value="Opslaan"/>    <button id="knopVolgendeWeek" onclick="myFunction();addOrSubtractCounter()">Volgende Week</button>
+        <input id="knopOpslaan" type="submit" value="Opslaan"/>
+
+
+
 </form>
+<br>
+<button id="knopVorigeWeek" onclick="subtractCounter();addWeekNumber();hideVorigeWeekButton()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();hideVolgendeWeekButton();addWeekNumber()">Volgende Week</button>
+
 </body>
 
 <script>
@@ -147,38 +153,47 @@
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("geselecteerdeCohort").value = this.responseText;
                 document.getElementById("geselecteerdeCohort").selectedIndex = selectedIndice;
-                console.log("aantal weken geselecteerde cohort = " + this.responseText)
+                hideVorigeWeekButton();
+                hideVolgendeWeekButton();
             }
         };
-        xhttp.open("GET", url, true);
+        xhttp.open("POST", url, true);
         xhttp.send();
     }
 
-    function addOrSubtractCounter() {
-        var counter = 0;
+    var counter = 1;
+
+    function addCounter() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
             counter++;
             console.log('Volgende week is geklikt, counter waarde: ' + counter);
-        } else if (document.getElementById("knopVorigeWeek").onclick) {
+        }
+    }
+
+    function subtractCounter() {
+        if (document.getElementById("knopVorigeWeek").onclick) {
             counter--;
             console.log('Vorige week is geklikt, counter waarde: ' + counter);
         }
-        return counter;
     }
 
-    function hideButton() {
-        var counter = 0;
-        if (counter == 0) {
+    function hideVorigeWeekButton() {
+        if (counter <= 1) {
             document.getElementById("knopVorigeWeek").style.visibility = "hidden";
-        } else if (counter == getAmountOfWeeksCohort()) {
+        } else {
+            document.getElementById("knopVorigeWeek").style.visibility = "visible";
+        }
+    }
+
+    function hideVolgendeWeekButton() {
+        if (counter == getAmountOfWeeksCohort()) {
             document.getElementById("knopVolgendeWeek").style.visibility = "hidden";
         }
     }
 
     function addWeekNumber() {
         var x = document.getElementById("weekNummer");
-        x.innerText = "Week " + addOrSubtractCounter();
+        x.innerText = "Week " + counter;
     }
-
 </script>
 </html>

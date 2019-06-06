@@ -40,7 +40,7 @@ public class AlgemeneController {
         return "";
     }
 
-    @RequestMapping(value = "/roosteraar/docent-koppelen/{cohort}", method = RequestMethod.GET)
+    @RequestMapping(value = "/roosteraar/docent-koppelen/{cohort}", method = RequestMethod.POST)
     public int getAantalWekenGeselecteerdeCohort(@PathVariable Cohort cohort) {
         int aantalWeken = cohort.hoeveelWekenInJaar(cohort.getStartJaar());
         int startJaar = cohort.getStartJaar();
