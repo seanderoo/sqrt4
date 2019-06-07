@@ -58,10 +58,14 @@ public class RoosterController extends AbstractController {
     @GetMapping("manager/rooster-maken-cohort-gekozen")
     public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
                                  Model model) {
-        List<Vak> vakkenLijst = vakRepo.findAll();
-        model.addAttribute("vakkenLijst", vakkenLijst);
         List<Vakdagdeel> vakdagdeelList = vakdagdeelRespository.findAll();
-        model.addAttribute("vakdagdeelList", vakdagdeelList);
+        List<Vakdagdeel> schoneVakdagdeellijst = new ArrayList<>();
+        for (Vakdagdeel vdd : vakdagdeelList) {
+            if (vdd.getVak() != null) {
+                schoneVakdagdeellijst.add(vdd);
+            }
+        }
+        model.addAttribute("vakdagdeelList", schoneVakdagdeellijst);
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
@@ -70,11 +74,95 @@ public class RoosterController extends AbstractController {
     }
 
     @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
-                              @ModelAttribute("cohort") Cohort cohort,
+    public String weekOpslaan(@RequestParam("cohortje") String cohortId,
+                              @RequestParam("maandagochtend") String maandagochtend,
+                              @RequestParam("maandagmiddag") String maandagmiddag,
+                              @RequestParam("maandagavond") String maandagavond,
+                              @RequestParam("dinsdagochtend") String dinsdagochtend,
+                              @RequestParam("dinsdagmiddag") String dinsdagmiddag,
+                              @RequestParam("dinsdagavond") String dinsdagavond,
+                              @RequestParam("woensdagochtend") String woensdagochtend,
+                              @RequestParam("woensdagmiddag") String woensdagmiddag,
+                              @RequestParam("woensdagavond") String woensdagavond,
+                              @RequestParam("donderdagochtend") String donderdagochtend,
+                              @RequestParam("donderdagmiddag") String donderdagmiddag,
+                              @RequestParam("donderdagavond") String donderdagavond,
+                              @RequestParam("vrijdagochtend") String vrijdagochtend,
+                              @RequestParam("vrijdagmiddag") String vrijdagmiddag,
+                              @RequestParam("vrijdagavond") String vrijdagavond,
                               Model model) {
-        Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
-        model.addAttribute(cohort1);
+        Cohort cohort = cohortRepo.findById(Integer.parseInt(cohortId));
+
+        Vakdagdeel vddMaO = vakdagdeelRespository.findById(Integer.parseInt(maandagochtend));
+        int vakMaOId = vddMaO.getVak().getVakId();
+        Vak vakMaO = vakRepo.findById(vakMaOId);
+        Vakdagdeel vddMaM = vakdagdeelRespository.findById(Integer.parseInt(maandagmiddag));
+        int vakMaMId = vddMaM.getVak().getVakId();
+        Vak vakMaM = vakRepo.findById(vakMaMId);
+        Vakdagdeel vddMaA = vakdagdeelRespository.findById(Integer.parseInt(maandagavond));
+        int vakMaAId = vddMaA.getVak().getVakId();
+        Vak vakMaA = vakRepo.findById(vakMaAId);
+        saveMaandagVakken(cohort, vakMaO, vakMaM, vakMaA);
+
+        Vakdagdeel vddDiO = vakdagdeelRespository.findById(Integer.parseInt(dinsdagochtend));
+        int vakDiOId = vddDiO.getVak().getVakId();
+        Vak vakDiO = vakRepo.findById(vakDiOId);
+        Vakdagdeel vddDiM = vakdagdeelRespository.findById(Integer.parseInt(dinsdagmiddag));
+        int vakDiMId = vddDiM.getVak().getVakId();
+        Vak vakDiM = vakRepo.findById(vakDiMId);
+        Vakdagdeel vddDiA = vakdagdeelRespository.findById(Integer.parseInt(dinsdagavond));
+        int vakDiAId = vddDiA.getVak().getVakId();
+        Vak vakDiA = vakRepo.findById(vakDiAId);
+        saveDinsdagVakken(cohort, vakDiO, vakDiM, vakDiA);
+
+
+        Vakdagdeel vddWoO = vakdagdeelRespository.findById(Integer.parseInt(woensdagochtend));
+        int vakWoOId = vddWoO.getVak().getVakId();
+        Vak vakWoO = vakRepo.findById(vakWoOId);
+        Vakdagdeel vddWoM = vakdagdeelRespository.findById(Integer.parseInt(woensdagmiddag));
+        int vakWoMId = vddWoM.getVak().getVakId();
+        Vak vakWoM = vakRepo.findById(vakWoMId);
+        Vakdagdeel vddWoA = vakdagdeelRespository.findById(Integer.parseInt(woensdagavond));
+        int vakWoAId = vddWoA.getVak().getVakId();
+        Vak vakWoA = vakRepo.findById(vakWoAId);
+        saveWoensdagVakken(cohort, vakWoO, vakWoM, vakWoA);
+
+
+        Vakdagdeel vddDoO = vakdagdeelRespository.findById(Integer.parseInt(donderdagochtend));
+        int vakDoOId = vddDoO.getVak().getVakId();
+        Vak vakDoO = vakRepo.findById(vakDoOId);
+        Vakdagdeel vddDoM = vakdagdeelRespository.findById(Integer.parseInt(donderdagmiddag));
+        int vakDoMId = vddDoM.getVak().getVakId();
+        Vak vakDoM = vakRepo.findById(vakDoMId);
+        Vakdagdeel vddDoA = vakdagdeelRespository.findById(Integer.parseInt(donderdagavond));
+        int vakDoAId = vddDoA.getVak().getVakId();
+        Vak vakDoA = vakRepo.findById(vakDoAId);
+        saveDonderdagVakken(cohort, vakDoO, vakDoM, vakDoA);
+
+
+        Vakdagdeel vddVrO = vakdagdeelRespository.findById(Integer.parseInt(vrijdagochtend));
+        int vakVrOId = vddVrO.getVak().getVakId();
+        Vak vakVroO = vakRepo.findById(vakVrOId);
+        Vakdagdeel vddVrM = vakdagdeelRespository.findById(Integer.parseInt(vrijdagmiddag));
+        int vakVrMId = vddVrM.getVak().getVakId();
+        Vak vakVrM = vakRepo.findById(vakVrMId);
+        Vakdagdeel vddVrA = vakdagdeelRespository.findById(Integer.parseInt(vrijdagavond));
+        int vakVrAId = vddVrA.getVak().getVakId();
+        Vak vakVrA = vakRepo.findById(vakVrAId);
+        saveDonderdagVakken(cohort, vakVroO, vakVrM, vakVrA);
+
+        List<Vakdagdeel> vakdagdeelList = vakdagdeelRespository.findAll();
+        List<Vakdagdeel> schoneVakdagdeellijst = new ArrayList<>();
+        for (Vakdagdeel vdd : vakdagdeelList) {
+            if (vdd.getVak() != null) {
+                schoneVakdagdeellijst.add(vdd);
+            }
+        }
+        model.addAttribute("vakdagdeelList", schoneVakdagdeellijst);
+        model.addAttribute("cohort", cohort);
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+
         return "rooster-maken-cohort-gekozen";
     }
 
@@ -175,6 +263,16 @@ public class RoosterController extends AbstractController {
         week.getVrijdag().getMiddag().setVak(vrMid);
         week.getVrijdag().getAvond().setVak(vrAvo);
         weekRepo.save(week);
+    }
+
+    public int omzettenNaarWerkendeInt(String nietWerkendeInt) {
+        final int WERKENDE_LEGE_INT = 0;
+        int werkendeInt = Integer.parseInt(nietWerkendeInt);
+        if (nietWerkendeInt == null) {
+            werkendeInt = WERKENDE_LEGE_INT;
+        }
+        return werkendeInt;
+
     }
 
 }
