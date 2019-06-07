@@ -75,6 +75,7 @@ public class RoosterController extends AbstractController {
 
     @PostMapping("manager/rooster-maken-cohort-gekozen")
     public String weekOpslaan(@RequestParam("cohortje") String cohortId,
+                              @RequestParam(value = "week", required = false) Integer weeknummer,
                               @RequestParam("maandagochtend") String maandagochtend,
                               @RequestParam("maandagmiddag") String maandagmiddag,
                               @RequestParam("maandagavond") String maandagavond,
@@ -102,7 +103,7 @@ public class RoosterController extends AbstractController {
         Vakdagdeel vddMaA = vakdagdeelRespository.findById(Integer.parseInt(maandagavond));
         int vakMaAId = vddMaA.getVak().getVakId();
         Vak vakMaA = vakRepo.findById(vakMaAId);
-        saveMaandagVakken(cohort, vakMaO, vakMaM, vakMaA);
+        saveMaandagVakken(cohort, weeknummer, vakMaO, vakMaM, vakMaA);
 
         Vakdagdeel vddDiO = vakdagdeelRespository.findById(Integer.parseInt(dinsdagochtend));
         int vakDiOId = vddDiO.getVak().getVakId();
@@ -113,7 +114,7 @@ public class RoosterController extends AbstractController {
         Vakdagdeel vddDiA = vakdagdeelRespository.findById(Integer.parseInt(dinsdagavond));
         int vakDiAId = vddDiA.getVak().getVakId();
         Vak vakDiA = vakRepo.findById(vakDiAId);
-        saveDinsdagVakken(cohort, vakDiO, vakDiM, vakDiA);
+        saveDinsdagVakken(cohort, weeknummer, vakDiO, vakDiM, vakDiA);
 
 
         Vakdagdeel vddWoO = vakdagdeelRespository.findById(Integer.parseInt(woensdagochtend));
@@ -125,7 +126,7 @@ public class RoosterController extends AbstractController {
         Vakdagdeel vddWoA = vakdagdeelRespository.findById(Integer.parseInt(woensdagavond));
         int vakWoAId = vddWoA.getVak().getVakId();
         Vak vakWoA = vakRepo.findById(vakWoAId);
-        saveWoensdagVakken(cohort, vakWoO, vakWoM, vakWoA);
+        saveWoensdagVakken(cohort, weeknummer, vakWoO, vakWoM, vakWoA);
 
 
         Vakdagdeel vddDoO = vakdagdeelRespository.findById(Integer.parseInt(donderdagochtend));
@@ -137,7 +138,7 @@ public class RoosterController extends AbstractController {
         Vakdagdeel vddDoA = vakdagdeelRespository.findById(Integer.parseInt(donderdagavond));
         int vakDoAId = vddDoA.getVak().getVakId();
         Vak vakDoA = vakRepo.findById(vakDoAId);
-        saveDonderdagVakken(cohort, vakDoO, vakDoM, vakDoA);
+        saveDonderdagVakken(cohort, weeknummer, vakDoO, vakDoM, vakDoA);
 
 
         Vakdagdeel vddVrO = vakdagdeelRespository.findById(Integer.parseInt(vrijdagochtend));
@@ -149,7 +150,7 @@ public class RoosterController extends AbstractController {
         Vakdagdeel vddVrA = vakdagdeelRespository.findById(Integer.parseInt(vrijdagavond));
         int vakVrAId = vddVrA.getVak().getVakId();
         Vak vakVrA = vakRepo.findById(vakVrAId);
-        saveDonderdagVakken(cohort, vakVroO, vakVrM, vakVrA);
+        saveDonderdagVakken(cohort, weeknummer, vakVroO, vakVrM, vakVrA);
 
         List<Vakdagdeel> vakdagdeelList = vakdagdeelRespository.findAll();
         List<Vakdagdeel> schoneVakdagdeellijst = new ArrayList<>();
