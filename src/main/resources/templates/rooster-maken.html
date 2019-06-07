@@ -17,13 +17,13 @@
 <table>
     <tr>
         <td><label>Voor welk Cohort wilt u een rooster aanmaken? </label></td>
-        <td><select id="selectCohort" th:name="cohortNaam">
-            <option>Kies een cohort</option>
-            <option th:each="cohort: ${cohorten}"
-                        th:value="${cohort.cohortNaam}"
-                        th:text="${cohort.cohortNaam}">
-            </option>
-        </select>
+        <td>
+            <div class="styled-select">
+                <select id="selectCohort" th:name="cohortNaam">
+                    <option>Kies een cohort</option>
+                    <option th:each="cohort: ${cohorten}" th:value="${cohort.cohortNaam}" th:text="${cohort.cohortNaam}"></option>
+                </select>
+            </div>
         </td>
     </tr>
     <tr>
