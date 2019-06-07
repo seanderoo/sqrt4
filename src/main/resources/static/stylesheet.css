@@ -111,6 +111,7 @@ button:not(.dropbtn), input {
     padding:6px 18px;
     text-decoration:none;
     text-shadow:0px 1px 0px #283966;
+    outline: none;
 }
 
 .input_gebruiker {
@@ -128,10 +129,12 @@ button:hover:not(.dropbtn), input:hover {
     background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
     background-color:#476e9e;
+    outline: none;
 }
 button:active:not(.dropbtn) {
     position:relative;
     top:1px;
+    outline: none;
 }
 
 .styled-select {

@@ -26,7 +26,7 @@
 
 
     <form id="rooster" action="#" th:action="@{/manager/rooster-karin}" th:object="${cohort}" method="post">
-        <table>
+        <table id="TableFormatter">
             <thead id="gekozenCohort"><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
             <tr>
                 <th> Week <span th:text="${weken.get(0).getWeekNummer()}"/></th>
