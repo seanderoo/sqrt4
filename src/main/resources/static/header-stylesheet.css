@@ -1,9 +1,17 @@
-* {box-sizing: border-box}
+* {
+    box-sizing: border-box;
+}
+
+header, .dropbtn {
+    text-transform: uppercase;
+}
 
 .navbar {
     overflow: hidden;
-    background-color: darkblue;
+    background-color: #665ba2;
     text-align: center;
+    font-family: Helvetica;
+    font-weight: 400;
     z-index: 0;
     width: 100%;
 }
@@ -21,8 +29,7 @@
 }
 
 .navbar a:hover, .dropdown:hover{
-    background-color: white;
-    color: darkblue;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 500px) {
@@ -36,7 +43,6 @@
 
 .dropdown{
     float: left;
-    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -59,8 +65,7 @@
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn{
-    background-color: white;
-    color: darkblue;
+    color: #ffffff;
 }
 
 .dropdown-content {
@@ -71,7 +76,6 @@
     box-shadow: 0px 8px 16px 0px
     rgba(0,0,0,0.2);
     z-index: 10;
-
 }
 
 .dropdown-content a{

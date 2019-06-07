@@ -43,26 +43,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><select id="maOch" th:name="vakken">
+        <td><div class="styled-select"><select id="maOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="diOch" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="diOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="woOch" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="woOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="doOch" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="doOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="vrOch" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="vrOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
+        </select></div></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="middag">13:00 - 17:00</td>
@@ -73,26 +73,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><select id="maMid" th:name="vakken">
+        <td><div class="styled-select"><select id="maMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="diMid" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="diMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="woMid" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="woMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="doMid" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="doMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="vrMid" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="vrMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
+        </select></div></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="avond">17:00 - 21:00</td>
@@ -103,26 +103,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><select id="maAvo" th:name="vakken">
+        <td><div class="styled-select"><select id="maAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="diAvo" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="diAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="woAvo" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="woAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="doAvo" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="doAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
-        <td><select id="vrAvo" th:name="vakken">
+        </select></div></td>
+        <td><div class="styled-select"><select id="vrAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></td>
+        </select></div></td>
     </tr>
     </tbody>
 </table>
