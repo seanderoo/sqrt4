@@ -16,14 +16,14 @@
 </p>
 <div id="nieuwVakForm">
     <form action="#" th:action="@{/manager/vak-toegevoegd}" th:method="POST">
-        <table>
+        <table id="TableFormatter">
             <tr>
                 <td><label>Vaknaam</label></td>
-                <td><input type="text" th:name="vakNaam" required></td>
+                <td><input class="input_gebruiker" type="text" th:name="vakNaam" required></td>
             </tr>
             <tr>
                 <td><label>Aantal uren</label></td>
-                <td><input type="text" th:name="aantalUren" required></td>
+                <td><input class="input_gebruiker" type="text" th:name="aantalUren" required></td>
             </tr>
             <tr>
                 <td></td><td> <input type="submit" value="Vak opslaan"/></td>

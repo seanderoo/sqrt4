@@ -16,26 +16,26 @@
 <h1>Nieuwe Gebruiker toevoegen</h1>
 <div id="nieuwegebruikerform">
     <form action="#" th:action="@{/admin/nieuwe-gebruiker}" th:method="POST">
-        <table>
+        <table id="TableFormatter">
             <tr>
                 <td> <label>Voornaam</label></td>
-                <td><input type="text" th:name="firstName" size="40" required></td>
+                <td><input class="input_gebruiker" type="text" th:name="firstName" size="40" required></td>
             </tr>
        <tr>
            <td><label>Achternaam</label></td>
-           <td><input type="text" th:name="lastName" size="40" required></td>
+           <td><input class="input_gebruiker" type="text" th:name="lastName" size="40" required></td>
        </tr>
            <tr>
                <td><label>Inlognaam</label></td>
-               <td> <input type="text" th:name="username" size="40" required></td>
+               <td> <input class="input_gebruiker" type="text" th:name="username" size="40" required></td>
            </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
-                <td> <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
+                <td> <input class="input_gebruiker" id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
             </tr>
             <tr>
                 <td>  <label>Herhaal wachtwoord</label></td>
-                <td>   <input id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>

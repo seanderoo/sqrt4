@@ -11,7 +11,9 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Overzicht Gebruikers</h1>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek gebruiker">
+<input class="input_gebruiker" type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek gebruiker">
+<br>
+<br>
 <form action = "#" th:action="@{/admin/overzicht-gebruikers}" th:method="POST">
 <table id="TableFormatter">
     <thead>
