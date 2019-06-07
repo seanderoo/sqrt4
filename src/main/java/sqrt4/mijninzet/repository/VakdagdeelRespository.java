@@ -7,4 +7,6 @@ import sqrt4.mijninzet.model.Vakdagdeel;
 @Repository
 public interface VakdagdeelRespository extends JpaRepository<Vakdagdeel, Integer> {
 
+    Vakdagdeel findById(int id);
+
 }

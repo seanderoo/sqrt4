@@ -60,11 +60,35 @@ public class RoosterController extends AbstractController {
     }
 
     @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam(value = "cohort") String cohortnaam,
-                              @ModelAttribute("cohort") Cohort cohort,
+    public String weekOpslaan(@RequestParam("cohortje") String cohortId,
+                              @RequestParam("maandagochtend") String maandagochtend,
+                              @RequestParam("maandagmiddag") String maandagmiddag,
+                              @RequestParam("maandagavond") String maandagavond,
+                              @RequestParam("dinsdagochtend") String dinsdagochtend,
+                              @RequestParam("dinsdagmiddag") String dinsdagmiddag,
+                              @RequestParam("dinsdagavond") String dinsdagavond,
+                              @RequestParam("woensdagochtend") String woensdagochtend,
+                              @RequestParam("woensdagmiddag") String woensdagmiddag,
+                              @RequestParam("woensdagavond") String woensdagavond,
+                              @RequestParam("donderdagochtend") String donderdagochtend,
+                              @RequestParam("donderdagmiddag") String donderdagmiddag,
+                              @RequestParam("donderdagavond") String donderdagavond,
+                              @RequestParam("vrijdagochtend") String vrijdagochtend,
+                              @RequestParam("vrijdagmiddag") String vrijdagmiddag,
+                              @RequestParam("vrijdagavond") String vrijdagavond,
                               Model model) {
-        Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
-        model.addAttribute(cohort1);
+        Cohort cohort = cohortRepo.findById(Integer.parseInt(cohortId));
+        Vakdagdeel vddMaO = vakdagdeelRespository.findById(Integer.parseInt(maandagochtend));
+        int vakMaOId = vddMaO.getVak().getVakId();
+        Vak vakMaO = vakRepo.findById(vakMaOId);
+        Vakdagdeel vddMaM = vakdagdeelRespository.findById(Integer.parseInt(maandagmiddag));
+        int vakMaMId = vddMaM.getVak().getVakId();
+        Vak vakMaM = vakRepo.findById(vakMaMId);
+        Vakdagdeel vddMaA = vakdagdeelRespository.findById(Integer.parseInt(maandagavond));
+        int vakMaAId = vddMaO.getVak().getVakId();
+        Vak vakMaA = vakRepo.findById(vakMaAId);
+        saveMaandagVakken(cohort, vakMaO, vakMaM, vakMaA);
+        model.addAttribute("cohort", cohort);
         return "rooster-maken-cohort-gekozen";
     }
 

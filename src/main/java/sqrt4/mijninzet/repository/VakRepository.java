@@ -10,5 +10,6 @@ import java.util.List;
 public interface VakRepository extends JpaRepository<Vak, Integer> {
 
     Vak findByVakNaam(String vaknaam);
+    Vak findById(int Id);
 
 }

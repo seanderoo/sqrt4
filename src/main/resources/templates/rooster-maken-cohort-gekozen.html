@@ -53,6 +53,7 @@
 
 <th:block th:each="week: ${weken}">
     <form class="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort.cohortNaam}" method="post">
+        <input type="hidden" name="cohortje" th:value="${cohort.getId()}">
         <table id="dropzone">
             <thead id="gekozenCohort"></thead>
             <tr>
