@@ -21,20 +21,22 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<h2>Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>. Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
+<h2 id="gekozenCohort" th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>. Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
  t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
 
 
-    <form id="rooster" action="#" th:action="@{/manager/rooster-karin}" th:object="${cohort}" method="post">
-        <table id="TableFormatter">
-            <thead id="gekozenCohort"><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
+    <form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+        <table>
+            <thead><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
             <tr>
-                <th> Week <span th:text="${weken.get(0).getWeekNummer()}"/></th>
-                <th th:text="${weken.get(0).getMaandag().getDatum()}">maandag</th>
-                <th th:text="${weken.get(0).getDinsdag().getDatum()}">dinsdag</th>
-                <th th:text="${weken.get(0).getWoensdag().getDatum()}">woensdag</th>
-                <th th:text="${weken.get(0).getDonderdag().getDatum()}">donderdag</th>
-                <th th:text="${weken.get(0).getVrijdag().getDatum()}">vrijdag</th>
+                <th><select id="week" name="week">
+                    <option th:each="week: ${weken}" th:value="${week.getWeekNummer()}" th:text="${week.getWeekNummerTekst()}"></option>
+                </select> </th>
+                <th id="maandag">maandag</th>
+                <th>dinsdag</th>
+                <th>woensdag</th>
+                <th>donderdag</th>
+                <th>vrijdag</th>
             </tr>
             <tr>
                 <td th:value="ochtend">9:00 - 13:00</td>
@@ -109,12 +111,12 @@
         <button type="submit" >Sla week op</button>
     </form>
 <p>
-    Hieronder alle weken
+    Hieronder een overzicht van alle weken van dit cohort
 </p>
 <th:block th:each="week: ${weken}">
-    <form id="rooster" action="#" th:action="@{/manager/rooster-karin}" th:object="${cohort}" method="post">
-        <table>
-            <thead><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
+    <form>
+        <table id="TableFormatter">
+            <thead> </thead>
             <tr>
                 <th>Week <span th:text="${week.getWeekNummer()}"></span></th>
                 <th th:text="${week.getMaandag().getDatum()}">maandag</th>

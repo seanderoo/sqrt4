@@ -61,6 +61,10 @@ public class Week {
         return weekNummer;
     }
 
+    public String getWeekNummerTekst() {
+        return "Week " + this.weekNummer;
+    }
+
     public void setWeekNummer(int weekNummer) {
         this.weekNummer = weekNummer;
     }
