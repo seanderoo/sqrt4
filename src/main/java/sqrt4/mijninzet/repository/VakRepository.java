@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface VakRepository extends JpaRepository<Vak, Integer> {
 
+    Vak findByVakNaam(String vaknaam);
+
 }

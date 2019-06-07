@@ -42,7 +42,7 @@
 
 <div class="roostertestdagdelen" id="stickyDagdelen">
     <h2>Dagdelen per vak:</h2>
-    <div th:each="vakdagdeel: ${dagdeelLijst}" >
+    <div th:each="vakdagdeel: ${vakdagdeelList}" >
         <div  class="dagdeel" th:id="${vakdagdeel.id}" th:value="${vakdagdeel.vakdagdeelNaam}" th:text="${vakdagdeel.getVakdagdeelNaam()}" draggable="true"
               ondragstart="drag(event)">dagdeelnaam</div>
     </div>
@@ -53,9 +53,9 @@
 </div>
 
 <th:block th:each="week: ${weken}">
-<form class="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort.cohortNaam}" method="post">
+<form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort}" method="post">
     <table>
-        <thead id="gekozenCohort"></thead>
+        <thead id="gekozenCohort"><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
         <tr>
             <th>Week <span th:text="${weken.indexOf(week)+1}"></span></th>
             <th th:text="${week.getMaandag().getDatum()}">maandag</th>
