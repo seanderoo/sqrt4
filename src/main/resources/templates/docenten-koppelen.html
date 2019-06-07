@@ -5,19 +5,22 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body>
+<body onload="hideVorigeWeekButton();addWeekNumber()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Koppel Docenten</h1>
 <h2>Koppel in dit scherm docenten aan de vakken</h2>
-<br>
-<select id="geselecteerdeCohort" onchange="getAmountOfWeeksCohort()">
-    <option>--Kies Cohort--</option>
-    <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
-</select>
-<br>
-<br>
+<div class="styled-select">
+    <select id="geselecteerdeCohort" onchange="getAmountOfWeeksCohort()">
+        <option>--Kies Cohort--</option>
+        <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
+    </select>
+</div>
+<h5 id="weekNummer" onchange="counter"></h5>
+<script>
+
+</script>
 <form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
 <table id="TableFormatter">
     <thead>
@@ -124,8 +127,14 @@
     </tbody>
 </table>
     <br>
-    <button id="knopVorigeWeek">Vorige Week</button>    <input id="knopOpslaan" type="submit" value="Opslaan"/>    <button id="knopVolgendeWeek">Volgende Week</button>
+        <input id="knopOpslaan" type="submit" value="Opslaan"/>
+
+
+
 </form>
+<br>
+<button id="knopVorigeWeek" onclick="subtractCounter();addWeekNumber();hideVorigeWeekButton()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();hideVolgendeWeekButton();addWeekNumber()">Volgende Week</button>
+
 </body>
 
 <script>
@@ -144,11 +153,47 @@
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("geselecteerdeCohort").value = this.responseText;
                 document.getElementById("geselecteerdeCohort").selectedIndex = selectedIndice;
-                console.log("aantal weken geselecteerde cohort = " + this.responseText)
+                hideVorigeWeekButton();
+                hideVolgendeWeekButton();
             }
         };
-        xhttp.open("GET", url, true);
+        xhttp.open("POST", url, true);
         xhttp.send();
+    }
+
+    var counter = 1;
+
+    function addCounter() {
+        if (document.getElementById("knopVolgendeWeek").onclick) {
+            counter++;
+            console.log('Volgende week is geklikt, counter waarde: ' + counter);
+        }
+    }
+
+    function subtractCounter() {
+        if (document.getElementById("knopVorigeWeek").onclick) {
+            counter--;
+            console.log('Vorige week is geklikt, counter waarde: ' + counter);
+        }
+    }
+
+    function hideVorigeWeekButton() {
+        if (counter <= 1) {
+            document.getElementById("knopVorigeWeek").style.visibility = "hidden";
+        } else {
+            document.getElementById("knopVorigeWeek").style.visibility = "visible";
+        }
+    }
+
+    function hideVolgendeWeekButton() {
+        if (counter == getAmountOfWeeksCohort()) {
+            document.getElementById("knopVolgendeWeek").style.visibility = "hidden";
+        }
+    }
+
+    function addWeekNumber() {
+        var x = document.getElementById("weekNummer");
+        x.innerText = "Week " + counter;
     }
 </script>
 </html>

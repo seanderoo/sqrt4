@@ -17,10 +17,10 @@
 </p>
 <div id="nieuweVacatureForm">
     <form action="#" th:action="@{/admin/vacature-toegevoegd}" th:method="POST">
-        <table>
+        <table id="TableFormatter">
             <tr>
                 <td><label>Vacaturenaam</label></td>
-                <td><input type="text" th:name="vacatureNaam" maxlength="255" required></td>
+                <td><input class="input_gebruiker" type="text" th:name="vacatureNaam" maxlength="255" required></td>
             </tr>
            <tr>
 
@@ -30,11 +30,11 @@
            </tr>
            <tr>
                <td><label>Aantal uren</label></td>
-               <td><input type="text" th:name="aantalUren" required></td>
+               <td><input class="input_gebruiker" type="text" th:name="aantalUren" required></td>
            </tr>
            <tr>
                <td><label>Eisen</label></td>
-               <td><textarea input type="text" th:name="eisen" value=""  maxlength="255" required></textarea></td>
+               <td><textarea class="input_gebruiker" input type="text" th:name="eisen" value=""  maxlength="255" required></textarea></td>
            </tr>
            <tr>
                <td></td><td> <input type="submit" value="Vacature opslaan"/></td>

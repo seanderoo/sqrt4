@@ -19,11 +19,13 @@
         <tr>
             <td><strong><label th:text="Vak"/></strong></td>
             <td>
+                <div class="styled-select">
                 <select id="vakkenLijst" onchange="showPreference(this.value)" th:field="*{vak}">
                     <option th:each="vak: ${vakkenLijst}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}">
                 </select>
+                </div>
             </td>
-            <td><input onchange="checkPreference()" id="voorkeurGebruiker" type="number" th:field="*{voorkeurGebruiker}" min="1" max="3"/></td>
+            <td><input class="input_gebruiker" onchange="checkPreference()" id="voorkeurGebruiker" type="number" th:field="*{voorkeurGebruiker}" min="1" max="3"/></td>
             <td><input id="knopOpslaan" type="submit" value="Opslaan"/></td>
         </tr>
     </table>

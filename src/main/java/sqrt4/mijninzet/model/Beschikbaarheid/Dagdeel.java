@@ -55,6 +55,9 @@ public class Dagdeel {
     }
 
     public Vak getVak() {
+        if (vak == null) {
+            vak = new Vak("Geen les", 0);
+        }
         return vak;
     }
 

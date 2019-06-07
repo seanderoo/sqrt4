@@ -85,8 +85,9 @@ public class DatabaseInitializer implements CommandLineRunner {
         Vak programming = new Vak("Programming", 16);
         Vak oop = new Vak("OOP", 16);
         Vak projectQuizmaster = new Vak("Project Quizmaster", 12);
+        Vak geenLes = new Vak("Geen les", 0);
 
-        List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster);
+        List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster, geenLes);
 
         //Create Cohort
         Cohort cohort15 = new Cohort(15,6,2019,27);

@@ -40,11 +40,11 @@
             </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
-                <td> <input id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
+                <td><input class="input_gebruiker" id="wachtwoord1" type="password" th:name="password" value="" size="40" required></td>
             </tr>
             <tr>
                 <td><label>Herhaal wachtwoord</label></td>
-                <td><input id="wachtwoord2" type="password" value="" size="40" required onchange="noTypo()"></td>
+                <td><input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required onchange="noTypo()"></td>
             </tr>
             <tr>
                 <td> <label>Huidige Rol</label></td>
@@ -71,27 +71,5 @@
     function changeProfilePic() {
         window.open("file:///C:/");
     }
-
-    // function changeProfilePicture() {
-    //     var currentUser = document.getElementById("userId").value;
-    //     var url = '/ajax/profiel/' + currentUser;
-    //     console.log('dit is de url: ' + url)
-    //     changeProfilePic();
-    //
-    //
-    //     var xhttp;
-    //     if (selectedCourse == "") {
-    //         document.getElementById("voorkeurGebruiker").innerHTML = "";
-    //         return;
-    //     }
-    //     xhttp = new XMLHttpRequest();
-    //     xhttp.onreadystatechange = function () {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             document.getElementById("voorkeurGebruiker").value = this.responseText;
-    //         }
-    //     };
-    //     xhttp.open("POST", url, true);
-    //     xhttp.send();
-    // }
 </script>
 </html>
