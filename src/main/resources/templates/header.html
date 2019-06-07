@@ -9,7 +9,7 @@
 <body>
 
 <div class="navbar" id="header" th:fragment="copy">
-    <a href="/home">Home</a>
+    <a href="/home"><img src="/images/home-icon-white_338306.png" alt="HOME" height="32" width="32"></a>
     <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/docenten-koppelen">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
