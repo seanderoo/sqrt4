@@ -53,7 +53,7 @@
 </div>
 
 <th:block th:each="week: ${weken}">
-<form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort}" method="post">
+<form class="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:object="${cohort}" method="post">
     <table>
         <thead id="gekozenCohort"><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
         <tr>
