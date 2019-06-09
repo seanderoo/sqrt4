@@ -115,51 +115,25 @@ public class Week {
         }
     }
 
-
     public Dag getMaandag() {
-        Dag dag = null;
-        for (Dag d : dagenlijst) {
-            if (d.getDagnaam().equals("maandag")) {
-                dag = d;
-            }
-        }
-        return dag;
+        Dag maandag = getDag("maandag");
+        return maandag;
     }
     public Dag getDinsdag() {
-        Dag dag = null;
-        for (Dag d : dagenlijst) {
-            if (d.getDagnaam().equals("dinsdag")) {
-                dag = d;
-            }
-        }
-        return dag;
+        Dag dinsdag = getDag("dinsdag");
+        return dinsdag;
     }
     public Dag getWoensdag() {
-        Dag dag = null;
-        for (Dag d : dagenlijst) {
-            if (d.getDagnaam().equals("woensdag")) {
-                dag = d;
-            }
-        }
-        return dag;
+        Dag woensdag = getDag("woensdag");
+        return woensdag;
     }
     public Dag getDonderdag() {
-        Dag dag = null;
-        for (Dag d : dagenlijst) {
-            if (d.getDagnaam().equals("donderdag")) {
-                dag = d;
-            }
-        }
-        return dag;
+        Dag donderdag = getDag("donderdag");
+        return donderdag;
     }
     public Dag getVrijdag() {
-        Dag dag = null;
-        for (Dag d : dagenlijst) {
-            if (d.getDagnaam().equals("vrijdag")) {
-                dag = d;
-            }
-        }
-        return dag;
+        Dag vrijdag = getDag("vrijdag");
+        return vrijdag;
     }
 
     public void setUser(User user) {
