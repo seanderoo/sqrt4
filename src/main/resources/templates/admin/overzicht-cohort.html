@@ -11,6 +11,9 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Cohort-beheer</h1>
+<input class="input_gebruiker" type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek cohort">
+<br>
+<br>
 <form action="#" th:action="@{/admin/verwijder-cohort}" th:method="POST">
     <table id="TableFormatter">
         <thead>
@@ -45,4 +48,31 @@
     </table>
 </form>
 </body>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, occurrence;
+
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("TableFormatter");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            occurrence = false;
+            td = tr[i].getElementsByTagName("td");
+            for(var j=0; j< td.length; j++){
+                currentTd = td[j];
+                if (currentTd ) {
+                    if (currentTd.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        occurrence = true;
+                    }
+                }
+            }
+            if(!occurrence){
+                tr[i].style.display = "none";
+            }
+        }
+    }
+</script>
 </html>
