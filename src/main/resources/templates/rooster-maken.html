@@ -15,12 +15,11 @@
 
 <form id="cohort" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen}" th:method="get">
     <label>Voor welk Cohort wilt u een rooster aanmaken? </label>
-    <div class="styled-select">
+    <br><br>
         <select id="geselecteerdeCohort" onclick="checkCohort()" th:name="cohortNaam">
             <option>--Kies een cohort--</option>
             <option th:each="cohort: ${cohorten}" th:value="${cohort.cohortNaam}" th:text="${cohort.cohortNaam}"></option>
         </select>
-    </div>
     <br><br>
     <button type="submit">Kies dit cohort</button>
 </form>

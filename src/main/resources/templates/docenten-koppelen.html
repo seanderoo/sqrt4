@@ -5,18 +5,16 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body onload="hideVorigeWeekButton();addWeekNumber()">
+<body onload="addWeekNumber()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Koppel Docenten</h1>
 <h2>Koppel in dit scherm docenten aan de vakken</h2>
-<div class="styled-select">
     <select id="geselecteerdeCohort" onchange="getAmountOfWeeksCohort()">
         <option>--Kies Cohort--</option>
         <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
     </select>
-</div>
 <h5 id="weekNummer" onchange="counter"></h5>
 <script>
 
@@ -43,26 +41,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><div class="styled-select"><select id="maOch" th:name="vakken">
+        <td><select id="maOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="diOch" th:name="vakken">
+        </select></td>
+        <td><select id="diOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="woOch" th:name="vakken">
+        </select></td>
+        <td><select id="woOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="doOch" th:name="vakken">
+        </select></td>
+        <td><select id="doOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="vrOch" th:name="vakken">
+        </select></td>
+        <td><select id="vrOch" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
+        </select></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="middag">13:00 - 17:00</td>
@@ -73,26 +71,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><div class="styled-select"><select id="maMid" th:name="vakken">
+        <td><select id="maMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="diMid" th:name="vakken">
+        </select></td>
+        <td><select id="diMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="woMid" th:name="vakken">
+        </select></td>
+        <td><select id="woMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="doMid" th:name="vakken">
+        </select></td>
+        <td><select id="doMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="vrMid" th:name="vakken">
+        </select></td>
+        <td><select id="vrMid" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
+        </select></td>
     </tr>
     <tr>
         <td rowspan="2" th:value="avond">17:00 - 21:00</td>
@@ -103,26 +101,26 @@
         <td>Vak</td>
     </tr>
     <tr>
-        <td><div class="styled-select"><select id="maAvo" th:name="vakken">
+        <td><select id="maAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="diAvo" th:name="vakken">
+        </select></td>
+        <td><select id="diAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="woAvo" th:name="vakken">
+        </select></td>
+        <td><select id="woAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="doAvo" th:name="vakken">
+        </select></td>
+        <td><select id="doAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
-        <td><div class="styled-select"><select id="vrAvo" th:name="vakken">
+        </select></td>
+        <td><select id="vrAvo" th:name="vakken">
             <option>--Kies docent--</option>
             <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
-        </select></div></td>
+        </select></td>
     </tr>
     </tbody>
 </table>
@@ -133,7 +131,7 @@
 
 </form>
 <br>
-<button id="knopVorigeWeek" onclick="subtractCounter();addWeekNumber();hideVorigeWeekButton()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();hideVolgendeWeekButton();addWeekNumber()">Volgende Week</button>
+<button id="knopVorigeWeek" onclick="subtractCounter();displayVorigeWeekButton();displayVolgendeWeekButton();addWeekNumber()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();displayVolgendeWeekButton();displayVorigeWeekButton();addWeekNumber();">Volgende Week</button>
 
 </body>
 
@@ -153,8 +151,6 @@
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("geselecteerdeCohort").value = this.responseText;
                 document.getElementById("geselecteerdeCohort").selectedIndex = selectedIndice;
-                hideVorigeWeekButton();
-                hideVolgendeWeekButton();
             }
         };
         xhttp.open("POST", url, true);
@@ -162,6 +158,7 @@
     }
 
     var counter = 1;
+    var aantalWekenCohort = 21;
 
     function addCounter() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
@@ -177,17 +174,19 @@
         }
     }
 
-    function hideVorigeWeekButton() {
-        if (counter <= 1) {
-            document.getElementById("knopVorigeWeek").style.visibility = "hidden";
+    function displayVorigeWeekButton() {
+        if (counter > 1) {
+            document.getElementById("knopVorigeWeek").style.display = "inline";
         } else {
-            document.getElementById("knopVorigeWeek").style.visibility = "visible";
+            document.getElementById("knopVorigeWeek").style.display = "none";
         }
     }
 
-    function hideVolgendeWeekButton() {
-        if (counter == getAmountOfWeeksCohort()) {
-            document.getElementById("knopVolgendeWeek").style.visibility = "hidden";
+    function displayVolgendeWeekButton() {
+        if (counter == aantalWekenCohort) {
+            document.getElementById("knopVolgendeWeek").style.display = "none";
+        } else {
+            document.getElementById("knopVolgendeWeek").style.display = "inline";
         }
     }
 
