@@ -36,7 +36,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
 
         model.addAttribute("algemeneWeek", algemeneWeek);
 
-        return "algemene-beschikbaarheid";
+        return "docent/algemene-beschikbaarheid";
     }
 
     @PostMapping(value = "/algemene-beschikbaarheid-updaten")
@@ -78,6 +78,6 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         weekRepo.save(algemeneWeek);
         model.addAttribute("algemeneWeek", algemeneWeek);
 
-        return "algemene-beschikbaarheid";
+        return "docent/algemene-beschikbaarheid";
     }
 }

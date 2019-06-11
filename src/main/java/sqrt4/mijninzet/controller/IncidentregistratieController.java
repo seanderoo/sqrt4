@@ -35,7 +35,7 @@ public class IncidentregistratieController extends AbstractController {
     public String Incidentregistratie(Model model) {
         List<Incident> incidentList = repoIncident.findAllByUser(voegActiveUserToe());
         model.addAttribute("incidentLijst", incidentList);
-        return "incidentregistratie";
+        return "docent/incidentregistratie";
     }
 
     @ModelAttribute("dag")
@@ -68,7 +68,7 @@ public class IncidentregistratieController extends AbstractController {
         List<Incident> incidentList = repoIncident.findAllByUser(voegActiveUserToe());
         Collections.sort(incidentList, new IncidentComparator());
         model.addAttribute("incidentLijst", incidentList);
-        return "incidentregistratie";
+        return "docent/incidentregistratie";
     }
 
     class IncidentComparator implements Comparator<Incident> {
@@ -77,56 +77,4 @@ public class IncidentregistratieController extends AbstractController {
             return a.getDatum().isBefore(b.getDatum()) ? -1 : a.getDatum().isEqual(b.getDatum()) ? 0 : 1;
         }
     }
-
-//    @PostMapping(value = "/docent/incidentregistratie")
-//    public String verwijderIncident(@RequestParam("Verwijderen")LocalDate date, Model model){
-//        repoIncident.deleteByDatum(date);
-//        List<Incident> incidentList = repoIncident.findAll();
-//        model.addAttribute("incidentLijst", incidentList);
-//        return "incidentregistratie";
-//
-//    }
-
-
-//    @PostMapping(value ="/incidentregistratie")
-//    public String zoekWeekOp (@RequestParam("selectedDate") String gekozendatum, Model model){
-//        gekozenDag = gekozendatum;
-//
-//        LocalDate date = LocalDate.parse(gekozenDag);
-//        Dag tempDag = repoIncident.findDagByDatum(date);
-//        int weekNr = tempDag.getWeekNummer();
-//        int weekJr = tempDag.getJaarNummer();
-//        Week tempWeek = repoWeek.findByJaarNummerAndWeekNummer(weekJr, weekNr);
-//        System.out.println(tempWeek);
-//        model.addAttribute("geselecteerdeWeek" , tempWeek);
-//        model.addAttribute("maandagdatum", tempWeek.getDag("maandag").getDatum());
-//        model.addAttribute("dinsdagdatum", tempWeek.getDag("dinsdag").getDatum());
-//        model.addAttribute("woensdagdatum", tempWeek.getDag("woensdag").getDatum());
-//        model.addAttribute("donderdagdatum", tempWeek.getDag("donderdag").getDatum());
-//        model.addAttribute("vrijdagdatum", tempWeek.getDag("vrijdag").getDatum());
-//        model.addAttribute("maandagochtend", tempWeek.getDag("maandag").getOchtendAsInt());
-//        System.out.println(tempWeek.getDag("maandag").getOchtendAsInt());
-//        model.addAttribute("dinsdagochtend", tempWeek.getDag("dinsdag").getOchtendAsInt());
-//        model.addAttribute("woensdagochtend", tempWeek.getDag("woensdag").getOchtendAsInt());
-//        model.addAttribute("donderdagochtend", tempWeek.getDag("donderdag").getOchtendAsInt());
-//        model.addAttribute("vrijdagochtend", tempWeek.getDag("vrijdag").getOchtendAsInt());
-//        return "incidentregistratie";
-//    }
-
-//    @GetMapping(value = "/incidentregistratie-huidigeWeek")
-//    public String opgehaaldeWeek(Week huidigeWeek, Model model) {
-//        model.addAttribute("huidigeWeek", huidigeWeek);
-//
-//        return "incidentregistratie";
-//    }
-
-//    @GetMapping(value = "/incidentregistratie")
-//    public String zoekSelectedWeek (String dag, Model model){
-//
-//
-//       return "incidentregistratie";
-//}
-
-
-
 }
