@@ -168,7 +168,7 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
-        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakDiAvo);
+        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
         saveVakkenPerDag(cohort1, weeknummer, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
         saveVakkenPerDag(cohort1, weeknummer, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
         saveVakkenPerDag(cohort1, weeknummer, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
