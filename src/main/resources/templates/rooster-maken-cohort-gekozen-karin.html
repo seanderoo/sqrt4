@@ -7,15 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <!--    <link rel="stylesheet" type="text/css" href="/form-karin.css">-->
 </head>
-<style>
-    #rooster {
-        width: 70%;
-        margin-left: 15%;
-        margin-right: 15%;
-        padding: 15px;
-        border: 1px solid darkblue;
-    }
-</style>
 <body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
@@ -24,12 +15,12 @@
 <h2 id="gekozenCohort" th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>. Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
  t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
 
-
-    <form id="rooster" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
-        <table>
+    <form action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+        <table id="TableFormatter">
             <thead><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
             <tr>
                 <th><select id="week" name="week">
+                    <option>Kies een week</option>
                     <option th:each="week: ${weken}" th:value="${week.getWeekNummer()}" th:text="${week.getWeekNummerTekst()}"></option>
                 </select> </th>
                 <th id="maandag">maandag</th>
@@ -108,6 +99,7 @@
                 </select> </td>
             </tr>
         </table>
+        <br>
         <button type="submit" >Sla week op</button>
     </form>
 <p>
@@ -156,7 +148,8 @@
 
 </body>
 <script>
-
+// Kijken of je iets met ajax kunt doen. Een onchange function bij de week selectie. Zodra dat gebeurt dan haal je de
+// vakken op die al in de database staan en laat die zien.
 
 </script>
 </html>

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
@@ -176,8 +175,6 @@ public class RoosterController extends AbstractController {
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        int teller = 1;
-        model.addAttribute("teller", teller);
         return "rooster-maken-cohort-gekozen-karin";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
@@ -201,7 +198,6 @@ public class RoosterController extends AbstractController {
                               Model model) {
         Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute(cohort1);
-        System.out.println(weeknummer);
         Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
         Vak vakDiOcht = vakRepo.findByVakNaam(diOchtVak);
         Vak vakWoOcht = vakRepo.findByVakNaam(woOchtVak);
@@ -230,7 +226,6 @@ public class RoosterController extends AbstractController {
     }
 
     public void saveMaandagVakken(Cohort cohort, int weekNummer, Vak maOcht, Vak maMid, Vak maAvo) {
-        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
         week.getMaandag().getOchtend().setVak(maOcht);
         week.getMaandag().getMiddag().setVak(maMid);
@@ -238,7 +233,6 @@ public class RoosterController extends AbstractController {
         weekRepo.save(week);
     }
     public void saveDinsdagVakken(Cohort cohort, int weekNummer, Vak diOcht, Vak diMid, Vak diAvo) {
-        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
         week.getDinsdag().getOchtend().setVak(diOcht);
         week.getDinsdag().getMiddag().setVak(diMid);
@@ -246,7 +240,6 @@ public class RoosterController extends AbstractController {
         weekRepo.save(week);
     }
     public void saveWoensdagVakken(Cohort cohort, int weekNummer, Vak woOcht, Vak woMid, Vak woAvo) {
-        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
         week.getWoensdag().getOchtend().setVak(woOcht);
         week.getWoensdag().getMiddag().setVak(woMid);
@@ -254,7 +247,6 @@ public class RoosterController extends AbstractController {
         weekRepo.save(week);
     }
     public void saveDonderdagVakken(Cohort cohort, int weekNummer, Vak doOcht, Vak doMid, Vak doAvo) {
-        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
         week.getDonderdag().getOchtend().setVak(doOcht);
         week.getDonderdag().getMiddag().setVak(doMid);
@@ -262,7 +254,6 @@ public class RoosterController extends AbstractController {
         weekRepo.save(week);
     }
     public void saveVrijdagVakken(Cohort cohort, int weekNummer, Vak vrOcht, Vak vrMid, Vak vrAvo) {
-        ArrayList<Week> weken = (ArrayList) weekRepo.findWeeksByCohortId(cohort.getId());
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
         week.getVrijdag().getOchtend().setVak(vrOcht);
         week.getVrijdag().getMiddag().setVak(vrMid);
