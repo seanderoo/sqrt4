@@ -44,14 +44,14 @@ public class RoosterController extends AbstractController {
         cohorten.removeIf(condition);
 
         model.addAttribute("cohorten", cohorten);
-        return "rooster-maken";
+        return "manager/rooster-maken";
     }
 
     @GetMapping("/manager/rooster-maken-karin")
     public String kiesCohort(Model model) {
         List<Cohort> cohorten = cohortRepo.findAll();
         model.addAttribute("cohorten", cohorten);
-        return "rooster-maken-karin";
+        return "manager/rooster-maken-karin";
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen")
@@ -62,7 +62,7 @@ public class RoosterController extends AbstractController {
         model.addAttribute("cohort", cohort);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        return "rooster-maken-cohort-gekozen";
+        return "manager/rooster-maken-cohort-gekozen";
     }
 
     @PostMapping("manager/rooster-maken-cohort-gekozen")
@@ -118,7 +118,7 @@ public class RoosterController extends AbstractController {
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
 
-        return "rooster-maken-cohort-gekozen";
+        return "manager/rooster-maken-cohort-gekozen";
     }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen-karin")
@@ -130,7 +130,7 @@ public class RoosterController extends AbstractController {
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        return "rooster-maken-cohort-gekozen-karin";
+        return "manager/rooster-maken-cohort-gekozen-karin";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
     public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
@@ -177,7 +177,7 @@ public class RoosterController extends AbstractController {
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
-        return "rooster-maken-cohort-gekozen-karin";
+        return "manager/rooster-maken-cohort-gekozen-karin";
     }
 
     public void saveVakkenPerDag(Cohort cohort, int weekNummer, String dagnaam, Vak ochtend, Vak middag, Vak avond) {

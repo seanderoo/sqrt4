@@ -26,7 +26,7 @@ public class LesroosterController {
         model.addAttribute("vakkenLijst", vakkenLijst);
         List<Vakdagdeel> vakdagdeelLijst = vakdagdeelRespository.findAll();
         model.addAttribute("vakdagdeelLijst", vakdagdeelLijst);
-        return "lesrooster-aanmaken";
+        return "manager/lesrooster-aanmaken";
     }
 
 
