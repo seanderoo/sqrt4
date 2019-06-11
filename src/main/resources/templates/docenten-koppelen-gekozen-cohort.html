@@ -10,16 +10,12 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Koppel Docenten</h1>
-<h2>Koppel in dit scherm docenten aan de vakken</h2>
-    <select id="geselecteerdeCohort" onchange="getAmountOfWeeksCohort()">
-        <option>--Kies Cohort--</option>
-        <option th:each="cohort: ${cohortList}" th:value="${cohort.getId()}" th:text="${cohort.getCohortNaam()}">
-    </select>
-<h5 id="weekNummer" onchange="counter"></h5>
-<script>
 
-</script>
-<form action="#" th:action="@{/roosteraar/docent-koppelen}" th:object="${user}" method="POST">
+<h2><span id="weekNummer"></span></h2>
+<input id="startWeek" type="hidden" th:name="startWeek" th:value="${cohort.getStartWeek()}">
+<input id="eindWeek" type="hidden" th:name="eindWeek" th:value="${cohort.getEindWeek()}">
+
+<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
 <table id="TableFormatter">
     <thead>
     <tr>
@@ -131,7 +127,7 @@
 
 </form>
 <br>
-<button id="knopVorigeWeek" onclick="subtractCounter();displayVorigeWeekButton();displayVolgendeWeekButton();addWeekNumber()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();displayVolgendeWeekButton();displayVorigeWeekButton();addWeekNumber();">Volgende Week</button>
+<button id="knopVorigeWeek" onclick="subtractCounter();displayVorigeWeekButton();displayVolgendeWeekButton();addWeekNumber()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();displayVolgendeWeekButton();displayVorigeWeekButton();addWeekNumber()">Volgende Week</button>
 
 </body>
 
@@ -139,7 +135,7 @@
     function getAmountOfWeeksCohort() {
         var selectedCohort = document.getElementById("geselecteerdeCohort").value;
         var selectedIndice = document.getElementById("geselecteerdeCohort").selectedIndex;
-        var url = '/ajax/roosteraar/docent-koppelen/' + selectedCohort;
+        var url = "/ajax/roosteraar/docent-koppelen/" + selectedCohort;
 
         var xhttp;
         if (selectedCohort == "") {
@@ -157,8 +153,11 @@
         xhttp.send();
     }
 
-    var counter = 1;
-    var aantalWekenCohort = 21;
+    var startWeek = document.getElementById("startWeek").value;
+    var eindWeek = document.getElementById("eindWeek").value;
+    var counter = startWeek;
+
+    var aantalWekenCohort = eindWeek - startWeek;
 
     function addCounter() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
@@ -175,7 +174,7 @@
     }
 
     function displayVorigeWeekButton() {
-        if (counter > 1) {
+        if (counter > startWeek) {
             document.getElementById("knopVorigeWeek").style.display = "inline";
         } else {
             document.getElementById("knopVorigeWeek").style.display = "none";
@@ -183,7 +182,7 @@
     }
 
     function displayVolgendeWeekButton() {
-        if (counter == aantalWekenCohort) {
+        if (counter == eindWeek) {
             document.getElementById("knopVolgendeWeek").style.display = "none";
         } else {
             document.getElementById("knopVolgendeWeek").style.display = "inline";
@@ -194,5 +193,6 @@
         var x = document.getElementById("weekNummer");
         x.innerText = "Week " + counter;
     }
+    
 </script>
 </html>

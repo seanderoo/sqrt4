@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooster aanmaken</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+
+<h2>Hier kunt u een rooster aanmaken.</h2>
+<form id="cohort" action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:method="GET">
+    <table id="TableFormatter">
+        <tr>
+            <td><label>Voor welk Cohort wilt u een rooster aanmaken? </label></td>
+            <td><select id="selectCohort" th:name="cohortNaam">
+                <option>Kies een cohort</option>
+                <option th:each="cohort: ${cohortList}"
+                        th:value="${cohort.getCohortNaam()}"
+                        th:text="${cohort.cohortNaam}">
+                </option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Kies dit cohort</button></td>
+        </tr>
+    </table>
+</form>
+<script>
+
+</script>
+
+<p id="demo">
+</p>
+</body>
+<script>
+
+
+</script>
+</html>
+
