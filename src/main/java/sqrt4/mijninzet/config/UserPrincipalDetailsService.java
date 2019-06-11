@@ -30,7 +30,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(s);
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        String[] authStrings = user.getRoles().split(", ");
+        String[] authStrings = user.getRoles().split(",");
         for(String authString : authStrings) {
             authorities.add(new SimpleGrantedAuthority(authString));
         }
