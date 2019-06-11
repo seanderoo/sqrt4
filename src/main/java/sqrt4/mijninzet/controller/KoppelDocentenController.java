@@ -54,6 +54,9 @@ public class KoppelDocentenController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
+        List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+
         return "docenten-koppelen-gekozen-cohort";
     }
 
