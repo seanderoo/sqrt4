@@ -215,6 +215,7 @@ public class RoosterController extends AbstractController {
                 schoneVakdagdeellijst.add(vdd);
             }
         }
+        Collections.sort(vakdagdeellijst);
         return vakdagdeellijst;
     }
 }
