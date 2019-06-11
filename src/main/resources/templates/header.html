@@ -9,7 +9,7 @@
 <body>
 
 <div class="navbar" id="header" th:fragment="copy">
-    <a href="/home"><img src="/images/home-icon-white_338306.png" alt="HOME" height="32" width="32"></a>
+    <a href="/home"><img src="/images/home-icon-white_338306.png" alt="HOME" height="24" width="24"></a>
     <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/docenten-koppelen">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
@@ -58,8 +58,8 @@
             <a href="/manager/rooster-maken-karin">Maak een lesrooster aan</a>
         </div>
     </div>
-    <a style="float:right" href="/logout">Uitloggen</a>
-    <a style="float:right" href="/profiel">Wijzig Profiel</a>
+    <a style="float:right" href="/logout"><img src="/images/logout.png" height="24" width="24"></a>
+    <a style="float:right" href="/profiel"><img src="/images/account.png" height="24" width="24"></a>
 </div>
 
 </body>

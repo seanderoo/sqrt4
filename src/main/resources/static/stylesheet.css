@@ -144,7 +144,7 @@ button:active:not(.dropbtn) {
     outline: none;
 }
 
-.styled-select {
+select {
     height: 29px;
     overflow: hidden;
     width: auto;
@@ -155,7 +155,7 @@ button:active:not(.dropbtn) {
     outline: none;
 }
 
-.styled-select select {
+select select {
     background: transparent;
     border: 1px;
     font-size: 14px;
@@ -163,6 +163,14 @@ button:active:not(.dropbtn) {
     padding: 5px;
     width: auto;
     outline: none;
+}
+
+#knopVorigeWeek {
+    display: none;
+}
+
+#knopVolgendeWeek {
+    display: inline;
 }
 
 
