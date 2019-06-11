@@ -130,8 +130,6 @@ public class RoosterController extends AbstractController {
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        int teller = 1;
-        model.addAttribute("teller", teller);
         return "rooster-maken-cohort-gekozen-karin";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
@@ -155,7 +153,6 @@ public class RoosterController extends AbstractController {
                               Model model) {
         Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute(cohort1);
-        System.out.println(weeknummer);
         Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
         Vak vakDiOcht = vakRepo.findByVakNaam(diOchtVak);
         Vak vakWoOcht = vakRepo.findByVakNaam(woOchtVak);
@@ -171,7 +168,7 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
-        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakDiAvo);
+        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
         saveVakkenPerDag(cohort1, weeknummer, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
         saveVakkenPerDag(cohort1, weeknummer, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
         saveVakkenPerDag(cohort1, weeknummer, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
