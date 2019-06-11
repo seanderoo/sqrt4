@@ -61,7 +61,7 @@ public User(String username, String password, String roles, String permissions){
 
     public List<String> getRoleList(){
         if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
+            return Arrays.asList(this.roles.split(", "));
         }
         return new ArrayList<>();
     }
