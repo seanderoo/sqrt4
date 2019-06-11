@@ -8,7 +8,7 @@ import java.util.List;
 public class Vak {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vakId")
     private int vakId;
 

@@ -26,7 +26,7 @@
     .droppable {
         width: 110px;
         height: 55px;
-        padding: 10px;
+        /*padding: 10px;*/
         border: 1px solid darkblue;
         display: table-cell;
     }
@@ -57,7 +57,7 @@
         <table id="dropzone">
             <thead id="gekozenCohort"></thead>
             <tr>
-                <th>Week <span th:text="${weken.indexOf(week)+1}"></span></th>
+                <th>Week <span th:text="${weken.indexOf(week)+1}"></span><input type="hidden" name="week" th:value="${week.getId()}"></th>
                 <th th:text="${week.getMaandag().getDatum()}">maandag</th>
                 <th th:text="${week.getDinsdag().getDatum()}">dinsdag</th>
                 <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
@@ -67,41 +67,41 @@
             <tr>
                 <td th:value="ochtend">9:00 - 13:00</td>
                 <td class="droppable" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="maandagochtend" value=""></td>
+                    value=""><input type="hidden" name="maandagochtend" value="0"></td>
                 <td class="droppable" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="dinsdagochtend" value=""></td>
+                    value=""><input type="hidden" name="dinsdagochtend" value="0"></td>
                 <td class="droppable" id="woensdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="woensdagochtend" value=""></td>
+                    value=""><input type="hidden" name="woensdagochtend" value="0"></td>
                 <td class="droppable" id="donderdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="donderdagochtend" value=""></td>
+                    value=""><input type="hidden" name="donderdagochtend" value="0"></td>
                 <td class="droppable" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="vrijdagochtend" value=""></td>
+                    value=""><input type="hidden" name="vrijdagochtend" value="0"></td>
             </tr>
             <tr>
                 <td th:value="middag">13:00 - 17:00</td>
                 <td class="droppable" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="maandagmiddag" value=""></td>
+                    value=""><input type="hidden" name="maandagmiddag" value="0"></td>
                 <td class="droppable" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="dinsdagmiddag" value=""></td>
+                    value=""><input type="hidden" name="dinsdagmiddag" value="0"></td>
                 <td class="droppable" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="woensdagmiddag" value=""></td>
+                    value=""><input type="hidden" name="woensdagmiddag" value="0"></td>
                 <td class="droppable" id="donderdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="donderdagmiddag" value=""></td>
+                    value=""><input type="hidden" name="donderdagmiddag" value="0"></td>
                 <td class="droppable" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="vrijdagmiddag" value=""></td>
+                    value=""><input type="hidden" name="vrijdagmiddag" value="0"></td>
             </tr>
             <tr>
                 <td th:value="avond">17:00 - 21:00</td>
                 <td class="droppable" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="maandagavond" value=""></td>
+                    value=""><input type="hidden" name="maandagavond" value="0"></td>
                 <td class="droppable" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="dinsdagavond" value=""></td>
+                    value=""><input type="hidden" name="dinsdagavond" value="0"></td>
                 <td class="droppable" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="woensdagavond" value=""></td>
+                    value=""><input type="hidden" name="woensdagavond" value="0"></td>
                 <td class="droppable" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="donderdagavond" value=""></td>
+                    value=""><input type="hidden" name="donderdagavond" value="0"></td>
                 <td class="droppable" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"
-                    value=""><input type="hidden" name="vrijdagavond" value=""></td>
+                    value=""><input type="hidden" name="vrijdagavond" value="0"></td>
             </tr>
         </table>
 
@@ -135,8 +135,10 @@
     }
 
     function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id)
+        ev.dataTransfer.setData("text", ev.target.id);
     }
+
+    var dropzone = document.querySelector('#dropzone');
 
     var droppedValue;
 
@@ -145,29 +147,33 @@
         var data = ev.dataTransfer.getData("text");
         droppedValue = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
+        ev.target.style.background = "";
     }
-
-
-    var dropzone = document.querySelector('#dropzone');
 
     dropzone.addEventListener('drop', function(e) {
         var td = e.target;
         if (td.tagName === 'TD') {
-            td.value = droppedValue;
-            td.firstChild.value = td.value;
-            // console.log("td value is: " + td.value);
-            // console.log("de childwaarde is: " + td.firstChild.value);
-            // console.log("maandagochtend: " + document.getElementsByName("maandagochtend")[0].value);
-            // console.log("dinsdagochtend: " + document.getElementsByName("dinsdagochtend")[0].value);
+            td.firstChild.value = droppedValue
         }
-    })
+    });
 
-    // dropzone.addEventListener('drag', function(e)){
-    //     var td = e.target;
-    //§§§§
-    //
-    //
-    // }
+    document.addEventListener("dragenter", function(event) {
+        event.preventDefault();
+        if (event.target.className == "droppable") {
+            event.target.style.background = "lightblue";
+        }
+    }, false);
+
+    document.addEventListener("dragleave", function(event) {
+        if (event.target.className == "droppable") {
+            event.target.style.background = "";
+            event.target.firstChild.value = "0";
+        }
+    }, false);
+
+    document.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    }, false);
 
 </script>
 </html>
