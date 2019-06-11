@@ -6,10 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
-import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
-import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.*;
 
 import java.time.LocalDate;
@@ -42,7 +40,7 @@ public class KoppelDocentenController {
 //        cohortList.removeIf(condition);
 
         model.addAttribute("cohortList", cohortList);
-        return "docenten-koppelen-kies-cohort";
+        return "roosteraar/docenten-koppelen-kies-cohort";
     }
 
     @GetMapping("roosteraar/docenten-koppelen-gekozen-cohort")
@@ -54,10 +52,10 @@ public class KoppelDocentenController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
+
         List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-
-        return "docenten-koppelen-gekozen-cohort";
+        return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
 }
