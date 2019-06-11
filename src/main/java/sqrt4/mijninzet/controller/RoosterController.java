@@ -130,8 +130,6 @@ public class RoosterController extends AbstractController {
         model.addAttribute("vakken", vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        int teller = 1;
-        model.addAttribute("teller", teller);
         return "rooster-maken-cohort-gekozen-karin";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
@@ -155,7 +153,6 @@ public class RoosterController extends AbstractController {
                               Model model) {
         Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute(cohort1);
-        System.out.println(weeknummer);
         Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
         Vak vakDiOcht = vakRepo.findByVakNaam(diOchtVak);
         Vak vakWoOcht = vakRepo.findByVakNaam(woOchtVak);
@@ -171,7 +168,7 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
-        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakDiAvo);
+        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
         saveVakkenPerDag(cohort1, weeknummer, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
         saveVakkenPerDag(cohort1, weeknummer, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
         saveVakkenPerDag(cohort1, weeknummer, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
@@ -185,6 +182,7 @@ public class RoosterController extends AbstractController {
 
     public void saveVakkenPerDag(Cohort cohort, int weekNummer, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
+        System.out.println("saveVakkenPerDag, week:" + week);
         week.getDag(dagnaam).getOchtend().setVak(ochtend);
         week.getDag(dagnaam).getMiddag().setVak(middag);
         week.getDag(dagnaam).getAvond().setVak(avond);
@@ -201,8 +199,12 @@ public class RoosterController extends AbstractController {
 
     private Vak haalVakOp(String id) {
         Vakdagdeel vakdagdeel = vakdagdeelRespository.findById(Integer.parseInt(id));
-        int vakId = vakdagdeel.getVak().getVakId();
-        return vakRepo.findById(vakId);
+        if (vakdagdeel == null) {
+            return vakRepo.findByVakNaam("Geen les");
+        } else {
+            int vakId = vakdagdeel.getVak().getVakId();
+            return vakRepo.findById(vakId);
+        }
     }
 
     private List<Vakdagdeel> haalVakdagdeellijstOp() {
