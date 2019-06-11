@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
+import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.WeekRepository;
 
 @RequestMapping("/docent")
@@ -29,10 +30,10 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
             algemeneWeek = new Week();
         }
 
-        algemeneWeek.setUser(voegActiveUserToe());
-
+        User actieveUser = voegActiveUserToe();
+        actieveUser.setWeek(algemeneWeek);
+        algemeneWeek.setUser(actieveUser);
         weekRepo.save(algemeneWeek);
-        System.out.println(algemeneWeek);
 
         model.addAttribute("algemeneWeek", algemeneWeek);
 
