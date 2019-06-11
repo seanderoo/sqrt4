@@ -82,12 +82,14 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Vacature> vacatures = Arrays.asList(coordinatorC16, coordinatorC17, productOwnerMijnInzet);
 
         //Create vakken
+        Vak geenLes = new Vak("Geen les", 0);
         Vak programming = new Vak("Programming", 16);
         Vak oop = new Vak("OOP", 16);
         Vak projectQuizmaster = new Vak("Project Quizmaster", 12);
-        Vak geenLes = new Vak("Geen les", 0);
+        Vak database = new Vak("Database", 40);
+        Vak advanced = new Vak("Advanced Programming", 30);
 
-        List<Vak> vakken = Arrays.asList(programming, oop, projectQuizmaster, geenLes);
+        List<Vak> vakken = Arrays.asList(geenLes, programming, oop, projectQuizmaster, database, advanced);
 
         //Create Cohort
         Cohort cohort15 = new Cohort(15,6,2019,27);
