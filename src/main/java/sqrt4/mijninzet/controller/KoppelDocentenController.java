@@ -9,7 +9,6 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -26,8 +25,12 @@ public class KoppelDocentenController {
     private WeekRepository weekRepository;
     @Autowired
     private VakRepository vakRepository;
+    @Autowired
+    private DagRepository dagRepository;
+    @Autowired
+    private DagdeelRepository dagdeelRepository;
 
-    @GetMapping("/roosteraar/docenten-koppelen-kies-cohort")
+    @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
 //        Calendar calendar = new GregorianCalendar();
 //        Date trialTime = new Date();
@@ -45,16 +48,21 @@ public class KoppelDocentenController {
 
     @GetMapping("roosteraar/docenten-koppelen-gekozen-cohort")
     public String docentenKoppelen(@RequestParam("cohortNaam") String cohortnaam,
-                               Model model) {
+                                   Model model) {
 
         Cohort cohort = cohortRepository.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
+
+        int index = 0;
+        model.addAttribute("index", index);
+
+        List<Week> weekList = cohort.getWeekList();
+        model.addAttribute("weekList", weekList);
+
+
+
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
-
-
-        List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
-        model.addAttribute("weken", weken);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 

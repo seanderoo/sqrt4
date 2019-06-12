@@ -5,36 +5,47 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body onload="addWeekNumber()">
+<body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Koppel Docenten</h1>
+<input id="index" type="hidden" th:value="${index}">
 
-<h2><span id="weekNummer"></span></h2>
-<input id="startWeek" type="hidden" th:name="startWeek" th:value="${cohort.getStartWeek()}">
-<input id="eindWeek" type="hidden" th:name="eindWeek" th:value="${cohort.getEindWeek()}">
+<h2 id="weekNummer" th:each="week : ${weekList.get(index)}">Week <span id="weekNummerHeader" th:text="${week.getWeekNummer()}"></span></h2>
+<input id="huidigeWeek" type="hidden" th:value="${weekList.get(index).getWeekNummer()}">
+<input id="weekId" type="hidden" th:value="${weekList.get(index).getId()}">
+<input id="startWeek" type="hidden" th:value="${cohort.getStartWeek()}">
+<input id="eindWeek" type="hidden" th:value="${cohort.getEindWeek()}">
 
-<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
-<table id="TableFormatter">
+<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${week}" method="POST">
+    <table id="TableFormatter">
     <thead>
-    <tr>
+    <tr colspan="2">
         <th>dagdeel</th>
-        <th>maandag</th>
-        <th>dinsdag</th>
-        <th>woensdag</th>
-        <th>donderdag</th>
-        <th>vrijdag</th>
+        <th>Maandag</th>
+        <th>Dinsdag</th>
+        <th>Woensdag</th>
+        <th>Donderdag</th>
+        <th>Vrijdag</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td th:text="${weekList.get(index).getMaandag().getDatum()}"></td>
+        <td th:text="${weekList.get(index).getDinsdag().getDatum()}"></td>
+        <td th:text="${weekList.get(index).getWoensdag().getDatum()}"></td>
+        <td th:text="${weekList.get(index).getDonderdag().getDatum()}"></td>
+        <td th:text="${weekList.get(index).getVrijdag().getDatum()}"></td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td rowspan="2" th:value="ochtend">9:00 - 13:00</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
+        <td th:text="${weekList.get(index).getMaandag().getOchtend().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDinsdag().getOchtend().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getWoensdag().getOchtend().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDonderdag().getOchtend().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getVrijdag().getOchtend().getVak().getVakNaam()}"></td>
     </tr>
     <tr>
         <td><select id="maOch" th:name="vakken">
@@ -60,11 +71,11 @@
     </tr>
     <tr>
         <td rowspan="2" th:value="middag">13:00 - 17:00</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
+        <td th:text="${weekList.get(index).getMaandag().getMiddag().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDinsdag().getMiddag().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getWoensdag().getMiddag().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDonderdag().getMiddag().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getVrijdag().getMiddag().getVak().getVakNaam()}"></td>
     </tr>
     <tr>
         <td><select id="maMid" th:name="vakken">
@@ -90,11 +101,11 @@
     </tr>
     <tr>
         <td rowspan="2" th:value="avond">17:00 - 21:00</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
-        <td>Vak</td>
+        <td th:text="${weekList.get(index).getMaandag().getAvond().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDinsdag().getAvond().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getWoensdag().getAvond().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getDonderdag().getAvond().getVak().getVakNaam()}"></td>
+        <td th:text="${weekList.get(index).getVrijdag().getAvond().getVak().getVakNaam()}"></td>
     </tr>
     <tr>
         <td><select id="maAvo" th:name="vakken">
@@ -127,54 +138,78 @@
 
 </form>
 <br>
-<button id="knopVorigeWeek" onclick="subtractCounter();displayVorigeWeekButton();displayVolgendeWeekButton();addWeekNumber()">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="addCounter();displayVolgendeWeekButton();displayVorigeWeekButton();addWeekNumber()">Volgende Week</button>
+<button id="knopVorigeWeek" onclick="displayVorigeWeekButton();displayVolgendeWeekButton();subtractIndex();addWeekNumber();">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="displayVolgendeWeekButton();displayVorigeWeekButton();addIndex();addWeekNumber();">Volgende Week</button>
+
 
 </body>
 
 <script>
-    function getAmountOfWeeksCohort() {
-        var selectedCohort = document.getElementById("geselecteerdeCohort").value;
-        var selectedIndice = document.getElementById("geselecteerdeCohort").selectedIndex;
-        var url = "/ajax/roosteraar/docent-koppelen/" + selectedCohort;
+    function getWeek() {
+        var weekId = document.getElementById("index").value;
+        var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + index;
+        console.log("dit is de url: " + url);
 
         var xhttp;
-        if (selectedCohort == "") {
-            document.getElementById("geselecteerdeCohort").innerHTML = "";
+        if (index == "") {
+            document.getElementById("index").innerHTML = "";
             return;
         }
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("geselecteerdeCohort").value = this.responseText;
-                document.getElementById("geselecteerdeCohort").selectedIndex = selectedIndice;
+                document.getElementById("voorkeurGebruiker").value = this.responseText;
             }
         };
         xhttp.open("POST", url, true);
         xhttp.send();
     }
+    getWeek();
 
-    var startWeek = document.getElementById("startWeek").value;
-    var eindWeek = document.getElementById("eindWeek").value;
-    var counter = startWeek;
+    var index;
+    index = document.getElementById("index").value;
+    console.log("indexwaarde: " + index);
 
-    var aantalWekenCohort = eindWeek - startWeek;
+    var huidigeWeek;
+    huidigeWeek = document.getElementById("huidigeWeek").value;
+    console.log("huidige week: " + huidigeWeek);
 
-    function addCounter() {
+    var startWeek;
+    startWeek = document.getElementById("startWeek").value;
+    console.log("startweek = " + startWeek);
+
+    var eindWeek;
+    eindWeek = document.getElementById("eindWeek").value;
+    console.log("eindweek = " + eindWeek);
+
+    var verschilInWeken;
+    verschilInWeken = eindWeek - startWeek;
+    console.log("verschil in weken: " + verschilInWeken);
+
+    function addIndex() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
-            counter++;
-            console.log('Volgende week is geklikt, counter waarde: ' + counter);
+            index++;
+            huidigeWeek++;
+            console.log("i: " + index);
+            console.log("hw: " + huidigeWeek);
         }
     }
 
-    function subtractCounter() {
+    function subtractIndex() {
         if (document.getElementById("knopVorigeWeek").onclick) {
-            counter--;
-            console.log('Vorige week is geklikt, counter waarde: ' + counter);
+            index--;
+            huidigeWeek--;
+            console.log("i: " + index);
+            console.log("hw: " + huidigeWeek);
         }
+    }
+
+    function addWeekNumber() {
+        var x = document.getElementById("weekNummerHeader");
+        x.innerText = huidigeWeek;
     }
 
     function displayVorigeWeekButton() {
-        if (counter > startWeek) {
+        if (index > -1) {
             document.getElementById("knopVorigeWeek").style.display = "inline";
         } else {
             document.getElementById("knopVorigeWeek").style.display = "none";
@@ -182,17 +217,14 @@
     }
 
     function displayVolgendeWeekButton() {
-        if (counter == eindWeek) {
+        if (huidigeWeek == eindWeek - 1) {
             document.getElementById("knopVolgendeWeek").style.display = "none";
         } else {
             document.getElementById("knopVolgendeWeek").style.display = "inline";
         }
     }
-
-    function addWeekNumber() {
-        var x = document.getElementById("weekNummer");
-        x.innerText = "Week " + counter;
-    }
     
 </script>
 </html>
+
+
