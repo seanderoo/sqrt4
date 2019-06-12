@@ -78,34 +78,27 @@
             <tr>
                 <td th:value="middag">13:00 - 17:00</td>
                 <td><select id="maMid" name="maMid">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="diMid" name="diMid">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="woMid" name="woMid">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="doMid" name="doMid">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="vrMid" name="vrMid">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
             </tr>
             <tr>
                 <td th:value="avond">17:00 - 21:00</td>
                 <td><select id="maAvo" name="maAvo">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="diAvo" name="diAvo">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="woAvo" name="woAvo">
@@ -194,7 +187,7 @@ function checkKeuze() {
     function loadData() {
         var request = new XMLHttpRequest();
         var selectedWeek = document.getElementById("week").value;
-        console.log("gekozen week is: " + selectedCohort);
+        console.log("gekozen week is: " + selectedWeek);
         var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
         var foutmelding = request.responseText;
         request.onreadystatechange = function() {

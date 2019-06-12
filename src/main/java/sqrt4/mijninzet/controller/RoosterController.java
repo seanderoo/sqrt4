@@ -179,7 +179,8 @@ public class RoosterController extends AbstractController {
         List<Vak> vakken = vakRepo.findAll();
         model.addAttribute("vakken", vakken);
         List<Vak> vakkenZonder = vakRepo.findAll();
-        vakkenZonder.remove(0);
+        Vak geenles = vakRepo.findByVakNaam("Geen les");
+        vakkenZonder.remove(geenles);
         model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
@@ -189,6 +190,7 @@ public class RoosterController extends AbstractController {
 
     final int UREN_PER_DAGDEEL = 4;
 
+    //haalt per vak het aantal uren wat voor dat cohort al opgeslagen is op uit de db (James en Karin)
     public HashMap<String, Integer> haalToegekendeUrenOp(Cohort cohort) {
         HashMap<String, Integer> vakUrenToegekend = new HashMap<>();
         List<Vak> vakken = vakRepo.findAll();

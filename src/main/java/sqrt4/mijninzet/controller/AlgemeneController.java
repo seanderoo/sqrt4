@@ -10,6 +10,7 @@ import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.CohortRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
+import sqrt4.mijninzet.repository.WeekRepository;
 
 @RestController
 @RequestMapping("/ajax")
@@ -20,7 +21,7 @@ public class AlgemeneController {
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
     @Autowired
-    private CohortRepository cohortRepository;
+    private WeekRepository weekRepo;
 
     @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
@@ -62,14 +63,13 @@ public class AlgemeneController {
         return aantalWeken;
 
     }
-    //(Karin)
+    //haalt de vakken op die al voor die week zijn ogeslagen (Karin)
     @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
-    public int aantalUrenToegekend(@PathVariable Week week) {
-        //Michel haalde overal cohort weg en toen werkte het wel.
-        //aantal uren wat al toegekend is in dit cohort ophalen uit de database
+    public String vakAlOpgeslagen(@PathVariable Week week) {
         System.out.println("week is: " + week);
-        int aantalUren = 0;
-        System.out.println("Het aantal uren is: " + aantalUren);
-        return aantalUren;
+        //week is niet de juiste week. Als je week 6 kiest maakt hij daar weekid 6 van en haalt vervolgens de week die daarbij hoort uit de db op.
+        String vaknaam = week.getDag("maandag").getOchtend().getVak().getVakNaam();
+        System.out.println("De naam van het vak is: " + vaknaam);
+        return vaknaam;
     }
 }

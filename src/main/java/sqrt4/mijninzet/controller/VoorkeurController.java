@@ -25,9 +25,11 @@ public class VoorkeurController extends AbstractController {
     @GetMapping("/docent/voorkeuren")
     public String getVakken(Model model) {
         List<Vak> vakkenLijst = vakRepository.findAll();
+        Vak geenles = vakRepository.findByVakNaam("Geen les");
+        vakkenLijst.remove(geenles);
         User user = voegActiveUserToe();
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
-        System.out.println(voorkeurLijst);
+//        System.out.println(voorkeurLijst);
 
         Voorkeur voorkeur = new Voorkeur();
 
