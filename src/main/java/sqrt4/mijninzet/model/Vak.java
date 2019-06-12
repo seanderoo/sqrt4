@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Vak {
+public class Vak implements Comparable <Vak>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,6 +89,10 @@ public class Vak {
     }
 
 
+    @Override
+    public int compareTo(Vak o) {
+        return this.vakNaam.compareTo(o.vakNaam);
+    }
 }
 
 

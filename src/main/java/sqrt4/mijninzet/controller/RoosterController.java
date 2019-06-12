@@ -126,8 +126,11 @@ public class RoosterController extends AbstractController {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
         List<Vak> vakken = vakRepo.findAll();
+        vakkenSorteren(vakken);
         List<Vak> vakkenZonder = vakRepo.findAll();
-        vakkenZonder.remove(0);
+        Vak geenLes = vakRepo.findByVakNaam("Geen les");
+        vakkenZonder.remove(geenLes);
+        Collections.sort(vakkenZonder);
         model.addAttribute("vakken", vakken);
         model.addAttribute("vakkenZonder", vakkenZonder);
         System.out.println(vakkenZonder);
@@ -178,9 +181,11 @@ public class RoosterController extends AbstractController {
         saveVakkenPerDag(cohort1, weeknummer, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
         saveVakkenPerDag(cohort1, weeknummer, "vrijdag", vakVrOcht, vakVrMid, vakVrAvo);
         List<Vak> vakken = vakRepo.findAll();
+       vakkenSorteren(vakken);
         model.addAttribute("vakken", vakken);
         List<Vak> vakkenZonder = vakRepo.findAll();
         vakkenZonder.remove(0);
+        Collections.sort(vakkenZonder);
         model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
@@ -213,6 +218,14 @@ public class RoosterController extends AbstractController {
         }
         vakUrenToegekend.remove("Geen les");
         return vakUrenToegekend;
+    }
+
+    public List<Vak> vakkenSorteren(List<Vak> vakkenlijst){
+        Collections.sort(vakkenlijst);
+        Vak geenLes = vakRepo.findByVakNaam("Geen les");
+        vakkenlijst.remove(geenLes);
+        vakkenlijst.add(0, geenLes);
+    return vakkenlijst;
     }
 
     public void saveVakkenPerDag(Cohort cohort, int weekNummer, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
