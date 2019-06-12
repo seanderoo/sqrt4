@@ -47,19 +47,13 @@ public class AlgemeneController {
         return "";
     }
 
-    @RequestMapping(value = "/roosteraar/docent-koppelen/{cohort}", method = RequestMethod.POST)
-    public int getAantalWekenGeselecteerdeCohort(@PathVariable Cohort cohort) {
-        int aantalWeken = cohort.hoeveelWekenInJaar(cohort.getStartJaar());
-        int startJaar = cohort.getStartJaar();
-        int eindJaar = cohort.getEindJaar();
-        int startWeek = cohort.getStartWeek();
-        int eindWeek = cohort.getEindWeek();
-        if (startJaar == eindJaar) {
-            aantalWeken = eindWeek - startWeek;
-        } else if (eindJaar > startJaar) {
-            aantalWeken = (aantalWeken - startWeek) + eindWeek;
-        }
-        return aantalWeken;
+    @RequestMapping(value = "/roosteraar/docent-koppelen-gekozen-cohort/{weekId}", method = RequestMethod.POST)
+    public Week getAantalWekenGeselecteerdeCohort(@PathVariable int weekId) {
+        Week week = null;
+
+
+        return week;
+
 
     }
 
