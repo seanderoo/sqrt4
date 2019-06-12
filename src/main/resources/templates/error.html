@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" type="text/css" href="/error.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
 <body>
-
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
 <p id="pageBody"></p>
 
 <form action="/home">

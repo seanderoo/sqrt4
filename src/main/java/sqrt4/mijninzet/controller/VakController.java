@@ -21,7 +21,7 @@ public class VakController {
 
     @GetMapping("/manager/vak-aanmaken")
     public String vakAanmaken() {
-        return "vak-aanmaken";
+        return "manager/vak-aanmaken";
     }
 
     @PostMapping("/manager/vak-toegevoegd")
@@ -31,11 +31,11 @@ public class VakController {
         for (Vakdagdeel vakdagdeel :vak.getVakdagdelen()) {
             vakdagdeelRespository.save(vakdagdeel);
         }
-        return "vak-toegevoegd";
+        return "manager/vak-toegevoegd";
     }
 
     @GetMapping("/manager/vak-rooster")
     public String vakRoosterMaken() {
-        return "vak-rooster";
+        return "manager/vak-rooster";
     }
 }

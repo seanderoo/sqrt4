@@ -1,9 +1,11 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
+import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.CohortRepository;
@@ -34,6 +36,11 @@ public class AlgemeneController {
         }
         return preference;
     }
+
+//    @RequestMapping(value = "/ajax/roosteraar/docent-koppelen/{cohortnummer}/{weeknummer}", method = RequestMethod.POST)
+//    public Week haalWeekOp(@PathVariable Cohort cohort, @PathVariable Week weeknummer) {
+//
+//    }
 
     @RequestMapping(value = "/{user}", method = RequestMethod.POST)
     public String testRest2(@PathVariable User user) {

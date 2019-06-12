@@ -34,13 +34,15 @@ public class GebruikerController extends AbstractController {
     }
 
     @PostMapping("/nieuwe-gebruiker")
-    public String nieuweGebruiker(User user) {
+    public String nieuweGebruiker(User user, Model model) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(1);
         userRepository.save(user);
-        return "admin/gebruiker-toegevoegd";
+        List<User> users = userRepository.findAll();
+        model.addAttribute("gebruikers", users);
+        return "admin/overzicht-gebruikers";
     }
 
     @GetMapping("/overzicht-gebruikers")

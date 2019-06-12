@@ -46,7 +46,7 @@ public class VoorkeurController extends AbstractController {
 
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", user);
-        return "voorkeuren";
+        return "docent/voorkeuren";
     }
 
     @PostMapping("/docent/voorkeuren")
@@ -61,6 +61,6 @@ public class VoorkeurController extends AbstractController {
         List<Vak> vakkenLijst = vakRepository.findAll();
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", voegActiveUserToe());
-        return "voorkeuren";
+        return "docent/voorkeuren";
     }
 }
