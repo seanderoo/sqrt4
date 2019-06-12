@@ -12,6 +12,7 @@ import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,7 @@ public class VoorkeurController extends AbstractController {
     @GetMapping("/docent/voorkeuren")
     public String getVakken(Model model) {
         List<Vak> vakkenLijst = vakRepository.findAll();
-        Vak geenles = vakRepository.findByVakNaam("Geen les");
-        vakkenLijst.remove(geenles);
+        vakkenlijstSorteren(vakkenLijst);
         User user = voegActiveUserToe();
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
 //        System.out.println(voorkeurLijst);
@@ -59,10 +59,18 @@ public class VoorkeurController extends AbstractController {
         ingevuldeVoorkeur.setVoorkeurGebruiker(voorkeur.getVoorkeurGebruiker());
         voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
         voorkeurenRepository.save(ingevuldeVoorkeur);
-
         List<Vak> vakkenLijst = vakRepository.findAll();
+        vakkenlijstSorteren(vakkenLijst);
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", voegActiveUserToe());
         return "docent/voorkeuren";
+    }
+
+
+    public List<Vak> vakkenlijstSorteren(List<Vak> vakkenlijst){
+        Vak geenles = vakRepository.findByVakNaam("Geen les");
+        vakkenlijst.remove(geenles);
+        Collections.sort(vakkenlijst);
+        return vakkenlijst;
     }
 }
