@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface DagdeelRepository extends JpaRepository<Dagdeel, Integer> {
 
+    int countByVakVakIdAndDag_Id(int vakId, int dagId);
 }

@@ -10,10 +10,7 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.Vakdagdeel;
 import sqrt4.mijninzet.model.Vak;
-import sqrt4.mijninzet.repository.CohortRepository;
-import sqrt4.mijninzet.repository.VakdagdeelRespository;
-import sqrt4.mijninzet.repository.VakRepository;
-import sqrt4.mijninzet.repository.WeekRepository;
+import sqrt4.mijninzet.repository.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -30,6 +27,8 @@ public class RoosterController extends AbstractController {
     WeekRepository weekRepo;
     @Autowired
     VakdagdeelRespository vakdagdeelRespository;
+    @Autowired
+    DagdeelRepository dagdeelRepository;
 
     @GetMapping("/manager/rooster-maken")
     public String maakRooster(Model model) {
@@ -127,9 +126,14 @@ public class RoosterController extends AbstractController {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
         List<Vak> vakken = vakRepo.findAll();
+        List<Vak> vakkenZonder = vakRepo.findAll();
+        vakkenZonder.remove(0);
         model.addAttribute("vakken", vakken);
+        model.addAttribute("vakkenZonder", vakkenZonder);
+        System.out.println(vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
+        model.addAttribute("hashmap", haalToegekendeUrenOp(cohort));
         return "manager/rooster-maken-cohort-gekozen-karin";
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
@@ -175,14 +179,44 @@ public class RoosterController extends AbstractController {
         saveVakkenPerDag(cohort1, weeknummer, "vrijdag", vakVrOcht, vakVrMid, vakVrAvo);
         List<Vak> vakken = vakRepo.findAll();
         model.addAttribute("vakken", vakken);
+        List<Vak> vakkenZonder = vakRepo.findAll();
+        vakkenZonder.remove(0);
+        model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
+        model.addAttribute("hashmap", haalToegekendeUrenOp(cohort1));
         return "manager/rooster-maken-cohort-gekozen-karin";
+    }
+
+    public HashMap<String, Integer> haalToegekendeUrenOp(Cohort cohort) {
+        HashMap<String, Integer> vakUrenToegekend = new HashMap<>();
+        List<Vak> vakken = vakRepo.findAll();
+        ArrayList<Integer> vakIds = new ArrayList<>();
+        for (Vak vak: vakken) {
+            vakIds.add(vak.getVakId());
+        }
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+        ArrayList<Integer> dagIds = new ArrayList<>();
+        for (Week week: weken) {
+            dagIds.add(week.getDag("maandag").getId());
+            dagIds.add(week.getDag("dinsdag").getId());
+            dagIds.add(week.getDag("woensdag").getId());
+            dagIds.add(week.getDag("donderdag").getId());
+            dagIds.add(week.getDag("vrijdag").getId());
+        }
+        for (int vakId: vakIds) {
+            int vakteller = 0;
+            for (int dagId: dagIds) {
+                vakteller += dagdeelRepository.countByVakVakIdAndDag_Id(vakId,dagId);
+            }
+            vakUrenToegekend.put(vakRepo.findById(vakId).getVakNaam(), vakteller * 4);
+        }
+        vakUrenToegekend.remove("Geen les");
+        return vakUrenToegekend;
     }
 
     public void saveVakkenPerDag(Cohort cohort, int weekNummer, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
         Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
-        System.out.println("saveVakkenPerDag, week:" + week);
         week.getDag(dagnaam).getOchtend().setVak(ochtend);
         week.getDag(dagnaam).getMiddag().setVak(middag);
         week.getDag(dagnaam).getAvond().setVak(avond);

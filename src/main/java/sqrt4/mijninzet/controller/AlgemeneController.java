@@ -73,4 +73,14 @@ public class AlgemeneController {
         return aantalUren;
     }
 
+    //(Karin)
+    @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
+    public int aantalUrenToegekend(@PathVariable Week week) {
+        //Michel haalde overal cohort weg en toen werkte het wel.
+        //aantal uren wat al toegekend is in dit cohort ophalen uit de database
+        System.out.println("week is: " + week);
+        int aantalUren = 0;
+        System.out.println("Het aantal uren is: " + aantalUren);
+        return aantalUren;
+    }
 }

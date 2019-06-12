@@ -6,6 +6,20 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
+<style>
+    .urenTabel {
+        float: left;
+        width: 20%;
+        padding: 15px;
+        /*position: fixed;*/
+    }
+    .vulWeek {
+        float: right;
+        margin-right: 10%;
+        width: 70%;
+        padding: 15px;
+    }
+</style>
 <body onload="checkKeuze()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
@@ -14,12 +28,26 @@
 <h2 id="gekozenCohort" th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>.
     Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
  t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
-
-    <form action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+<div  class="urenTabel">
+<table>
+    <h3>Uren per vak</h3>
+    <tr>
+        <th>Vak</th>
+        <th>Aantal uur</th>
+        <th>Reeds toegekend</th>
+    </tr>
+    <tr th:each="vak: ${vakkenZonder}" >
+        <td th:value="${vak}" th:text="${vak.getVakNaam()}"></td>
+        <td th:value="${vak}" th:text="${vak.getAantalUren()}"></td>
+        <td th:value="${hashmap}" th:text="${hashmap.get('__${vak.getVakNaam()}__')}"></td>
+    </tr>
+</table>
+</div>
+    <form class="vulWeek" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
         <table id="TableFormatter">
-            <thead><input type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
+            <thead><input id="cohort" type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
             <tr>
-                <th><select id="week" name="week" onchange="checkKeuze()">
+                <th><select id="week" name="week" onchange="checkKeuze(); loadData()">
                     <option value="geenKeuze">Kies een week</option>
                     <option th:each="week: ${weken}" th:value="${week.getWeekNummer()}" th:text="${week.getWeekNummerTekst()}"></option>
                 </select> </th>
@@ -32,23 +60,18 @@
             <tr>
                 <td th:value="ochtend">9:00 - 13:00</td>
                 <td><select id="maOcht" name="maOcht">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="diOcht" name="diOcht">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="woOcht" name="woOcht">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="doOcht" name="doOcht">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="vrOcht" name="vrOcht">
-                    <option>Geen les</option>
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
             </tr>
@@ -106,7 +129,7 @@
     Hieronder een overzicht van alle weken van dit cohort
 </p>
 <th:block th:each="week: ${weken}">
-    <form>
+    <form class="vulWeek">
         <table id="TableFormatter">
             <thead> </thead>
             <tr>
@@ -145,11 +168,12 @@
     </form>
 </th:block>
 
+<p id="demo">
+
+</p>
 
 </body>
 <script>
-// Kijken of je iets met ajax kunt doen. Een onchange function bij de week selectie. Zodra dat gebeurt dan haal je de
-// vakken op die al in de database staan en laat die zien.
 
 //checkt of er wel voor een week gekozen wordt. Zo niet, dan doet de submit knop het niet (Karin).
 function checkKeuze() {
@@ -157,7 +181,7 @@ function checkKeuze() {
     var geenKeuze = "geenKeuze";
     if (document.getElementById("week").value == geenKeuze) {
         button.disabled = true;
-        button.style.cursor="default";
+        button.style.cursor="not-allowed";
         button.style.color = "gray";
     } else {
         button.disabled = false;
@@ -167,23 +191,23 @@ function checkKeuze() {
 }
 // Kijken of je iets met ajax kunt doen. Een onchange function bij de vak selectie. Zodra dat gebeurt dan haal je de
 // vakken op die al in de database staan en laat zien hoeveel uur al toegekend is in het rooster. Werkt (nog) niet. Karin
-function loadData() {
-    var request = new XMLHttpRequest();
-    var selectedWeek = document.getElementById("week").value;
-    console.log("gekozen week is: " + selectedCohort);
-    var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
-    var foutmelding = request.responseText;
-    request.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerText = "Antwoord: " + this.responseText;
-        } else {
-            document.getElementById("demo").innerText = "foutmelding: " + foutmelding;
-        }
-    };
-    request.open("GET", url, true);
-    request.send();
-}
-loadData();
+    function loadData() {
+        var request = new XMLHttpRequest();
+        var selectedWeek = document.getElementById("week").value;
+        console.log("gekozen week is: " + selectedCohort);
+        var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
+        var foutmelding = request.responseText;
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               document.getElementById("demo").innerText = "Antwoord: " + this.responseText;
+            } else {
+                document.getElementById("demo").innerText = "foutmelding: " + foutmelding;
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+    loadData();
 
 
 </script>

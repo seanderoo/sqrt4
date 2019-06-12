@@ -12,5 +12,4 @@ public interface CohortRepository extends JpaRepository<Cohort, Integer> {
     List<Cohort> findAllByStartJaarIsGreaterThanEqual(int jaar);
     Cohort findById(int id);
 
-
 }
