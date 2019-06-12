@@ -165,7 +165,25 @@ function checkKeuze() {
         button.style.cursor = "pointer";
     }
 }
-
+// Kijken of je iets met ajax kunt doen. Een onchange function bij de vak selectie. Zodra dat gebeurt dan haal je de
+// vakken op die al in de database staan en laat zien hoeveel uur al toegekend is in het rooster. Werkt (nog) niet. Karin
+function loadData() {
+    var request = new XMLHttpRequest();
+    var selectedWeek = document.getElementById("week").value;
+    console.log("gekozen week is: " + selectedCohort);
+    var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
+    var foutmelding = request.responseText;
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerText = "Antwoord: " + this.responseText;
+        } else {
+            document.getElementById("demo").innerText = "foutmelding: " + foutmelding;
+        }
+    };
+    request.open("GET", url, true);
+    request.send();
+}
+loadData();
 
 
 </script>
