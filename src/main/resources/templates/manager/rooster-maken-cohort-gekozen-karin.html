@@ -34,10 +34,12 @@
     <tr>
         <th>Vak</th>
         <th>Aantal uur</th>
+        <th>Reeds toegekend</th>
     </tr>
-    <tr th:each="vak: ${vakken}" >
+    <tr th:each="vak: ${vakkenZonder}" >
         <td th:value="${vak}" th:text="${vak.getVakNaam()}"></td>
-        <td th:value="${vak}">????</td>
+        <td th:value="${vak}" th:text="${vak.getAantalUren()}"></td>
+        <td th:value="${hashmap}" th:text="${hashmap.get('__${vak.getVakNaam()}__')}"></td>
     </tr>
 </table>
 </div>
@@ -167,7 +169,7 @@
 </th:block>
 
 <p id="demo">
-(Nog) niet gelukt
+
 </p>
 
 </body>
