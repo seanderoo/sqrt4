@@ -45,7 +45,7 @@
         <table id="TableFormatter">
             <thead><input id="cohort" type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
             <tr>
-                <th><select id="week" name="week" onchange="checkKeuze()">
+                <th><select id="week" name="week" onchange="checkKeuze(); loadData()">
                     <option value="geenKeuze">Kies een week</option>
                     <option th:each="week: ${weken}" th:value="${week.getWeekNummer()}" th:text="${week.getWeekNummerTekst()}"></option>
                 </select> </th>
@@ -57,7 +57,7 @@
             </tr>
             <tr>
                 <td th:value="ochtend">9:00 - 13:00</td>
-                <td><select id="maOcht" name="maOcht" onchange="loadData()">
+                <td><select id="maOcht" name="maOcht">
                     <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
                 </select> </td>
                 <td><select id="diOcht" name="diOcht">
@@ -191,9 +191,9 @@ function checkKeuze() {
 // vakken op die al in de database staan en laat zien hoeveel uur al toegekend is in het rooster. Werkt (nog) niet. Karin
     function loadData() {
         var request = new XMLHttpRequest();
-        var selectedCohort = document.getElementById("cohort").value;
-        console.log("gekozen cohort is: " + selectedCohort);
-        var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedCohort;
+        var selectedWeek = document.getElementById("week").value;
+        console.log("gekozen week is: " + selectedCohort);
+        var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
         var foutmelding = request.responseText;
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
