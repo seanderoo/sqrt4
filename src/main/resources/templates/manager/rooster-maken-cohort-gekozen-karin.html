@@ -184,7 +184,7 @@
         var foutmelding = request.responseText;
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("demo").innerText = "Antwoord: " + this.responseText;
+               document.getElementById("demo").innerText = "Antwoord: " + this.responseText;
             } else {
                 document.getElementById("demo").innerText = "foutmelding: " + foutmelding;
             }

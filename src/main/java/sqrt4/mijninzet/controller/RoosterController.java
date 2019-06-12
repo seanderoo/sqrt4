@@ -133,7 +133,6 @@ public class RoosterController extends AbstractController {
         Collections.sort(vakkenZonder);
         model.addAttribute("vakken", vakken);
         model.addAttribute("vakkenZonder", vakkenZonder);
-        System.out.println(vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
         model.addAttribute("hashmap", haalToegekendeUrenOp(cohort));
@@ -184,7 +183,8 @@ public class RoosterController extends AbstractController {
        vakkenSorteren(vakken);
         model.addAttribute("vakken", vakken);
         List<Vak> vakkenZonder = vakRepo.findAll();
-        vakkenZonder.remove(0);
+        Vak geenles = vakRepo.findByVakNaam("Geen les");
+        vakkenZonder.remove(geenles);
         Collections.sort(vakkenZonder);
         model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
@@ -193,6 +193,9 @@ public class RoosterController extends AbstractController {
         return "manager/rooster-maken-cohort-gekozen-karin";
     }
 
+    final int UREN_PER_DAGDEEL = 4;
+
+    //haalt per vak het aantal uren wat voor dat cohort al opgeslagen is op uit de db (James en Karin)
     public HashMap<String, Integer> haalToegekendeUrenOp(Cohort cohort) {
         HashMap<String, Integer> vakUrenToegekend = new HashMap<>();
         List<Vak> vakken = vakRepo.findAll();
@@ -214,7 +217,7 @@ public class RoosterController extends AbstractController {
             for (int dagId: dagIds) {
                 vakteller += dagdeelRepository.countByVakVakIdAndDag_Id(vakId,dagId);
             }
-            vakUrenToegekend.put(vakRepo.findById(vakId).getVakNaam(), vakteller * 4);
+            vakUrenToegekend.put(vakRepo.findById(vakId).getVakNaam(), vakteller * UREN_PER_DAGDEEL);
         }
         vakUrenToegekend.remove("Geen les");
         return vakUrenToegekend;
