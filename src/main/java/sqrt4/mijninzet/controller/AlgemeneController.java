@@ -67,10 +67,9 @@ public class AlgemeneController {
         return aantalWeken;
 
     }
-    //haalt de vakken op die al voor die week zijn ogeslagen (Karin)
+    //haalt de vakken op die al voor die week zijn ogeslagen (James en Karin)
     @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
     public List<String> vakAlOpgeslagen(@PathVariable Week week) {
-        ArrayList<String> testArray = new ArrayList<>();
         String maOcht = week.getMaandag().getOchtend().getVak().getVakNaam();
         String maMid = week.getMaandag().getMiddag().getVak().getVakNaam();
         String maAvo = week.getMaandag().getAvond().getVak().getVakNaam();
@@ -87,9 +86,6 @@ public class AlgemeneController {
         String vrMid = week.getVrijdag().getMiddag().getVak().getVakNaam();
         String vrAvo = week.getVrijdag().getAvond().getVak().getVakNaam();
         List<String> list = Arrays.asList(maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo);
-        testArray.add(maOcht);
-        testArray.add(maMid);
-        testArray.add(maAvo);
         return list;
     }
 }
