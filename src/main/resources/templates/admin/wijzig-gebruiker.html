@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>  <label>Herhaal wachtwoord</label></td>
-                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required oninput="noTypo()"></td>
                 <td text="" id="noMatch" style="color:red"></td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Gebruiker Wijzigen" oninput="noTypo()"/></td>
+                <td><input id="submitButton" type="submit" value="Gebruiker Wijzigen"/></td>
             </tr>
 
         </table>
@@ -69,11 +69,25 @@
     function noTypo() {
         var ww1 = document.getElementById('wachtwoord1').value;
         var ww2 = document.getElementById('wachtwoord2').value;
+        buttonGreyOut(ww1 != ww2);
         if (ww1 != ww2) {
             document.getElementById('wachtwoord2').focus();
             document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen";
         } else {
             document.getElementById('noMatch').textContent= "";
+        }
+    }
+
+    function buttonGreyOut(voorwaarde) {
+        var button = document.getElementById("submitButton");
+        if (voorwaarde) {
+            button.disabled = true;
+            button.style.cursor="not-allowed";
+            button.style.color = "gray";
+        } else {
+            button.disabled = false;
+            button.style.color = "#ffffff";
+            button.style.cursor = "pointer";
         }
     }
 
