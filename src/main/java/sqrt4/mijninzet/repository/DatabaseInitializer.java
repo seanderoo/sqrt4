@@ -83,13 +83,23 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         //Create vakken
         Vak geenLes = new Vak("Geen les", 0);
-        Vak programming = new Vak("Programming", 16);
-        Vak oop = new Vak("OOP", 16);
+        Vak programming = new Vak("Programming", 36);
+        Vak database = new Vak("Databases", 48);
+        Vak oop = new Vak("OOP", 48);
         Vak projectQuizmaster = new Vak("Project Quizmaster", 12);
-        Vak database = new Vak("Database", 40);
         Vak advanced = new Vak("Advanced Programming", 30);
+        Vak wsUML = new Vak ("WS UML", 4);
+        Vak wsMVC  = new Vak ("WS MVC", 4);
+        Vak wsGIT   = new Vak("WS GIT", 4);
+        Vak wsTesting = new Vak("WS Testing", 4);
+        Vak wsWeb = new Vak ("WS HTML/CSS/JS", 4);
+        Vak wsNoSql = new Vak("WS NoSQL & CouchDB", 4);
+        Vak voortgangsgesprekken = new Vak("Voortgangsgesprekken", 16);
+        Vak projectbegeleiding = new Vak("Projectbegeleiding", 80);
 
-        List<Vak> vakken = Arrays.asList(geenLes, programming, oop, projectQuizmaster, database, advanced);
+        List<Vak> vakken = Arrays.asList(geenLes, programming, database, oop,
+                projectQuizmaster, advanced, wsUML, wsGIT, wsMVC, wsTesting, wsWeb, wsNoSql,
+                voortgangsgesprekken, projectbegeleiding);
 
         //Create Cohort
         Cohort cohort15 = new Cohort(15,6,2019,27);
