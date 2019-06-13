@@ -64,61 +64,61 @@ public class RoosterController extends AbstractController {
         return "manager/rooster-maken-cohort-gekozen";
     }
 
-    @PostMapping("manager/rooster-maken-cohort-gekozen")
-    public String weekOpslaan(@RequestParam("cohortje") String cohortId,
-                              @RequestParam(value = "week", required = false) Integer weeknummer,
-                              @RequestParam("maandagochtend") String maandagochtend,
-                              @RequestParam("maandagmiddag") String maandagmiddag,
-                              @RequestParam("maandagavond") String maandagavond,
-                              @RequestParam("dinsdagochtend") String dinsdagochtend,
-                              @RequestParam("dinsdagmiddag") String dinsdagmiddag,
-                              @RequestParam("dinsdagavond") String dinsdagavond,
-                              @RequestParam("woensdagochtend") String woensdagochtend,
-                              @RequestParam("woensdagmiddag") String woensdagmiddag,
-                              @RequestParam("woensdagavond") String woensdagavond,
-                              @RequestParam("donderdagochtend") String donderdagochtend,
-                              @RequestParam("donderdagmiddag") String donderdagmiddag,
-                              @RequestParam("donderdagavond") String donderdagavond,
-                              @RequestParam("vrijdagochtend") String vrijdagochtend,
-                              @RequestParam("vrijdagmiddag") String vrijdagmiddag,
-                              @RequestParam("vrijdagavond") String vrijdagavond,
-                              Model model) {
-        final int OCHTEND = 0;
-        final int MIDDAG = 1;
-        final int AVOND = 2;
-
-        Cohort cohort = cohortRepo.findById(Integer.parseInt(cohortId));
-
-        String[] dagdeelIdsMaandag = {maandagochtend, maandagmiddag, maandagavond};
-        String[] dagdeelIdsDinsdag = {dinsdagochtend, dinsdagmiddag, dinsdagavond};
-        String[] dagdeelIdsWoensdag = {woensdagochtend, woensdagmiddag, woensdagavond};
-        String[] dagdeelIdsDonderdag = {donderdagochtend, donderdagmiddag, donderdagavond};
-        String[] dagdeelIdsVrijdag = {vrijdagochtend, vrijdagmiddag, vrijdagavond};
-
-        List<Vak> vakkenMaandag = haalVakkenOpMetId(dagdeelIdsMaandag);
-        List<Vak> vakkenDinsdag = haalVakkenOpMetId(dagdeelIdsDinsdag);
-        List<Vak> vakkenWoensdag = haalVakkenOpMetId(dagdeelIdsWoensdag);
-        List<Vak> vakkenDonderdag = haalVakkenOpMetId(dagdeelIdsDonderdag);
-        List<Vak> vakkenVrijdag = haalVakkenOpMetId(dagdeelIdsVrijdag);
-
-        saveVakkenPerDag(cohort, weeknummer, "maandag", vakkenMaandag.get(OCHTEND), vakkenMaandag.get(MIDDAG),
-                vakkenMaandag.get(AVOND));
-        saveVakkenPerDag(cohort, weeknummer, "dinsdag", vakkenDinsdag.get(OCHTEND), vakkenDinsdag.get(MIDDAG),
-                vakkenDinsdag.get(AVOND));
-        saveVakkenPerDag(cohort, weeknummer, "woensdag", vakkenWoensdag.get(OCHTEND), vakkenWoensdag.get(MIDDAG),
-                vakkenWoensdag.get(AVOND));
-        saveVakkenPerDag(cohort, weeknummer, "donderdag", vakkenDonderdag.get(OCHTEND), vakkenDonderdag.get(MIDDAG),
-                vakkenDonderdag.get(AVOND));
-        saveVakkenPerDag(cohort, weeknummer, "vrijdag", vakkenVrijdag.get(OCHTEND), vakkenVrijdag.get(MIDDAG),
-                vakkenVrijdag.get(AVOND));
-
-        model.addAttribute("vakdagdeelList", haalVakdagdeellijstOp());
-        model.addAttribute("cohort", cohort);
-        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
-        model.addAttribute("weken", weken);
-
-        return "manager/rooster-maken-cohort-gekozen";
-    }
+//    @PostMapping("manager/rooster-maken-cohort-gekozen")
+//    public String weekOpslaan(@RequestParam("cohortje") String cohortId,
+//                              @RequestParam(value = "week", required = false) Integer weeknummer,
+//                              @RequestParam("maandagochtend") String maandagochtend,
+//                              @RequestParam("maandagmiddag") String maandagmiddag,
+//                              @RequestParam("maandagavond") String maandagavond,
+//                              @RequestParam("dinsdagochtend") String dinsdagochtend,
+//                              @RequestParam("dinsdagmiddag") String dinsdagmiddag,
+//                              @RequestParam("dinsdagavond") String dinsdagavond,
+//                              @RequestParam("woensdagochtend") String woensdagochtend,
+//                              @RequestParam("woensdagmiddag") String woensdagmiddag,
+//                              @RequestParam("woensdagavond") String woensdagavond,
+//                              @RequestParam("donderdagochtend") String donderdagochtend,
+//                              @RequestParam("donderdagmiddag") String donderdagmiddag,
+//                              @RequestParam("donderdagavond") String donderdagavond,
+//                              @RequestParam("vrijdagochtend") String vrijdagochtend,
+//                              @RequestParam("vrijdagmiddag") String vrijdagmiddag,
+//                              @RequestParam("vrijdagavond") String vrijdagavond,
+//                              Model model) {
+//        final int OCHTEND = 0;
+//        final int MIDDAG = 1;
+//        final int AVOND = 2;
+//
+//        Cohort cohort = cohortRepo.findById(Integer.parseInt(cohortId));
+//
+//        String[] dagdeelIdsMaandag = {maandagochtend, maandagmiddag, maandagavond};
+//        String[] dagdeelIdsDinsdag = {dinsdagochtend, dinsdagmiddag, dinsdagavond};
+//        String[] dagdeelIdsWoensdag = {woensdagochtend, woensdagmiddag, woensdagavond};
+//        String[] dagdeelIdsDonderdag = {donderdagochtend, donderdagmiddag, donderdagavond};
+//        String[] dagdeelIdsVrijdag = {vrijdagochtend, vrijdagmiddag, vrijdagavond};
+//
+//        List<Vak> vakkenMaandag = haalVakkenOpMetId(dagdeelIdsMaandag);
+//        List<Vak> vakkenDinsdag = haalVakkenOpMetId(dagdeelIdsDinsdag);
+//        List<Vak> vakkenWoensdag = haalVakkenOpMetId(dagdeelIdsWoensdag);
+//        List<Vak> vakkenDonderdag = haalVakkenOpMetId(dagdeelIdsDonderdag);
+//        List<Vak> vakkenVrijdag = haalVakkenOpMetId(dagdeelIdsVrijdag);
+//
+//        saveVakkenPerDag(cohort, weeknummer, "maandag", vakkenMaandag.get(OCHTEND), vakkenMaandag.get(MIDDAG),
+//                vakkenMaandag.get(AVOND));
+//        saveVakkenPerDag(cohort, weeknummer, "dinsdag", vakkenDinsdag.get(OCHTEND), vakkenDinsdag.get(MIDDAG),
+//                vakkenDinsdag.get(AVOND));
+//        saveVakkenPerDag(cohort, weeknummer, "woensdag", vakkenWoensdag.get(OCHTEND), vakkenWoensdag.get(MIDDAG),
+//                vakkenWoensdag.get(AVOND));
+//        saveVakkenPerDag(cohort, weeknummer, "donderdag", vakkenDonderdag.get(OCHTEND), vakkenDonderdag.get(MIDDAG),
+//                vakkenDonderdag.get(AVOND));
+//        saveVakkenPerDag(cohort, weeknummer, "vrijdag", vakkenVrijdag.get(OCHTEND), vakkenVrijdag.get(MIDDAG),
+//                vakkenVrijdag.get(AVOND));
+//
+//        model.addAttribute("vakdagdeelList", haalVakdagdeellijstOp());
+//        model.addAttribute("cohort", cohort);
+//        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+//        model.addAttribute("weken", weken);
+//
+//        return "manager/rooster-maken-cohort-gekozen";
+//    }
 
     @GetMapping("manager/rooster-maken-cohort-gekozen-karin")
     public String roosterKarin(@RequestParam("cohortNaam") String cohortnaam,
@@ -140,7 +140,7 @@ public class RoosterController extends AbstractController {
     }
     @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
     public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
-                              @RequestParam(value = "week", required = false) int weeknummer,
+                              @RequestParam(value = "week", required = false) int weekId,
                               @RequestParam("maOcht") String maOchtVak,
                               @RequestParam("diOcht") String diOchtVak,
                               @RequestParam("woOcht") String woOchtVak,
@@ -174,13 +174,13 @@ public class RoosterController extends AbstractController {
         Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
         Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
         Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
-        saveVakkenPerDag(cohort1, weeknummer, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
-        saveVakkenPerDag(cohort1, weeknummer, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
-        saveVakkenPerDag(cohort1, weeknummer, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
-        saveVakkenPerDag(cohort1, weeknummer, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
-        saveVakkenPerDag(cohort1, weeknummer, "vrijdag", vakVrOcht, vakVrMid, vakVrAvo);
+        saveVakkenPerDag(weekId, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
+        saveVakkenPerDag(weekId, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
+        saveVakkenPerDag(weekId, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
+        saveVakkenPerDag(weekId, "donderdag", vakDoOcht, vakDoMid, vakDoAvo);
+        saveVakkenPerDag(weekId, "vrijdag", vakVrOcht, vakVrMid, vakVrAvo);
         List<Vak> vakken = vakRepo.findAll();
-       vakkenSorteren(vakken);
+        vakkenSorteren(vakken);
         model.addAttribute("vakken", vakken);
         List<Vak> vakkenZonder = vakRepo.findAll();
         Vak geenles = vakRepo.findByVakNaam("Geen les");
@@ -231,8 +231,8 @@ public class RoosterController extends AbstractController {
     return vakkenlijst;
     }
 
-    public void saveVakkenPerDag(Cohort cohort, int weekNummer, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
-        Week week = weekRepo.findByWeekNummerAndCohort(weekNummer, cohort);
+    public void saveVakkenPerDag(int weekId, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
+        Week week = weekRepo.findById(weekId);
         week.getDag(dagnaam).getOchtend().setVak(ochtend);
         week.getDag(dagnaam).getMiddag().setVak(middag);
         week.getDag(dagnaam).getAvond().setVak(avond);
