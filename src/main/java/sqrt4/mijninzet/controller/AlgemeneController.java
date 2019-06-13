@@ -12,6 +12,10 @@ import sqrt4.mijninzet.repository.CohortRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/ajax")
 public class AlgemeneController {
@@ -57,13 +61,25 @@ public class AlgemeneController {
 
 
     }
-    //haalt de vakken op die al voor die week zijn ogeslagen (Karin)
+    //haalt de vakken op die al voor die week zijn ogeslagen (James en Karin)
     @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
-    public String vakAlOpgeslagen(@PathVariable Week week) {
-        System.out.println("week is: " + week);
-        //week is niet de juiste week. Als je week 6 kiest maakt hij daar weekid 6 van en haalt vervolgens de week die daarbij hoort uit de db op.
-        String vaknaam = week.getDag("maandag").getOchtend().getVak().getVakNaam();
-        System.out.println("De naam van het vak is: " + vaknaam);
-        return vaknaam;
+    public List<String> vakAlOpgeslagen(@PathVariable Week week) {
+        String maOcht = week.getMaandag().getOchtend().getVak().getVakNaam();
+        String maMid = week.getMaandag().getMiddag().getVak().getVakNaam();
+        String maAvo = week.getMaandag().getAvond().getVak().getVakNaam();
+        String diOcht = week.getDinsdag().getOchtend().getVak().getVakNaam();
+        String diMid = week.getDinsdag().getMiddag().getVak().getVakNaam();
+        String diAvo = week.getDinsdag().getAvond().getVak().getVakNaam();
+        String woOcht = week.getWoensdag().getOchtend().getVak().getVakNaam();
+        String woMid = week.getWoensdag().getMiddag().getVak().getVakNaam();
+        String woAvo = week.getWoensdag().getAvond().getVak().getVakNaam();
+        String doOcht = week.getDonderdag().getOchtend().getVak().getVakNaam();
+        String doMid = week.getDonderdag().getMiddag().getVak().getVakNaam();
+        String doAvo = week.getDonderdag().getAvond().getVak().getVakNaam();
+        String vrOcht = week.getVrijdag().getOchtend().getVak().getVakNaam();
+        String vrMid = week.getVrijdag().getMiddag().getVak().getVakNaam();
+        String vrAvo = week.getVrijdag().getAvond().getVak().getVakNaam();
+        List<String> list = Arrays.asList(maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo);
+        return list;
     }
 }
