@@ -54,9 +54,8 @@ public class AlgemeneController {
 
 
         return week;
-
-
     }
+
     //haalt de vakken op die al voor die week zijn ogeslagen (Karin)
     @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
     public String vakAlOpgeslagen(@PathVariable Week week) {

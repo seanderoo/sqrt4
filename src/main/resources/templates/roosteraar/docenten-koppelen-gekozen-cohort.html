@@ -12,7 +12,7 @@
 <h1>Koppel Docenten</h1>
 <input id="index" type="hidden" th:value="${index}">
 
-<h2 id="weekNummer" th:each="week : ${weekList.get(index)}">Week <span id="weekNummerHeader" th:text="${week.getWeekNummer()}"></span></h2>
+<h2>Week <span id="weekNummerHeader" th:text="${weekList.get(index).getWeekNummer()}"></span></h2>
 <input id="huidigeWeek" type="hidden" th:value="${weekList.get(index).getWeekNummer()}">
 <input id="weekId" type="hidden" th:value="${weekList.get(index).getId()}">
 <input id="startWeek" type="hidden" th:value="${cohort.getStartWeek()}">
@@ -145,8 +145,8 @@
 
 <script>
     function getWeek() {
-        var weekId = document.getElementById("index").value;
-        var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + index;
+        var weekId = document.getElementById("weekId").value;
+        var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + weekId;
         console.log("dit is de url: " + url);
 
         var xhttp;
@@ -180,10 +180,6 @@
     var eindWeek;
     eindWeek = document.getElementById("eindWeek").value;
     console.log("eindweek = " + eindWeek);
-
-    var verschilInWeken;
-    verschilInWeken = eindWeek - startWeek;
-    console.log("verschil in weken: " + verschilInWeken);
 
     function addIndex() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
