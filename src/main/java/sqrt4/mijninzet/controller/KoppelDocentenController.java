@@ -22,15 +22,7 @@ public class KoppelDocentenController {
     @Autowired
     private CohortRepository cohortRepository;
     @Autowired
-    private VakdagdeelRespository vakdagdeelRespository;
-    @Autowired
     private WeekRepository weekRepository;
-    @Autowired
-    private VakRepository vakRepository;
-    @Autowired
-    private DagRepository dagRepository;
-    @Autowired
-    private DagdeelRepository dagdeelRepository;
 
     @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
@@ -58,8 +50,11 @@ public class KoppelDocentenController {
         int index = 0;
         model.addAttribute("index", index);
 
-        List<Week> weekList = cohort.getWeekList();
-        model.addAttribute("weekList", weekList);
+//        List<Week> weekList = cohort.getWeekList();
+//        model.addAttribute("weekList", weekList);
+
+        List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
