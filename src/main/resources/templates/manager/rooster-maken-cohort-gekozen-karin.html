@@ -15,9 +15,12 @@
     }
     .vulWeek {
         float: right;
-        margin-right: 10%;
-        width: 70%;
+        margin-right: 20%;
+        width: 60%;
         padding: 15px;
+    }
+    .gevuldeWeek {
+        margin-left: 15%;
     }
 </style>
 <body onload="checkKeuze()">
@@ -33,7 +36,7 @@
         <tr>
             <th>Vak</th>
             <th>Aantal uur</th>
-            <th>Reeds toegekend</th>
+            <th>Reeds ingeroosterd</th>
         </tr>
         <tr th:each="vak: ${vakkenZonder}" >
             <td th:value="${vak}" th:text="${vak.getVakNaam()}"></td>
@@ -118,7 +121,7 @@
     Hieronder een overzicht van alle weken van dit cohort
 </p>
 <th:block th:each="week: ${weken}">
-    <form class="vulWeek">
+    <form class="gevuldeWeek">
         <table id="TableFormatter">
             <thead> </thead>
             <tr>
@@ -156,8 +159,7 @@
         </table>
     </form>
 </th:block>
-<p id="demo">
-</p>
+
 </body>
 <script>
     //checkt of er wel voor een week gekozen wordt. Zo niet, dan doet de submit knop het niet (Karin).
@@ -174,7 +176,7 @@
             button.style.cursor = "pointer";
         }
     }
-    // Kijken of je iets met ajax kunt doen. Een onchange function bij de week selectie. Zodra dat gebeurt dan haal je de
+    // Een onchange function bij de week selectie. Zodra dat gebeurt dan haal je met AJAX de
     // vakken op die al in de database staan. James en Karin
     function loadData() {
         var request = new XMLHttpRequest();
@@ -203,6 +205,5 @@
         request.open("GET", url, true);
         request.send();
     }
-    // loadData();
 </script>
 </html>
