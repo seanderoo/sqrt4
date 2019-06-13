@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Dag {
@@ -100,8 +101,11 @@ public class Dag {
         return dagnaam;
     }
 
-    public LocalDate getDatum() {
-        return datum;
+    public String getDatum() {
+        LocalDate date = datum;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = date.format(formatter);
+        return formattedString;
     }
 
     @Override
