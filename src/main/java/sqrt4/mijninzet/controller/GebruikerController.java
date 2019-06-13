@@ -14,7 +14,6 @@ import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.RoleRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/admin")
@@ -72,13 +71,13 @@ public class GebruikerController extends AbstractController {
             User user = userRepository.findUserById(userIdWijzig);
             model.addAttribute("gebruiker", user);
 
-            String gebruikerrol = user.getRoles();
-            gebruikerrol = hoofdletterPlusKleineLetters(gebruikerrol);
-            model.addAttribute("gebruikerrol", gebruikerrol);
+            String gebruikerrollen = user.getRoles();
+            model.addAttribute("gebruikerrollen", gebruikerrollen);
 
             List<Role> rollen = roleRepository.findAll();
-            rollen = verwijderGebruikerrolUitLijst(rollen, user);
             model.addAttribute("roles", rollen);
+            String rollenString = zetOmNaarString(rollen);
+            model.addAttribute("alleRollen", rollenString);
 
             return "admin/wijzig-gebruiker";
         }
@@ -98,21 +97,15 @@ public class GebruikerController extends AbstractController {
         return "admin/overzicht-gebruikers";
     }
 
-    private List<Role> verwijderGebruikerrolUitLijst(List<Role> lijstMetRollen, User gebruiker) {
-        List<Role> lijstZonderGebruikerrol = new ArrayList<>();
-        String gebruikerrol = gebruiker.getRoles();
-        gebruikerrol = hoofdletterPlusKleineLetters(gebruikerrol);
-        for (Role rol : lijstMetRollen) {
-            if (!rol.getName().equals(gebruikerrol)) {
-                lijstZonderGebruikerrol.add(rol);
+    private String zetOmNaarString(List<Role> rollen) {
+        StringBuilder bob = new StringBuilder();
+        for (int i = 0; i < rollen.size(); i++) {
+            bob.append(rollen.get(i).getName().toUpperCase());
+            if (i != (rollen.size()-1)) {
+                bob.append(",");
             }
         }
-        System.out.println(lijstZonderGebruikerrol);
-        return lijstZonderGebruikerrol;
-    }
-
-    private String hoofdletterPlusKleineLetters(String woord) {
-        woord = woord.substring(0,1).toUpperCase() + woord.substring(1).toLowerCase();
-        return woord;
+        String string = bob.toString();
+        return string;
     }
 }

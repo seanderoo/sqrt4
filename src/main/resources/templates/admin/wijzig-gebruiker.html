@@ -38,23 +38,26 @@
             </tr>
             <tr>
                 <td>  <label>Herhaal wachtwoord</label></td>
-                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required onblur="noTypo()"></td>
+                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required oninput="noTypo()"></td>
                 <td text="" id="noMatch" style="color:red"></td>
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
-                <td> <select th:name="roles" multiple="multiple">
-                    <option th:value="${gebruiker.getRoles()}" th:text="${gebruikerrol}"></option>
+                <td> <select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}" style="height: auto !important">
                     <option th:each="role : ${roles}"
+                            th:id="${role.getId()}"
                             th:value="${role.getName()}"
-                            th:text="${role.getName()}">
+                            th:text="${role.getName()}"
+                    onload="">
                     </option>
                 </select></td>
+                <input type="hidden" id="gebruikerrollen" th:value="${gebruikerrollen}">
+                <input type="hidden" id="alleRollen" th:value="${alleRollen}">
 
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Gebruiker Wijzigen" onclick="noTypo()"/></td>
+                <td><input id="submitButton" type="submit" value="Gebruiker Wijzigen"/></td>
             </tr>
 
         </table>
@@ -66,10 +69,52 @@
     function noTypo() {
         var ww1 = document.getElementById('wachtwoord1').value;
         var ww2 = document.getElementById('wachtwoord2').value;
+        buttonGreyOut(ww1 != ww2);
         if (ww1 != ww2) {
             document.getElementById('wachtwoord2').focus();
-            document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen, flapdrol <_<";
+            document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen";
+        } else {
+            document.getElementById('noMatch').textContent= "";
         }
     }
+
+    function buttonGreyOut(voorwaarde) {
+        var button = document.getElementById("submitButton");
+        if (voorwaarde) {
+            button.disabled = true;
+            button.style.cursor="not-allowed";
+            button.style.color = "gray";
+        } else {
+            button.disabled = false;
+            button.style.color = "#ffffff";
+            button.style.cursor = "pointer";
+        }
+    }
+
+    function isSelected() {
+        var gebruikerrollen = document.getElementById("gebruikerrollen").getAttribute("value");
+        var gesplitsteRollen = gebruikerrollen.split(",");
+
+        var alleRollen = document.getElementById("alleRollen").getAttribute("value");
+        var alleRollenGesplitst = alleRollen.split(",");
+
+        for (var i = 0; i < gesplitsteRollen.length; i++) {
+            for (var j = 0; j < alleRollenGesplitst.length; j++) {
+                if(gesplitsteRollen[i] === alleRollenGesplitst[j]) {
+                    setTextRollenbox("rollenbox",gesplitsteRollen[i]);
+                }
+            }
+        }
+
+        function setTextRollenbox(idVanElement, tekstVanElement) {
+            var idVanElement = document.getElementById(idVanElement);
+            for (var i = 0; i < idVanElement.options.length; ++i) {
+                if (idVanElement.options[i].text.toUpperCase() === tekstVanElement)
+                    idVanElement.options[i].selected = true;
+            }
+        }
+    }
+    isSelected();
+
 </script>
 </html>
