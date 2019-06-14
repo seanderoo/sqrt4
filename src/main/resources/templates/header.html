@@ -58,6 +58,14 @@
             <a href="/manager/rooster-maken-karin">Maak een lesrooster aan</a>
         </div>
     </div>
+    <div sec:authorize="hasAuthority('ROLEMANAGER')" class="dropdown">
+        <button class="dropbtn">Incidentenbeheer
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/manager/incidenten-beheer">Beheer incidenten</a>
+        </div>
+    </div>
     <a style="float:right" href="/logout"><img src="/images/logout.png" height="24" width="24"></a>
     <a style="float:right" href="/profiel"><img src="/images/account.png" height="24" width="24"></a>
 </div>

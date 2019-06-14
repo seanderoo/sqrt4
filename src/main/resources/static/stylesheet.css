@@ -135,6 +135,7 @@ button:hover:not(.dropbtn), input:hover {
     background:-ms-linear-gradient(top, #25167a 5%, #7892c2 100%);
     background:linear-gradient(to bottom, #25167a 5%, #7892c2 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
+    color: white;
     background-color:#25167a;
     outline: none;
 }
@@ -173,4 +174,42 @@ select select {
     display: inline;
 }
 
+#opmerkingVeld {
+    margin-top: 20px;
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    height: 200px !important;
+}
+
+::placeholder {
+    color: darkgrey;
+    font-size: 16px;
+}
+
+#overzicht, tr, td {
+    table-layout: fixed;
+    word-wrap: break-word;
+    background-color: white;
+    border: 1px solid black;
+    color: black !important;
+}
+
+#overzichtAfgehandeld {
+    margin-top: 30px;
+}
+
+#inputFieldManager {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#headerRowIncident th {
+    background-color: #7892c2 !important;
+}
+
+#headerRowIncident2 th {
+    background-color: #7892c2 !important;
+}
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4 | Incident Registreren</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+
+</head>
+<body>
+<div>
+    <header>
+        <div th:insert="~{header::copy}">Header</div>
+    </header>
+    <h1>Accorderen van Incidenten</h1>
+
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body>
+<form action="#" th:action="@{/manager/incidenten-beheer}" th:object="${incident}" method="POST">
+    <table id="overzicht">
+        <tr class="ST">
+            <th>Naam Gebruiker</th>
+            <th>Datum Incident</th>
+            <th>Ochtend</th>
+            <th>Middag</th>
+            <th>Avond</th>
+            <th>Opmerking Gebruiker</th>
+            <th>Toelichting Manager</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="incident: ${aanvraagLijst}">
+            <!--        <input id="incident_id" type="hidden" th:name="incident_id" th:value="${incident.getId()}">-->
+            <td th:text="${incident.getUser().getFullName()}"></td>
+            <td th:text="${incident.getDatum()}" name="datumAanvraag"></td>
+            <td th:class="${incident.isOchtend()}"></td>
+            <td th:class="${incident.isMiddag()}"></td>
+            <td th:class="${incident.isAvond()}"></td>
+            <td th:text="${incident.getOpmerkingGebruiker()}"></td>
+            <td>
+            <textarea placeholder="Plaats hier uw opmerking" id="inputFieldManager"
+                      th:name="inputManagerText" th:value="${incident.getManagerToelichting()}"></textarea></td>
+            <td>
+                <select id="statusSelect" th:name="status">
+                    <option th:value="in_behandeling" th:text="in_behandeling"></option>
+                    <option th:value="Akkoord" th:text="Akkoord"></option>
+                    <option th:value="Afgewezen" th:text="Afgewezen"></option>
+                </select>
+            </td>
+            <td
+                    colspan="8">
+                <button type="submit" th:name="incident_id" th:value="${incident.getId()}">Opslaan
+                </button>
+            </td>
+        </tr>
+        <tr>
+
+
+        </tr>
+    </table>
+
+    <br/>
+    <br/>
+    <table id="overzichtAfgehandeld">
+        <tr class="ST">
+            <th>Naam Gebruiker</th>
+            <th>Datum Incident</th>
+            <th>Ochtend</th>
+            <th>Middag</th>
+            <th>Avond</th>
+            <th>Opmerking Gebruiker</th>
+            <th>Toelichting Manager</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="incident: ${afgehandeldLijst}">
+            <td th:text="${incident.getUser().getFullName()}"></td>
+            <td th:text="${incident.getDatum()}"></td>
+            <td th:class="${incident.isOchtend()}"></td>
+            <td th:class="${incident.isMiddag()}"></td>
+            <td th:class="${incident.isAvond()}"></td>
+            <td th:text="${incident.getOpmerkingGebruiker()}"></td>
+            <td th:text="${incident.getManagerToelichting()}"></td>
+            <td th:text="${incident.getStatus()}">
+        </tr>
+    </table>
+</form>
+
+<script>
+
+    // function getListIncidentenOnbehandeld(){
+    //     var aanpassingStatusKnop = document.getElementById("statusSelect").value;
+    //     var url = '/ajax/incidenten-beheer/catch'
+    //
+    //     var xhttp;
+    //     // if(aanpassingStatusKnop === "in behandeling"){
+    //     //     document.getElementById("statusSelect").innerHTML = "in behandeling";
+    //     //     return;
+    //     // } var result = JsonConvert.DeserializeObject<RootObject>(json);
+    //
+    //     xhttp = new XMLHttpRequest();
+    //     xhttp.open("POST", url, true);
+    //     xhttp.onreadystatechange = function() {
+    //         if (this.readyState === 4 && this.status === 200) {
+    //             String  = this.responseText;
+    //
+    //             document.getElementById("aanvraagLijst").value = (JSON.parse(this.response));
+    //             console.log('Floris says: ' + this.response);
+    //         }
+    //     };
+    //     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    //     xhttp.setRequestHeader('Accept', 'application/json');
+    //     xhttp.send();
+    // }
+    //
+    //
+
+    // function Opslaan(){
+    //     this.click = function() {
+    //         alert('Hartelijk dank!\nVoorkeur is opgeslagen')
+    //     }
+    // }
+    //
+    // function checkPreference() {
+    //     var preference = document.getElementById('voorkeurGebruiker').value;
+    //     if (preference == 1) {
+    //         Opslaan();
+    //     } else if (preference == 2) {
+    //         Opslaan();
+    //     } else if (preference == 3) {
+    //         Opslaan();
+    //     } else {
+    //         alert('Voer een geldige voorkeur voor tussen de 1 en 3')
+    //     }
+    // }
+    //
+    // var knopOpslaan = new Opslaan();
+    //
+    // var knopElement = document.getElementById('knopOpslaan');
+    // knopElement.addEventListener('click', knopOpslaan.click);
+
+</script>
+</body>
+<footer>
+</footer>
+
+</html>
