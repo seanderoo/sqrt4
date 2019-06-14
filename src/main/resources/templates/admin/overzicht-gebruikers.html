@@ -15,7 +15,7 @@
 <br>
 <br>
 <form action = "#" th:action="@{/admin/overzicht-gebruikers}" th:method="POST">
-<table id="TableFormatter">
+<table class="TableFormatter" id="gebruikersTabel">
     <thead>
     <tr class="ST">
         <th>Id</th>
@@ -48,7 +48,7 @@
 
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("TableFormatter");
+        table = document.getElementById("gebruikersTabel");
         tr = table.getElementsByTagName("tr");
         
         for (i = 0; i < tr.length; i++) {

@@ -15,7 +15,7 @@
 <br>
 <br>
 <form action="#" th:action="@{/admin/verwijder-cohort}" th:method="POST">
-    <table id="TableFormatter">
+    <table class="TableFormatter" id="cohortTabel">
         <thead>
         <tr class="ST">
             <th>Cohortnaam</th>
@@ -54,7 +54,7 @@
 
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("TableFormatter");
+        table = document.getElementById("cohortTabel");
         tr = table.getElementsByTagName("tr");
 
         for (i = 0; i < tr.length; i++) {

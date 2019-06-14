@@ -16,7 +16,7 @@
 <h2>U heeft gesolliciteerd op de volgende vacatures:</h2>
 </p>
 <form action="#" th:action="@{/docent/sollicitaties-details-sollicitatie-overzicht}" th:object="${sollicitatie}" th:method="GET">
-    <table id="TableFormatter">
+    <table class="TableFormatter">
         <thead>
         <tr class="ST">
             <th>Vacature</th>
@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${sollicitaties.empty}">
+        <tr th:if="${empty(sollicitaties)}">
             <td class="ST" colspan="3">U heeft nog op geen enkele vacature gesolliciteerd</td>
         </tr>
         <tr th:each="vacature: ${sollicitaties}">

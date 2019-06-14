@@ -19,7 +19,7 @@
     <div class="content">
 <form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${week}" method="POST">
         <h6></h6>
-        <table id="TableFormatter">
+        <table class="TableFormatter">
             <input name="weekId" type="hidden" th:value="${week.getId()}">
             <thead>
             <tr colspan="2">

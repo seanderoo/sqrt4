@@ -7,30 +7,50 @@
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
 <style>
-    .urenTabel {
+    #urenTabel {
         float: left;
-        width: 20%;
-        padding: 15px;
-        /*position: fixed;*/
+        width: 15%;
+        margin-left: 5%;
+        margin-right: auto;
+        position: fixed;
     }
-    .vulWeek {
+
+    #gevuldeWeek1 {
         float: right;
-        margin-right: 20%;
-        width: 60%;
-        padding: 15px;
+        margin-right: 5%;
+        margin-left: auto;
+        width: 65%;
     }
-    .gevuldeWeek {
-        margin-left: 15%;
+
+    #gevuldeWeek2{
+        float: right;
+        margin-right: 5%;
+        margin-left: auto;
+        width: 65%;
     }
+
+    #gevuldeWeek3{
+        float: right;
+        margin-right: 10%;
+        margin-left: auto;
+        width: 65%;
+    }
+
+    #gevuldeWeek4{
+        float: right;
+        margin-right: 10%;
+        margin-left: auto;
+        width: 55%;
+    }
+
 </style>
 <body onload="checkKeuze()">
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h2 id="gekozenCohort" th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>.
-    Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
-    t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
-<div  class="urenTabel">
+
+
+<div  id="urenTabel">
     <table>
         <h3>Uren per vak</h3>
         <tr>
@@ -45,8 +65,11 @@
         </tr>
     </table>
 </div>
-<form class="vulWeek" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
-    <table id="TableFormatter">
+<form id="gevuldeWeek1" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+    <table class="TableFormatter" id="gevuldeWeek2">
+        <h2 th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>.
+            Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
+            t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
         <thead><input id="cohort" type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
         <tr>
             <th><select id="week" name="week" onchange="checkKeuze(); loadData()">
@@ -113,17 +136,23 @@
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
         </tr>
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button id="submitButton" type="submit">Sla week op</button></td>
+            <td></td>
+            <td></td>
+        </tr>
+
     </table>
-    <br>
-    <button id="submitButton" type="submit">Sla week op</button>
+
 </form>
-<p>
-    Hieronder een overzicht van alle weken van dit cohort
-</p>
+<h2 id="gevuldeWeek3">Hieronder een overzicht van alle weken van dit cohort</h2>
 <th:block th:each="week: ${weken}">
-    <form class="gevuldeWeek">
-        <table id="TableFormatter">
-            <thead> </thead>
+        <table class="TableFormatter" id="gevuldeWeek4">
+            <thead></thead>
             <tr>
                 <th>Week <span th:text="${week.getWeekNummer()}"></span></th>
                 <th th:text="${week.getMaandag().getDatum()}">maandag</th>
@@ -157,7 +186,6 @@
                 <td th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}"> </td>
             </tr>
         </table>
-    </form>
 </th:block>
 
 </body>
@@ -204,6 +232,18 @@
         };
         request.open("GET", url, true);
         request.send();
+    }
+
+    var header = document.getElementById("urenTabel");
+    var sticky = header.offsetTop;
+
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
     }
 </script>
 </html>
