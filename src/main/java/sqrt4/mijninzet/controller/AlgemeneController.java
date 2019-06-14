@@ -91,4 +91,25 @@ public class AlgemeneController {
         List<String> list = Arrays.asList(maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo);
         return list;
     }
+
+    @RequestMapping(value = "/roosteraar/docenten-koppelen-gekozen-cohort/{week}", method = RequestMethod.GET)
+    public long[] docentAlOpgeslagen(@PathVariable Week week) {
+        long maOcht = week.getMaandag().getOchtend().getDocent().getId();
+        long maMid = week.getMaandag().getMiddag().getDocent().getId();
+        long maAvo = week.getMaandag().getAvond().getDocent().getId();
+        long diOcht = week.getDinsdag().getOchtend().getDocent().getId();
+        long diMid = week.getDinsdag().getMiddag().getDocent().getId();
+        long diAvo = week.getDinsdag().getAvond().getDocent().getId();
+        long woOcht = week.getWoensdag().getOchtend().getDocent().getId();
+        long woMid = week.getWoensdag().getMiddag().getDocent().getId();
+        long woAvo = week.getWoensdag().getAvond().getDocent().getId();
+        long doOcht = week.getDonderdag().getOchtend().getDocent().getId();
+        long doMid = week.getDonderdag().getMiddag().getDocent().getId();
+        long doAvo = week.getDonderdag().getAvond().getDocent().getId();
+        long vrOcht = week.getVrijdag().getOchtend().getDocent().getId();
+        long vrMid = week.getVrijdag().getMiddag().getDocent().getId();
+        long vrAvo = week.getVrijdag().getAvond().getDocent().getId();
+        long[] list = {maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo};
+        return list;
+    }
 }
