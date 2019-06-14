@@ -17,10 +17,11 @@
 <th:block th:each="week: ${weken}">
     <button class="collapsible">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
     <div class="content">
-<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
+<form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table id="TableFormatter">
-            <input name="weekId" type="text" th:value="${week.getId()}">
+            <input name="weekId" type="hidden" th:value="${week.getId()}">
+            <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
             <thead>
             <tr colspan="2">
                 <th>Weeknummer</th>
@@ -49,24 +50,19 @@
                 <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"></td>
             </tr>
             <tr>
-                <td><select id="maOch" th:name="maOch">
-                    <option>--Kies docent--</option>
+                <td><select id="maOcht" th:name="maOcht">
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="diOch" th:name="diOch">
-                    <option>--Kies docent--</option>
+                <td><select id="diOcht" th:name="diOcht">
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="woOch" th:name="woOch">
-                    <option>--Kies docent--</option>
+                <td><select id="woOcht" th:name="woOcht">
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="doOch" th:name="doOch">
-                    <option>--Kies docent--</option>
+                <td><select id="doOcht" th:name="doOcht">
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="vrOch" th:name="vrOch">
-                    <option>--Kies docent--</option>
+                <td><select id="vrOcht" th:name="vrOcht">
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
             </tr>
@@ -80,23 +76,18 @@
             </tr>
             <tr>
                 <td><select id="maMid" th:name="maMid">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="diMid" th:name="diMid">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="woMid" th:name="woMid">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="doMid" th:name="doMid">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="vrMid" th:name="vrMid">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
             </tr>
@@ -110,23 +101,18 @@
             </tr>
             <tr>
                 <td><select id="maAvo" th:name="maAvo">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="diAvo" th:name="diAvo">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="woAvo" th:name="woAvo">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="doAvo" th:name="doAvo">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
                 <td><select id="vrAvo" th:name="vrAvo">
-                    <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
             </tr>
@@ -184,22 +170,22 @@
     //     xhttp.send();
     // }
     // getWeek();
-
-    var index;
-    index = document.getElementById("index").value;
-    console.log("indexwaarde: " + index);
-
-    var huidigeWeek;
-    huidigeWeek = document.getElementById("huidigeWeek").value;
-    console.log("huidige week: " + huidigeWeek);
-
-    var startWeek;
-    startWeek = document.getElementById("startWeek").value;
-    console.log("startweek = " + startWeek);
-
-    var eindWeek;
-    eindWeek = document.getElementById("eindWeek").value;
-    console.log("eindweek = " + eindWeek);
+    //
+    // var index;
+    // index = document.getElementById("index").value;
+    // console.log("indexwaarde: " + index);
+    //
+    // var huidigeWeek;
+    // huidigeWeek = document.getElementById("huidigeWeek").value;
+    // console.log("huidige week: " + huidigeWeek);
+    //
+    // var startWeek;
+    // startWeek = document.getElementById("startWeek").value;
+    // console.log("startweek = " + startWeek);
+    //
+    // var eindWeek;
+    // eindWeek = document.getElementById("eindWeek").value;
+    // console.log("eindweek = " + eindWeek);
 
     function addIndex() {
         if (document.getElementById("knopVolgendeWeek").onclick) {
