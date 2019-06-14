@@ -14,7 +14,7 @@
 <h1>Solliciteren</h1>
 <h2>Solliciteer hier op vacatures:</h2>
 <form action="#" th:action="@{/docent/sollicitaties-details-vacature-overzicht}" th:method="GET">
-<table id="TableFormatter">
+<table class="TableFormatter">
     <thead>
     <tr class="ST">
         <th>Vacature</th>
@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${vacatures.empty}">
+    <tr th:if="${empty(vacatures)}">
         <td class="ST" colspan="3">Geen openstaande vacatures beschikbaar</td>
     </tr>
     <tr th:each="vacature: ${vacatures}">
@@ -37,18 +37,11 @@
 <br>
 <input type="button" value="Ga naar het overzicht van mijn sollicitaties" onclick=window.location.pathname="/docent/sollicitaties-overzicht" />
 
-<!--<button id="knopSollicitatieOpslaan" onclick="sollicitatieOpgeslagen()">Solliciteren</button>-->
-<!--    <p id="sollicitatieOpgeslagen"></p>-->
 </body>
 <footer>
 </footer>
 
 <script>
-function sollicitatieOpgeslagen(){
-
-    document.getElementById("sollicitatieOpgeslagen").innerHTML = '<img src="https://media.giphy.com/media/RX7N03MEUafW8/giphy.gif" alt="Flawless">';
-
-}
 </script>
 
 </html>
