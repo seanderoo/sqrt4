@@ -20,7 +20,7 @@
     <div class="content">
 <form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
-        <table id="TableFormatter">
+        <table class="TableFormatter">
             <input name="weekId" type="hidden" th:value="${week.getId()}">
             <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
             <thead>
@@ -132,7 +132,7 @@
 
 <script>
     var coll = document.getElementsByClassName("collapsible");
-    var selectedWeek = document.getElementById("weekId").value;
+    // var selectedWeek = document.getElementById("weekId").value;
     var i;
 
     for (i = 0; i < coll.length; i++) {
