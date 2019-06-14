@@ -32,19 +32,16 @@
            </tr>
             <tr>
                 <td><label>Wachtwoord</label></td>
-                <td><input class="input_gebruiker" id="wachtwoord1" type="password" th:name="password" value="" required
-                           size="40"></td>
+                <td> <input class="input_gebruiker" id="wachtwoord1" type="password" th:name="password" value="" required size="40"></td>
             </tr>
             <tr>
                 <td>  <label>Herhaal wachtwoord</label></td>
-                <td><input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required
-                           oninput="noTypo()"></td>
+                <td>   <input class="input_gebruiker" id="wachtwoord2" type="password" value="" size="40" required oninput="noTypo()"></td>
                 <td text="" id="noMatch" style="color:red"></td>
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
-                <td><select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}"
-                            style="height: auto !important" required>
+                <td> <select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}" style="height: auto !important" required>
                     <option th:each="role : ${roles}"
                             th:id="${role.getId()}"
                             th:value="${role.getName()}"

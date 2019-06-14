@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
@@ -11,13 +12,10 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
+import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.*;
-
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Controller
@@ -64,8 +62,8 @@ public class KoppelDocentenController {
     }
 
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
-    public String slaWeekOp(@RequestParam("cohortNaam") String cohortnaam,
-                            @RequestParam(value = "week", required = false) int weekId,
+    public String slaWeekOp(@RequestParam("cohortNaam") String cohortNaam,
+                            @RequestParam(value = "weekId", required = false) int weekId,
                             @RequestParam("maOcht") long maOchtDoc,
                             @RequestParam("diOcht") long diOchtDoc,
                             @RequestParam("woOcht") long woOchtDoc,
@@ -83,53 +81,52 @@ public class KoppelDocentenController {
                             @RequestParam("vrAvo") long vrAvoDoc,
                             Model model) {
 
-        System.out.println("dit is de weekId: " + weekId);
-        Cohort cohort = cohortRepository.findByCohortNaam(cohortnaam);
-        Dagdeel dagdeel = new Dagdeel();
 
-
+        Cohort cohort = cohortRepository.findByCohortNaam(cohortNaam);
         Week week = weekRepository.findById(weekId);
-        Dag maandag = week.getDag("maandag");
-        Dag dinsdag = week.getDag("dinsdag");
-        Dag woensdag = week.getDag("woensdag");
-        Dag donderdag = week.getDag("donderdag");
-        Dag vrijdag = week.getDag("vrijdag");
 
-        User user1 = userRepository.findUserById(maOchtDoc);
-        User user2 = userRepository.findUserById(maMidDoc);
-        User user3 = userRepository.findUserById(maAvoDoc);
-        User user4 = userRepository.findUserById(diOchtDoc);
-        User user5 = userRepository.findUserById(diMidDoc);
-        User user6 = userRepository.findUserById(diAvoDoc);
-        User user7 = userRepository.findUserById(woOchtDoc);
-        User user8 = userRepository.findUserById(woMidDoc);
-        User user9 = userRepository.findUserById(woAvoDoc);
+        User docent1 = userRepository.findUserById(maOchtDoc);
+        User docent2 = userRepository.findUserById(maMidDoc);
+        User docent3 = userRepository.findUserById(maAvoDoc);
 
-        woensdag.getOchtend().setDocent(user7);
-        woensdag.getMiddag().setDocent(user8);
-        woensdag.getAvond().setDocent(user9);
+        User docent4 = userRepository.findUserById(diOchtDoc);
+        User docent5 = userRepository.findUserById(diMidDoc);
+        User docent6 = userRepository.findUserById(diAvoDoc);
 
-        User user10 = userRepository.findUserById(doOchtDoc);
-        User user11 = userRepository.findUserById(doMidDoc);
-        User user12 = userRepository.findUserById(doAvoDoc);
+        User docent7 = userRepository.findUserById(woOchtDoc);
+        User docent8 = userRepository.findUserById(woMidDoc);
+        User docent9 = userRepository.findUserById(woAvoDoc);
 
-        donderdag.getOchtend().setDocent(user10);
-        donderdag.getMiddag().setDocent(user11);
-        donderdag.getAvond().setDocent(user12);
+        User docent10 = userRepository.findUserById(doOchtDoc);
+        User docent11 = userRepository.findUserById(doMidDoc);
+        User docent12 = userRepository.findUserById(doAvoDoc);
 
-        User user13 = userRepository.findUserById(vrOchtDoc);
-        User user14 = userRepository.findUserById(vrMidDoc);
-        User user15 = userRepository.findUserById(vrAvoDoc);
+        User docent13 = userRepository.findUserById(vrOchtDoc);
+        User docent14 = userRepository.findUserById(vrMidDoc);
+        User docent15 = userRepository.findUserById(vrAvoDoc);
 
-        vrijdag.getOchtend().setDocent(user13);
-        vrijdag.getMiddag().setDocent(user14);
-        vrijdag.getAvond().setDocent(user15);
+        saveDocentPerDag(weekId, "maandag", docent1, docent2, docent3);
+        saveDocentPerDag(weekId, "dinsdag", docent4, docent5, docent6);
+        saveDocentPerDag(weekId, "woensdag", docent7, docent8, docent9);
+        saveDocentPerDag(weekId, "donderdag", docent10, docent11, docent12);
+        saveDocentPerDag(weekId, "vrijdag", docent13, docent14, docent15);
 
-        dagRepository.save(maandag);
-        dagRepository.save(dinsdag);
-        dagRepository.save(woensdag);
-        dagRepository.save(donderdag);
-        dagRepository.save(vrijdag);
+        model.addAttribute("cohort", cohort);
+
+        List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+
+        List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
+        model.addAttribute("docentList", docentList);
+
         return "roosteraar/docenten-koppelen-gekozen-cohort";
+    }
+
+    public void saveDocentPerDag(int weekId, String dagnaam, User ochtend, User middag, User avond) {
+        Week week = weekRepository.findById(weekId);
+        week.getDag(dagnaam).getOchtend().setDocent(ochtend);
+        week.getDag(dagnaam).getMiddag().setDocent(middag);
+        week.getDag(dagnaam).getAvond().setDocent(avond);
+        weekRepository.save(week);
     }
 }

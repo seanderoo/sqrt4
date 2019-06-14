@@ -214,4 +214,50 @@ select select {
     transition: max-height 0.2s ease-out;
 }
 
+#knopVorigeWeek {
+    display: none;
+}
+
+#knopVolgendeWeek {
+    display: inline;
+}
+
+#opmerkingVeld {
+    margin-top: 20px;
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    height: 200px !important;
+}
+
+::placeholder {
+    color: darkgrey;
+    font-size: 16px;
+}
+
+#overzicht, tr, td {
+    table-layout: fixed;
+    word-wrap: break-word;
+    background-color: white;
+    border: 1px solid black;
+    color: black !important;
+}
+
+#overzichtAfgehandeld {
+    margin-top: 30px;
+}
+
+#inputFieldManager {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#headerRowIncident th {
+    background-color: #7892c2 !important;
+}
+
+#headerRowIncident2 th {
+    background-color: #7892c2 !important;
+}
 

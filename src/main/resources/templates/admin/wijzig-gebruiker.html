@@ -45,8 +45,7 @@
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
-                <td><select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}"
-                            style="height: auto !important" required>
+                <td> <select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}" style="height: auto !important" required>
                     <option th:each="role : ${roles}"
                             th:id="${role.getId()}"
                             th:value="${role.getName()}"

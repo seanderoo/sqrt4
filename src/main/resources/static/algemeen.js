@@ -4,9 +4,9 @@ function noTypo() {
     buttonGreyOut(ww1 != ww2);
     if (ww1 != ww2) {
         document.getElementById('wachtwoord2').focus();
-        document.getElementById('noMatch').textContent = "Wachtwoorden komen niet overeen";
+        document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen";
     } else {
-        document.getElementById('noMatch').textContent = "";
+        document.getElementById('noMatch').textContent= "";
     }
 }
 
@@ -14,7 +14,7 @@ function buttonGreyOut(voorwaarde) {
     var button = document.getElementById("submitButton");
     if (voorwaarde) {
         button.disabled = true;
-        button.style.cursor = "not-allowed";
+        button.style.cursor="not-allowed";
         button.style.color = "gray";
     } else {
         button.disabled = false;
@@ -23,7 +23,7 @@ function buttonGreyOut(voorwaarde) {
     }
 }
 
-function multiselectZonderCtrl() {
+function multiselectZonderCtrl(){
     window.onmousedown = function (e) {
         var el = e.target;
         if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
@@ -49,8 +49,8 @@ function isSelected() {
 
     for (var i = 0; i < gesplitsteRollen.length; i++) {
         for (var j = 0; j < alleRollenGesplitst.length; j++) {
-            if (gesplitsteRollen[i] === alleRollenGesplitst[j]) {
-                setTextRollenbox("rollenbox", gesplitsteRollen[i]);
+            if(gesplitsteRollen[i] === alleRollenGesplitst[j]) {
+                setTextRollenbox("rollenbox",gesplitsteRollen[i]);
             }
         }
     }
@@ -64,7 +64,7 @@ function isSelected() {
     }
 }
 
-window.onload = function () {
+window.onload=function () {
     var deTabel = document.querySelector('#deTabel');
     var incidentOverzicht = document.querySelector('#hetIncident', '#overzicht');
     var beschikbaarheidsweergave;
@@ -75,7 +75,7 @@ window.onload = function () {
         beschikbaarheidsweergave = incidentOverzicht;
     }
 
-    beschikbaarheidsweergave.addEventListener('click', function (e) {
+    beschikbaarheidsweergave.addEventListener('click', function(e) {
         var td = e.target;
         if (td.tagName === 'TD') {
             e.target.classList.toggle('true');
