@@ -111,6 +111,14 @@ public class KoppelDocentenController {
         saveDocentPerDag(weekId, "donderdag", docent10, docent11, docent12);
         saveDocentPerDag(weekId, "vrijdag", docent13, docent14, docent15);
 
+        model.addAttribute("cohort", cohort);
+
+        List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+
+        List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
+        model.addAttribute("docentList", docentList);
+
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 

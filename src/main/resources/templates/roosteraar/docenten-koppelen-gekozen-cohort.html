@@ -20,8 +20,8 @@
 <form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table id="TableFormatter">
-            <input name="weekId" type="text" th:value="${week.getId()}">
-            <input name="cohortNaam" type="text" th:value="${cohort.getCohortNaam()}">
+            <input name="weekId" type="hidden" th:value="${week.getId()}">
+            <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
             <thead>
             <tr colspan="2">
                 <th>Weeknummer</th>
