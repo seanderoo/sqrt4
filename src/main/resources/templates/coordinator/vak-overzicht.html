@@ -10,19 +10,26 @@
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Het nieuwe vak is toegevoegd</h1>
-<h2>Overzicht van alle vakken</h2>
+<h1>Overzicht van alle vakken</h1>
+<h2></h2>
 <table class="TableFormatter">
     <tr class="ST">
         <th>Vaknaam</th>
         <th>Aantal Uur</th>
+        <th>Wijzigen</th>
+        <th>Verwijderen</th>
     </tr>
     <tr th:if="${vakken.empty}">
-        <td class="ST" colspan="2">Geen vakken aangemaakt</td>
+        <td class="ST" colspan="4">Geen vakken aangemaakt</td>
     </tr>
     <tr th:each="vak: ${vakken}">
         <td class="ST" th:text="${vak.getVakNaam()}"></td>
         <td class="ST" th:text="${vak.getAantalUren()}"></td>
+        <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vak.getVakId()}" >
+        Wijzig Vak</button></td>
+        <td class="ST"><button type="submit" th:name="Verwijder" th:value="${vak.getVakId()}">
+            Verwijder Vak
+        </button> </td>
     </tr>
 </table>
 </body>
