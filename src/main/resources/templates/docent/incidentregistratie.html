@@ -10,13 +10,13 @@
 </head>
 <body>
 <div>
-<header>
+    <header>
         <div th:insert="~{header::copy}">Header</div>
-</header>
+    </header>
     <h1>Incidentregistratie</h1>
-<h2>Geef je incident op.</h2>
+    <h2>Geef je incident op.</h2>
     <form id="reg_date" th:action="@{/docent/incidentregistratie}" th:object="${dag}" th:method="POST">
-    <label for="selectedDate">Datum van incident</label>
+        <label for="selectedDate">Datum van incident</label>
         <input class="input_gebruiker" type="date" id="selectedDate" name="datum" value="date">
 
         <br/>
@@ -24,17 +24,20 @@
         <table id="hetIncident">
             <tr>
                 <td th:class="*{getOchtend().getBeschikbaar()}"><input type="hidden" name="ochtend"
-                                                      th:value="${dag.getOchtend().getBeschikbaar()}">09.00 - 13.00
+                                                                       th:value="${dag.getOchtend().getBeschikbaar()}">09.00
+                    - 13.00
                 </td>
             </tr>
             <tr>
                 <td th:class="*{getMiddag().getBeschikbaar()}"><input type="hidden" name="middag"
-                                                     th:value="${dag.getMiddag().getBeschikbaar()}">13.00 - 17.00
+                                                                      th:value="${dag.getMiddag().getBeschikbaar()}">13.00
+                    - 17.00
                 </td>
             </tr>
             <tr>
                 <td th:class="*{getAvond().getBeschikbaar()}"><input type="hidden" name="avond"
-                                                    th:value="${dag.getAvond().getBeschikbaar()}">17.00 - 21.00
+                                                                     th:value="${dag.getAvond().getBeschikbaar()}">17.00
+                    - 21.00
                 </td>
             </tr>
         </table>

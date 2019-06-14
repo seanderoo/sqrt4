@@ -17,14 +17,6 @@ td {
     text-align: center;
 }
 
-td.kanwel {
-    background-color: green;
-}
-
-td.kanniet {
-    background-color: red;
-}
-
 td.true {
     background-color: green;
 }

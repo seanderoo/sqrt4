@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/form-karin.css">
+    <script type="text/javascript" src="/algemeen.js"></script>
+
 
 </head>
 <body>
@@ -43,12 +45,12 @@
             </tr>
             <tr>
                 <td> <label>Kies een Rol</label></td>
-                <td> <select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}" style="height: auto !important">
+                <td><select id="rollenbox" th:name="roles" multiple="multiple" th:size="${roles.size()}"
+                            style="height: auto !important" required>
                     <option th:each="role : ${roles}"
                             th:id="${role.getId()}"
                             th:value="${role.getName()}"
-                            th:text="${role.getName()}"
-                    onload="">
+                            th:text="${role.getName()}">
                     </option>
                 </select></td>
                 <input type="hidden" id="gebruikerrollen" th:value="${gebruikerrollen}">
@@ -66,55 +68,7 @@
 </div>
 </body>
 <script>
-    function noTypo() {
-        var ww1 = document.getElementById('wachtwoord1').value;
-        var ww2 = document.getElementById('wachtwoord2').value;
-        buttonGreyOut(ww1 != ww2);
-        if (ww1 != ww2) {
-            document.getElementById('wachtwoord2').focus();
-            document.getElementById('noMatch').textContent= "Wachtwoorden komen niet overeen";
-        } else {
-            document.getElementById('noMatch').textContent= "";
-        }
-    }
-
-    function buttonGreyOut(voorwaarde) {
-        var button = document.getElementById("submitButton");
-        if (voorwaarde) {
-            button.disabled = true;
-            button.style.cursor="not-allowed";
-            button.style.color = "gray";
-        } else {
-            button.disabled = false;
-            button.style.color = "#ffffff";
-            button.style.cursor = "pointer";
-        }
-    }
-
-    function isSelected() {
-        var gebruikerrollen = document.getElementById("gebruikerrollen").getAttribute("value");
-        var gesplitsteRollen = gebruikerrollen.split(",");
-
-        var alleRollen = document.getElementById("alleRollen").getAttribute("value");
-        var alleRollenGesplitst = alleRollen.split(",");
-
-        for (var i = 0; i < gesplitsteRollen.length; i++) {
-            for (var j = 0; j < alleRollenGesplitst.length; j++) {
-                if(gesplitsteRollen[i] === alleRollenGesplitst[j]) {
-                    setTextRollenbox("rollenbox",gesplitsteRollen[i]);
-                }
-            }
-        }
-
-        function setTextRollenbox(idVanElement, tekstVanElement) {
-            var idVanElement = document.getElementById(idVanElement);
-            for (var i = 0; i < idVanElement.options.length; ++i) {
-                if (idVanElement.options[i].text.toUpperCase() === tekstVanElement)
-                    idVanElement.options[i].selected = true;
-            }
-        }
-    }
+    multiselectZonderCtrl();
     isSelected();
-
 </script>
 </html>
