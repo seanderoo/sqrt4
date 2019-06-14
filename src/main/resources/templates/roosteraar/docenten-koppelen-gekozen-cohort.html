@@ -17,10 +17,10 @@
 <th:block th:each="week: ${weken}">
     <button class="collapsible">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
     <div class="content">
-<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${week}" method="POST">
+<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table id="TableFormatter">
-            <input name="weekId" type="hidden" th:value="${week.getId()}">
+            <input name="weekId" type="text" th:value="${week.getId()}">
             <thead>
             <tr colspan="2">
                 <th>Weeknummer</th>
@@ -164,26 +164,26 @@
 </body>
 
 <script>
-    function getWeek() {
-        var weekId = document.getElementById("weekId").value;
-        var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + weekId;
-        console.log("dit is de url: " + url);
-
-        var xhttp;
-        if (index == "") {
-            document.getElementById("index").innerHTML = "";
-            return;
-        }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("voorkeurGebruiker").value = this.responseText;
-            }
-        };
-        xhttp.open("POST", url, true);
-        xhttp.send();
-    }
-    getWeek();
+    // function getWeek() {
+    //     var weekId = document.getElementById("weekId").value;
+    //     var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + weekId;
+    //     console.log("dit is de url: " + url);
+    //
+    //     var xhttp;
+    //     if (index == "") {
+    //         document.getElementById("index").innerHTML = "";
+    //         return;
+    //     }
+    //     xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             document.getElementById("voorkeurGebruiker").value = this.responseText;
+    //         }
+    //     };
+    //     xhttp.open("POST", url, true);
+    //     xhttp.send();
+    // }
+    // getWeek();
 
     var index;
     index = document.getElementById("index").value;
