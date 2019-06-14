@@ -26,5 +26,26 @@
         </div>
     </fieldset>
 </form>
+<div>
+    <br>
+    <br>
+    <button id="wachtwoordVergeten" onclick="wachtwoordVergeten()">Wachtwoord vergeten?</button>
+</div>
+
+<p id="wachtwoordMelding"></p>
+<p id="gif1"></p>
 </body>
+<script>
+
+
+    function wachtwoordVergeten(){
+        document.getElementById("wachtwoordMelding").innerHTML= "Neem <a href=# onclick='gifFunction()'>hier</a> contact op met Adje de Admin.";
+    }
+
+    function gifFunction(){
+        document.getElementById("gif1").innerHTML = "<img src='https://media.giphy.com/media/65ODCwM00NVmEyLsX3/giphy.gif'>";
+    }
+
+
+</script>
 </html>
