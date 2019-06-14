@@ -214,14 +214,6 @@ select select {
     transition: max-height 0.2s ease-out;
 }
 
-#knopVorigeWeek {
-    display: none;
-}
-
-#knopVolgendeWeek {
-    display: inline;
-}
-
 #opmerkingVeld {
     margin-top: 20px;
     margin-left: 40%;
@@ -260,4 +252,5 @@ select select {
 #headerRowIncident2 th {
     background-color: #7892c2 !important;
 }
+
 
