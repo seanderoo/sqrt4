@@ -10,7 +10,8 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<h1>Koppel Docenten</h1>
+<h1>Koppel Docenten voor <span th:text="${cohort.getCohortNaam()}"></span></h1>
+
 
 <h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je docenten koppelen aan de vakken die in het rooster staan.</h3>
 
@@ -20,7 +21,7 @@
 <form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table id="TableFormatter">
-            <input name="weekId" type="hidden" th:value="${week.getId()}">
+            <input id="weekId" name="weekId" type="hidden" th:value="${week.getId()}">
             <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
             <thead>
             <tr colspan="2">
@@ -131,6 +132,7 @@
 
 <script>
     var coll = document.getElementsByClassName("collapsible");
+    var selectedWeek = document.getElementById("weekId").value;
     var i;
 
     for (i = 0; i < coll.length; i++) {
@@ -144,88 +146,39 @@
             }
         });
     }
-
 </script>
 
 </body>
 
 <script>
-    // function getWeek() {
-    //     var weekId = document.getElementById("weekId").value;
-    //     var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + weekId;
-    //     console.log("dit is de url: " + url);
-    //
-    //     var xhttp;
-    //     if (index == "") {
-    //         document.getElementById("index").innerHTML = "";
-    //         return;
-    //     }
-    //     xhttp = new XMLHttpRequest();
-    //     xhttp.onreadystatechange = function() {
+    // function loadData() {
+    //     var request = new XMLHttpRequest();
+    //     var selectedWeek = document.getElementById("weekId").value;
+    //     var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + selectedWeek;
+    //     console.log("dit is de url " + url);
+    //     request.onreadystatechange = function() {
     //         if (this.readyState == 4 && this.status == 200) {
-    //             document.getElementById("voorkeurGebruiker").value = this.responseText;
+    //             var data = JSON.parse(this.responseText);
+    //             document.getElementById("maOcht").value = data[0];
+    //             document.getElementById("maMid").value = data[1];
+    //             document.getElementById("maAvo").value = data[2];
+    //             document.getElementById("diOcht").value = data[3];
+    //             document.getElementById("diMid").value = data[4];
+    //             document.getElementById("diAvo").value = data[5];
+    //             document.getElementById("woOcht").value = data[6];
+    //             document.getElementById("woMid").value = data[7];
+    //             document.getElementById("woAvo").value = data[8];
+    //             document.getElementById("doOcht").value = data[9];
+    //             document.getElementById("doMid").value = data[10];
+    //             document.getElementById("doAvo").value = data[11];
+    //             document.getElementById("vrOcht").value = data[12];
+    //             document.getElementById("vrMid").value = data[13];
+    //             document.getElementById("vrAvo").value = data[14];
     //         }
     //     };
-    //     xhttp.open("POST", url, true);
-    //     xhttp.send();
+    //     request.open("GET", url, true);
+    //     request.send();
     // }
-    // getWeek();
-    //
-    // var index;
-    // index = document.getElementById("index").value;
-    // console.log("indexwaarde: " + index);
-    //
-    // var huidigeWeek;
-    // huidigeWeek = document.getElementById("huidigeWeek").value;
-    // console.log("huidige week: " + huidigeWeek);
-    //
-    // var startWeek;
-    // startWeek = document.getElementById("startWeek").value;
-    // console.log("startweek = " + startWeek);
-    //
-    // var eindWeek;
-    // eindWeek = document.getElementById("eindWeek").value;
-    // console.log("eindweek = " + eindWeek);
-
-    function addIndex() {
-        if (document.getElementById("knopVolgendeWeek").onclick) {
-            index++;
-            huidigeWeek++;
-            console.log("i: " + index);
-            console.log("hw: " + huidigeWeek);
-        }
-    }
-
-    function subtractIndex() {
-        if (document.getElementById("knopVorigeWeek").onclick) {
-            index--;
-            huidigeWeek--;
-            console.log("i: " + index);
-            console.log("hw: " + huidigeWeek);
-        }
-    }
-
-    function addWeekNumber() {
-        var x = document.getElementById("weekNummerHeader");
-        x.innerText = huidigeWeek;
-    }
-
-    function displayVorigeWeekButton() {
-        if (index > -1) {
-            document.getElementById("knopVorigeWeek").style.display = "inline";
-        } else {
-            document.getElementById("knopVorigeWeek").style.display = "none";
-        }
-    }
-
-    function displayVolgendeWeekButton() {
-        if (huidigeWeek == eindWeek - 1) {
-            document.getElementById("knopVolgendeWeek").style.display = "none";
-        } else {
-            document.getElementById("knopVolgendeWeek").style.display = "inline";
-        }
-    }
-
 </script>
 </html>
 
