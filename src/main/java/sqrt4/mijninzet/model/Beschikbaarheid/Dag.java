@@ -100,8 +100,11 @@ public class Dag {
         return dagnaam;
     }
 
-    public LocalDate getDatum() {
-        return datum;
+    public String getDatum() {
+        LocalDate date = datum;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = date.format(formatter);
+        return formattedString;
     }
 
     @Override

@@ -94,7 +94,7 @@ footer a:hover {
     margin: 30px;
 }
 
-button:not(.dropbtn), input {
+button:not(.dropbtn):not(.collapsible), input {
     -moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
     -webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
     box-shadow: 0px 0px 0px 2px #9fb4f2;
@@ -127,7 +127,7 @@ button:not(.dropbtn), input {
 }
 
 
-button:hover:not(.dropbtn), input:hover {
+button:hover:not(.dropbtn):not(.collapsible), input:hover {
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #25167a), color-stop(1, #7892c2));
     background:-moz-linear-gradient(top, #25167a 5%, #7892c2 100%);
     background:-webkit-linear-gradient(top, #25167a 5%, #7892c2 100%);
@@ -139,7 +139,8 @@ button:hover:not(.dropbtn), input:hover {
     background-color:#25167a;
     outline: none;
 }
-button:active:not(.dropbtn) {
+
+button:active:not(.dropbtn):not(.collapsible) {
     position:relative;
     top:1px;
     outline: none;
@@ -166,12 +167,52 @@ select select {
     outline: none;
 }
 
-#knopVorigeWeek {
-    display: none;
+.collapsible {
+    background-color: #8e9ec8;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
 }
 
-#knopVolgendeWeek {
-    display: inline;
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible {
+    background-color: #8e9ec8;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #1d3d91;
+}
+
+.content {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 #opmerkingVeld {
