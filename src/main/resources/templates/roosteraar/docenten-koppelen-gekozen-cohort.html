@@ -17,7 +17,7 @@
 <th:block th:each="week: ${weken}">
     <button class="collapsible">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
     <div class="content">
-<form action="#" th:action="@{/roosteraar/docent-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
+<form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table id="TableFormatter">
             <input name="weekId" type="text" th:value="${week.getId()}">
@@ -49,23 +49,23 @@
                 <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"></td>
             </tr>
             <tr>
-                <td><select id="maOch" th:name="maOch">
+                <td><select id="maOcht" th:name="maOcht">
                     <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="diOch" th:name="diOch">
+                <td><select id="diOcht" th:name="diOcht">
                     <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="woOch" th:name="woOch">
+                <td><select id="woOcht" th:name="woOcht">
                     <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="doOch" th:name="doOch">
+                <td><select id="doOcht" th:name="doOcht">
                     <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>
-                <td><select id="vrOch" th:name="vrOch">
+                <td><select id="vrOcht" th:name="vrOcht">
                     <option>--Kies docent--</option>
                     <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
                 </select></td>

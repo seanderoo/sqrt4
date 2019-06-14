@@ -45,7 +45,7 @@
         </tr>
     </table>
 </div>
-<form class="vulWeek" action="#" th:action="@{/manager/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+<form class="vulWeek" action="#" th:action="@{/coordinator/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
     <table id="TableFormatter">
         <thead><input id="cohort" type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
         <tr>
@@ -181,7 +181,7 @@
     function loadData() {
         var request = new XMLHttpRequest();
         var selectedWeek = document.getElementById("week").value;
-        var url = '/ajax/manager/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
+        var url = '/ajax/coordinator/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);

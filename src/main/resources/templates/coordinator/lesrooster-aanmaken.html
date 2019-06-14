@@ -1,0 +1,128 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>SQRT4 | Lesrooster</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/stylesheet.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">-->
+<!--</head>-->
+<!--<style>-->
+<!--    .droppable {-->
+<!--        width: 95px;-->
+<!--        height: 55px;-->
+<!--        padding: 10px;-->
+<!--        border: 2px solid darkblue;-->
+<!--        display: table-cell;-->
+<!--    }-->
+
+<!--    .trow {-->
+<!--        display: table-row-->
+<!--    }-->
+
+<!--    #roostertabel {-->
+<!--        width: 40%;-->
+<!--        margin-left: 30%;-->
+<!--        margin-right: 30%;-->
+<!--    }-->
+
+<!--</style>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <div th:insert="~{header::copy}">Header</div>-->
+<!--</header>-->
+<!--<h1>Rooster maken</h1>-->
+
+<!--<h2>Dagdelen per vak:</h2>-->
+
+<!--<div id="roostertestdagdelen" style="list-style-type:none">-->
+<!--    <div th:each="vakdagdeel: ${vakdagdeelLijst}" >-->
+<!--        <div  class="vakdagdeel" th:id="${vakdagdeel.id}" th:value="${vakdagdeel.getVakdagdeelNaam()}" th:text="${vakdagdeel.getVakdagdeelNaam()}" draggable="true"-->
+<!--             ondragstart="drag(event)">dagdeelnaam</div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<h2>Plaats de vakken in het gewenste dagdeel:</h2>-->
+<!--<table id="roostertabel">-->
+<!--    <tr>-->
+<!--        <th></th>-->
+<!--        <th>Maandag</th>-->
+<!--        <th>Dinsdag</th>-->
+<!--        <th>Woensdag</th>-->
+<!--        <th>Donderdag</th>-->
+<!--        <th>Vrijdag</th>-->
+<!--    </tr>-->
+
+
+<!--    <tr class="trow">-->
+<!--        <th>Ochtend</th>-->
+<!--        <td class="droppable" id="maandagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="dinsdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="woensdagochtend" ondrop="drop(event)"-->
+<!--              ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="donderdagochtend" ondrop="drop(event)"-->
+<!--              ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="vrijdagochtend" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--    </tr>-->
+
+<!--    <tr class="trow">-->
+<!--        <th>Middag</th>-->
+<!--        <td class="droppable" id="maandagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="dinsdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="woensdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="donderdagmiddag" ondrop="drop(event)"-->
+<!--              ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="vrijdagmiddag" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--    </tr>-->
+
+<!--    <tr class="trow">-->
+<!--        <th>Avond</th>-->
+<!--        <td class="droppable" id="maandagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="dinsdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="woensdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="donderdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--        <td class="droppable" id="vrijdagavond" ondrop="drop(event)" ondragover="allowDrop(event)"></td>-->
+<!--    </tr>-->
+
+<!--</table>-->
+<!--<br>-->
+<!--<button id="knopOpslaan" type="submit" value="Submit">Opslaan</button>-->
+
+
+<!--<br>-->
+
+<!--<script>-->
+
+<!--    function allowDrop(ev) {-->
+<!--        ev.preventDefault();-->
+<!--    }-->
+
+<!--    function drag(ev) {-->
+<!--        ev.dataTransfer.setData("text", ev.target.id)-->
+<!--    }-->
+
+<!--    function drop(ev) {-->
+<!--        ev.preventDefault();-->
+<!--        var data = ev.dataTransfer.getData("text");-->
+<!--        ev.target.appendChild(document.getElementById(data));-->
+<!--    }-->
+
+
+<!--</script>-->
+<!--</body>-->
+<!--<footer>-->
+<!--</footer>-->
+
+<!--</html>-->
+
+
+<!--&lt;!&ndash;<div id="roostertestdagdelen" style="list-style-type:none" th:action="@{/roostertest}" th:object="${vakkenLijst}"&ndash;&gt;-->
+<!--&lt;!&ndash;     th:method="GET">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:if="${vakkenLijst.empty}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div colspan="3">Geen vakken beschikbaar</div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:each="vak: ${vakkenLijst}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="vak" th:id="${vak.vakId}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}" draggable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;             ondragstart="drag(event)">vaknaam</div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->

@@ -19,23 +19,18 @@ public class VakController {
     @Autowired
     VakdagdeelRespository vakdagdeelRespository;
 
-    @GetMapping("/manager/vak-aanmaken")
+    @GetMapping("/coordinator/vak-aanmaken")
     public String vakAanmaken() {
-        return "manager/vak-aanmaken";
+        return "coordinator/vak-aanmaken";
     }
 
-    @PostMapping("/manager/vak-toegevoegd")
+    @PostMapping("/coordinator/vak-toegevoegd")
     public String vakToegevoegd(@ModelAttribute Vak vak){
         vakRepository.save(vak);
         vak.setVakdagdelen(vak.aantalDagdelenBerekenen());
         for (Vakdagdeel vakdagdeel :vak.getVakdagdelen()) {
             vakdagdeelRespository.save(vakdagdeel);
         }
-        return "manager/vak-toegevoegd";
-    }
-
-    @GetMapping("/manager/vak-rooster")
-    public String vakRoosterMaken() {
-        return "manager/vak-rooster";
+        return "coordinator/vak-toegevoegd";
     }
 }

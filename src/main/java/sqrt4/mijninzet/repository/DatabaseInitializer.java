@@ -49,11 +49,11 @@ public class DatabaseInitializer implements CommandLineRunner {
         //create rollen
         Role god = new Role("Admin");
         Role docent = new Role("Docent");
-        Role manager = new Role("Manager");
+        Role coordinator = new Role("Coordinator");
         Role roosteraar = new Role("Roosteraar");
         Role administrator = new Role("God");
 
-        List<Role> rollen = Arrays.asList(god, docent, manager, roosteraar, administrator);
+        List<Role> rollen = Arrays.asList(god, docent, coordinator, roosteraar, administrator);
 
         //create users
         User matthijs = new User("M", passwordEncoder.encode("M123"), "DOCENT", "", "Matthijs", "Verkaaik", "");
@@ -63,11 +63,11 @@ public class DatabaseInitializer implements CommandLineRunner {
         User remi = new User("Re", passwordEncoder.encode("R123"), "DOCENT", "", "Remi", "de Boer", "");
         User ronald = new User("Ro", passwordEncoder.encode("Ro123"), "DOCENT", "", "Ronald", "Kleijn", "");
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN,DOCENT", "", "Adje", "de Admin", "");
-        User manager1 = new User("Manager", passwordEncoder.encode("M123"), "MANAGER", "", "M", "Anager", "");
+        User coordinator1 = new User("Co", passwordEncoder.encode("C123"), "COORDINATOR", "", "Co", "Ordinator", "");
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
 
 
-        List<User> users = Arrays.asList(matthijs, huub, gerke, lillian, remi, ronald, admin, manager1, roosteraar1);
+        List<User> users = Arrays.asList(matthijs, huub, gerke, lillian, remi, ronald, admin, coordinator1, roosteraar1);
 
         //Create vacatures
         Vacature coordinatorC15 = new Vacature("Coordinator Cohort 15",

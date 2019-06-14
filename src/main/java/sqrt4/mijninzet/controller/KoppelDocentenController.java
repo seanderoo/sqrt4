@@ -61,8 +61,8 @@ public class KoppelDocentenController {
     }
 
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
-    public String slaWeekOp(@RequestParam("cohortNaam") String cohortnaam,
-                            @RequestParam(value = "week", required = false) int weekId,
+    public String slaWeekOp(@RequestParam(value = "cohortNaam", required = false) String cohortnaam,
+                            @RequestParam(value = "weekId", required = false) int weekId,
                             @RequestParam("maOcht") long maOchtDoc,
                             @RequestParam("diOcht") long diOchtDoc,
                             @RequestParam("woOcht") long woOchtDoc,

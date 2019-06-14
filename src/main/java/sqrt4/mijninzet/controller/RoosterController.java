@@ -30,7 +30,7 @@ public class RoosterController extends AbstractController {
     @Autowired
     DagdeelRepository dagdeelRepository;
 
-    @GetMapping("/manager/rooster-maken")
+    @GetMapping("/coordinator/rooster-maken")
     public String maakRooster(Model model) {
         Calendar calendar = new GregorianCalendar();
         Date trialTime = new Date();
@@ -43,17 +43,17 @@ public class RoosterController extends AbstractController {
         cohorten.removeIf(condition);
 
         model.addAttribute("cohorten", cohorten);
-        return "manager/rooster-maken";
+        return "coordinator/rooster-maken";
     }
 
-    @GetMapping("/manager/rooster-maken-karin")
+    @GetMapping("/coordinator/rooster-maken-karin")
     public String kiesCohort(Model model) {
         List<Cohort> cohorten = cohortRepo.findAll();
         model.addAttribute("cohorten", cohorten);
-        return "manager/rooster-maken-karin";
+        return "coordinator/rooster-maken-karin";
     }
 
-    @GetMapping("manager/rooster-maken-cohort-gekozen")
+    @GetMapping("coordinator/rooster-maken-cohort-gekozen")
     public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
                                  Model model) {
         model.addAttribute("vakdagdeelList", haalVakdagdeellijstOp());
@@ -61,10 +61,10 @@ public class RoosterController extends AbstractController {
         model.addAttribute("cohort", cohort);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
-        return "manager/rooster-maken-cohort-gekozen";
+        return "coordinator/rooster-maken-cohort-gekozen";
     }
 
-//    @PostMapping("manager/rooster-maken-cohort-gekozen")
+//    @PostMapping("coordinator/rooster-maken-cohort-gekozen")
 //    public String weekOpslaan(@RequestParam("cohortje") String cohortId,
 //                              @RequestParam(value = "week", required = false) Integer weeknummer,
 //                              @RequestParam("maandagochtend") String maandagochtend,
@@ -117,10 +117,10 @@ public class RoosterController extends AbstractController {
 //        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
 //        model.addAttribute("weken", weken);
 //
-//        return "manager/rooster-maken-cohort-gekozen";
+//        return "coordinator/rooster-maken-cohort-gekozen";
 //    }
 
-    @GetMapping("manager/rooster-maken-cohort-gekozen-karin")
+    @GetMapping("coordinator/rooster-maken-cohort-gekozen-karin")
     public String roosterKarin(@RequestParam("cohortNaam") String cohortnaam,
                                Model model) {
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
@@ -136,9 +136,9 @@ public class RoosterController extends AbstractController {
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
         model.addAttribute("hashmap", haalToegekendeUrenOp(cohort));
-        return "manager/rooster-maken-cohort-gekozen-karin";
+        return "coordinator/rooster-maken-cohort-gekozen-karin";
     }
-    @PostMapping("manager/rooster-maken-cohort-gekozen-karin")
+    @PostMapping("coordinator/rooster-maken-cohort-gekozen-karin")
     public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
                               @RequestParam(value = "week", required = false) int weekId,
                               @RequestParam("maOcht") String maOchtVak,
@@ -190,7 +190,7 @@ public class RoosterController extends AbstractController {
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);
         model.addAttribute("hashmap", haalToegekendeUrenOp(cohort1));
-        return "manager/rooster-maken-cohort-gekozen-karin";
+        return "coordinator/rooster-maken-cohort-gekozen-karin";
     }
 
     final int UREN_PER_DAGDEEL = 4;

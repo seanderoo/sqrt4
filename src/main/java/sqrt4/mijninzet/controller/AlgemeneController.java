@@ -63,7 +63,7 @@ public class AlgemeneController {
     //haalt de vakken op die al voor die week zijn ogeslagen (Karin)
 
     //haalt de vakken op die al voor die week zijn ogeslagen (James en Karin)
-    @RequestMapping(value = "/manager/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
+    @RequestMapping(value = "/coordinator/rooster-maken-cohort-gekozen-karin/{week}", method = RequestMethod.GET)
     public List<String> vakAlOpgeslagen(@PathVariable Week week) {
         String maOcht = week.getMaandag().getOchtend().getVak().getVakNaam();
         String maMid = week.getMaandag().getMiddag().getVak().getVakNaam();

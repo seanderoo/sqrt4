@@ -48,14 +48,13 @@
             <a href="/admin/nieuwe-vacature">Maak een nieuwe vacature aan</a>
         </div>
     </div>
-    <div sec:authorize="hasAuthority('ROLEMANAGER')" class="dropdown">
-        <button class="dropbtn">Managen
+    <div sec:authorize="hasAuthority('ROLECOORDINATOR')" class="dropdown">
+        <button class="dropbtn">Coordineren
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/manager/vak-aanmaken">Maak vak aan</a>
-            <a href="/manager/rooster-maken">Maak rooster voor cohort</a>
-            <a href="/manager/rooster-maken-karin">Maak een lesrooster aan</a>
+            <a href="/coordinator/vak-aanmaken">Maak vak aan</a>
+            <a href="/coordinator/rooster-maken-karin">Maak rooster voor cohort</a>
         </div>
     </div>
     <a style="float:right" href="/logout"><img src="/images/logout.png" height="24" width="24"></a>
