@@ -11,6 +11,7 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
+import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -27,6 +28,8 @@ public class KoppelDocentenController {
     private WeekRepository weekRepository;
     @Autowired
     private DagRepository dagRepository;
+    @Autowired
+    private VoorkeurenRepository voorkeurenRepository;
 
     @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
@@ -54,6 +57,10 @@ public class KoppelDocentenController {
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
+
+        List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
+        String voorkeurenString = zetOmNaarString(voorkeuren);
+        model.addAttribute("voorkeuren", voorkeurenString);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
@@ -132,5 +139,23 @@ public class KoppelDocentenController {
         vrijdag.getAvond().setDocent(user15);
         dagRepository.save(vrijdag);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
+    }
+
+    private String zetOmNaarString(List<Voorkeur> voorkeuren) {
+        StringBuilder bob = new StringBuilder();
+        for (int i = 0; i < voorkeuren.size(); i++) {
+            Voorkeur voorkeur = voorkeuren.get(i);
+            bob.append(voorkeur.getVoorkeurGebruiker())
+                    .append("_")
+                    .append(voorkeur.getUser().getId())
+                    .append("_").
+                    append(voorkeur.getVak().getVakId());
+            if (i != (voorkeuren.size()-1)) {
+                bob.append(",");
+            }
+        }
+        String string = bob.toString();
+        System.out.println(string);
+        return string;
     }
 }

@@ -213,4 +213,20 @@ select select {
     transition: max-height 0.2s ease-out;
 }
 
+#TableFormatter option {
+    background-color: white;
+}
+
+.graag {
+    background-color: lightgreen !important;
+}
+
+.mwa {
+    background-color: #faff4d !important;
+}
+
+.lieverniet {
+    background-color: #ff4d43 !important;
+}
+
 
