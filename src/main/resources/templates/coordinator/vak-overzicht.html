@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Vak toegevoegd</title>
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Het nieuwe vak is toegevoegd</h1>
+<h2>Overzicht van alle vakken</h2>
+<table class="TableFormatter">
+    <tr class="ST">
+        <th>Vaknaam</th>
+        <th>Aantal Uur</th>
+    </tr>
+    <tr th:if="${vakken.empty}">
+        <td class="ST" colspan="2">Geen vakken aangemaakt</td>
+    </tr>
+    <tr th:each="vak: ${vakken}">
+        <td class="ST" th:text="${vak.getVakNaam()}"></td>
+        <td class="ST" th:text="${vak.getAantalUren()}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -15,7 +15,7 @@
 
 <form action="#" th:action="@{/docent/voorkeuren}" th:object="${voorkeur}" method="POST">
     <input id="userId" type="hidden" th:name="user_id" th:value="${user.getId()}">
-    <table id="TableFormatter">
+    <table class="TableFormatter">
         <tr>
             <td><strong><label th:text="Vak"/></strong></td>
             <td>

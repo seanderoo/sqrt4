@@ -36,7 +36,7 @@
     </table>
     <br>
 <!--    if statement die aan de hand van de meegegeven soort kijkt welke knop ('solliciteren' of 'afmelden')
-je te zien krijgt-->
+je te zien krijgt (Karin)-->
 
     <span th:if="${soort == 'vacature-overzicht'}"><button type="submit" th:value="${vacature.id}" th:name="id">Solliciteren</button> </span>
     <span th:if="${soort == 'sollicitatie-overzicht'}"><button type="submit" th:value="${vacature.id}" th:name="id">Afmelden</button> </span>

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
-import sqrt4.mijninzet.model.Vakdagdeel;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.*;
 
@@ -25,8 +24,6 @@ public class RoosterController extends AbstractController {
     VakRepository vakRepo;
     @Autowired
     WeekRepository weekRepo;
-    @Autowired
-    VakdagdeelRespository vakdagdeelRespository;
     @Autowired
     DagdeelRepository dagdeelRepository;
 
@@ -56,7 +53,7 @@ public class RoosterController extends AbstractController {
     @GetMapping("coordinator/rooster-maken-cohort-gekozen")
     public String wekenVanCohort(@RequestParam("cohortNaam") String cohortnaam,
                                  Model model) {
-        model.addAttribute("vakdagdeelList", haalVakdagdeellijstOp());
+//        model.addAttribute("vakdagdeelList", haalVakdagdeellijstOp());
         Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute("cohort", cohort);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
@@ -237,35 +234,5 @@ public class RoosterController extends AbstractController {
         week.getDag(dagnaam).getMiddag().setVak(middag);
         week.getDag(dagnaam).getAvond().setVak(avond);
         weekRepo.save(week);
-    }
-
-    private List<Vak> haalVakkenOpMetId(String[] ids) {
-        ArrayList<Vak> vakkenVanEenDag = new ArrayList<>();
-        for (String id : ids) {
-            vakkenVanEenDag.add(haalVakOp(id));
-        }
-        return vakkenVanEenDag;
-    }
-
-    private Vak haalVakOp(String id) {
-        Vakdagdeel vakdagdeel = vakdagdeelRespository.findById(Integer.parseInt(id));
-        if (vakdagdeel == null) {
-            return vakRepo.findByVakNaam("Geen les");
-        } else {
-            int vakId = vakdagdeel.getVak().getVakId();
-            return vakRepo.findById(vakId);
-        }
-    }
-
-    private List<Vakdagdeel> haalVakdagdeellijstOp() {
-        List<Vakdagdeel> vakdagdeellijst = vakdagdeelRespository.findAll();
-        List<Vakdagdeel> schoneVakdagdeellijst = new ArrayList<>();
-        for (Vakdagdeel vdd : vakdagdeellijst) {
-            if (vdd.getVak() != null) {
-                schoneVakdagdeellijst.add(vdd);
-            }
-        }
-        Collections.sort(vakdagdeellijst);
-        return vakdagdeellijst;
     }
 }

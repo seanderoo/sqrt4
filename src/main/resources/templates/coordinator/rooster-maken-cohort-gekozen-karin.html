@@ -65,7 +65,7 @@
         </tr>
     </table>
 </div>
-<form id="gevuldeWeek1" action="#" th:action="@{/coordinator/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+<form id="gevuldeWeek1" action="#" th:action="@{/coordinator/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" th:method="POST">
     <table class="TableFormatter" id="gevuldeWeek2">
         <h2 th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>.
             Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
