@@ -70,16 +70,20 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<User> users = Arrays.asList(matthijs, huub, gerke, lillian, remi, ronald, admin, manager1, roosteraar1);
 
         //Create vacatures
-        Vacature coordinatorC16 = new Vacature("Coordinator Cohort 15",
-                "De boel coördineren",
+        Vacature coordinatorC15 = new Vacature("Coordinator Cohort 15",
+                "Als coordinator moet je de boel coördineren. ",
                 40, "Uitstekende probleemoplossende en prioriterende vaardigheden");
-        Vacature coordinatorC17 = new Vacature("Coordinator Cohort 16",
-                "De boel coördineren",
-                40, "Uitstekende probleemoplossende en prioriterende vaardigheden");
+        Vacature examen = new Vacature("Examencommissie",
+                "Voorzitter zijn van de examencommissie. Zorgen voor de verspreiding van de tentamens. Tevens " +
+                        "zorg je ervoor dat alles wordt nagekeken en dat de studenten geinformeerd worden over hun cijfer",
+                55, "In bezit zijn van certificaat Examen afnemen. Op maandagen beschikbaar zijn");
         Vacature productOwnerMijnInzet = new Vacature("Product Owner - Project Mijn Inzet",
-                "Het product ownen", 60, "Huub zijn");
+                "Het product ownen zodat je iedereen kunt vertellen wat er van hen verwacht wordt", 60, "Huub zijn");
+        Vacature orkestleider = new Vacature("Orkestleider HvA Orkest", "Je bent de orkestleider van het HvA huisorkest dus " +
+                "je reist mee als het orkest speelt. Je beslist mee over het repertoire en neemt nieuwe musici aan.", 35, "Muzikaal zijn." +
+                " In het bezit zijn van een muziekinstrument.");
 
-        List<Vacature> vacatures = Arrays.asList(coordinatorC16, coordinatorC17, productOwnerMijnInzet);
+        List<Vacature> vacatures = Arrays.asList(coordinatorC15, examen, productOwnerMijnInzet, orkestleider);
 
         //Create vakken
         Vak geenLes = new Vak("Geen les", 0);
