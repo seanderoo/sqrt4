@@ -63,3 +63,31 @@ function isSelected() {
         }
     }
 }
+
+window.onload=function () {
+    var deTabel = document.querySelector('#deTabel');
+    var incidentOverzicht = document.querySelector('#hetIncident', '#overzicht');
+    var beschikbaarheidsweergave;
+
+    if (deTabel) {
+        beschikbaarheidsweergave = deTabel;
+    } else if (incidentOverzicht) {
+        beschikbaarheidsweergave = incidentOverzicht;
+    }
+
+    beschikbaarheidsweergave.addEventListener('click', function(e) {
+        var td = e.target;
+        if (td.tagName === 'TD') {
+            e.target.classList.toggle('true');
+            e.target.classList.toggle('false');
+
+            if (e.target.classList.contains('true')) {
+                td.firstChild.value = 'true';
+            } else {
+                td.firstChild.value = 'false';
+            }
+        }
+        console.log(td.firstChild.value);
+    })
+}
+
