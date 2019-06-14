@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <script type="text/javascript" src="/algemeen.js"></script>
+
 </head>
 <body>
 <header>
@@ -50,22 +52,7 @@
 </form>
 
 <script>
-    var deTabel = document.querySelector('#deTabel');
 
-    deTabel.addEventListener('click', function(e) {
-        var td = e.target;
-        if (td.tagName === 'TD') {
-            e.target.classList.toggle('true');
-            e.target.classList.toggle('false');
-
-            if (e.target.classList.contains('true')) {
-                td.firstChild.value = 'true';
-            } else {
-                td.firstChild.value = 'false';
-            }
-        }
-        console.log(td.firstChild.value);
-    })
 
 
     /*Knop voor het opslaan van data*/
