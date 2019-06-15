@@ -41,7 +41,6 @@ public class RoosterController extends AbstractController {
         List<Vak> vakken = vakRepo.findAll();
         vakkenSorteren(vakken);
         List<Vak> vakkenZonder = vakkenLijstZonder("Geen les");
-        Collections.sort(vakkenZonder);
         model.addAttribute("vakken", vakken);
         model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
@@ -94,7 +93,6 @@ public class RoosterController extends AbstractController {
         vakkenSorteren(vakken);
         model.addAttribute("vakken", vakken);
         List<Vak> vakkenZonder = vakkenLijstZonder("Geen les");
-        Collections.sort(vakkenZonder);
         model.addAttribute("vakkenZonder", vakkenZonder);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort1.getId());
         model.addAttribute("weken", weken);

@@ -61,7 +61,7 @@ public class SolliciterenController extends AbstractController{
     }
 
     //lijst van vacatures waar huidige gebruiker al wel of nog niet op gesolliciteerd heeft. Input bepaalt welke lijst
-    //returned wordt
+    //returned wordt (Karin)
     public List<Vacature> welNietGesolliciteerd(String keuze) {
         List<Vacature> gesolliciteerdeVacatures = new ArrayList<>();
         List<Vacature> openVacatures = vacrepo.findAll();

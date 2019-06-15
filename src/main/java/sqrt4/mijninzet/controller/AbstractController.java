@@ -8,6 +8,7 @@ import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.VakRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractController {
@@ -26,6 +27,7 @@ public abstract class AbstractController {
         List<Vak> vakkenZonder = vakRepository.findAll();
         Vak verwijderVak = vakRepository.findByVakNaam(vakNaam);
         vakkenZonder.remove(verwijderVak);
+        Collections.sort(vakkenZonder);
         return vakkenZonder;
     }
 }
