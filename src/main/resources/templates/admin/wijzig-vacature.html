@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/form-karin.css">
+    <script type="text/javascript" src="/algemeen.js"></script>
 </head>
 <body>
 <header>
@@ -60,17 +61,7 @@
 
 </body>
 <script>
-    function textCounter( field, countfield, maxlimit ) {
-        if ( field.value.length > maxlimit ) {
-            field.value = field.value.substring( 0, maxlimit );
-            field.blur();
-            field.focus();
-            return false;
-        } else {
-            countfield.value = maxlimit - field.value.length;
-        }
-    }
-
+    textCounter(field, countfield, maxlimit );
 </script>
 
 </html>
