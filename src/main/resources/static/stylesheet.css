@@ -256,4 +256,20 @@ select select {
     background-color: #7892c2 !important;
 }
 
+#TableFormatter option {
+    background-color: white;
+}
+
+.graag {
+    background-color: lightgreen !important;
+}
+
+.mwa {
+    background-color: #faff4d !important;
+}
+
+.lieverniet {
+    background-color: #ff4d43 !important;
+}
+
 
