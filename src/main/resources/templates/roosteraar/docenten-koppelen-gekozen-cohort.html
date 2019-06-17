@@ -160,6 +160,7 @@
         });
     }
 
+
 </script>
 
 </body>
@@ -173,51 +174,74 @@
     var gesplitsteVoorkeuren = voorkeuren.split(",");
     console.log("aantal gesplitste voorkeuren: " + gesplitsteVoorkeuren.length);
 
-    for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
-        var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
-        var voorkeur = voorkeurgroep[VOORKEUR];
-        var user = voorkeurgroep[USER];
-        var vak = voorkeurgroep[VAK];
-        // console.log("Voorkeurcombi nr. " + (i +1));
-        // console.log("Voorkeur: " + voorkeur);
-        // console.log("Docent: " + user);
-        // console.log("Vak: " + vak);
+    document.addEventListener('click', function getVoorkeuren(e) {
+        var selector = e.target;
+        var parent1 = selector.parentNode;
+        var parent1_CellIndex = parent1.cellIndex;
+        var parent2 = parent1.parentNode;
+        var vorigeTableRow = parent2.previousElementSibling;
+        var kiendjes = vorigeTableRow.childNodes;
+        var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1_CellIndex)];
+        var checkVakValue = kiendjeBoven.getAttribute('value');
+        var opties = selector.options;
+        if (selector.tagName === 'SELECT') {
+            for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
+                var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
+                var voorkeur = voorkeurgroep[VOORKEUR];
+                var user = voorkeurgroep[USER];
+                var vak = voorkeurgroep[VAK];
+                console.log("Voorkeurcombi nr. " + (i +1));
+                // console.log("Voorkeur: " + voorkeur);
+                // console.log("Docent: " + user);
+                console.log("Vak: " + vak);
+                toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+            }
+            // var options = selector.options;
+            // console.log(selector.tagName + ": " + options.length + " opties");
+            // for (var j = 0; j < options.length; j++) {
+            //     console.log("dit is text nummer " + (j + 1) + ": " + options[j].text);
+            //     console.log("dit is value nummer " + (j + 1) + ": " + options[j].value);
+            //     console.log("dit is name nummer " + (j + 1) + ": " + options[j].name);
+            //     console.log("dit is text nummer " + (j + 1) + ": " + options[j].getAttribute('text'));
+            //     console.log("dit is value nummer " + (j + 1) + ": " + options[j].getAttribute('value'));
+            //     console.log("dit is name nummer " + (j + 1) + ": " + options[j].getAttribute('name'));
+            // }
+        }
+    });
 
-        var vakIds = ["vakMaO", "vakDiO"];
-        console.log("aantal vakIds: " + vakIds.length);
-        toonVoorkeur("vakMaO", "maOch", voorkeur, user, vak);
-        toonVoorkeur("vakDiO", "diOch", voorkeur, user, vak);
-
-
-        // for (var i = 0; i < vakIds.length; i++) {
-        //     console.log(vakIds[i]);
-        // }
-
+    function krijgPrevNodeIndex(index) {
+        return (index + 1) * 2 + 1;
     }
 
-    function toonVoorkeur(id, id2, voorkeur, user, vak) {
-        var huidigVak = document.getElementById(id).getAttribute("value");
-        var bijbehorendeSelect = document.getElementById(id2);
-        if (vak === huidigVak) {
-            if (voorkeur == 3) {
-                var elementen = bijbehorendeSelect.getElementsByName(user);
-                console.log("elementen: " + elementen.length);
-                for (var j = 0; j < elementen.length; j++) {
-                    elementen[j].classList.add('graag');
+function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
+
+    if (vak === checkVak) {
+        if (voorkeur == 3) {
+            for (var j = 0; j < opties.length; j++) {
+                if (opties[j].value == user) {
+                    opties[j].classList.add('graag');
+                    console.log("toegevoegd! graag")
                 }
-            } else if (voorkeur == 2) {
-                var elementen = bijbehorendeSelect.getElementsByName(user);
-                for (var j = 0; j < elementen.length; j++) {
-                    elementen[j].classList.add('mwa');
+            }
+        } else if (voorkeur == 2) {
+            for (var j = 0; j < opties.length; j++) {
+                if (opties[j].value == user) {
+                    opties[j].classList.add('mwa');
+                    console.log("toegevoegd! mwa")
+
                 }
-            } else if (voorkeur == 1) {
-                var elementen = bijbehorendeSelect.getElementsByName(user);
-                for (var j = 0; j < elementen.length; j++) {
-                    elementen[j].classList.add('lieverniet');
+            }
+        } else if (voorkeur == 1) {
+            for (var j = 0; j < opties.length; j++) {
+                if (opties[j].value == user) {
+                    opties[j].classList.add('lieverniet');
+                    console.log("toegevoegd! lieverniet")
                 }
             }
         }
     }
+}
+
     // var huidigVak = document.getElementById("vakMaO").getAttribute("value");
     // if (vak === huidigVak) {
     //     if (voorkeur == 3) {

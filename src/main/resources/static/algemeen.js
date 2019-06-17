@@ -78,16 +78,16 @@ window.onload=function () {
     beschikbaarheidsweergave.addEventListener('click', function(e) {
         var td = e.target;
         if (td.tagName === 'TD') {
-            e.target.classList.toggle('true');
-            e.target.classList.toggle('false');
+            td.classList.toggle('true');
+            td.classList.toggle('false');
 
-            if (e.target.classList.contains('true')) {
+            if (td.classList.contains('true')) {
                 td.firstChild.value = 'true';
             } else {
                 td.firstChild.value = 'false';
             }
         }
         console.log(td.firstChild.value);
-    })
+    });
 }
 
