@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${empty(sollicitaties)}">
+        <tr th:if="${sollicitaties.isEmpty()}">
             <td class="ST" colspan="3">U heeft nog op geen enkele vacature gesolliciteerd</td>
         </tr>
         <tr th:each="vacature: ${sollicitaties}">

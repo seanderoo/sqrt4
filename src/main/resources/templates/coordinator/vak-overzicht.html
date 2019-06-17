@@ -5,6 +5,7 @@
     <title>SQRT4  |  Vak toegevoegd</title>
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+<!--    <script type="text/javascript" src="/static/algemeen.js"></script>-->
 </head>
 <body>
 <header>
@@ -20,7 +21,7 @@
         <th>Wijzigen</th>
         <th>Verwijderen</th>
     </tr>
-    <tr th:if="${vakken.empty}">
+    <tr th:if="${vakken.isEmpty()}">
         <td class="ST" colspan="4">Geen vakken aangemaakt</td>
     </tr>
     <tr th:each="vak: ${vakken}">
