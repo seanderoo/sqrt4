@@ -21,7 +21,11 @@ public interface WeekRepository extends JpaRepository<Week, Integer> {
 
     List<Week> findAllByCohortAndJaarNummer(Cohort cohort, int jaarNr);
 
-    Week findByUser(User user);
+    Week findByCohortIsNullAndUser(User user);
+
+    Week findByCohort_IdAndUser(int value1, User user);
+
+
 
 
 
