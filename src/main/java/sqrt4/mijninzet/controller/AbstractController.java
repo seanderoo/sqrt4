@@ -22,7 +22,7 @@ public abstract class AbstractController {
     @Autowired
     WeekRepository weekRepo;
 
-    List<Week> weken = new ArrayList<>();
+
 
     User voegActiveUserToe(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -38,19 +38,15 @@ public abstract class AbstractController {
         return vakkenZonder;
     }
 
-    public List<User> docentenBeschikbaarheid() {
-        List<User> docenten = haalBeschikbaarhedenOp(weken);
-        return docenten;
-    }
+    public List<User> beschikbareDocentenPerDagdeel() {
+        List<User> docenten = userRepo.findAll();
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : docenten) {
+            Week nieuw = weekRepo.findByUser(user);
+            if ( nieuw.getMaandag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
 
-    private List<User> haalBeschikbaarhedenOp(List<Week> wekenlijst) {
-
-        weken = weekRepo.findAllByJaarNummerAndWeekNummer(0, 0);
-        List<User> users = new ArrayList<>();
-        for (Week week : wekenlijst) {
-            User user = userRepo.findByWeek(week);
-            users.add(user);
         }
-        return users;
     }
 }

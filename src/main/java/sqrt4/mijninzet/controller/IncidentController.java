@@ -32,6 +32,7 @@ public class IncidentController extends AbstractController {
 
     @GetMapping("/docent/incidentregistratie")
     public String incidentRegistratie(Model model) {
+
         List<Incident> statusAfgehandeld = repoIncident.findAllByUserAndStatusNotContaining(voegActiveUserToe(),
                 "in behandeling");
 
