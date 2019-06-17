@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
 import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Incident;
-import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
 import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
@@ -34,7 +33,7 @@ public class IncidentController extends AbstractController {
     @GetMapping("/docent/incidentregistratie")
     public String incidentRegistratie(Model model) {
 
-        List<User> docentMaOch = beschikbareDocentenPerDagdeel("maandag", "ochtend");
+
         List<Incident> statusAfgehandeld = repoIncident.findAllByUserAndStatusNotContaining(voegActiveUserToe(),
                 "in behandeling");
 

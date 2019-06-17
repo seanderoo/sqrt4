@@ -40,163 +40,179 @@ public abstract class AbstractController {
         return vakkenZonder;
     }
 
-    public List<User> beschikbareDocentenPerDagdeel(String dag, String dagdeel) {
+    public List<User> beschikbareDocentenMetWeek() {
         List<User> docenten = userRepo.findAllByRolesContaining("DOCENT");
-        List<User> beschikbareDocenten = new ArrayList<>();
         List<User> beschikbareDocentenMetWeek = new ArrayList<>();
         for (User user : docenten) {
             if ( user.getWeek() != null ) {
                 beschikbareDocentenMetWeek.add(user);
             }
         }
+        return beschikbareDocentenMetWeek;
+    }
 
-        switch (dag) {
-            case "maandag":
-                switch (dagdeel) {
-                    case "ochtend":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getMaandag().getOchtend().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "middag":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getMaandag().getMiddag().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "avond":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getMaandag().getAvond().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                }
-                break;
-
-            case "dinsdag":
-                switch (dagdeel) {
-                    case "ochtend":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDinsdag().getOchtend().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "middag":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDinsdag().getMiddag().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "avond":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDinsdag().getAvond().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                }
-                break;
-
-            case "woensdag":
-                switch (dagdeel) {
-                    case "ochtend":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getWoensdag().getOchtend().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "middag":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getWoensdag().getMiddag().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "avond":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getWoensdag().getAvond().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                }
-                break;
-
-            case "donderdag":
-                switch (dagdeel) {
-                    case "ochtend":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDonderdag().getOchtend().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "middag":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDonderdag().getMiddag().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "avond":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getDonderdag().getAvond().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                }
-                break;
-
-            case "vrijdag":
-                switch (dagdeel) {
-                    case "ochtend":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getVrijdag().getOchtend().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "middag":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getVrijdag().getMiddag().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                    case "avond":
-                        for (User user : beschikbareDocentenMetWeek) {
-                            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
-                            if ( nieuw.getVrijdag().getAvond().getBeschikbaar() ) {
-                                beschikbareDocenten.add(user);
-                            }
-                        }
-                        break;
-                }
-                break;
+    public List<User> getDocentenOpMaandagOchtend() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getMaandag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
         }
+        return beschikbareDocenten;
+    }
 
+    public List<User> getDocentenOpMaandagMiddag() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getMaandag().getMiddag().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpMaandagAvond() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getMaandag().getAvond().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDinsdagOchtend() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDinsdag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDinsdagMiddag() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDinsdag().getMiddag().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDinsdagAvond() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDinsdag().getAvond().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpWoensdagOchtend() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getWoensdag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpWoensdagMiddag() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getWoensdag().getMiddag().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpWoensdagAvond() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getWoensdag().getAvond().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDonderdagOchtend() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDonderdag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDonderdagMiddag() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDonderdag().getMiddag().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpDonderdagAvond() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getDonderdag().getAvond().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpVrijdagOchtend() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getVrijdag().getOchtend().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpVrijdagMiddag() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getVrijdag().getMiddag().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
+        return beschikbareDocenten;
+    }
+
+    public List<User> getDocentenOpVrijdagAvond() {
+        List<User> beschikbareDocenten = new ArrayList<>();
+        for (User user : beschikbareDocentenMetWeek()) {
+            Week nieuw = weekRepo.findByCohortIsNullAndUser(user);
+            if ( nieuw.getVrijdag().getAvond().getBeschikbaar() ) {
+                beschikbareDocenten.add(user);
+            }
+        }
         return beschikbareDocenten;
     }
 

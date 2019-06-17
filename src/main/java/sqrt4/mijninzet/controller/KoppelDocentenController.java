@@ -59,21 +59,21 @@ public class KoppelDocentenController extends AbstractController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
-        model.addAttribute("MAO", beschikbareDocentenPerDagdeel("maandag", "ochtend"));
-        model.addAttribute("MAM", beschikbareDocentenPerDagdeel("maandag", "middag"));
-        model.addAttribute("MAA", beschikbareDocentenPerDagdeel("maandag", "avond"));
-        model.addAttribute("DIO", beschikbareDocentenPerDagdeel("dinsdag", "ochtend"));
-        model.addAttribute("DIM", beschikbareDocentenPerDagdeel("dinsdag", "middag"));
-        model.addAttribute("DIA", beschikbareDocentenPerDagdeel("dinsdag", "avond"));
-        model.addAttribute("WOO", beschikbareDocentenPerDagdeel("woensdag", "ochtend"));
-        model.addAttribute("WOM", beschikbareDocentenPerDagdeel("woensdag", "middag"));
-        model.addAttribute("WOA", beschikbareDocentenPerDagdeel("woensdag", "avond"));
-        model.addAttribute("DOO", beschikbareDocentenPerDagdeel("donderdag", "ochtend"));
-        model.addAttribute("DOM", beschikbareDocentenPerDagdeel("donderdag", "middag"));
-        model.addAttribute("DOA", beschikbareDocentenPerDagdeel("donderdag", "avond"));
-        model.addAttribute("VRO", beschikbareDocentenPerDagdeel("vrijdag", "ochtend"));
-        model.addAttribute("VRM", beschikbareDocentenPerDagdeel("vrijdag", "middag"));
-        model.addAttribute("VRA", beschikbareDocentenPerDagdeel("vrijdag", "avond"));
+        model.addAttribute("MAO", getDocentenOpMaandagOchtend());
+        model.addAttribute("MAM", getDocentenOpMaandagMiddag());
+        model.addAttribute("MAA", getDocentenOpMaandagAvond());
+        model.addAttribute("DIO", getDocentenOpDinsdagOchtend());
+        model.addAttribute("DIM", getDocentenOpDinsdagMiddag());
+        model.addAttribute("DIA", getDocentenOpDinsdagAvond());
+        model.addAttribute("WOO", getDocentenOpWoensdagOchtend());
+        model.addAttribute("WOM", getDocentenOpWoensdagMiddag());
+        model.addAttribute("WOA", getDocentenOpWoensdagAvond());
+        model.addAttribute("DOO", getDocentenOpDonderdagOchtend());
+        model.addAttribute("DOM", getDocentenOpDonderdagMiddag());
+        model.addAttribute("DOA", getDocentenOpDonderdagAvond());
+        model.addAttribute("VRO", getDocentenOpVrijdagOchtend());
+        model.addAttribute("VRM", getDocentenOpVrijdagMiddag());
+        model.addAttribute("VRA", getDocentenOpVrijdagAvond());
 
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
@@ -136,21 +136,21 @@ public class KoppelDocentenController extends AbstractController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
-        model.addAttribute("MAO", beschikbareDocentenPerDagdeel("maandag", "ochtend"));
-        model.addAttribute("MAM", beschikbareDocentenPerDagdeel("maandag", "middag"));
-        model.addAttribute("MAA", beschikbareDocentenPerDagdeel("maandag", "avond"));
-        model.addAttribute("DIO", beschikbareDocentenPerDagdeel("dinsdag", "ochtend"));
-        model.addAttribute("DIM", beschikbareDocentenPerDagdeel("dinsdag", "middag"));
-        model.addAttribute("DIA", beschikbareDocentenPerDagdeel("dinsdag", "avond"));
-        model.addAttribute("WOO", beschikbareDocentenPerDagdeel("woensdag", "ochtend"));
-        model.addAttribute("WOM", beschikbareDocentenPerDagdeel("woensdag", "middag"));
-        model.addAttribute("WOA", beschikbareDocentenPerDagdeel("woensdag", "avond"));
-        model.addAttribute("DOO", beschikbareDocentenPerDagdeel("donderdag", "ochtend"));
-        model.addAttribute("DOM", beschikbareDocentenPerDagdeel("donderdag", "middag"));
-        model.addAttribute("DOA", beschikbareDocentenPerDagdeel("donderdag", "avond"));
-        model.addAttribute("VRO", beschikbareDocentenPerDagdeel("vrijdag", "ochtend"));
-        model.addAttribute("VRM", beschikbareDocentenPerDagdeel("vrijdag", "middag"));
-        model.addAttribute("VRA", beschikbareDocentenPerDagdeel("vrijdag", "avond"));
+        model.addAttribute("MAO", getDocentenOpMaandagOchtend());
+        model.addAttribute("MAM", getDocentenOpMaandagMiddag());
+        model.addAttribute("MAA", getDocentenOpMaandagAvond());
+        model.addAttribute("DIO", getDocentenOpDinsdagOchtend());
+        model.addAttribute("DIM", getDocentenOpDinsdagMiddag());
+        model.addAttribute("DIA", getDocentenOpDinsdagAvond());
+        model.addAttribute("WOO", getDocentenOpWoensdagOchtend());
+        model.addAttribute("WOM", getDocentenOpWoensdagMiddag());
+        model.addAttribute("WOA", getDocentenOpWoensdagAvond());
+        model.addAttribute("DOO", getDocentenOpDonderdagOchtend());
+        model.addAttribute("DOM", getDocentenOpDonderdagMiddag());
+        model.addAttribute("DOA", getDocentenOpDonderdagAvond());
+        model.addAttribute("VRO", getDocentenOpVrijdagOchtend());
+        model.addAttribute("VRM", getDocentenOpVrijdagMiddag());
+        model.addAttribute("VRA", getDocentenOpVrijdagAvond());
 
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
