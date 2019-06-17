@@ -50,13 +50,13 @@ public class SolliciterenController extends AbstractController{
             sollicitatie = solrepo.findByUserAndVacature(voegActiveUserToe(), vacature);
             solrepo.delete(sollicitatie);
         }
-        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
+        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
         return "/docent/sollicitaties-overzicht";
     }
 
     @GetMapping("/docent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
-        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
+        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
         return "docent/sollicitaties-overzicht";
     }
 

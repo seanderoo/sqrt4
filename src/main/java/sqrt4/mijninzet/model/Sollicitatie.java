@@ -14,9 +14,12 @@ public class Sollicitatie {
     @ManyToOne
     private Vacature vacature;
 
+    private String status;
+
     public Sollicitatie(User user, Vacature vacature) {
         this.user = user;
         this.vacature = vacature;
+        this.status = "in behandeling";
     }
 
     public Sollicitatie() {
@@ -44,6 +47,14 @@ public class Sollicitatie {
 
     public void setVacature(Vacature vacature) {
         this.vacature = vacature;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
