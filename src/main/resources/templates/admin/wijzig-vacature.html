@@ -31,7 +31,7 @@
                 <td><textarea onblur="textCounter(this,this.form.counter,255);"
                               onkeyup="textCounter(this,this.form.counter,255);" input type="text"
                               class="input_gebruiker" maxlength="255" required
-                              th:name="omschrijving" th:value="*{vacature.getOmschrijving()}"></textarea></td>
+                              th:name="omschrijving" th:text="*{vacature.getOmschrijving()}"></textarea></td>
                 <td><input class="max255" onblur="textCounter(this.form.recipients,this,255);"
                            disabled onfocus="this.blur();" tabindex="999" maxlength="3" size="3"
                            value="255" name="counter"></td>
@@ -44,10 +44,15 @@
             <tr>
                 <td><label>Eisen</label></td>
                 <td><textarea class="input_gebruiker" input type="text" th:name="eisen"
-                              th:value="*{vacature.getEisen()}" maxlength="255" required></textarea></td>
+                              th:text="*{vacature.getEisen()}" maxlength="255" required></textarea></td>
             </tr>
             <tr>
-                <td></td><td> <input type="submit" value="Vacature opslaan"/></td>
+                <td></td>
+                <td> <input type="submit" value="Vacature opslaan"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="Annuleren" onclick=window.location.pathname="/admin/overzicht-vacatures"></td>
             </tr>
         </table>
     </form>
