@@ -50,7 +50,6 @@ public class CohortController extends AbstractController {
 
         try {
             cohort = new Cohort(cohortNummer, startWeek, startJaar, eindWeek);
-//            cohort.setUser(voegActiveUserToe());
             cohortRepo.save(cohort);
             model.addAttribute("user", voegActiveUserToe());
         } catch (Exception e) {
