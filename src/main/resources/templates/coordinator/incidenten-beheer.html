@@ -22,7 +22,6 @@
 <br/>
 <br/>
 </body>
-<form action="#" th:action="@{/manager/incidenten-beheer}" th:object="${incident}" method="POST">
     <table id="overzicht">
         <tr class="ST">
             <th>Naam Gebruiker</th>
@@ -35,7 +34,7 @@
             <th>Status</th>
         </tr>
         <tr th:each="incident: ${aanvraagLijst}">
-            <!--        <input id="incident_id" type="hidden" th:name="incident_id" th:value="${incident.getId()}">-->
+            <form action="#" method="POST" th:action="@{/coordinator/incidenten-beheer}" th:object="${incident}">
             <td th:text="${incident.getUser().getFullName()}"></td>
             <td th:text="${incident.getDatum()}" name="datumAanvraag"></td>
             <td th:class="${incident.isOchtend()}"></td>
@@ -44,12 +43,12 @@
             <td th:text="${incident.getOpmerkingGebruiker()}"></td>
             <td>
             <textarea placeholder="Plaats hier uw opmerking" id="inputFieldManager"
-                      th:name="inputManagerText" th:value="${incident.getManagerToelichting()}"></textarea></td>
+                      th:name="managerToelichting" th:value="${incident.getManagerToelichting()}"></textarea></td>
             <td>
-                <select id="statusSelect" th:name="status">
-                    <option th:value="in_behandeling" th:text="in_behandeling"></option>
-                    <option th:value="Akkoord" th:text="Akkoord"></option>
-                    <option th:value="Afgewezen" th:text="Afgewezen"></option>
+                <select id="statusSelect" name="status">
+                    <option th:text="in_behandeling" value="in behandeling"></option>
+                    <option th:text="Akkoord" value="Akkoord"></option>
+                    <option th:text="Afgewezen" value="Afgewezen"></option>
                 </select>
             </td>
             <td
@@ -57,6 +56,7 @@
                 <button type="submit" th:name="incident_id" th:value="${incident.getId()}">Opslaan
                 </button>
             </td>
+            </form>
         </tr>
         <tr>
 
@@ -88,7 +88,7 @@
             <td th:text="${incident.getStatus()}">
         </tr>
     </table>
-</form>
+<!--</form>-->
 
 <script>
 

@@ -11,5 +11,6 @@ public interface VakRepository extends JpaRepository<Vak, Integer> {
 
     Vak findByVakNaam(String vaknaam);
     Vak findById(int Id);
-
+    void deleteByVakId(int vakId);
+    Vak findVakByVakId(int vakId);
 }

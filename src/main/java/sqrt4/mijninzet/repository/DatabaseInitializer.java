@@ -21,18 +21,16 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
     private CohortRepository cohortRepository;
-    private VakdagdeelRespository vakdagdeelRespository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, CohortRepository cohortRepository, VakdagdeelRespository vakdagdeelRespository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
         this.cohortRepository = cohortRepository;
-        this.vakdagdeelRespository = vakdagdeelRespository;
     }
 
     @Override
@@ -43,8 +41,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.cohortRepository.deleteAll();
-        this.vakdagdeelRespository.deleteAll();
-
 
         //create rollen
         Role god = new Role("Admin");
@@ -119,12 +115,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.userRepository.saveAll(users);
         this.vacatureRepository.saveAll(vacatures);
         this.vakRepository.saveAll(vakken);
-        for (Vak vak:vakken) {
-            vak.setVakdagdelen(vak.aantalDagdelenBerekenen());
-            for (Vakdagdeel vakdagdeel :vak.getVakdagdelen()) {
-                this.vakdagdeelRespository.save(vakdagdeel);
-            }
-        }
         this.roleRepository.saveAll(rollen);
         this.cohortRepository.saveAll(cohorts);
 

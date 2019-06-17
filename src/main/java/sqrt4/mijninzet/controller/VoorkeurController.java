@@ -19,14 +19,11 @@ import java.util.List;
 public class VoorkeurController extends AbstractController {
 
     @Autowired
-    private VakRepository vakRepository;
-    @Autowired
     private VoorkeurenRepository voorkeurenRepository;
 
     @GetMapping("/docent/voorkeuren")
     public String getVakken(Model model) {
-        List<Vak> vakkenLijst = vakRepository.findAll();
-        vakkenlijstSorteren(vakkenLijst);
+        List<Vak> vakkenLijst = vakkenLijstZonder("Geen les");
         User user = voegActiveUserToe();
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
 //        System.out.println(voorkeurLijst);
@@ -59,18 +56,18 @@ public class VoorkeurController extends AbstractController {
         ingevuldeVoorkeur.setVoorkeurGebruiker(voorkeur.getVoorkeurGebruiker());
         voorkeurenRepository.deleteByVak_VakIdAndUser(vak.getVakId(), voegActiveUserToe());
         voorkeurenRepository.save(ingevuldeVoorkeur);
-        List<Vak> vakkenLijst = vakRepository.findAll();
-        vakkenlijstSorteren(vakkenLijst);
+        List<Vak> vakkenLijst = vakkenLijstZonder("Geen les");
         model.addAttribute("vakkenLijst", vakkenLijst);
         model.addAttribute("user", voegActiveUserToe());
         return "docent/voorkeuren";
     }
 
 
-    public List<Vak> vakkenlijstSorteren(List<Vak> vakkenlijst){
-        Vak geenles = vakRepository.findByVakNaam("Geen les");
-        vakkenlijst.remove(geenles);
-        Collections.sort(vakkenlijst);
-        return vakkenlijst;
-    }
+    //Is niet meer nodig want er staat een method in de Abstract Controller
+//    public List<Vak> vakkenlijstSorteren(List<Vak> vakkenlijst){
+//        Vak geenles = vakRepository.findByVakNaam("Geen les");
+//        vakkenlijst.remove(geenles);
+//        Collections.sort(vakkenlijst);
+//        return vakkenlijst;
+//    }
 }

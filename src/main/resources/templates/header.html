@@ -54,16 +54,17 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/coordinator/vak-aanmaken">Maak vak aan</a>
-            <a href="/coordinator/rooster-maken-karin">Maak rooster voor cohort</a>
+            <a href="/coordinator/vak-overzicht">Overzicht van alle vakken</a>
+            <a href="/coordinator/vak-aanmaken">Maak nieuw vak aan</a>
+            <a href="/coordinator/rooster-maken">Maak rooster voor cohort</a>
         </div>
     </div>
-    <div sec:authorize="hasAuthority('ROLEMANAGER')" class="dropdown">
+    <div class="dropdown" sec:authorize="hasAuthority('ROLECOORDINATOR')">
         <button class="dropbtn">Incidentenbeheer
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="/manager/incidenten-beheer">Beheer incidenten</a>
+            <a href="/coordinator/incidenten-beheer">Beheer incidenten</a>
         </div>
     </div>
     <a style="float:right" href="/logout"><img src="/images/logout.png" height="24" width="24"></a>
