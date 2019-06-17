@@ -42,17 +42,17 @@ public class IncidentController extends AbstractController {
         return "docent/incidentregistratie";
     }
 
-    @GetMapping("/manager/incidenten-beheer")
+    @GetMapping("/coordinator/incidenten-beheer")
     public String incidentBeheer(Model model) {
         List<Incident> incidentList = repoIncident.findAllByStatusIsContaining("in behandeling");
         List<Incident> afgehandeldLijst = repoIncident.findAllByStatusIsNotContaining("in behandeling");
         model.addAttribute("user", voegActiveUserToe());
         model.addAttribute("afgehandeldLijst", afgehandeldLijst);
         model.addAttribute("aanvraagLijst", incidentList);
-        return "manager/incidenten-beheer";
+        return "coordinator/incidenten-beheer";
     }
 
-    @PostMapping("/manager/incidenten-beheer")
+    @PostMapping("/coordinator/incidenten-beheer")
     public String incidentBeheer(Incident incident,
                                  @RequestParam(value = "status") String statusString,
                                  @RequestParam(value = "inputManagerText", required = false) String textManager,
@@ -79,7 +79,7 @@ public class IncidentController extends AbstractController {
         List<Incident> afgehandeldLijst = repoIncident.findAllByStatusIsNotContaining("in behandeling");
         model.addAttribute("afgehandeldLijst", afgehandeldLijst);
         model.addAttribute("aanvraagLijst", incidentList);
-        return "manager/incidenten-beheer";
+        return "coordinator/incidenten-beheer";
     }
 
     @ModelAttribute("dag")
