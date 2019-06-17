@@ -4,22 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
-import sqrt4.mijninzet.model.Beschikbaarheid.Dag;
-import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
-import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.*;
+
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.function.Predicate;
 
 @Controller
-public class KoppelDocentenController {
+public class KoppelDocentenController extends AbstractController {
 
     @Autowired
     private UserRepository userRepository;
@@ -57,6 +57,22 @@ public class KoppelDocentenController {
         model.addAttribute("weken", weken);
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
+
+        model.addAttribute("MAO", beschikbareDocentenPerDagdeel("maanddag", "ochtend"));
+        model.addAttribute("MAM", beschikbareDocentenPerDagdeel("maandag", "middag"));
+        model.addAttribute("MAA", beschikbareDocentenPerDagdeel("maandag", "avond"));
+        model.addAttribute("DIO", beschikbareDocentenPerDagdeel("dinsdag", "ochtend"));
+        model.addAttribute("DIM", beschikbareDocentenPerDagdeel("dinsdag", "middag"));
+        model.addAttribute("DIA", beschikbareDocentenPerDagdeel("dinsdag", "avond"));
+        model.addAttribute("WOO", beschikbareDocentenPerDagdeel("woensdag", "ochtend"));
+        model.addAttribute("WOM", beschikbareDocentenPerDagdeel("woensdag", "middag"));
+        model.addAttribute("WOA", beschikbareDocentenPerDagdeel("woensdag", "avond"));
+        model.addAttribute("DOO", beschikbareDocentenPerDagdeel("donderdag", "ochtend"));
+        model.addAttribute("DOM", beschikbareDocentenPerDagdeel("donderdag", "middag"));
+        model.addAttribute("DOA", beschikbareDocentenPerDagdeel("donderdag", "avond"));
+        model.addAttribute("VRO", beschikbareDocentenPerDagdeel("vrijdag", "ochtend"));
+        model.addAttribute("VRM", beschikbareDocentenPerDagdeel("vrijdag", "middag"));
+        model.addAttribute("VRA", beschikbareDocentenPerDagdeel("vrijdag", "avond"));
         model.addAttribute("docentList", docentList);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
