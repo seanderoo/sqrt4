@@ -18,17 +18,9 @@ public class Vak implements Comparable <Vak>{
     @Column(name = "aantalUren")
     private int aantalUren;
 
-    @OneToMany(mappedBy = "vak",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Vakdagdeel> vakdagdelen;
-
-    public void setVakdagdelen(List<Vakdagdeel> vakdagdelen) {
-        this.vakdagdelen = vakdagdelen;
-    }
-
     public Vak(String vakNaam, int aantalUren) {
         this.vakNaam = vakNaam;
         this.aantalUren = aantalUren;
-        this.vakdagdelen = new ArrayList();
     }
 
     public Vak() { super(); }
@@ -57,10 +49,6 @@ public class Vak implements Comparable <Vak>{
         this.aantalUren = aantalUren;
     }
 
-    public List<Vakdagdeel> getVakdagdelen(){
-        return vakdagdelen;
-    }
-
     @Override
     public String toString() {
         return "Vak{" +
@@ -68,24 +56,6 @@ public class Vak implements Comparable <Vak>{
                 ", vakNaam='" + vakNaam + '\'' +
                 ", aantalUren=" + aantalUren +
                 '}';
-    }
-
-    public List<Vakdagdeel> aantalDagdelenBerekenen(){
-        List<Vakdagdeel> vakDagdelen= new ArrayList();
-        final int DAGDEELUREN = 4;
-        int aantalUren = this.aantalUren;
-//        System.out.println("Het aantal uren is: "+aantalUren);
-        int aantalDagdelen = aantalUren / DAGDEELUREN;
-        if ((aantalUren % DAGDEELUREN) > 0){
-            aantalDagdelen++;
-        }
-        for (int i = 1; i <= aantalDagdelen; i++) {
-            Vakdagdeel vakdagdeelX = new Vakdagdeel(i, this);
-//            System.out.println("DagdeelX is: "+vakdagdeelX);
-            vakDagdelen.add(vakdagdeelX);
-        }
-        return vakDagdelen;
-
     }
 
 

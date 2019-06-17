@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Vak toegevoegd</title>
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Overzicht van alle vakken</h1>
+<h2></h2>
+<form action="#" th:action="@{/coordinator/vak-overzicht}" th:method="POST">
+<table class="TableFormatter">
+    <tr class="ST">
+        <th>Vaknaam</th>
+        <th>Aantal Uur</th>
+        <th>Wijzigen</th>
+        <th>Verwijderen</th>
+    </tr>
+    <tr th:if="${vakken.empty}">
+        <td class="ST" colspan="4">Geen vakken aangemaakt</td>
+    </tr>
+    <tr th:each="vak: ${vakken}">
+        <td class="ST" th:text="${vak.getVakNaam()}"></td>
+        <td class="ST" th:text="${vak.getAantalUren()}"></td>
+        <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vak.getVakId()}">Wijzig Vak</button></td>
+        <td class="ST"><button onclick="return bevestigVerwijderen()" type="submit" th:name="Verwijder" th:value="${vak.getVakId()}">
+            Verwijder Vak</button> </td>
+    </tr>
+</table>
+</form>
+</body>
+<script>
+    function bevestigVerwijderen() {
+        var antwoord = confirm("Weet u zeker dat u dit vak wilt verwijderen?");
+        return antwoord;
+    }
+</script>
+</html>
