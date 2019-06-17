@@ -13,8 +13,14 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 <h1>Wijzig Vak <span th:text="${vak.getVakNaam()}"></span> </h1>
-<form>
+<form action="#" th:action="@{/coordinator/vak-wijzigen}" th:method="POST">
+<table th:value="${vak}">
+    <tr>
+        <th>Vaknaam</th>
+        <th>Aantal Uur</th>
+    </tr>
 
+</table>
 </form>
 </body>
 </html>

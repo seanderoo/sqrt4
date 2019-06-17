@@ -35,7 +35,7 @@
 
         <td class="ST"><button type="submit" th:name="Wijzig" th:value="${gebruiker.getId()}" >
             Wijzig gebruiker</button></td>
-        <td class="ST"><button type="submit" th:name="Verwijder" th:value="${gebruiker.getId()}">
+        <td class="ST"><button onclick="return bevestigVerwijderen()" type="submit" th:name="Verwijder" th:value="${gebruiker.getId()}">
             Verwijder gebruiker
         </button> </td>
     </tr>
@@ -67,6 +67,10 @@
                 tr[i].style.display = "none";
             }
         }
+    }
+    function bevestigVerwijderen() {
+        var antwoord = confirm("Weet u zeker dat u dit item wilt verwijderen?");
+        return antwoord;
     }
 </script>
 </body>

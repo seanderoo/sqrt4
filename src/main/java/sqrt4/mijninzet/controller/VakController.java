@@ -51,7 +51,6 @@ public class VakController extends AbstractController{
             model.addAttribute("vakken", vakken);
             return "coordinator/vak-overzicht";
         } else if (wijzigVakId != null) {
-            System.out.println("wijzig vak id = " + wijzigVakId);
             Vak wijzigVak = vakRepository.findVakByVakId(wijzigVakId);
             model.addAttribute(wijzigVak);
             return "coordinator/vak-wijzigen";
