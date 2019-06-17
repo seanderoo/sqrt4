@@ -89,5 +89,5 @@ window.onload=function () {
         }
         console.log(td.firstChild.value);
     })
-}
+};
 

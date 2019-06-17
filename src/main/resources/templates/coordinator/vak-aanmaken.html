@@ -15,7 +15,7 @@
 <h2>Vul hier de gegevens in van het nieuwe vak:</h2>
 </p>
 <div id="nieuwVakForm">
-    <form action="#" th:action="@{/coordinator/vak-toegevoegd}" th:method="POST">
+    <form action="#" th:action="@{/coordinator/vak-aanmaken}" th:method="POST">
         <table class="TableFormatter">
             <tr>
                 <td><label>Vaknaam</label></td>
@@ -26,7 +26,7 @@
                 <td><input class="input_gebruiker" type="text" th:name="aantalUren" required></td>
             </tr>
             <tr>
-                <td></td><td> <input type="submit" value="Vak opslaan"/></td>
+                <td></td><td> <button type="submit" onclick="onSubmit()" value="Vak opslaan">Vak Opslaan</button></td>
             </tr>
 
         </table>
@@ -34,4 +34,10 @@
     </form>
 </div>
 </body>
+<script>
+    function onSubmit() {
+        alert("Hartelijk dank, het nieuwe vak is opgeslagen")
+
+    }
+</script>
 </html>
