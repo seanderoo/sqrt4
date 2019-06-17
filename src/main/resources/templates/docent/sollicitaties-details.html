@@ -14,7 +14,7 @@
 <h1>Bedankt voor uw interesse.</h1>
 <p>
 <h2>Meer info over de vacature <span th:text="${vacature.vacatureNaam}"/> :</h2>
-</p>
+
 <form action="#" th:action="@{/docent/sollicitaties}" th:method="GET">
     <table class="TableFormatter">
         <thead>
@@ -44,7 +44,8 @@ je te zien krijgt (Karin)-->
 <br>
 </form>
 <br>
-<input type="button" value="Naar overzicht Vacatures" onclick=window.location.pathname="/docent/solliciteren" />
-<input type="button" value="Naar overzicht Sollicitaties" onclick=window.location.pathname="/docent/sollicitaties-overzicht" />
+<input onclick=window.location.pathname="/docent/solliciteren"; type="button" value="Naar overzicht Vacatures"/>
+<input onclick=window.location.pathname="/docent/sollicitaties-overzicht"; type="button"
+       value="Naar overzicht Sollicitaties"/>
 </body>
 </html>

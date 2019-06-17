@@ -55,8 +55,8 @@ function isSelected() {
         }
     }
 
-    function setTextRollenbox(idVanElement, tekstVanElement) {
-        var idVanElement = document.getElementById(idVanElement);
+    function setTextRollenbox(idElement, tekstVanElement) {
+        var idVanElement = document.getElementById(idElement);
         for (var i = 0; i < idVanElement.options.length; ++i) {
             if (idVanElement.options[i].text.toUpperCase() === tekstVanElement)
                 idVanElement.options[i].selected = true;
