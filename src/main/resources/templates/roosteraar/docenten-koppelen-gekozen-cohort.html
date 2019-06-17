@@ -52,19 +52,24 @@
             </tr>
             <tr>
                 <td><select id="maOcht" th:name="maOcht">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${MAO}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="diOcht" th:name="diOcht">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DIO}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="woOcht" th:name="woOcht">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${WOO}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="doOcht" th:name="doOcht">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DOO}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="vrOcht" th:name="vrOcht">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${VRO}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
             </tr>
             <tr>
@@ -77,19 +82,24 @@
             </tr>
             <tr>
                 <td><select id="maMid" th:name="maMid">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${MAM}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="diMid" th:name="diMid">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DIM}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="woMid" th:name="woMid">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${WOM}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="doMid" th:name="doMid">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DOM}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="vrMid" th:name="vrMid">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${VRM}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
             </tr>
             <tr>
@@ -102,19 +112,24 @@
             </tr>
             <tr>
                 <td><select id="maAvo" th:name="maAvo">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${MAA}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="diAvo" th:name="diAvo">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DIA}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="woAvo" th:name="woAvo">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${WOA}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="doAvo" th:name="doAvo">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${DOA}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
                 <td><select id="vrAvo" th:name="vrAvo">
-                    <option th:each="docent: ${docentList}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}">
+                    <option th:each="docent: ${VRA}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}"
+                            th:value="${docent.getId()}">
                 </select></td>
             </tr>
             </tbody>

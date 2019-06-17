@@ -58,7 +58,7 @@ public class KoppelDocentenController extends AbstractController {
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
 
-        model.addAttribute("MAO", beschikbareDocentenPerDagdeel("maanddag", "ochtend"));
+        model.addAttribute("MAO", beschikbareDocentenPerDagdeel("maandag", "ochtend"));
         model.addAttribute("MAM", beschikbareDocentenPerDagdeel("maandag", "middag"));
         model.addAttribute("MAA", beschikbareDocentenPerDagdeel("maandag", "avond"));
         model.addAttribute("DIO", beschikbareDocentenPerDagdeel("dinsdag", "ochtend"));

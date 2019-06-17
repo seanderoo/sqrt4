@@ -35,8 +35,6 @@ public class IncidentController extends AbstractController {
     public String incidentRegistratie(Model model) {
 
         List<User> docentMaOch = beschikbareDocentenPerDagdeel("maandag", "ochtend");
-        System.out.println(docentMaOch);
-
         List<Incident> statusAfgehandeld = repoIncident.findAllByUserAndStatusNotContaining(voegActiveUserToe(),
                 "in behandeling");
 
