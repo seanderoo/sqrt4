@@ -235,8 +235,13 @@ select select {
     color: black !important;
 }
 
-#overzichtAfgehandeld {
+#overzichtAfgehandeld tr td {
     margin-top: 30px;
+    table-layout: fixed;
+    word-wrap: break-word;
+    background-color: white;
+    border: 1px solid black;
+    color: black !important;
 }
 
 #inputFieldManager {

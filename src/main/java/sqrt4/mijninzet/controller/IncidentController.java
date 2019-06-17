@@ -53,34 +53,21 @@ public class IncidentController extends AbstractController {
     }
 
     @PostMapping("/coordinator/incidenten-beheer")
-    public String incidentBeheer(Incident incident,
-                                 @RequestParam(value = "status") String statusString,
-                                 @RequestParam(value = "inputManagerText", required = false) String textManager,
+    public String incidentBeheer(@RequestParam(value = "incident_id") Long incidentId,
+                                 @RequestParam(value = "status") String statusAanvraag,
+                                 @RequestParam(value = "managerToelichting", required = false) String managerToelichting,
                                  Model model) {
-
-        incident.setStatus(incident.getStatus());
-        incident.setManagerToelichting(incident.getManagerToelichting());
+        Incident incident = repoIncident.findIncidentById(incidentId);
+        incident.setStatus(statusAanvraag);
+        incident.setManagerToelichting(managerToelichting);
         repoIncident.save(incident);
-
-
-//            @RequestParam (value = "incident_id") Long incident_id,
-//                                  @RequestParam(value = "inputManagerText", required = false) String opmerkingManager,
-//                                  @RequestParam("status") String aanvraagBeoordeling,
-//                                              Model model){
-//
-//        Incident temp = repoIncident.findIncidentById(incident_id);
-//        temp.setManagerToelichting(opmerkingManager);
-//        System.out.println(temp.getManagerToelichting());
-//        temp.setStatus(temp.getStatus());
-//
-//        System.out.println("Status " + temp.getStatus());
-//        repoIncident.save(temp);
         List<Incident> incidentList = repoIncident.findAllByStatusIsContaining("in behandeling");
         List<Incident> afgehandeldLijst = repoIncident.findAllByStatusIsNotContaining("in behandeling");
         model.addAttribute("afgehandeldLijst", afgehandeldLijst);
         model.addAttribute("aanvraagLijst", incidentList);
         return "coordinator/incidenten-beheer";
     }
+
 
     @ModelAttribute("dag")
     public Dag dag() {
@@ -109,7 +96,6 @@ public class IncidentController extends AbstractController {
 
         if ( bestaatAl ) {
             Incident temp = repoIncident.findByDatumAndUser(date, voegActiveUserToe());
-            System.out.println("Dit is na bestaatAl: " + temp);
             temp.setOchtend(ochtend);
             temp.setMiddag(middag);
             temp.setAvond(avond);
