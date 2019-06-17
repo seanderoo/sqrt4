@@ -3,7 +3,6 @@ package sqrt4.mijninzet.repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sqrt4.mijninzet.model.*;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
@@ -21,16 +20,18 @@ public class DatabaseInitializer implements CommandLineRunner {
     private VakRepository vakRepository;
     private RoleRepository roleRepository;
     private CohortRepository cohortRepository;
+    private WeekRepository weekRepository;
 
     public DatabaseInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                VacatureRepository vacatureRepository, VakRepository vakRepository,
-                               RoleRepository roleRepository, CohortRepository cohortRepository) {
+                               RoleRepository roleRepository, CohortRepository cohortRepository, WeekRepository weekRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.vacatureRepository = vacatureRepository;
         this.vakRepository = vakRepository;
         this.roleRepository = roleRepository;
         this.cohortRepository = cohortRepository;
+        this.weekRepository = weekRepository;
     }
 
     @Override
@@ -62,8 +63,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         User admin = new User("Admin", passwordEncoder.encode("Admin123"), "ADMIN,DOCENT", "", "Adje", "de Admin", "");
         User coordinator1 = new User("Co", passwordEncoder.encode("C123"), "COORDINATOR", "", "Co", "Ordinator", "");
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
-
-
+        
         List<User> users = Arrays.asList(nouser, matthijs, huub, gerke, lillian, remi, ronald, admin, coordinator1, roosteraar1);
 
         //Create vacatures

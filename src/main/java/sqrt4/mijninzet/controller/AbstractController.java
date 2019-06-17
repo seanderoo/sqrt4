@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractController {
-    final Long ID_DEFAULT_USER = Long.valueOf(0);
 
     @Autowired
     UserRepository userRepo;
