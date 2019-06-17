@@ -12,24 +12,30 @@
 </header>
 <h1>Overzicht Vacatures</h1>
 <form action = "#" th:action="@{/admin/overzicht-vacatures}" th:method="POST">
-    <table id="TableVacatures">
+    <table class="TableFormatter">
         <thead>
         <tr class="ST">
             <th>Naam</th>
             <th>Aantal uren</th>
+            <th>Omschrijving</th>
+            <th>Eisen</th>
+            <th>Wijzigen</th>
             <th>Verwijderen</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${vacatureLijst.isEmpty()}">
-            <td class="ST" colspan="6">Er zijn nog geen cohorten aangemaakt.</td>
+            <td class="ST" colspan="6">Er zijn nog geen vacatures aangemaakt.</td>
         </tr>
         <tr th:each="vacature: ${vacatureLijst}">
+            <input type="hidden" th:name="id" th:value="${vacature.getId()}" size="40" required>
             <td class="ST"><span th:text="${vacature.getVacatureNaam()}">Naam</span></td>
             <td class="ST"><span th:text="${vacature.getAantalUren()}">Aantal uren </span></td>
-            <!--            <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vacature.getId()}" >-->
-            <!--                Wijzig</button></td>-->
-            <td class="ST"><button type="submit" th:name="Verwijder" th:value="${vacature.getId()}">
+            <td class="ST"><span th:text="${vacature.getOmschrijving()}">Omschrijving</span></td>
+            <td class="ST"><span th:text="${vacature.getEisen()}">Eisen</span></td>
+            <td class="ST"><button type="submit" th:name="Wijzig" th:value="${vacature.getId()}" >
+                            Wijzig</button></td>
+            <td class="ST"><button onclick="return bevestigVerwijderen()" type="submit" th:name="Verwijder" th:value="${vacature.getId()}">
                 Verwijder
             </button> </td>
         </tr>
@@ -37,4 +43,10 @@
     </table>
 </form>
 </body>
+<script>
+    function bevestigVerwijderen() {
+        var antwoord = confirm("Weet u zeker dat u dit vak wilt verwijderen?");
+        return antwoord;
+    }
+</script>
 </html>
