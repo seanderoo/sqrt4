@@ -14,7 +14,7 @@
 <h1>Bedankt voor uw sollicitatie!</h1>
 <p>
 <h2>U heeft gesolliciteerd op de volgende vacatures:</h2>
-</p>
+
 <form action="#" th:action="@{/docent/sollicitaties-details-sollicitatie-overzicht}" th:object="${sollicitatie}" th:method="GET">
     <table class="TableFormatter">
         <thead>
@@ -37,6 +37,6 @@
     </table>
 </form>
 <br>
-<input type="button" value="Terug naar overzicht Vacatures" onclick=window.location.pathname="/docent/solliciteren" />
+<input onclick=window.location.pathname="/docent/solliciteren"; type="button" value="Terug naar overzicht Vacatures"/>
 </body>
 </html>
