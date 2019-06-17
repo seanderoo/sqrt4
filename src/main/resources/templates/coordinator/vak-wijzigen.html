@@ -16,7 +16,7 @@
 <form action="#" th:action="@{/coordinator/vak-wijzigen}" th:method="POST">
 <table class="TableFormatter" th:value="${vak}">
     <tr>
-        <td><input type="hidden" th:name="id" th:value="*{vak.getVakId()}"></td>
+        <td><input type="hidden" th:name="vakId" th:object="${vak}" th:value="${vak.getVakId()}"></td>
     </tr>
     <tr>
         <td><label>Vaknaam</label></td>
@@ -29,6 +29,10 @@
     <tr>
         <td></td>
         <td><input id="submitButton" type="submit" value="Wijzig vak"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" value="Terug naar overzicht vakken" onclick=window.location.pathname="/coordinator/vak-overzicht"></td>
     </tr>
 </table>
 </form>
