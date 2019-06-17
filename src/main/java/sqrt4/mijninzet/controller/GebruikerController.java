@@ -25,6 +25,8 @@ public class GebruikerController extends AbstractController {
     @Autowired
     RoleRepository roleRepository;
 
+    private final int ACTIVE = 1;
+
     @GetMapping("/nieuwe-gebruiker")
     public String nieuweGebruiker(Model model) {
         List<Role> rollen = roleRepository.findAll();
@@ -37,16 +39,16 @@ public class GebruikerController extends AbstractController {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(1);
+        user.setActive(ACTIVE);
         userRepository.save(user);
-        List<User> users = userRepository.findAll();
+        List<User> users = gebruikersLijstZonder("No");
         model.addAttribute("gebruikers", users);
         return "admin/overzicht-gebruikers";
     }
 
     @GetMapping("/overzicht-gebruikers")
     public String overzichtGebruikers(Model model) {
-        List<User> users = userRepository.findAll();
+        List<User> users = gebruikersLijstZonder("No");
         model.addAttribute("gebruikers", users);
         return "admin/overzicht-gebruikers";
     }
@@ -58,12 +60,12 @@ public class GebruikerController extends AbstractController {
         User activeUser = voegActiveUserToe();
         if (userIdVerwijder != null) {
             if (userIdVerwijder == activeUser.getId()) {
-                List<User> users = userRepository.findAll();
+                List<User> users = gebruikersLijstZonder("No");
                 model.addAttribute("gebruikers", users);
                 return "/admin/overzicht-gebruikers";
             } else if (userIdVerwijder != activeUser.getId()) {
                 userRepository.deleteById(userIdVerwijder);
-                List<User> users = userRepository.findAll();
+                List<User> users = gebruikersLijstZonder("No");
                 model.addAttribute("gebruikers", users);
                 return "admin/overzicht-gebruikers";
             }
@@ -84,18 +86,6 @@ public class GebruikerController extends AbstractController {
         return "admin/overzicht-gebruikers";
     }
 
-
-    @PostMapping("/wijzig-gebruiker")
-    public String wijzigGebruiker(User user, Model model) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setRoles(user.getRoles().toUpperCase());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        userRepository.save(user);
-        List<User> users = userRepository.findAll();
-        model.addAttribute("gebruikers", users);
-        return "admin/overzicht-gebruikers";
-    }
 
     private String zetOmNaarString(List<Role> rollen) {
         StringBuilder bob = new StringBuilder();
