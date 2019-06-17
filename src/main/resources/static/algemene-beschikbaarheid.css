@@ -18,11 +18,11 @@ td {
 }
 
 td.true {
-    background-color: green;
+    background-color: green !important;
 }
 
 td.false {
-    background-color: red;
+    background-color: red !important;
 }
 
 #knopOpslaan {
