@@ -3,11 +3,14 @@ package sqrt4.mijninzet.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.VakRepository;
+import sqrt4.mijninzet.repository.WeekRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +19,8 @@ public abstract class AbstractController {
     UserRepository userRepo;
     @Autowired
     VakRepository vakRepository;
+    @Autowired
+    WeekRepository weekRepo;
 
     User voegActiveUserToe(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -29,5 +34,17 @@ public abstract class AbstractController {
         vakkenZonder.remove(verwijderVak);
         Collections.sort(vakkenZonder);
         return vakkenZonder;
+    }
+
+    private List<User> haalBeschikbaarhedenOp(List<Week> wekenlijst) {
+        List<Week> weken = weekRepo.findAllByJaarNummerAndWeekNummer(0, 0);
+
+        List<User> docenten = haalBeschikbaarhedenOp(weken);
+        List<User> users = new ArrayList<>();
+        for (Week week : wekenlijst) {
+            User user = userRepo.findByWeek(week);
+            users.add(user);
+        }
+        return users;
     }
 }

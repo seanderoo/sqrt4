@@ -5,7 +5,6 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public interface WeekRepository extends JpaRepository<Week, Integer> {
@@ -15,6 +14,8 @@ public interface WeekRepository extends JpaRepository<Week, Integer> {
     Week findByWeekNummerAndUser(int weekNr, User user);
 
     List<Week> findWeeksByCohortId(int cohortId);
+
+    List<Week> findAllByJaarNummerAndWeekNummer(int value1, int value2);
 
     Week findByWeekNummerAndCohort(int weekNummer, Cohort cohort);
 
