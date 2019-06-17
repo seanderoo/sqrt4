@@ -15,7 +15,7 @@
 </header>
 <h1>Wijzig Bestaande Gebruiker <span th:text="${gebruiker.getFirstName()}"/></h1>
 <div id="nieuwegebruikerform">
-    <form action="#" th:action="@{/admin/wijzig-gebruiker}" th:method="POST">
+    <form action="#" th:action="@{/admin/nieuwe-gebruiker}" th:method="POST">
         <table class="TableFormatter">
             <tr>
                 <td><input type="hidden" th:name="id" th:value="*{gebruiker.getId()}" size="40" required></td>
@@ -56,6 +56,10 @@
             <tr>
                 <td></td>
                 <td><input id="submitButton" type="submit" value="Gebruiker Wijzigen"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="Terug naar overzicht gebruikers" onclick=window.location.pathname="/admin/overzicht-gebruikers"></td>
             </tr>
         </table>
     </form>

@@ -30,6 +30,7 @@ public abstract class AbstractController {
         return userRepo.findByUsername(userName);
     }
 
+    //wordt gebruikt om "Geen les" uit de lijst met vakken te halen (Karin)
     public List<Vak> vakkenLijstZonder(String vakNaam) {
         List<Vak> vakkenZonder = vakRepository.findAll();
         Vak verwijderVak = vakRepository.findByVakNaam(vakNaam);
@@ -49,5 +50,13 @@ public abstract class AbstractController {
 
         }
         return beschikbareDocenten;
+    }
+
+    //wordt gebruikt om "Kies docent" uit de lijst met gebruikers te halen (Karin)
+    public List<User> gebruikersLijstZonder(String userName) {
+        List<User> gebruikersZonder = userRepo.findAll();
+        User verwijderUser = userRepo.findByUsername(userName);
+        gebruikersZonder.remove(verwijderUser);
+        return gebruikersZonder;
     }
 }
