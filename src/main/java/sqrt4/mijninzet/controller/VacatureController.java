@@ -29,8 +29,20 @@ public class VacatureController extends AbstractController{
     }
 
     @PostMapping("/overzicht-vacatures")
-    public String verwijderVacature(@RequestParam("Verwijder") int id, Model model){
-        vacrepo.deleteById(id);
+    public String verwijderVacature(@RequestParam(value = "Verwijder", required = false) Integer idv,
+                                    @RequestParam(value = "Wijzig", required = false) Integer idw,
+                                    Model model){
+        if (idv != null){
+            vacrepo.deleteById(idv);
+            List<Vacature> vacaturelijst = vacrepo.findAll();
+            model.addAttribute("vacatureLijst", vacaturelijst);
+        return "admin/overzicht-vacatures";
+        }
+        else if (idw != null){
+            Vacature wijzigVacature = vacrepo.findById((int)idw);
+            model.addAttribute("vacature", wijzigVacature);
+            return "admin/wijzig-vacature";
+        }
         List<Vacature> vacaturelijst = vacrepo.findAll();
         model.addAttribute("vacatureLijst", vacaturelijst);
         return "admin/overzicht-vacatures";
@@ -38,8 +50,10 @@ public class VacatureController extends AbstractController{
 
 
     @PostMapping("/vacature-toegevoegd")
-    public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature) {
+    public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature, Model model) {
         vacrepo.save(vacature);
-        return "admin/vacature-toegevoegd";
+        List<Vacature> vacaturelijst = vacrepo.findAll();
+        model.addAttribute("vacatureLijst", vacaturelijst);
+        return "admin/overzicht-vacatures";
     }
 }

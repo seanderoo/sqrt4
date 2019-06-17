@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQRT4  |  Nieuwe vacature</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/form-karin.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Wijzig vacature</h1>
+<p>
+<h2>Wijzig hier de gegevens van de vacature "<span th:text="${vacature.getVacatureNaam()}"/>":</h2>
+</p>
+<div id="nieuweVacatureForm">
+    <form action="#" th:action="@{/admin/vacature-toegevoegd}" th:method="POST">
+        <table class="TableFormatter">
+           <tr>
+               <td><input type="hidden" th:name="id" th:value="*{vacature.getId()}" size="40" required></td>
+           </tr>
+            <tr>
+                <td><label>Vacaturenaam</label></td>
+                <td><input class="input_gebruiker" type="text" th:name="vacatureNaam"
+                           th:value="*{vacature.getVacatureNaam()}" maxlength="255" required></td>
+            </tr>
+            <tr>
+                <td><label>Omschrijving</label></td>
+                <td><textarea onblur="textCounter(this,this.form.counter,255);"
+                              onkeyup="textCounter(this,this.form.counter,255);" input type="text"
+                              class="input_gebruiker" maxlength="255" required
+                              th:name="omschrijving" th:value="*{vacature.getOmschrijving()}"></textarea></td>
+                <td><input class="max255" onblur="textCounter(this.form.recipients,this,255);"
+                           disabled onfocus="this.blur();" tabindex="999" maxlength="3" size="3"
+                           value="255" name="counter"></td>
+            </tr>
+            <tr>
+                <td><label>Aantal uren</label></td>
+                <td><input class="input_gebruiker" type="text" th:name="aantalUren"
+                           th:value="*{vacature.getAantalUren()}"required></td>
+            </tr>
+            <tr>
+                <td><label>Eisen</label></td>
+                <td><textarea class="input_gebruiker" input type="text" th:name="eisen"
+                              th:value="*{vacature.getEisen()}" maxlength="255" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td><td> <input type="submit" value="Vacature opslaan"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+<script>
+    function textCounter( field, countfield, maxlimit ) {
+        if ( field.value.length > maxlimit ) {
+            field.value = field.value.substring( 0, maxlimit );
+            field.blur();
+            field.focus();
+            return false;
+        } else {
+            countfield.value = maxlimit - field.value.length;
+        }
+    }
+
+</script>
+
+</html>
