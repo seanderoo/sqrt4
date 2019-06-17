@@ -66,8 +66,9 @@ public class VakController extends AbstractController{
     }
     //deze is voor het wijzigen van het vak.
     @PostMapping("coordinator/vak-wijzigen")
-    public String vakGewijzigd(Model model) {
-        //vakrepo.save
+    public String vakGewijzigd(@ModelAttribute("vak") Vak vak,
+                               Model model) {
+        vakRepository.save(vak);
         List<Vak> vakken = vakkenLijstZonder("Geen les");
         model.addAttribute("vakken", vakken);
         return "coordinator/vak-overzicht";

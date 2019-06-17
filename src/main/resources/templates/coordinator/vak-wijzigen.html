@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wijzig Vak</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/form-karin.css">
 </head>
@@ -12,14 +12,28 @@
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-<h1>Wijzig Vak <span th:text="${vak.getVakNaam()}"></span> </h1>
+<h1>Wijzig vak: <span th:text="${vak.getVakNaam()}"></span> </h1>
 <form action="#" th:action="@{/coordinator/vak-wijzigen}" th:method="POST">
-<table th:value="${vak}">
+<table class="TableFormatter" th:value="${vak}">
     <tr>
-        <th>Vaknaam</th>
-        <th>Aantal Uur</th>
+        <td><input type="hidden" th:name="vakId" th:object="${vak}" th:value="${vak.getVakId()}"></td>
     </tr>
-
+    <tr>
+        <td><label>Vaknaam</label></td>
+        <td><input class="input_gebruiker" type="text" th:name="vakNaam" th:value="*{vak.getVakNaam()}"/></td>
+    </tr>
+    <tr>
+        <td><label>Aantal uur</label></td>
+        <td><input class="input_gebruiker" type="text" th:name="aantalUren" th:value="*{vak.getAantalUren()}"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input id="submitButton" type="submit" value="Wijzig vak"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" value="Terug naar overzicht vakken" onclick=window.location.pathname="/coordinator/vak-overzicht"></td>
+    </tr>
 </table>
 </form>
 </body>
