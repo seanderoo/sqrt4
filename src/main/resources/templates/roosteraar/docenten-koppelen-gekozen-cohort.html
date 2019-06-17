@@ -16,12 +16,12 @@
 <h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je docenten koppelen aan de vakken die in het rooster staan.</h3>
 
 <th:block th:each="week: ${weken}">
-    <button class="collapsible">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
+    <button class="collapsible" th:onclick="|logWeek(${week.getId()})|" th:value="${week.getId()}" th:text="${week.getId()}">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
     <div class="content">
 <form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
         <h6></h6>
         <table class="TableFormatter">
-            <input name="weekId" type="hidden" th:value="${week.getId()}">
+            <input id="weekId" name="weekId" type="hidden" th:value="${week.getId()}">
             <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
             <thead>
             <tr colspan="2">
@@ -128,11 +128,9 @@
 </th:block>
 
 <br>
-<!--<button id="knopVorigeWeek" onclick="displayVorigeWeekButton();displayVolgendeWeekButton();subtractIndex();addWeekNumber();">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="displayVolgendeWeekButton();displayVorigeWeekButton();addIndex();addWeekNumber();">Volgende Week</button>-->
 
 <script>
     var coll = document.getElementsByClassName("collapsible");
-    // var selectedWeek = document.getElementById("weekId").value;
     var i;
 
     for (i = 0; i < coll.length; i++) {
@@ -146,39 +144,44 @@
             }
         });
     }
+
+    function logWeek(weeknr) {
+        console.log("selected week: " + weeknr);
+    }
+
 </script>
 
 </body>
 
 <script>
-    // function loadData() {
-    //     var request = new XMLHttpRequest();
-    //     var selectedWeek = document.getElementById("weekId").value;
-    //     var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + selectedWeek;
-    //     console.log("dit is de url " + url);
-    //     request.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             var data = JSON.parse(this.responseText);
-    //             document.getElementById("maOcht").value = data[0];
-    //             document.getElementById("maMid").value = data[1];
-    //             document.getElementById("maAvo").value = data[2];
-    //             document.getElementById("diOcht").value = data[3];
-    //             document.getElementById("diMid").value = data[4];
-    //             document.getElementById("diAvo").value = data[5];
-    //             document.getElementById("woOcht").value = data[6];
-    //             document.getElementById("woMid").value = data[7];
-    //             document.getElementById("woAvo").value = data[8];
-    //             document.getElementById("doOcht").value = data[9];
-    //             document.getElementById("doMid").value = data[10];
-    //             document.getElementById("doAvo").value = data[11];
-    //             document.getElementById("vrOcht").value = data[12];
-    //             document.getElementById("vrMid").value = data[13];
-    //             document.getElementById("vrAvo").value = data[14];
-    //         }
-    //     };
-    //     request.open("GET", url, true);
-    //     request.send();
-    // }
+    function loadData() {
+            var request = new XMLHttpRequest();
+        var selectedWeek = document.getElementById("weekId").value;
+        var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + selectedWeek;
+        console.log("dit is de url " + url);
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("maOcht").value = data[0];
+                document.getElementById("maMid").value = data[1];
+                document.getElementById("maAvo").value = data[2];
+                document.getElementById("diOcht").value = data[3];
+                document.getElementById("diMid").value = data[4];
+                document.getElementById("diAvo").value = data[5];
+                document.getElementById("woOcht").value = data[6];
+                document.getElementById("woMid").value = data[7];
+                document.getElementById("woAvo").value = data[8];
+                document.getElementById("doOcht").value = data[9];
+                document.getElementById("doMid").value = data[10];
+                document.getElementById("doAvo").value = data[11];
+                document.getElementById("vrOcht").value = data[12];
+                document.getElementById("vrMid").value = data[13];
+                document.getElementById("vrAvo").value = data[14];
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
 </script>
 </html>
 
