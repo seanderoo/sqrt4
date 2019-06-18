@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
+import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,6 +44,13 @@ public class AlgemeneController {
         } catch (NullPointerException e) {
         }
         return preference;
+    }
+
+    @RequestMapping(value = "/voorkeuren/{user}", method = RequestMethod.GET)
+    public List<Voorkeur> showAllPreferences(@PathVariable User user) {
+        List<Voorkeur> voorkeuren = voorkeurenRepository.findAllByUser(user);
+        System.out.println("******* " + voorkeuren + " *******");
+        return voorkeuren;
     }
 
 //    @RequestMapping(value = "/incidenten-beheer/catch", method = RequestMethod.POST)
