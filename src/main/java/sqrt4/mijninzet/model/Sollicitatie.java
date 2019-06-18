@@ -14,12 +14,18 @@ public class Sollicitatie {
     @ManyToOne
     private Vacature vacature;
 
-    private String status;
+    private Status status;
+
+    public enum Status {
+        IN_BEHANDELING,
+        TOEGEWEZEN,
+        AFGEWEZEN
+    }
 
     public Sollicitatie(User user, Vacature vacature) {
         this.user = user;
         this.vacature = vacature;
-        this.status = "in behandeling";
+        this.status = Status.IN_BEHANDELING;
     }
 
     public Sollicitatie() {
@@ -50,11 +56,28 @@ public class Sollicitatie {
     }
 
     public String getStatus() {
-        return status;
+        switch (this.status) {
+            case IN_BEHANDELING:
+                return "In behandeling";
+            case TOEGEWEZEN:
+                return "Toegewezen";
+            case AFGEWEZEN:
+                return "Afgewezen";
+        }
+        return null;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        switch (status) {
+            case "In behandeling":
+                this.status = Status.IN_BEHANDELING;
+                break;
+            case "Toegewezen":
+                this.status = Status.TOEGEWEZEN;
+                break;
+            case "Afgewezen":
+                this.status = Status.AFGEWEZEN;
+        }
     }
 
     @Override
@@ -63,6 +86,6 @@ public class Sollicitatie {
                 "sollicitatieId=" + sollicitatieId +
                 ", user=" + user +
                 ", vacature=" + vacature +
-                '}';
+                '}' + status;
     }
 }
