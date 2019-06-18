@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
+import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.Role;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vacature;
@@ -42,6 +43,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         this.vakRepository.deleteAll();
         this.roleRepository.deleteAll();
         this.cohortRepository.deleteAll();
+        this.weekRepository.deleteAll();
 
         //create rollen
         Role god = new Role("Admin");
@@ -65,6 +67,14 @@ public class DatabaseInitializer implements CommandLineRunner {
         User roosteraar1 = new User("R", passwordEncoder.encode("R123"), "ROOSTERAAR", "", "R", "Oosteraar", "");
         
         List<User> users = Arrays.asList(nouser, matthijs, huub, gerke, lillian, remi, ronald, admin, coordinator1, roosteraar1);
+        this.userRepository.saveAll(users);
+
+        for (User user : users) {
+            Week algemeneWeek = new Week();
+            user.setWeek(algemeneWeek);
+            algemeneWeek.setUser(user);
+            weekRepository.save(algemeneWeek);
+        }
 
         //Create vacatures
         Vacature coordinatorC15 = new Vacature("Coordinator Cohort 15",

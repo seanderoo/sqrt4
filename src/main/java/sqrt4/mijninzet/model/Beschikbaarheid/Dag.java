@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 
 @Entity
 public class Dag {
@@ -155,5 +154,11 @@ public class Dag {
 
     public void setAvond(Dagdeel avond) {
         this.avond = avond;
+    }
+
+    public void setAllToTrue(Dag dag) {
+        this.ochtend.setBeschikbaar(true);
+        this.middag.setBeschikbaar(true);
+        this.avond.setBeschikbaar(true);
     }
 }

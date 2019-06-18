@@ -37,6 +37,9 @@ public class Week {
     public Week() {
         this(0,0);
         voegDagenToe();
+        for (Dag dag : dagenlijst) {
+            dag.setAllToTrue(dag);
+        }
     }
 
     private void voegDagenToe() {
