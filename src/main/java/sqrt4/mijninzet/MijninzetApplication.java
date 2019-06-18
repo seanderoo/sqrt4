@@ -11,6 +11,6 @@ public class MijninzetApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MijninzetApplication.class, args);
-        }
     }
+}
 
