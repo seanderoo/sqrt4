@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserById(Long userId);
     List<User> findAllByRolesContaining(String role);
 
-    User findByWeek(Week week);
+//    User findByWeek(Week week);
 }

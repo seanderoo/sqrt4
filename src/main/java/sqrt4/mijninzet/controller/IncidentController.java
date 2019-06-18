@@ -102,6 +102,7 @@ public class IncidentController extends AbstractController {
             temp.setOchtend(ochtend);
             temp.setMiddag(middag);
             temp.setAvond(avond);
+            temp.setStatus("in behandeling");
             temp.setOpmerkingGebruiker(opmerkingGebruiker);
             repoIncident.save(temp);
         } else {

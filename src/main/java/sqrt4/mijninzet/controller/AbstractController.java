@@ -31,6 +31,12 @@ public abstract class AbstractController {
         return userRepo.findByUsername(userName);
     }
 
+    public void addWeek(User user){
+        Week algemeneWeek = new Week();
+        algemeneWeek.setUser(user);
+        weekRepo.save(algemeneWeek);
+    }
+
     //wordt gebruikt om "Geen les" uit de lijst met vakken te halen (Karin)
     public List<Vak> vakkenLijstZonder(String vakNaam) {
         List<Vak> vakkenZonder = vakRepository.findAll();
@@ -43,12 +49,13 @@ public abstract class AbstractController {
     public List<User> beschikbareDocentenMetWeek() {
         List<User> docenten = userRepo.findAllByRolesContaining("DOCENT");
         List<User> beschikbareDocentenMetWeek = new ArrayList<>();
+
         for (User user : docenten) {
-            if ( user.getWeek() != null ) {
+
                 beschikbareDocentenMetWeek.add(user);
-            }
         }
-        return beschikbareDocentenMetWeek;
+//        return beschikbareDocentenMetWeek;
+        return docenten;
     }
 
     public List<User> getDocentenOpMaandagOchtend() {

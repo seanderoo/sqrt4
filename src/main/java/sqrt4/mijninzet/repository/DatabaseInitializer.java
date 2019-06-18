@@ -71,7 +71,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         for (User user : users) {
             Week algemeneWeek = new Week();
-            user.setWeek(algemeneWeek);
+//            user.setWeek(algemeneWeek);
             algemeneWeek.setUser(user);
             weekRepository.save(algemeneWeek);
         }

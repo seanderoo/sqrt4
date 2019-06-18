@@ -28,8 +28,16 @@
         </tr>
     </table>
 </form>
-
-
+<br>
+<br>
+<br>
+<br>
+<div id="voorkeuren">
+<table class="TableFormatter">
+        <td id="voorkeur"><span></span></td>
+    </tr>
+</table>
+</div>
 </body>
 <script>
     function showPreference() {
@@ -51,14 +59,50 @@
         };
         xhttp.open("POST", url, true);
         xhttp.send();
+        showAllPreferences();
     }
     showPreference();
+
+
+
+
+
+    var overzichtVoorkeuren = document.getElementById("voorkeuren");
+    function showAllPreferences(){
+        var request = new XMLHttpRequest();
+        var currentUser = document.getElementById("userId").value;
+        var url = '/ajax/voorkeuren/' + currentUser;
+
+
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var data = JSON.parse(this.responseText);
+                console.log(this.responseText)
+                console.log(data);
+                maakOverzichtTabel(data);
+            }
+        }
+        request.open("GET", url, true);
+        request.send();
+    }
+
+    function maakOverzichtTabel(data) {
+        var htmlString = "";
+
+        for (i = 0; i < data.length; i++) {
+            htmlString += "<p>" + data[i].name;
+        }
+        overzichtVoorkeuren.insertAdjacentHTML("beforeend", htmlString);
+    }
 
     function Opslaan(){
         this.click = function() {
             alert('Hartelijk dank!\nVoorkeur is opgeslagen')
         }
     }
+
 
     function checkPreference() {
         var preference = document.getElementById('voorkeurGebruiker').value;
