@@ -29,7 +29,7 @@ public class User {
     private String lastName;
     private String profilePic;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
