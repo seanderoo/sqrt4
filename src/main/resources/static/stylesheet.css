@@ -261,15 +261,19 @@ select select {
 }
 
 .graag {
-    background-color: lightgreen !important;
+    background-color: lightgreen;
 }
 
 .mwa {
-    background-color: #faff4d !important;
+    background-color: #faff4d;
 }
 
 .lieverniet {
-    background-color: #ff4d43 !important;
+    background-color: #ff7b68;
+}
+
+.geenkeuze {
+    background-color: white;
 }
 
 

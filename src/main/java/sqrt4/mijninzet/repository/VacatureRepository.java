@@ -9,4 +9,5 @@ public interface VacatureRepository extends JpaRepository<Vacature, Integer> {
 
     Vacature findByVacatureNaam(String vacatureNaam);
     Vacature findById(int id);
+    Vacature findVacatureById(Integer id);
 }
