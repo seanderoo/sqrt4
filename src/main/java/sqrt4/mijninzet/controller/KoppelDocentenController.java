@@ -62,6 +62,7 @@ public class KoppelDocentenController extends AbstractController {
         model.addAttribute("docentList", docentList);
 
         model.addAttribute("MAO", getDocentenOpMaandagOchtend());
+        System.out.println(getDocentenOpMaandagOchtend());
         model.addAttribute("MAM", getDocentenOpMaandagMiddag());
         model.addAttribute("MAA", getDocentenOpMaandagAvond());
         model.addAttribute("DIO", getDocentenOpDinsdagOchtend());
@@ -87,11 +88,11 @@ public class KoppelDocentenController extends AbstractController {
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
     public String slaWeekOp(@RequestParam("cohortNaam") String cohortNaam,
                             @RequestParam(value = "weekId", required = false) int weekId,
-                            @RequestParam("maOcht") long maOchtDoc,
-                            @RequestParam("diOcht") long diOchtDoc,
-                            @RequestParam("woOcht") long woOchtDoc,
-                            @RequestParam("doOcht") long doOchtDoc,
-                            @RequestParam("vrOcht") long vrOchtDoc,
+                            @RequestParam("maOch") long maOchtDoc,
+                            @RequestParam("diOch") long diOchtDoc,
+                            @RequestParam("woOch") long woOchtDoc,
+                            @RequestParam("doOch") long doOchtDoc,
+                            @RequestParam("vrOch") long vrOchtDoc,
                             @RequestParam("maMid") long maMidDoc,
                             @RequestParam("diMid") long diMidDoc,
                             @RequestParam("woMid") long woMidDoc,

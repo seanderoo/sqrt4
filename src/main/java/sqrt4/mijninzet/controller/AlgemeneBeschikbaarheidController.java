@@ -31,7 +31,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         }
 
         User actieveUser = voegActiveUserToe();
-        actieveUser.setWeek(algemeneWeek);
+//        actieveUser.setWeek(algemeneWeek);
         algemeneWeek.setUser(actieveUser);
         weekRepo.save(algemeneWeek);
 

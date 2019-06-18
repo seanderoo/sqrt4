@@ -29,8 +29,8 @@ public class User {
     private String lastName;
     private String profilePic;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Week week;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Incident> incidentList;
@@ -152,18 +152,23 @@ public User(String username, String password, String roles, String permissions){
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", active=" + active +
+                ", roles='" + roles + '\'' +
+                ", permissions='" + permissions + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", incidentList=" + incidentList +
                 '}';
     }
 
-    public void setWeek(Week week) {
-        this.week = week;
-    }
-
-    public Week getWeek() {
-        return week;
-    }
+//    public void setWeek(Week week) {
+//        this.week = week;
+//    }
+//
+//    public Week getWeek() {
+//        return week;
+//    }
 }
