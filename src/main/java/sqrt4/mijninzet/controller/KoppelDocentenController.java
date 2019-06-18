@@ -176,7 +176,6 @@ public class KoppelDocentenController extends AbstractController {
             }
         }
         String string = bob.toString();
-        System.out.println(string);
         return string;
     }
 
