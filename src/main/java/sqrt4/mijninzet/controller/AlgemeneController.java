@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
+import sqrt4.mijninzet.repository.DagdeelRepository;
 import sqrt4.mijninzet.repository.IncidentregistratieRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
@@ -25,9 +27,10 @@ public class AlgemeneController {
     private VoorkeurenRepository voorkeurenRepository;
     @Autowired
     private WeekRepository weekRepo;
-
     @Autowired
     private IncidentregistratieRepository repoIncident;
+    @Autowired
+    private DagdeelRepository dagdeelRepository;
 
     @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
