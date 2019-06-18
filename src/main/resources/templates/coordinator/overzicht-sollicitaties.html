@@ -13,8 +13,7 @@
 </header>
 <h1>Overzicht van alle vacatures waarop gesolliciteerd is</h1>
 
-<form action="#" th:action="@{/coordinator/overzicht-sollicitaties}" th:object="${sollicitatie}" th:method="POST">
-    <table class="TableFormatter">
+    <table class="TableFormatter" th:value="${sollicitaties}">
         <tr>
             <th>Vacature</th>
             <th>Sollicitant</th>
@@ -24,18 +23,26 @@
         <tr th:if="${sollicitaties.isEmpty()}">
             <td class="ST" colspan="4">Niemand heeft nog op een vacature gesolliciteerd</td>
         </tr>
+        <tr>
+
+        </tr>
         <tr th:each="sollicitatie: ${sollicitaties}">
-            <td class="ST" th:text="${sollicitatie.getVacature().getVacatureNaam()}" th:value="${sollicitatie.getVacature()}" th:name="vacatureId">Vacature </td>
-            <td class="ST" th:text="${sollicitatie.getUser().getFullName()}" th:value="${sollicitatie.getUser()}" th:name="userId">Sollicitant </td>
-            <td>
-                <select id="statusSelect" name="status">
-<!--                    <option>Pas de status aan</option>-->
-                    <option th:each="status: ${statussen}" th:value="${sollicitatie.status}" th:text="${status}"></option>
+            <form action="#" th:action="@{/coordinator/overzicht-sollicitaties}" th:object="${sollicitatie}" th:method="POST">
+                <input type="hidden" th:name="sollicitatieId" th:value="${sollicitatie.getSollicitatieId()}">
+                <td class="ST"> <input type="hidden" th:text="${sollicitatie.getVacature().getVacatureNaam()}" th:value="${sollicitatie.getVacature().getId()}" th:name="vacature"> </td>
+                <td class="ST"> <input type="hidden" th:text="${sollicitatie.getUser().getFullName()}" th:value="${sollicitatie.getUser().getId()}" th:name="user"> </td>
+                <td>
+                <select id="statusSelect" th:name="status">
+                    <option th:each="status: ${statussen}" th:value="${sollicitatie.status}" th:text="${status}" ></option>
                 </select>
-            </td>
-            <td><button id="submitButton" type="submit">Opslaan</button></td>
+                </td>
+                <td><button id="submitButton" type="submit">Opslaan</button></td>
+            </form>
         </tr>
     </table>
-</form>
 </body>
+<script>
+    var status = document.getElementById("statusSelect").value;
+    console.log("status is " + status);
+</script>
 </html>
