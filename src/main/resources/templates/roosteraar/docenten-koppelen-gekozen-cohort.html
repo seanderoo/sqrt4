@@ -152,8 +152,6 @@
 </body>
 
 <script>
-
-
     var VOORKEUR = 0;
     var USER = 1;
     var VAK = 2;
@@ -162,13 +160,12 @@
     var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
     var gesplitsteVoorkeuren = voorkeuren.split(",");
 
-
     var selectors = window.document.getElementsByTagName("select");
-    // window.document.getElementsByTagName("option").classList.add('lieverniet');
 
     for (var j = 0; j < selectors.length; j++) {
         getVoorkeuren(selectors[j]);
     }
+
     function getVoorkeuren(tagname) {
         //De voorkeurskleur wordt pas bij mouseover gegenereerd.
         //De onderstaande vars zijn nodig om de id van de vaknaam boven de SELECT op te halen. Deze is nodig om met de
@@ -183,22 +180,22 @@
         var checkVakValue = kiendjeBoven.getAttribute('value');
         var opties = selector.options;
 
-        // if (selector.tagName === 'SELECT') {
-            //Hier worden de Voorkeurscombi's opgesplitst.
-            for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
-                var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
-                var voorkeur = voorkeurgroep[VOORKEUR];
-                var user = voorkeurgroep[USER];
-                var vak = voorkeurgroep[VAK];
 
-                toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+        //Hier worden de Voorkeurscombi's opgesplitst.
+        for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
+            var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
+            var voorkeur = voorkeurgroep[VOORKEUR];
+            var user = voorkeurgroep[USER];
+            var vak = voorkeurgroep[VAK];
+
+            toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+        }
+
+        for (var j = 0; j < opties.length; j++) {
+            if (opties[j].className === '') {
+                opties[j].classList.add('geenkeuze');
             }
-        // }
-        // for (var j = 0; j < opties.length; j++) {
-        //     if (opties[j].className === undefined) {
-        //         opties[j].classList.add('geenkeuze');
-        //     }
-        // }
+        }
     };
 
     function krijgPrevNodeIndex(index) {
@@ -215,8 +212,7 @@
                 voorkeurAanhechten(voorkeur, opties, user, 'mwa');
             } else if (voorkeur == 1) {
                 voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
-            }
-                else {
+            } else {
                 voorkeurAanhechten(0, opties, user, 'geenkeuze');
             }
         }
@@ -227,8 +223,8 @@
             if (opties[j].value == user) {
                 opties[j].classList.add(voorkeursklasse);
                 if (voorkeur > 0) {
-                    opties[j].innerHTML = voorkeur + ": " + opties[j].innerHTML;
-                } else {}
+                    opties[j].innerHTML += ": " + voorkeur;
+                }
             }
         }
     }
