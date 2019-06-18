@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 </head>
-<body>
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
@@ -18,7 +17,8 @@
         <tr>
             <th>Vacature</th>
             <th>Sollicitant</th>
-            <th>Status</th>
+            <th>Huidige status</th>
+            <th>Nieuwe status</th>
             <th></th>
         </tr>
         <tr th:if="${sollicitaties.isEmpty()}">
@@ -34,9 +34,10 @@
                 ></td>
             <td><input type="hidden" class="ST" th:text="${sollicitatie.getUser().getFullName()}"
                        th:value="${sollicitatie.getUser().getId()}" th:name="user"></td>
+                <td th:value="${sollicitatie.getStatus()}" th:text="${sollicitatie.getStatus()}"></td>
             <td>
                 <select id="statusSelect" th:name="status">
-                    <option th:each="status: ${statussen}" th:value="${status}" th:text="${status}"></option>
+                    <option th:each="status: ${statussen}" th:text="${status}" th:value="${status}"></option>
                 </select>
             </td>
             <td><button id="submitButton" type="submit">Opslaan</button></td>
