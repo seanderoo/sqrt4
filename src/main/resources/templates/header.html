@@ -12,7 +12,15 @@
     <a href="/home"><img src="/images/home-icon-white_338306.png" alt="HOME" height="24" width="24"></a>
     <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/docenten-koppelen-kies-cohort">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
-    <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/solliciteren">Solliciteren</a>
+    <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
+        <button class="dropbtn">Solliciteren
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/docent/solliciteren">Overzicht vacatures</a>
+            <a href="/docent/sollicitaties-overzicht">Overzicht sollicitaties</a>
+        </div>
+    </div>
     <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
         <button class="dropbtn">Beschikbaarheden
             <i class="fa fa-caret-down"></i>
@@ -67,13 +75,20 @@
         </div>
     </div>
     <div class="dropdown" sec:authorize="hasAuthority('ROLECOORDINATOR')">
+        <button class="dropbtn">Sollicitatiebeheer
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/coordinator/overzicht-sollicitaties">Beheer sollicitaties</a>
+        </div>
+    </div>
+    <div class="dropdown" sec:authorize="hasAuthority('ROLECOORDINATOR')">
         <button class="dropbtn">Rooster maken
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
             <a href="/coordinator/rooster-maken">Rooster maken voor een cohort</a>
         </div>
-
     </div>
     <a style="float:right" href="/logout"><img src="/images/logout.png" height="24" width="24"></a>
     <a style="float:right" href="/profiel"><img src="/images/account.png" height="24" width="24"></a>

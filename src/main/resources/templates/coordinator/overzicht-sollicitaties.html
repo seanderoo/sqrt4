@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overzicht Sollicitaties</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+<h1>Overzicht van alle vacatures waarop gesolliciteerd is</h1>
+
+<form action="#" th:action="@{/coordinator/overzicht-sollicitaties}" th:object="${sollicitatie}" th:method="POST">
+    <table class="TableFormatter">
+        <tr>
+            <th>Vacature</th>
+            <th>Sollicitant</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        <tr th:if="${sollicitaties.isEmpty()}">
+            <td class="ST" colspan="4">Niemand heeft nog op een vacature gesolliciteerd</td>
+        </tr>
+        <tr th:each="sollicitatie: ${sollicitaties}">
+            <td class="ST" th:text="${sollicitatie.getVacature().getVacatureNaam()}" th:value="${sollicitatie.getVacature()}" th:name="vacatureId">Vacature </td>
+            <td class="ST" th:text="${sollicitatie.getUser().getFullName()}" th:value="${sollicitatie.getUser()}" th:name="userId">Sollicitant </td>
+            <td>
+                <select id="statusSelect" name="status">
+<!--                    <option>Pas de status aan</option>-->
+                    <option th:each="status: ${statussen}" th:value="${sollicitatie.status}" th:text="${status}"></option>
+                </select>
+            </td>
+            <td><button id="submitButton" type="submit">Opslaan</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

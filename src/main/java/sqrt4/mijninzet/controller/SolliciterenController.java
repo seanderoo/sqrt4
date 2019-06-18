@@ -3,14 +3,14 @@ package sqrt4.mijninzet.controller;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import org.springframework.web.bind.annotation.PathVariable;
+        import org.springframework.web.bind.annotation.*;
         import sqrt4.mijninzet.model.Sollicitatie;
+        import sqrt4.mijninzet.model.User;
         import sqrt4.mijninzet.model.Vacature;
         import sqrt4.mijninzet.repository.SollicitatieRepository;
         import sqrt4.mijninzet.repository.VacatureRepository;
 
+        import java.lang.reflect.Array;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -50,14 +50,47 @@ public class SolliciterenController extends AbstractController{
             sollicitatie = solrepo.findByUserAndVacature(voegActiveUserToe(), vacature);
             solrepo.delete(sollicitatie);
         }
-        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
+        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
         return "/docent/sollicitaties-overzicht";
     }
 
     @GetMapping("/docent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
-        model.addAttribute("sollicitaties", welNietGesolliciteerd("sollicitaties"));
+        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
         return "docent/sollicitaties-overzicht";
+    }
+
+    @GetMapping("/coordinator/overzicht-sollicitaties")
+    public String coordinatorGetSollicitaties(Model model) {
+        List<Sollicitatie> sollicitaties = solrepo.findAll();
+        model.addAttribute("sollicitaties", sollicitaties);
+        Sollicitatie.Status[] enums = Sollicitatie.Status.values();
+        for (Sollicitatie.Status statusnaam: enums) {
+            System.out.println(statusnaam);
+        }
+        model.addAttribute("statussen", enums);
+        return "coordinator/overzicht-sollicitaties";
+    }
+    @PostMapping("/coordinator/overzicht-sollicitaties")
+    public String coordinatorGetMeerSollicitaties(@RequestParam(value = "vacatureId", required = false) Integer vacatureId,
+                                                  @RequestParam(value = "userId", required = false) Long userId,
+                                                  @RequestParam(value = "status", required = false) String status,
+                                                  @ModelAttribute("sollicitatie") Sollicitatie sol,
+                                                  Model model) {
+        System.out.println(vacatureId);
+        System.out.println(userId);
+        System.out.println(sol);
+        Vacature vacature = vacrepo.findVacatureById(vacatureId);
+        User user = userRepo.findUserById(userId);
+        Sollicitatie sollicitatie = solrepo.findByUserAndVacature(user, vacature);
+        sollicitatie.setStatus(status.toString());
+        solrepo.save(sollicitatie);
+        System.out.println(sollicitatie);
+        List<Sollicitatie> sollicitaties = solrepo.findAll();
+        model.addAttribute("sollicitaties", sollicitaties);
+        Sollicitatie.Status[] enums = Sollicitatie.Status.values();
+        model.addAttribute("statussen", enums);
+        return "coordinator/overzicht-sollicitaties";
     }
 
     //lijst van vacatures waar huidige gebruiker al wel of nog niet op gesolliciteerd heeft. Input bepaalt welke lijst
