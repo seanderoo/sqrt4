@@ -9,8 +9,6 @@ package sqrt4.mijninzet.controller;
         import sqrt4.mijninzet.model.Vacature;
         import sqrt4.mijninzet.repository.SollicitatieRepository;
         import sqrt4.mijninzet.repository.VacatureRepository;
-
-        import java.lang.reflect.Array;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -72,20 +70,10 @@ public class SolliciterenController extends AbstractController{
         return "coordinator/overzicht-sollicitaties";
     }
     @PostMapping("/coordinator/overzicht-sollicitaties")
-    public String coordinatorGetMeerSollicitaties(@RequestParam(value = "vacatureId", required = false) Integer vacatureId,
-                                                  @RequestParam(value = "userId", required = false) Long userId,
-                                                  @RequestParam(value = "status", required = false) String status,
-                                                  @ModelAttribute("sollicitatie") Sollicitatie sol,
+    public String coordinatorGetMeerSollicitaties(@ModelAttribute("sollicitatie") Sollicitatie sol,
                                                   Model model) {
-        System.out.println(vacatureId);
-        System.out.println(userId);
         System.out.println(sol);
-        Vacature vacature = vacrepo.findVacatureById(vacatureId);
-        User user = userRepo.findUserById(userId);
-        Sollicitatie sollicitatie = solrepo.findByUserAndVacature(user, vacature);
-        sollicitatie.setStatus(status.toString());
-        solrepo.save(sollicitatie);
-        System.out.println(sollicitatie);
+        solrepo.save(sol);
         List<Sollicitatie> sollicitaties = solrepo.findAll();
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
