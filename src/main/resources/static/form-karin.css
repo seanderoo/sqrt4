@@ -19,7 +19,6 @@ label {
 
 input, select, textarea {
     font-size: 0.8em;
-    padding: 12px;
     margin: 8px 0;
     border-radius: 4px;
     float: right;
