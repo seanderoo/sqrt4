@@ -15,6 +15,7 @@ import sqrt4.mijninzet.repository.UserRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -112,11 +113,11 @@ public class IncidentController extends AbstractController {
                 "in behandeling");
         List<Incident> incidentList = repoIncident.findAllByUserAndStatusContaining(voegActiveUserToe(),
                 "in behandeling");
+
+        Collections.sort(incidentList, new IncidentComparator());
+        Collections.sort(statusAfgehandeld, new IncidentComparator());
         model.addAttribute("statusInBehandeling", incidentList);
         model.addAttribute("statusAfgehandeld", statusAfgehandeld);
-//        List<Incident> incidentList = repoIncident.findAllByUser(voegActiveUserToe());
-//        Collections.sort(incidentList, new IncidentComparator());
-//        model.addAttribute("incidentLijst", incidentList);
         return "docent/incidentregistratie";
     }
 
