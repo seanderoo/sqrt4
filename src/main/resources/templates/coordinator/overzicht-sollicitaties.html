@@ -13,7 +13,8 @@
 </header>
 <h1>Overzicht van alle vacatures waarop gesolliciteerd is</h1>
 
-    <table class="TableFormatter" th:value="${sollicitaties}">
+
+    <table class="TableFormatter">
         <tr>
             <th>Vacature</th>
             <th>Sollicitant</th>
@@ -23,20 +24,22 @@
         <tr th:if="${sollicitaties.isEmpty()}">
             <td class="ST" colspan="4">Niemand heeft nog op een vacature gesolliciteerd</td>
         </tr>
-        <tr>
-
-        </tr>
         <tr th:each="sollicitatie: ${sollicitaties}">
             <form action="#" th:action="@{/coordinator/overzicht-sollicitaties}" th:object="${sollicitatie}" th:method="POST">
-                <input type="hidden" th:name="sollicitatieId" th:value="${sollicitatie.getSollicitatieId()}">
-                <td class="ST"> <input type="hidden" th:text="${sollicitatie.getVacature().getVacatureNaam()}" th:value="${sollicitatie.getVacature().getId()}" th:name="vacature"> </td>
-                <td class="ST"> <input type="hidden" th:text="${sollicitatie.getUser().getFullName()}" th:value="${sollicitatie.getUser().getId()}" th:name="user"> </td>
-                <td>
+                <input id="idWaarde" type="hidden" th:value="${sollicitatie.getSollicitatieId()}"
+                th:name="sollicitatieId">
+                <td><input id="vacature" type="hidden" class="ST"
+                           th:text="${sollicitatie.getVacature().getVacatureNaam()}"
+                           th:value="${sollicitatie.getVacature().getId()}" th:name="vacature"
+                ></td>
+            <td><input type="hidden" class="ST" th:text="${sollicitatie.getUser().getFullName()}"
+                       th:value="${sollicitatie.getUser().getId()}" th:name="user"></td>
+            <td>
                 <select id="statusSelect" th:name="status">
-                    <option th:each="status: ${statussen}" th:value="${sollicitatie.status}" th:text="${status}" ></option>
+                    <option th:each="status: ${statussen}" th:value="${status}" th:text="${status}"></option>
                 </select>
-                </td>
-                <td><button id="submitButton" type="submit">Opslaan</button></td>
+            </td>
+            <td><button id="submitButton" type="submit">Opslaan</button></td>
             </form>
         </tr>
     </table>

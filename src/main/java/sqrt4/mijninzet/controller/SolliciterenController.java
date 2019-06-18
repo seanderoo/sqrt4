@@ -9,8 +9,6 @@ package sqrt4.mijninzet.controller;
         import sqrt4.mijninzet.model.Vacature;
         import sqrt4.mijninzet.repository.SollicitatieRepository;
         import sqrt4.mijninzet.repository.VacatureRepository;
-
-        import java.lang.reflect.Array;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -72,7 +70,7 @@ public class SolliciterenController extends AbstractController{
     public String coordinatorGetMeerSollicitaties(@ModelAttribute("sollicitatie") Sollicitatie sol,
                                                   Model model) {
         System.out.println(sol);
-//        solrepo.save(sol);
+        solrepo.save(sol);
         List<Sollicitatie> sollicitaties = solrepo.findAll();
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();

@@ -55,30 +55,38 @@ public class Sollicitatie {
         this.vacature = vacature;
     }
 
-    public String getStatus() {
-        switch (this.status) {
-            case IN_BEHANDELING:
-                return "In behandeling";
-            case TOEGEWEZEN:
-                return "Toegewezen";
-            case AFGEWEZEN:
-                return "Afgewezen";
-        }
-        return null;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatus(String status) {
-        switch (status) {
-            case "In behandeling":
-                this.status = Status.IN_BEHANDELING;
-                break;
-            case "Toegewezen":
-                this.status = Status.TOEGEWEZEN;
-                break;
-            case "Afgewezen":
-                this.status = Status.AFGEWEZEN;
-        }
+    public void setStatus(Status status) {
+        this.status = status;
     }
+
+//    public String getStatus() {
+//        switch (this.status) {
+//            case IN_BEHANDELING:
+//                return "In behandeling";
+//            case TOEGEWEZEN:
+//                return "Toegewezen";
+//            case AFGEWEZEN:
+//                return "Afgewezen";
+//        }
+//        return null;
+//    }
+//
+//    public void setStatus(String status) {
+//        switch (status) {
+//            case "In behandeling":
+//                this.status = Status.IN_BEHANDELING;
+//                break;
+//            case "Toegewezen":
+//                this.status = Status.TOEGEWEZEN;
+//                break;
+//            case "Afgewezen":
+//                this.status = Status.AFGEWEZEN;
+//        }
+//    }
 
     @Override
     public String toString() {
