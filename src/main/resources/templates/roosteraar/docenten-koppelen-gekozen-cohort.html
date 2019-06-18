@@ -152,6 +152,8 @@
 </body>
 
 <script>
+
+
     var VOORKEUR = 0;
     var USER = 1;
     var VAK = 2;
@@ -160,11 +162,18 @@
     var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
     var gesplitsteVoorkeuren = voorkeuren.split(",");
 
-    document.addEventListener('mouseover', function getVoorkeuren(e) {
+
+    var selectors = window.document.getElementsByTagName("select");
+    // window.document.getElementsByTagName("option").classList.add('lieverniet');
+
+    for (var j = 0; j < selectors.length; j++) {
+        getVoorkeuren(selectors[j]);
+    }
+    function getVoorkeuren(tagname) {
         //De voorkeurskleur wordt pas bij mouseover gegenereerd.
         //De onderstaande vars zijn nodig om de id van de vaknaam boven de SELECT op te halen. Deze is nodig om met de
         //vakId in de Voorkeurscombinatie op te halen.
-        var selector = e.target;
+        var selector = tagname;
         var parent1 = selector.parentNode;
         var parent1CellIndex = parent1.cellIndex;
         var parent2 = parent1.parentNode;
@@ -174,7 +183,7 @@
         var checkVakValue = kiendjeBoven.getAttribute('value');
         var opties = selector.options;
 
-        if (selector.tagName === 'SELECT') {
+        // if (selector.tagName === 'SELECT') {
             //Hier worden de Voorkeurscombi's opgesplitst.
             for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
                 var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
@@ -184,8 +193,13 @@
 
                 toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
             }
-        }
-    });
+        // }
+        // for (var j = 0; j < opties.length; j++) {
+        //     if (opties[j].className === undefined) {
+        //         opties[j].classList.add('geenkeuze');
+        //     }
+        // }
+    };
 
     function krijgPrevNodeIndex(index) {
         //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
@@ -196,19 +210,25 @@
     function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
         if (vak === checkVak) {
             if (voorkeur == 3) {
-                voorkeurAanhechten(opties, user, 'graag');
+                voorkeurAanhechten(voorkeur, opties, user, 'graag');
             } else if (voorkeur == 2) {
-                voorkeurAanhechten(opties, user, 'mwa');
+                voorkeurAanhechten(voorkeur, opties, user, 'mwa');
             } else if (voorkeur == 1) {
-                voorkeurAanhechten(opties, user, 'lieverniet');
+                voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
+            }
+                else {
+                voorkeurAanhechten(0, opties, user, 'geenkeuze');
             }
         }
     }
 
-    function voorkeurAanhechten(opties, user, voorkeursklasse) {
+    function voorkeurAanhechten(voorkeur, opties, user, voorkeursklasse) {
         for (var j = 0; j < opties.length; j++) {
             if (opties[j].value == user) {
                 opties[j].classList.add(voorkeursklasse);
+                if (voorkeur > 0) {
+                    opties[j].innerHTML = voorkeur + ": " + opties[j].innerHTML;
+                } else {}
             }
         }
     }
