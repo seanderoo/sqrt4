@@ -1,5 +1,7 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ public class Dag {
     private int id;
 
     @ManyToOne
+    @JsonIgnore
     private Week week;
 
     private String dagnaam;

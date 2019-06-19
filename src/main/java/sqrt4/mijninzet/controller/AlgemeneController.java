@@ -92,6 +92,8 @@ public class AlgemeneController {
         String vrMid = week.getVrijdag().getMiddag().getVak().getVakNaam();
         String vrAvo = week.getVrijdag().getAvond().getVak().getVakNaam();
         List<String> list = Arrays.asList(maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo);
+        System.out.println("maOcht vak: " + maOcht);
+        System.out.println("maAvo vak: " + maAvo);
         return list;
     }
 
