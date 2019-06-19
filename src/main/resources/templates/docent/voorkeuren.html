@@ -29,10 +29,8 @@
     </table>
 </form>
 <br>
-<br>
-<br>
-<br>
 <div id="voorkeuren">
+
 </div>
 </body>
 <script>
@@ -55,9 +53,9 @@
         };
         xhttp.open("POST", url, true);
         xhttp.send();
-        showAllPreferences();
     }
     showPreference();
+    showAllPreferences();
 
     var overzichtVoorkeuren = document.getElementById("voorkeuren");
     function showAllPreferences(){
@@ -69,8 +67,6 @@
             if (this.readyState == 4 && this.status == 200) {
 
                 var data = JSON.parse(this.responseText);
-                console.log(this.responseText)
-                console.log(data);
                 maakOverzichtTabel(data);
             }
         }
