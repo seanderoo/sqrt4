@@ -44,12 +44,6 @@ public class AlgemeneController {
         return preference;
     }
 
-//    @RequestMapping(value = "/incidenten-beheer/catch", method = RequestMethod.POST)
-//    public @ResponseBody List<Incident> haalLijstOp(){
-//        List<Incident> incidentList = repoIncident.findAllByStatusIsContaining("in behandeling");
-//
-//        return incidentList;}
-
 //    @RequestMapping(value = "/ajax/roosteraar/docent-koppelen/{cohortnummer}/{weeknummer}", method = RequestMethod.POST)
 //    public Week haalWeekOp(@PathVariable Cohort cohort, @PathVariable Week weeknummer) {
 //

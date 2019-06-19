@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>SQRT4 | Incident Registreren</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">
+    <!--    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">-->
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
 
 </head>
@@ -16,13 +16,8 @@
     <h1>Accorderen van Incidenten</h1>
 
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 
-<table id="overzicht">
+<table class="TableFormatter">
         <tr class="ST">
             <th>Naam Gebruiker</th>
             <th>Datum Incident</th>
@@ -40,9 +35,9 @@
             <td th:class="${incident.isOchtend()}"></td>
             <td th:class="${incident.isMiddag()}"></td>
             <td th:class="${incident.isAvond()}"></td>
-            <td th:text="${incident.getOpmerkingGebruiker()}"></td>
+                <td class="inputManager" th:text="${incident.getOpmerkingGebruiker()}"></td>
             <td>
-            <textarea placeholder="Plaats hier uw opmerking" id="inputFieldManager"
+            <textarea class="inputManager" id="inputFieldManager" placeholder="Plaats hier uw opmerking"
                       th:name="managerToelichting" th:value="${incident.getManagerToelichting()}"></textarea></td>
             <td>
                 <select id="statusSelect" name="status">
@@ -66,7 +61,7 @@
 
     <br/>
     <br/>
-    <table id="overzichtAfgehandeld">
+<table class="TableFormatter" id="overzichtAfgehandeld">
         <tr class="ST">
             <th>Naam Gebruiker</th>
             <th>Datum Incident</th>
@@ -83,8 +78,8 @@
             <td th:class="${incident.isOchtend()}"></td>
             <td th:class="${incident.isMiddag()}"></td>
             <td th:class="${incident.isAvond()}"></td>
-            <td th:text="${incident.getOpmerkingGebruiker()}"></td>
-            <td th:text="${incident.getManagerToelichting()}"></td>
+            <td class="inputManager" th:text="${incident.getOpmerkingGebruiker()}"></td>
+            <td class="inputManager" th:text="${incident.getManagerToelichting()}"></td>
             <td th:text="${incident.getStatus()}">
         </tr>
     </table>
