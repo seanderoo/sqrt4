@@ -11,11 +11,12 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<h2>Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
+<br><br>
+<input onclick=window.location.pathname="docent/rooster-kiezen"; type="button" value="Ander Cohort kiezen"/>
 <button onclick="printDiv('rooster')">Rooster opslaan of afdrukken</button>
-
+<br><br>
 <div id = "rooster">
-<h2 id="gevuldeWeek3">Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
+    <h2>Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
 <th:block th:each="week: ${weken}">
     <table class="onderstreep">
         <thead></thead>
