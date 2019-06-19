@@ -40,6 +40,11 @@ function multiselectZonderCtrl(){
     }
 }
 
+function getVandaagDatum() {
+    var huidigeDatum = document.querySelector("#selectedDate").valueAsDate = new Date();
+    return huidigeDatum;
+}
+
 function isSelected() {
     var gebruikerrollen = document.getElementById("gebruikerrollen").getAttribute("value");
     var gesplitsteRollen = gebruikerrollen.split(",");
@@ -65,7 +70,7 @@ function isSelected() {
 }
 
 window.onload=function () {
-    document.querySelector("#selectedDate").valueAsDate = new Date();
+
     var deTabel = document.querySelector('#deTabel');
     var incidentOverzicht = document.querySelector('#hetIncident', '#overzicht');
     var beschikbaarheidsweergave;
