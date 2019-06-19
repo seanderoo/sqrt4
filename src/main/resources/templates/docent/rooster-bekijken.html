@@ -11,7 +11,7 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
-<h2 id="gevuldeWeek3">Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
+<h2>Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
 <th:block th:each="week: ${weken}">
     <table class="onderstreep">
         <thead></thead>
@@ -31,7 +31,7 @@
             <td th:text="${week.getDonderdag().getOchtend().getVak().getVakNaam()}"></td>
             <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"> </td>
         </tr>
-        <tr class="onder">
+        <tr class="onderstreep">
             <td></td>
             <td th:text="${week.getMaandag().getOchtend().getDocent().getFullName()}"></td>
             <td th:text="${week.getDinsdag().getOchtend().getDocent().getFullName()}"></td>
@@ -47,7 +47,7 @@
             <td th:text="${week.getDonderdag().getMiddag().getVak().getVakNaam()}"> </td>
             <td th:text="${week.getVrijdag().getMiddag().getVak().getVakNaam()}"> </td>
         </tr>
-        <tr>
+        <tr class="onderstreep">
             <td></td>
             <td th:text="${week.getMaandag().getMiddag().getDocent().getFullName()}"></td>
             <td th:text="${week.getDinsdag().getMiddag().getDocent().getFullName()}"></td>
@@ -63,7 +63,7 @@
             <td th:text="${week.getDonderdag().getAvond().getVak().getVakNaam()}"> </td>
             <td th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}"> </td>
         </tr>
-        <tr>
+        <tr class="onderstreep">
             <td></td>
             <td th:text="${week.getMaandag().getAvond().getDocent().getFullName()}"></td>
             <td th:text="${week.getDinsdag().getAvond().getDocent().getFullName()}"></td>
@@ -72,6 +72,7 @@
             <td th:text="${week.getVrijdag().getAvond().getDocent().getFullName()}"></td>
         </tr>
     </table>
+    <br>
 </th:block>
 
 </body>
