@@ -1,5 +1,6 @@
 package sqrt4.mijninzet.model.Beschikbaarheid;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 
@@ -20,6 +21,7 @@ public class Dagdeel {
     private User docent;
 
     @OneToOne
+    @JsonIgnore
     private Dag dag;
 
 
