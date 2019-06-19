@@ -56,6 +56,11 @@ public User(String username, String password, String roles, String permissions){
         this.profilePic = "https://marriedwiki.com/uploads/bio/2014/11/30/thumb/beyonce-knowles-260-260.jpeg";
     }
 
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     protected User() {
     }
 

@@ -100,6 +100,22 @@ public class RoosterController extends AbstractController {
         return "coordinator/rooster-maken-cohort-gekozen";
     }
 
+    @GetMapping("docent/rooster-kiezen")
+    public String docentRoosterBekijken(Model model) {
+        model.addAttribute("cohorten", cohortRepo.findAll());
+        return "docent/rooster-kiezen";
+    }
+
+    @GetMapping("docent/rooster-bekijken")
+    public String docentCohortGekozen(@RequestParam("cohortNaam") String cohortnaam,
+                               Model model) {
+        Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
+        model.addAttribute("cohort", cohort);
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+        return "docent/rooster-bekijken";
+    }
+
     final int UREN_PER_DAGDEEL = 4;
 
     //haalt per vak het aantal uren wat voor dat cohort al opgeslagen is op uit de db (James en Karin)
