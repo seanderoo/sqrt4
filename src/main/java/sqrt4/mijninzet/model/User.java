@@ -125,8 +125,7 @@ public User(String username, String password, String roles, String permissions){
         return firstName;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
+    public String getFullName() { return firstName + " " + lastName;
     }
 
     public void setFirstName(String firstName) {

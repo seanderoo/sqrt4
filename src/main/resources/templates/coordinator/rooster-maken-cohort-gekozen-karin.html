@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooster aanmaken</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
+</head>
+<style>
+    #urenTabel {
+        float: left;
+        width: 15%;
+        margin-left: 5%;
+        margin-right: auto;
+        position: fixed;
+    }
+
+    #gevuldeWeek1 {
+        float: right;
+        margin-right: 5%;
+        margin-left: auto;
+        width: 65%;
+    }
+
+    #gevuldeWeek2{
+        float: right;
+        margin-right: 5%;
+        margin-left: auto;
+        width: 65%;
+    }
+
+    #gevuldeWeek3{
+        float: right;
+        margin-right: 10%;
+        margin-left: auto;
+        width: 65%;
+    }
+
+    #gevuldeWeek4{
+        float: right;
+        margin-right: 10%;
+        margin-left: auto;
+        width: 55%;
+    }
+
+</style>
+<body onload="checkKeuze()">
+<header>
+    <div th:insert="~{header::copy}">Header</div>
+</header>
+
+
+<div  id="urenTabel">
+    <table>
+        <h3>Uren per vak</h3>
+        <tr>
+            <th>Vak</th>
+            <th>Aantal uur</th>
+            <th>Reeds ingeroosterd</th>
+        </tr>
+        <tr th:each="vak: ${vakkenZonder}" >
+            <td th:value="${vak}" th:text="${vak.getVakNaam()}"></td>
+            <td th:value="${vak}" th:text="${vak.getAantalUren()}"></td>
+            <td th:value="${hashmap}" th:text="${hashmap.get('__${vak.getVakNaam()}__')}"></td>
+        </tr>
+    </table>
+</div>
+
+<form id="gevuldeWeek1" action="#" th:action="@{/coordinator/rooster-maken-cohort-gekozen-karin}" th:object="${cohort}" method="post">
+    <table class="TableFormatter" id="gevuldeWeek2">
+        <h2 th:value="${cohort.cohortNaam}">Rooster aanmaken voor <span th:text="${cohort.cohortNaam}"/>.
+            Van week <span th:text="${cohort.getStartWeek()}"/> <span th:text="${cohort.getStartJaar()}"/>
+            t/m week <span th:text="${cohort.getEindWeek()}"/> <span th:text="${cohort.getEindJaar()}"/> </h2>
+        <thead><input id="cohort" type="hidden" name="cohortNaam" th:value="*{cohortNaam}"> </thead>
+        <tr>
+            <th><select id="week" name="week" onchange="checkKeuze(); loadData()">
+                <option value="geenKeuze">Kies een week</option>
+                <option th:each="week: ${weken}" th:value="${week.getId()}" th:text="${week.getWeekNummerTekst()}"></option>
+            </select> </th>
+            <th>maandag</th>
+            <th>dinsdag</th>
+            <th>woensdag</th>
+            <th>donderdag</th>
+            <th>vrijdag</th>
+        </tr>
+        <tr>
+            <td th:value="ochtend">9:00 - 13:00</td>
+            <td><select id="maOcht" name="maOcht">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diOcht" name="diOcht">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woOcht" name="woOcht">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doOcht" name="doOcht">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrOcht" name="vrOcht">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td th:value="middag">13:00 - 17:00</td>
+            <td><select id="maMid" name="maMid">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diMid" name="diMid">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woMid" name="woMid">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doMid" name="doMid">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrMid" name="vrMid">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td th:value="avond">17:00 - 21:00</td>
+            <td><select id="maAvo" name="maAvo">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="diAvo" name="diAvo">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="woAvo" name="woAvo">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="doAvo" name="doAvo">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+            <td><select id="vrAvo" name="vrAvo">
+                <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
+            </select> </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button id="submitButton" type="submit">Sla week op</button></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+</form>
+<h2 id="gevuldeWeek3">Hieronder een overzicht van alle weken van dit cohort</h2>
+<th:block th:each="week: ${weken}">
+        <table class="TableFormatter" id="gevuldeWeek4">
+            <thead></thead>
+            <tr>
+                <th>Week <span th:text="${week.getWeekNummer()}"></span></th>
+                <th th:text="${week.getMaandag().getDatum()}">maandag</th>
+                <th th:text="${week.getDinsdag().getDatum()}">dinsdag</th>
+                <th th:text="${week.getWoensdag().getDatum()}">woensdag</th>
+                <th th:text="${week.getDonderdag().getDatum()}">donderdag</th>
+                <th th:text="${week.getVrijdag().getDatum()}">vrijdag</th>
+            </tr>
+            <tr>
+                <td th:value="ochtend">9:00 - 13:00</td>
+                <td th:text="${week.getMaandag().getOchtend().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getDinsdag().getOchtend().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getWoensdag().getOchtend().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getDonderdag().getOchtend().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"> </td>
+            </tr>
+            <tr>
+                <td th:value="middag">13:00 - 17:00</td>
+                <td th:text="${week.getMaandag().getMiddag().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getDinsdag().getMiddag().getVak().getVakNaam()}"></td>
+                <td th:text="${week.getWoensdag().getMiddag().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getDonderdag().getMiddag().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getVrijdag().getMiddag().getVak().getVakNaam()}"> </td>
+            </tr>
+            <tr>
+                <td th:value="avond">17:00 - 21:00</td>
+                <td th:text="${week.getMaandag().getAvond().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getDinsdag().getAvond().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getWoensdag().getAvond().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getDonderdag().getAvond().getVak().getVakNaam()}"> </td>
+                <td th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}"> </td>
+            </tr>
+        </table>
+</th:block>
+
+</body>
+<script>
+    //checkt of er wel voor een week gekozen wordt. Zo niet, dan doet de submit knop het niet (Karin).
+    function checkKeuze() {
+        var button = document.getElementById("submitButton");
+        var geenKeuze = "geenKeuze";
+        if (document.getElementById("week").value == geenKeuze) {
+            button.disabled = true;
+            button.style.cursor="not-allowed";
+            button.style.color = "gray";
+        } else {
+            button.disabled = false;
+            button.style.color = "#ffffff";
+            button.style.cursor = "pointer";
+        }
+    }
+    // Een onchange function bij de week selectie. Zodra dat gebeurt dan haal je met AJAX de
+    // vakken op die al in de database staan. James en Karin
+    function loadData() {
+        var request = new XMLHttpRequest();
+        var selectedWeek = document.getElementById("week").value;
+        var url = '/ajax/coordinator/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("maOcht").value = data[0];
+                document.getElementById("maMid").value = data[1];
+                document.getElementById("maAvo").value = data[2];
+                document.getElementById("diOcht").value = data[3];
+                document.getElementById("diMid").value = data[4];
+                document.getElementById("diAvo").value = data[5];
+                document.getElementById("woOcht").value = data[6];
+                document.getElementById("woMid").value = data[7];
+                document.getElementById("woAvo").value = data[8];
+                document.getElementById("doOcht").value = data[9];
+                document.getElementById("doMid").value = data[10];
+                document.getElementById("doAvo").value = data[11];
+                document.getElementById("vrOcht").value = data[12];
+                document.getElementById("vrMid").value = data[13];
+                document.getElementById("vrAvo").value = data[14];
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+
+    var header = document.getElementById("urenTabel");
+    var sticky = header.offsetTop;
+
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
+</html>

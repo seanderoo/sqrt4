@@ -11,8 +11,4 @@ public interface DagdeelRepository extends JpaRepository<Dagdeel, Integer> {
 
     int countByVakVakIdAndDag_Id(int vakId, int dagId);
 
-    List<Dagdeel> findAllByDag_Id(int dagId);
-
-
-
 }
