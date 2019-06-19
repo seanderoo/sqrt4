@@ -225,27 +225,48 @@ select select {
     font-size: 16px;
 }
 
-#overzicht tr td {
-    table-layout: fixed;
-    word-wrap: break-word;
-    background-color: white;
-    border: 1px solid black;
-    color: black !important;
+/*#overzicht tr td {*/
+/*    table-layout: fixed;*/
+/*    word-wrap: break-word;*/
+/*    background-color: white;*/
+/*    border: 1px solid black;*/
+/*    color: black !important;*/
+/*    margin-outside: 30px;*/
+/*}*/
+
+/*#overzichtAfgehandeld tr td {*/
+/*    margin-top: 30px;*/
+/*    table-layout: fixed;*/
+/*    word-wrap: break-word;*/
+/*    background-color: white;*/
+/*    border: 1px solid black;*/
+/*    color: black !important;*/
+/*}*/
+
+td.true {
+    background-color: green !important;
 }
 
-#overzichtAfgehandeld tr td {
-    margin-top: 30px;
-    table-layout: fixed;
-    word-wrap: break-word;
-    background-color: white;
-    border: 1px solid black;
-    color: black !important;
+td.false {
+    background-color: red !important;
 }
 
 #inputFieldManager {
     height: 100%;
     width: 100%;
+    border-collapse: collapse;
     position: relative;
+}
+
+.inputManager {
+    word-wrap: break-word;
+    word-break: break-word;
+    table-layout: fixed;
+}
+
+#knopOpslaanIncident {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #headerRowIncident th {

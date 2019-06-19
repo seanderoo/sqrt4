@@ -65,6 +65,7 @@ function isSelected() {
 }
 
 window.onload=function () {
+    document.querySelector("#selectedDate").valueAsDate = new Date();
     var deTabel = document.querySelector('#deTabel');
     var incidentOverzicht = document.querySelector('#hetIncident', '#overzicht');
     var beschikbaarheidsweergave;
@@ -89,7 +90,7 @@ window.onload=function () {
         }
         console.log(td.firstChild.value);
     });
-}
+};
 
 function textCounter( field, countfield, maxlimit ) {
     if ( field.value.length > maxlimit ) {
@@ -106,3 +107,4 @@ function bevestigVerwijderen() {
     var antwoord = confirm("Weet u zeker dat u dit vak wilt verwijderen?");
     return antwoord;
 }
+
