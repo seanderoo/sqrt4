@@ -26,7 +26,6 @@ public class VoorkeurController extends AbstractController {
         List<Vak> vakkenLijst = vakkenLijstZonder("Geen les");
         User user = voegActiveUserToe();
         List<Voorkeur> voorkeurLijst = voorkeurenRepository.findAllByUser(voegActiveUserToe());
-//        System.out.println(voorkeurLijst);
 
         Voorkeur voorkeur = new Voorkeur();
 
