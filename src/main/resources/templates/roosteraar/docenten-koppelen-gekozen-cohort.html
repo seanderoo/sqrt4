@@ -17,7 +17,6 @@
 </style>
 
 <h1>Koppel Docenten voor <span th:text="${cohort.getCohortNaam()}"></span></h1>
-
 <form id="gevuldeWeek1" action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
     <table class="TableFormatter">
         <thead>
@@ -113,6 +112,7 @@
     <button id="submitButton" type="submit">Sla week op</span></button>
 
 </form>
+
 <h2 id="gevuldeWeek3">Hieronder een overzicht van alle weken van dit cohort</h2>
 <h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je docenten koppelen aan de vakken die in het rooster staan.</h3>
 <input type="hidden" th:value="${voorkeuren}" id="voorkeuren">
