@@ -10,6 +10,7 @@ package sqrt4.mijninzet.controller;
         import sqrt4.mijninzet.repository.SollicitatieRepository;
         import sqrt4.mijninzet.repository.VacatureRepository;
         import java.util.ArrayList;
+        import java.util.Collections;
         import java.util.List;
 
 @Controller
@@ -54,13 +55,16 @@ public class SolliciterenController extends AbstractController{
 
     @GetMapping("/docent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
-        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
+        List<Sollicitatie> sollicitaties = solrepo.findAllByUser(voegActiveUserToe());
+        Collections.sort(sollicitaties);
+        model.addAttribute("sollicitaties", sollicitaties);
         return "docent/sollicitaties-overzicht";
     }
 
     @GetMapping("/coordinator/overzicht-sollicitaties")
     public String coordinatorGetSollicitaties(Model model) {
         List<Sollicitatie> sollicitaties = solrepo.findAll();
+        Collections.sort(sollicitaties);
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
         model.addAttribute("statussen", enums);
@@ -71,6 +75,7 @@ public class SolliciterenController extends AbstractController{
                                                   Model model) {
         solrepo.save(sol);
         List<Sollicitatie> sollicitaties = solrepo.findAll();
+        Collections.sort(sollicitaties);
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
         model.addAttribute("statussen", enums);
@@ -92,8 +97,10 @@ public class SolliciterenController extends AbstractController{
         }
         switch (keuze) {
             case "vacatures":
+                Collections.sort(openVacatures);
                 return openVacatures;
             case "sollicitaties":
+                Collections.sort(gesolliciteerdeVacatures);
                 return gesolliciteerdeVacatures;
         }
         return null;
