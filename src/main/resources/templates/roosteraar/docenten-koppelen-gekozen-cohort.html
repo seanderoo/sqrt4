@@ -21,7 +21,8 @@
     <table class="TableFormatter">
         <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
         <thead>
-        <th><select id="week" name="week" onchange="loadVakken();loadDocenten()">
+        <input type="hidden" th:value="${voorkeuren}" id="voorkeuren">
+        <th><select id="week" name="week" onchange="loadVakken();loadDocenten();voorkeurenLaden()">
             <option value="geenKeuze">--Kies een week--</option>
             <option th:each="week : ${weken}" th:value="${week.getId()}" th:text="${week.getWeekNummerTekst()}"></option>
         </select></th>
@@ -253,6 +254,147 @@
         request.open("GET", url, true);
         request.send();
     }
+
+    document.addEventListener("click", function (ev) {
+        var selector = ev.target;
+        var parent1 = selector.parentNode;
+        var parent1CellIndex = parent1.cellIndex;
+        var parent2 = parent1.parentNode;
+        var vorigeTableRow = parent2.previousElementSibling;
+        var kiendjes = vorigeTableRow.childNodes;
+        var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1CellIndex)];
+
+        var selectors = window.document.getElementsByTagName("select");
+
+        if (selector.id !== "week") {
+            if (selector.tagName === "SELECT") {
+                wipeClassesSelectAndOptions(selectors);
+
+                var options = selector.options;
+                console.log("vak: " + kiendjeBoven.innerText);
+                for (var i = 0; i < options.length; i++) {
+                    console.log("-->" + options[i].text + ", class: " + options[i].className);
+                }
+            }
+        }
+        function krijgPrevNodeIndex(index) {
+            //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
+            //ook de lege tekstvelden worden in de childnode-array opgenomen.
+            return (index + 1) * 2 + 1;
+        }
+    });
+
+    function voorkeurenLaden() {
+        var VOORKEUR = 0;
+        var USER = 1;
+        var VAK = 2;
+
+        //De trojaanse string wordt opgehaald en gesplitst in Vookeur-objectcombinaties.
+        var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
+        var gesplitsteVoorkeuren = voorkeuren.split(",");
+
+        var selectors = window.document.getElementsByTagName("select");
+        // wipeClassesSelectAndOptions(selectors);
+
+        for (var j = 0; j < selectors.length; j++) {
+            if (selectors[j].id !== "week") {
+                getVoorkeuren(selectors[j]);
+            }
+        }
+
+        function getVoorkeuren(tagname) {
+            //De voorkeurskleur wordt pas bij mouseover gegenereerd.
+            //De onderstaande vars zijn nodig om de id van de vaknaam boven de SELECT op te halen. Deze is nodig om met de
+            //vakId in de Voorkeurscombinatie op te halen.
+            var selector = tagname;
+            var parent1 = selector.parentNode;
+            var parent1CellIndex = parent1.cellIndex;
+            var parent2 = parent1.parentNode;
+            var vorigeTableRow = parent2.previousElementSibling;
+            var kiendjes = vorigeTableRow.childNodes;
+            // console.log("parent: "+ parent1 + ", index: " + parent1CellIndex);
+            // for (var i = 0; i < kiendjes.length; i++) {
+            //     console.log("kiendje " + (i+1) + ": " + kiendjes[i].textContent);
+            // }
+            var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1CellIndex)];
+            // console.log("kiendje boven: " + kiendjeBoven);
+            // console.log("index = " + krijgPrevNodeIndex(parent1CellIndex));
+            // console.log("kiendje boven: " + kiendjes[krijgPrevNodeIndex(parent1CellIndex)]);
+            // console.log("kiendje boven: " + kiendjeBoven.textContent);
+
+            var checkVakValue = kiendjeBoven.innerText;
+            var opties = selector.options;
+
+
+            //Hier worden de Voorkeurscombi's opgesplitst.
+            for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
+                var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
+                var voorkeur = voorkeurgroep[VOORKEUR];
+                var user = voorkeurgroep[USER];
+                var vak = voorkeurgroep[VAK];
+
+                console.log("Voorkeur nr. " + (i+1) + ": " + checkVakValue + " = " + vak);
+                // console.log("");
+
+                toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+            }
+
+            for (var j = 0; j < opties.length; j++) {
+                if (opties[j].className === '') {
+                    opties[j].classList.add('geenkeuze');
+                }
+            }
+        };
+
+        function krijgPrevNodeIndex(index) {
+            //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
+            //ook de lege tekstvelden worden in de childnode-array opgenomen.
+            return (index + 1) * 2 + 1;
+        }
+
+        function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
+            if (vak === checkVak) {
+                if (voorkeur == 3) {
+                    voorkeurAanhechten(voorkeur, opties, user, 'graag');
+                } else if (voorkeur == 2) {
+                    voorkeurAanhechten(voorkeur, opties, user, 'mwa');
+                } else if (voorkeur == 1) {
+                    voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
+                } else {
+                    voorkeurAanhechten(0, opties, user, 'geenkeuze');
+                }
+            }
+        }
+
+        function voorkeurAanhechten(voorkeur, opties, user, voorkeursklasse) {
+            for (var j = 0; j < opties.length; j++) {
+                if (opties[j].value == user) {
+                    opties[j].classList.add(voorkeursklasse);
+                    if (voorkeur > 0) {
+                        opties[j].innerHTML += ": " + voorkeur;
+                    }
+                }
+            }
+        }
+    }
+//Er is een tweetal problemen op het moment:
+    //1. De Voorkeur ophalen loopt altijd één stap achter op ajax
+    //2. Onderstaande methode werkt nog niet.
+    function wipeClassesSelectAndOptions(array) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].id !== "week") {
+                array[i].classList.remove("graag", "mwa", "lieverniet", "geenkeuze");
+                var nextArray = array[i].options;
+                if (nextArray instanceof Array) {
+                    console.log("Ja, er zit nog een array in.");
+                    wipeClassesSelectAndOptions(nextArray);
+                } else {
+                    console.log("Dat was het: de arrays zijn op.");
+                }
+            }
+        }
+    }
+
 
 </script>
 

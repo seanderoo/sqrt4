@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
+import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.*;
 
@@ -171,12 +172,13 @@ public class KoppelDocentenController extends AbstractController {
                     .append("_")
                     .append(voorkeur.getUser().getId())
                     .append("_").
-                    append(voorkeur.getVak().getVakId());
+                    append(voorkeur.getVak().getVakNaam());
             if (i != (voorkeuren.size()-1)) {
                 bob.append(",");
             }
         }
         String string = bob.toString();
+        System.out.println("Odysseus sprak: \"Laten we onze lijst in een string verstoppen:\" " + string);
         return string;
     }
 
