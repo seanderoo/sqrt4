@@ -33,10 +33,6 @@
 <br>
 <br>
 <div id="voorkeuren">
-<table class="TableFormatter">
-        <td id="voorkeur"><span></span></td>
-    </tr>
-</table>
 </div>
 </body>
 <script>
@@ -63,17 +59,11 @@
     }
     showPreference();
 
-
-
-
-
     var overzichtVoorkeuren = document.getElementById("voorkeuren");
     function showAllPreferences(){
         var request = new XMLHttpRequest();
         var currentUser = document.getElementById("userId").value;
         var url = '/ajax/voorkeuren/' + currentUser;
-
-
 
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -92,7 +82,7 @@
         var htmlString = "";
 
         for (i = 0; i < data.length; i++) {
-            htmlString += "<p>" + data[i].name;
+            htmlString += "<p>" + data[i].vak.vakNaam + " voorkeur: " + data[i].voorkeurGebruiker;
         }
         overzichtVoorkeuren.insertAdjacentHTML("beforeend", htmlString);
     }
