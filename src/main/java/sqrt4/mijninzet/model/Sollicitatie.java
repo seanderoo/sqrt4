@@ -3,7 +3,7 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 
 @Entity
-public class Sollicitatie {
+public class Sollicitatie implements Comparable<Sollicitatie> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sollicitatieId;
@@ -15,6 +15,11 @@ public class Sollicitatie {
     private Vacature vacature;
 
     private Status status;
+
+    @Override
+    public int compareTo(Sollicitatie o) {
+        return this.vacature.getVacatureNaam().compareTo(o.vacature.getVacatureNaam());
+    }
 
     public enum Status {
         IN_BEHANDELING,
@@ -55,38 +60,22 @@ public class Sollicitatie {
         this.vacature = vacature;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
     public void setStatus(Status status) {
         this.status = status;
     }
 
-//    public String getStatus() {
-//        switch (this.status) {
-//            case IN_BEHANDELING:
-//                return "In behandeling";
-//            case TOEGEWEZEN:
-//                return "Toegewezen";
-//            case AFGEWEZEN:
-//                return "Afgewezen";
-//        }
-//        return null;
-//    }
-//
-//    public void setStatus(String status) {
-//        switch (status) {
-//            case "In behandeling":
-//                this.status = Status.IN_BEHANDELING;
-//                break;
-//            case "Toegewezen":
-//                this.status = Status.TOEGEWEZEN;
-//                break;
-//            case "Afgewezen":
-//                this.status = Status.AFGEWEZEN;
-//        }
-//    }
+    public String getStatus() {
+        switch (this.status) {
+            case IN_BEHANDELING:
+                return "In behandeling";
+            case TOEGEWEZEN:
+                return "Toegewezen";
+            case AFGEWEZEN:
+                return "Afgewezen";
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {

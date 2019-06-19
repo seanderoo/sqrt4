@@ -1,16 +1,20 @@
 package sqrt4.mijninzet.controller;
 
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.*;
-        import sqrt4.mijninzet.model.Sollicitatie;
-        import sqrt4.mijninzet.model.User;
-        import sqrt4.mijninzet.model.Vacature;
-        import sqrt4.mijninzet.repository.SollicitatieRepository;
-        import sqrt4.mijninzet.repository.VacatureRepository;
-        import java.util.ArrayList;
-        import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import sqrt4.mijninzet.model.Sollicitatie;
+import sqrt4.mijninzet.model.Vacature;
+import sqrt4.mijninzet.repository.SollicitatieRepository;
+import sqrt4.mijninzet.repository.VacatureRepository;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class SolliciterenController extends AbstractController{
@@ -54,27 +58,27 @@ public class SolliciterenController extends AbstractController{
 
     @GetMapping("/docent/sollicitaties-overzicht")
     public String getSollicitaties(Model model) {
-        model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
+        List<Sollicitatie> sollicitaties = solrepo.findAllByUser(voegActiveUserToe());
+        Collections.sort(sollicitaties);
+        model.addAttribute("sollicitaties", sollicitaties);
         return "docent/sollicitaties-overzicht";
     }
 
     @GetMapping("/coordinator/overzicht-sollicitaties")
     public String coordinatorGetSollicitaties(Model model) {
         List<Sollicitatie> sollicitaties = solrepo.findAll();
+        Collections.sort(sollicitaties);
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
-        for (Sollicitatie.Status statusnaam: enums) {
-            System.out.println(statusnaam);
-        }
         model.addAttribute("statussen", enums);
         return "coordinator/overzicht-sollicitaties";
     }
     @PostMapping("/coordinator/overzicht-sollicitaties")
     public String coordinatorGetMeerSollicitaties(@ModelAttribute("sollicitatie") Sollicitatie sol,
                                                   Model model) {
-        System.out.println(sol);
         solrepo.save(sol);
         List<Sollicitatie> sollicitaties = solrepo.findAll();
+        Collections.sort(sollicitaties);
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
         model.addAttribute("statussen", enums);
@@ -96,8 +100,10 @@ public class SolliciterenController extends AbstractController{
         }
         switch (keuze) {
             case "vacatures":
+                Collections.sort(openVacatures);
                 return openVacatures;
             case "sollicitaties":
+                Collections.sort(gesolliciteerdeVacatures);
                 return gesolliciteerdeVacatures;
         }
         return null;

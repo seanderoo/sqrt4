@@ -3,7 +3,7 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 
 @Entity
-public class Vacature {
+public class Vacature implements Comparable<Vacature> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,5 +70,10 @@ public class Vacature {
                 "id=" + id +
                 ", vacatureNaam='" + vacatureNaam + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Vacature o) {
+        return this.vacatureNaam.compareTo(o.vacatureNaam);
     }
 }

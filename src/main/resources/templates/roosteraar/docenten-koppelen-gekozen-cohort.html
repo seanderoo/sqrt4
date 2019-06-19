@@ -10,148 +10,312 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
+<style>
+    .TableFormatter td {
+        border: 1px solid white;
+    }
+</style>
+
 <h1>Koppel Docenten voor <span th:text="${cohort.getCohortNaam()}"></span></h1>
+<form action="#" id="gevuldeWeek1" method="POST" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}"
+      th:object="${cohort}">
+    <table class="TableFormatter">
+        <thead>
+        <th><select id="week" name="week">
+            <option value="geenKeuze">--Kies een week--</option>
+            <option th:each="week : ${weken}" th:text="${week.getWeekNummerTekst()}" th:value="${week.getId()}">Kies
+                week
+            </option>
+        </select></th>
+        <th>Maandag</th>
+        <th>Dinsdag</th>
+        <th>Woensdag</th>
+        <th>Donderdag</th>
+        <th>Vrijdag</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2">Ochtend<br>09:00-13:00</td>
+            <td id="vakMaO" th:text="${week.getMaandag().getOchtend().getVak().getVakNaam()}"
+                th:value="${week.getMaandag().getOchtend().getVak().getVakId()}"></td>
+            <td id="vakDiO" th:text="${week.getDinsdag().getOchtend().getVak().getVakNaam()}"
+                th:value="${week.getDinsdag().getOchtend().getVak().getVakId()}"></td>
+            <td id="vakWoO" th:text="${week.getWoensdag().getOchtend().getVak().getVakNaam()}"
+                th:value="${week.getWoensdag().getOchtend().getVak().getVakId()}"></td>
+            <td id="vakDoO" th:text="${week.getDonderdag().getOchtend().getVak().getVakNaam()}"
+                th:value="${week.getDonderdag().getOchtend().getVak().getVakId()}"></td>
+            <td id="vakVrO" th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"
+                th:value="${week.getVrijdag().getOchtend().getVak().getVakId()}"></td>
+        </tr>
+        <tr>
+            <td><select id="maOcht" onchange="this.className=this.options[this.selectedIndex].className"
+                        th:name="maOch">
+                <option th:each="docent: ${MAO}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="diOcht" onchange="this.className=this.options[this.selectedIndex].className"
+                        th:name="diOch">
+                <option th:each="docent: ${DIO}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="woOcht" onchange="this.className=this.options[this.selectedIndex].className"
+                        th:name="woOch">
+                <option th:each="docent: ${WOO}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="doOcht" onchange="this.className=this.options[this.selectedIndex].className"
+                        th:name="doOch">
+                <option th:each="docent: ${DOO}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="vrOcht" onchange="this.className=this.options[this.selectedIndex].className"
+                        th:name="vrOch">
+                <option th:each="docent: ${VRO}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+        </tr>
+        <tr>
+            <td rowspan="2">Middag<br>13:00-17:00</td>
+            <td id="vakMaM" th:text="${week.getMaandag().getMiddag().getVak().getVakNaam()}"
+                th:value="${week.getMaandag().getMiddag().getVak().getVakId()}"></td>
+            <td id="vakDiM" th:text="${week.getDinsdag().getMiddag().getVak().getVakNaam()}"
+                th:value="${week.getDinsdag().getMiddag().getVak().getVakId()}"></td>
+            <td id="vakWoM" th:text="${week.getWoensdag().getMiddag().getVak().getVakNaam()}"
+                th:value="${week.getWoensdag().getMiddag().getVak().getVakId()}"></td>
+            <td id="vakDoM" th:text="${week.getDonderdag().getMiddag().getVak().getVakNaam()}"
+                th:value="${week.getDonderdag().getMiddag().getVak().getVakId()}"></td>
+            <td id="vakVrM" th:text="${week.getVrijdag().getMiddag().getVak().getVakNaam()}"
+                th:value="${week.getVrijdag().getMiddag().getVak().getVakId()}"></td>
+        </tr>
+        <tr>
+            <td><select id="maMid" onchange="this.className=this.options[this.selectedIndex].className" th:name="maMid">
+                <option th:each="docent: ${MAM}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="diMid" onchange="this.className=this.options[this.selectedIndex].className" th:name="diMid">
+                <option th:each="docent: ${DIM}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="woMid" onchange="this.className=this.options[this.selectedIndex].className" th:name="woMid">
+                <option th:each="docent: ${WOM}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="doMid" onchange="this.className=this.options[this.selectedIndex].className" th:name="doMid">
+                <option th:each="docent: ${DOM}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="vrMid" onchange="this.className=this.options[this.selectedIndex].className" th:name="vrMid">
+                <option th:each="docent: ${VRM}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+        </tr>
+        <tr>
+            <td rowspan="2">Avond<br>17:00-21:00</td>
+            <td id="vakMaA" th:text="${week.getMaandag().getAvond().getVak().getVakNaam()}"
+                th:value="${week.getMaandag().getAvond().getVak().getVakId()}"></td>
+            <td id="vakDiA" th:text="${week.getDinsdag().getAvond().getVak().getVakNaam()}"
+                th:value="${week.getDinsdag().getAvond().getVak().getVakId()}"></td>
+            <td id="vakWoA" th:text="${week.getWoensdag().getAvond().getVak().getVakNaam()}"
+                th:value="${week.getWoensdag().getAvond().getVak().getVakId()}"></td>
+            <td id="vakDoA" th:text="${week.getDonderdag().getAvond().getVak().getVakNaam()}"
+                th:value="${week.getDonderdag().getAvond().getVak().getVakId()}"></td>
+            <td id="vakVrA" th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}"
+                th:value="${week.getVrijdag().getAvond().getVak().getVakId()}"></td>
+        </tr>
+        <tr>
+            <td><select id="maAvo" onchange="this.className=this.options[this.selectedIndex].className" th:name="maAvo">
+                <option th:each="docent: ${MAA}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="diAvo" onchange="this.className=this.options[this.selectedIndex].className" th:name="diAvo">
+                <option th:each="docent: ${DIA}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="woAvo" onchange="this.className=this.options[this.selectedIndex].className" th:name="woAvo">
+                <option th:each="docent: ${WOA}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="doAvo" onchange="this.className=this.options[this.selectedIndex].className" th:name="doAvo">
+                <option th:each="docent: ${DOA}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+            <td><select id="vrAvo" onchange="this.className=this.options[this.selectedIndex].className" th:name="vrAvo">
+                <option th:each="docent: ${VRA}" th:name="${docent.getId()}"
+                        th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:value="${docent.getId()}">
+            </select></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <button id="submitButton" type="submit">Sla week op</span></button>
 
+</form>
 
-<h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je docenten koppelen aan de vakken die in het rooster staan.</h3>
-<input type="hidden" th:value="${voorkeuren}" id="voorkeuren">
+<h2 id="gevuldeWeek3">Hieronder een overzicht van alle weken van dit cohort</h2>
+<h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je
+    docenten koppelen aan de vakken die in het rooster staan.</h3>
+<input id="voorkeuren" th:value="${voorkeuren}" type="hidden">
 
 <th:block th:each="week: ${weken}">
-    <button class="collapsible">Week: <span th:text="${week.getWeekNummer()}"></span>   |   Data: <span th:text="${week.getMaandag().getDatum() + ' t/m ' + week.getVrijdag().getDatum()}"></span></button>
-    <div class="content">
-<form action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
-        <h6></h6>
-        <table class="TableFormatter">
-            <input name="weekId" type="hidden" th:value="${week.getId()}">
-            <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
-            <thead>
-            <tr colspan="2">
-                <th>Weeknummer</th>
-                <th>Maandag</th>
-                <th>Dinsdag</th>
-                <th>Woensdag</th>
-                <th>Donderdag</th>
-                <th>Vrijdag</th>
-            </tr>
-            <tr>
-                <td th:text="${week.getWeekNummer()}"></td>
-                <td th:text="${week.getMaandag().getDatum()}"></td>
-                <td th:text="${week.getDinsdag().getDatum()}"></td>
-                <td th:text="${week.getWoensdag().getDatum()}"></td>
-                <td th:text="${week.getDonderdag().getDatum()}"></td>
-                <td th:text="${week.getVrijdag().getDatum()}"></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td rowspan="2" th:value="ochtend">9:00 - 13:00</td>
-                <td th:text="${week.getMaandag().getOchtend().getVak().getVakNaam()}" id="vakMaO" th:value="${week.getMaandag().getOchtend().getVak().getVakId()}"></td>
-                <td th:text="${week.getDinsdag().getOchtend().getVak().getVakNaam()}" id="vakDiO" th:value="${week.getDinsdag().getOchtend().getVak().getVakId()}"></td>
-                <td th:text="${week.getWoensdag().getOchtend().getVak().getVakNaam()}" id="vakWoO" th:value="${week.getWoensdag().getOchtend().getVak().getVakId()}"></td>
-                <td th:text="${week.getDonderdag().getOchtend().getVak().getVakNaam()}" id="vakDoO" th:value="${week.getDonderdag().getOchtend().getVak().getVakId()}"></td>
-                <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}" id="vakVrO" th:value="${week.getVrijdag().getOchtend().getVak().getVakId()}"></td>
-            </tr>
-            <tr>
-                <td><select id="maOcht" th:name="maOch" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${MAO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="diOcht" th:name="diOch" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DIO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="woOcht" th:name="woOch" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${WOO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="doOcht" th:name="doOch" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DOO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="vrOcht" th:name="vrOch" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${VRO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-            </tr>
-            <tr>
-                <td rowspan="2" th:value="middag">13:00 - 17:00</td>
-                <td th:text="${week.getMaandag().getMiddag().getVak().getVakNaam()}" id="vakMaM" th:value="${week.getMaandag().getMiddag().getVak().getVakId()}"></td>
-                <td th:text="${week.getDinsdag().getMiddag().getVak().getVakNaam()}" id="vakDiM" th:value="${week.getDinsdag().getMiddag().getVak().getVakId()}"></td>
-                <td th:text="${week.getWoensdag().getMiddag().getVak().getVakNaam()}" id="vakWoM" th:value="${week.getWoensdag().getMiddag().getVak().getVakId()}"></td>
-                <td th:text="${week.getDonderdag().getMiddag().getVak().getVakNaam()}" id="vakDoM" th:value="${week.getDonderdag().getMiddag().getVak().getVakId()}"></td>
-                <td th:text="${week.getVrijdag().getMiddag().getVak().getVakNaam()}" id="vakVrM" th:value="${week.getVrijdag().getMiddag().getVak().getVakId()}"></td>
-            </tr>
-            <tr>
-                <td><select id="maMid" th:name="maMid" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${MAM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="diMid" th:name="diMid" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DIM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="woMid" th:name="woMid" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${WOM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="doMid" th:name="doMid" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DOM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="vrMid" th:name="vrMid" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${VRM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-            </tr>
-            <tr>
-                <td rowspan="2" th:value="avond">17:00 - 21:00</td>
-                <td th:text="${week.getMaandag().getAvond().getVak().getVakNaam()}" id="vakMaA" th:value="${week.getMaandag().getAvond().getVak().getVakId()}"></td>
-                <td th:text="${week.getDinsdag().getAvond().getVak().getVakNaam()}" id="vakDiA" th:value="${week.getDinsdag().getAvond().getVak().getVakId()}"></td>
-                <td th:text="${week.getWoensdag().getAvond().getVak().getVakNaam()}" id="vakWoA" th:value="${week.getWoensdag().getAvond().getVak().getVakId()}"></td>
-                <td th:text="${week.getDonderdag().getAvond().getVak().getVakNaam()}" id="vakDoA" th:value="${week.getDonderdag().getAvond().getVak().getVakId()}"></td>
-                <td th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}" id="vakVrA" th:value="${week.getVrijdag().getAvond().getVak().getVakId()}"></td>
-            </tr>
-            <tr>
-                <td><select id="maAvo" th:name="maAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${MAA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="diAvo" th:name="diAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DIA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="woAvo" th:name="woAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${WOA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="doAvo" th:name="doAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${DOA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-                <td><select id="vrAvo" th:name="vrAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                    <option th:each="docent: ${VRA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
-                </select></td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <input id="knopOpslaan" type="submit" value="Opslaan"/>
-        <br>
-        <br>
-</form>
-    </div>
+    <table class="TableFormatter">
+        <thead>
+        <tr colspan="2">
+            <th>Weeknummer</th>
+            <th>Maandag</th>
+            <th>Dinsdag</th>
+            <th>Woensdag</th>
+            <th>Donderdag</th>
+            <th>Vrijdag</th>
+        </tr>
+        <tr>
+            <td th:text="${week.getWeekNummer()}"></td>
+            <td th:text="${week.getMaandag().getDatum()}"></td>
+            <td th:text="${week.getDinsdag().getDatum()}"></td>
+            <td th:text="${week.getWoensdag().getDatum()}"></td>
+            <td th:text="${week.getDonderdag().getDatum()}"></td>
+            <td th:text="${week.getVrijdag().getDatum()}"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2" th:value="ochtend">9:00 - 13:00</td>
+            <td th:text="${week.getMaandag().getOchtend().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDinsdag().getOchtend().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getWoensdag().getOchtend().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDonderdag().getOchtend().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getVrijdag().getOchtend().getVak().getVakNaam()}"></td>
+        </tr>
+        <tr>
+            <td th:text="${week.getMaandag().getOchtend().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDinsdag().getOchtend().getDocent().getFullName()}"></td>
+            <td th:text="${week.getWoensdag().getOchtend().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDonderdag().getOchtend().getDocent().getFullName()}"></td>
+            <td th:text="${week.getVrijdag().getOchtend().getDocent().getFullName()}"></td>
+        </tr>
+        <tr>
+            <td rowspan="2" th:value="middag">13:00 - 17:00</td>
+            <td th:text="${week.getMaandag().getMiddag().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDinsdag().getMiddag().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getWoensdag().getMiddag().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDonderdag().getMiddag().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getVrijdag().getMiddag().getVak().getVakNaam()}"></td>
+        </tr>
+        <tr>
+            <td th:text="${week.getMaandag().getMiddag().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDinsdag().getMiddag().getDocent().getFullName()}"></td>
+            <td th:text="${week.getWoensdag().getMiddag().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDonderdag().getMiddag().getDocent().getFullName()}"></td>
+            <td th:text="${week.getVrijdag().getMiddag().getDocent().getFullName()}"></td>
+        </tr>
+        <tr>
+            <td rowspan="2" th:value="avond">17:00 - 21:00</td>
+            <td th:text="${week.getMaandag().getAvond().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDinsdag().getAvond().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getWoensdag().getAvond().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getDonderdag().getAvond().getVak().getVakNaam()}"></td>
+            <td th:text="${week.getVrijdag().getAvond().getVak().getVakNaam()}"></td>
+        </tr>
+        <tr>
+            <td th:text="${week.getMaandag().getAvond().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDinsdag().getAvond().getDocent().getFullName()}"></td>
+            <td th:text="${week.getWoensdag().getAvond().getDocent().getFullName()}"></td>
+            <td th:text="${week.getDonderdag().getAvond().getDocent().getFullName()}"></td>
+            <td th:text="${week.getVrijdag().getAvond().getDocent().getFullName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
 </th:block>
 
-<br>
-<!--<button id="knopVorigeWeek" onclick="displayVorigeWeekButton();displayVolgendeWeekButton();subtractIndex();addWeekNumber();">Vorige Week</button>      <button id="knopVolgendeWeek" onclick="displayVolgendeWeekButton();displayVorigeWeekButton();addIndex();addWeekNumber();">Volgende Week</button>-->
-
 <script>
-    var coll = document.getElementsByClassName("collapsible");
-    // var selectedWeek = document.getElementById("weekId").value;
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight){
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    }
+    // var coll = document.getElementsByClassName("collapsible");
+    // var i;
+    //
+    // for (i = 0; i < coll.length; i++) {
+    //     coll[i].addEventListener("click", function() {
+    //         this.classList.toggle("active");
+    //         var content = this.nextElementSibling;
+    //         if (content.style.maxHeight){
+    //             content.style.maxHeight = null;
+    //         } else {
+    //             content.style.maxHeight = content.scrollHeight + "px";
+    //         }
+    //         loadData(weeknr);
+    //     });
+    // }
 </script>
 
 </body>
 
-<script>
+<script th:inline="javascript">
+
+    var weken = /*[[${weken}]]*/;
+    // var startWeek = weken[0].weekNummer;
+    // // var inputWeek = document.getElementById("week");
+    //
+    // var antwoordWeek = weken[inputWeek - startWeek];
+    // var maOchtVak = weken[0].maandag.ochtend.vak.vakNaam;
+    // console.log(maOchtVak);
+
+
+    function loadData() {
+        var request = new XMLHttpRequest();
+        var selectedWeek = document.getElementById("week").value;
+        var url = '/ajax/coordinator/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
+        console.log(url);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("maOcht").value = data[0];
+                document.getElementById("maMid").value = data[1];
+                document.getElementById("maAvo").value = data[2];
+                document.getElementById("diOcht").value = data[3];
+                document.getElementById("diMid").value = data[4];
+                document.getElementById("diAvo").value = data[5];
+                document.getElementById("woOcht").value = data[6];
+                document.getElementById("woMid").value = data[7];
+                document.getElementById("woAvo").value = data[8];
+                document.getElementById("doOcht").value = data[9];
+                document.getElementById("doMid").value = data[10];
+                document.getElementById("doAvo").value = data[11];
+                document.getElementById("vrOcht").value = data[12];
+                document.getElementById("vrMid").value = data[13];
+                document.getElementById("vrAvo").value = data[14];
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+
+    function loadDocenten() {
+        var request = new XMLHttpRequest();
+        var weeknr = document.getElementById("week").value;
+        var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + weeknr;
+        console.log("load docenten: " + url);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("maOcht").value = data[0];
+                document.getElementById("maMid").value = data[1];
+                document.getElementById("maAvo").value = data[2];
+                document.getElementById("diOcht").value = data[3];
+                document.getElementById("diMid").value = data[4];
+                document.getElementById("diAvo").value = data[5];
+                document.getElementById("woOcht").value = data[6];
+                document.getElementById("woMid").value = data[7];
+                document.getElementById("woAvo").value = data[8];
+                document.getElementById("doOcht").value = data[9];
+                document.getElementById("doMid").value = data[10];
+                document.getElementById("doAvo").value = data[11];
+                document.getElementById("vrOcht").value = data[12];
+                document.getElementById("vrMid").value = data[13];
+                document.getElementById("vrAvo").value = data[14];
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+
     var VOORKEUR = 0;
     var USER = 1;
     var VAK = 2;
@@ -196,8 +360,7 @@
                 opties[j].classList.add('geenkeuze');
             }
         }
-    };
-
+    }
     function krijgPrevNodeIndex(index) {
         //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
         //ook de lege tekstvelden worden in de childnode-array opgenomen.
@@ -229,83 +392,5 @@
         }
     }
 
-    function getWeek() {
-        var weekId = document.getElementById("weekId").value;
-        var url = "/ajax/roosteraar/docent-koppelen-gekozen-cohort/" + weekId;
-        console.log("dit is de url: " + url);
-
-        var xhttp;
-        if (index == "") {
-            document.getElementById("index").innerHTML = "";
-            return;
-        }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("voorkeurGebruiker").value = this.responseText;
-            }
-        };
-        xhttp.open("POST", url, true);
-        xhttp.send();
-    }
-    getWeek();
-
-    var index;
-    index = document.getElementById("index").value;
-    console.log("indexwaarde: " + index);
-
-    var huidigeWeek;
-    huidigeWeek = document.getElementById("huidigeWeek").value;
-    console.log("huidige week: " + huidigeWeek);
-
-    var startWeek;
-    startWeek = document.getElementById("startWeek").value;
-    console.log("startweek = " + startWeek);
-
-    var eindWeek;
-    eindWeek = document.getElementById("eindWeek").value;
-    console.log("eindweek = " + eindWeek);
-
-    function addIndex() {
-        if (document.getElementById("knopVolgendeWeek").onclick) {
-            index++;
-            huidigeWeek++;
-            console.log("i: " + index);
-            console.log("hw: " + huidigeWeek);
-        }
-    }
-
-    function subtractIndex() {
-        if (document.getElementById("knopVorigeWeek").onclick) {
-            index--;
-            huidigeWeek--;
-            console.log("i: " + index);
-            console.log("hw: " + huidigeWeek);
-        }
-    }
-
-    function addWeekNumber() {
-        var x = document.getElementById("weekNummerHeader");
-        x.innerText = huidigeWeek;
-    }
-
-    function displayVorigeWeekButton() {
-        if (index > -1) {
-            document.getElementById("knopVorigeWeek").style.display = "inline";
-        } else {
-            document.getElementById("knopVorigeWeek").style.display = "none";
-        }
-    }
-
-    function displayVolgendeWeekButton() {
-        if (huidigeWeek == eindWeek - 1) {
-            document.getElementById("knopVolgendeWeek").style.display = "none";
-        } else {
-            document.getElementById("knopVolgendeWeek").style.display = "inline";
-        }
-    }
-
 </script>
 </html>
-
-

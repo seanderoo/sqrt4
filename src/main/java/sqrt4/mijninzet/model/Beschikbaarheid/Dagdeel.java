@@ -66,6 +66,9 @@ public class Dagdeel {
     }
 
     public User getDocent() {
+        if ( docent == null ) {
+            docent = new User("G", "G123", "DOCENT", "", "Geen", "docent", "");
+        }
         return docent;
     }
 

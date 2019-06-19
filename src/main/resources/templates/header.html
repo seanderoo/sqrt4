@@ -12,6 +12,7 @@
     <a href="/home"><img src="/images/home-icon-white_338306.png" alt="HOME" height="24" width="24"></a>
     <a sec:authorize="hasAuthority('ROLEROOSTERAAR')" href="/roosteraar/docenten-koppelen-kies-cohort">Maak het rooster</a>
     <a sec:authorize="hasAuthority('ROLEDOCENT')" href="/docent/voorkeuren">Kennis administreren</a>
+    <a href="/docent/rooster-kiezen" sec:authorize="hasAuthority('ROLEDOCENT')">Bekijk rooster</a>
     <div sec:authorize="hasAuthority('ROLEDOCENT')" class="dropdown">
         <button class="dropbtn">Solliciteren
             <i class="fa fa-caret-down"></i>

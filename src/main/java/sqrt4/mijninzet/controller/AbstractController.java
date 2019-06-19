@@ -49,12 +49,13 @@ public abstract class AbstractController {
     public List<User> beschikbareDocentenMetWeek() {
         List<User> docenten = userRepo.findAllByRolesContaining("DOCENT");
         List<User> beschikbareDocentenMetWeek = new ArrayList<>();
+
         for (User user : docenten) {
-            if ( user.getWeek() != null ) {
-                beschikbareDocentenMetWeek.add(user);
-            }
+
+            beschikbareDocentenMetWeek.add(user);
         }
-        return beschikbareDocentenMetWeek;
+//        return beschikbareDocentenMetWeek;
+        return docenten;
     }
 
     public List<User> getDocentenOpMaandagOchtend() {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import sqrt4.mijninzet.model.Vacature;
 import sqrt4.mijninzet.repository.VacatureRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequestMapping("/admin")
@@ -24,6 +25,7 @@ public class VacatureController extends AbstractController{
     @GetMapping("/overzicht-vacatures")
     public String overzichtVacatures(Model model){
         List<Vacature> vacaturelijst = vacrepo.findAll();
+        Collections.sort(vacaturelijst);
         model.addAttribute("vacatureLijst", vacaturelijst);
         return "admin/overzicht-vacatures";
     }
@@ -35,6 +37,7 @@ public class VacatureController extends AbstractController{
         if (idv != null){
             vacrepo.deleteById(idv);
             List<Vacature> vacaturelijst = vacrepo.findAll();
+            Collections.sort(vacaturelijst);
             model.addAttribute("vacatureLijst", vacaturelijst);
         return "admin/overzicht-vacatures";
         }
@@ -44,6 +47,7 @@ public class VacatureController extends AbstractController{
             return "admin/wijzig-vacature";
         }
         List<Vacature> vacaturelijst = vacrepo.findAll();
+        Collections.sort(vacaturelijst);
         model.addAttribute("vacatureLijst", vacaturelijst);
         return "admin/overzicht-vacatures";
     }
@@ -53,6 +57,7 @@ public class VacatureController extends AbstractController{
     public String nieuweGebruiker(@ModelAttribute("vacature") Vacature vacature, Model model) {
         vacrepo.save(vacature);
         List<Vacature> vacaturelijst = vacrepo.findAll();
+        Collections.sort(vacaturelijst);
         model.addAttribute("vacatureLijst", vacaturelijst);
         return "admin/overzicht-vacatures";
     }

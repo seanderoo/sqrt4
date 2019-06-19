@@ -297,4 +297,17 @@ td.false {
     background-color: white;
 }
 
+tr.onderstreep td {
+    border-bottom: solid black 2px;
+}
+
+.onderstreep {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 15px 30px;
+    border: 1px solid #25167a;
+    background-color: #dedceb;
+}
+
 

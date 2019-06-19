@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sqrt4.mijninzet.model.Beschikbaarheid.Cohort;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.Vak;
-import sqrt4.mijninzet.repository.*;
+import sqrt4.mijninzet.repository.CohortRepository;
+import sqrt4.mijninzet.repository.DagdeelRepository;
+import sqrt4.mijninzet.repository.VakRepository;
+import sqrt4.mijninzet.repository.WeekRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class RoosterController extends AbstractController {
@@ -98,6 +104,22 @@ public class RoosterController extends AbstractController {
         model.addAttribute("weken", weken);
         model.addAttribute("hashmap", haalToegekendeUrenOp(cohort1));
         return "coordinator/rooster-maken-cohort-gekozen";
+    }
+
+    @GetMapping("docent/rooster-kiezen")
+    public String docentRoosterBekijken(Model model) {
+        model.addAttribute("cohorten", cohortRepo.findAll());
+        return "docent/rooster-kiezen";
+    }
+
+    @GetMapping("docent/rooster-bekijken")
+    public String docentCohortGekozen(@RequestParam("cohortNaam") String cohortnaam,
+                                      Model model) {
+        Cohort cohort = cohortRepo.findByCohortNaam(cohortnaam);
+        model.addAttribute("cohort", cohort);
+        List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
+        model.addAttribute("weken", weken);
+        return "docent/rooster-bekijken";
     }
 
     final int UREN_PER_DAGDEEL = 4;
