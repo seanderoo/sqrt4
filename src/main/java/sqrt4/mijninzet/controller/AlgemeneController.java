@@ -5,17 +5,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
-import sqrt4.mijninzet.repository.DagdeelRepository;
 import sqrt4.mijninzet.model.Voorkeur;
-import sqrt4.mijninzet.repository.IncidentregistratieRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
-import sqrt4.mijninzet.repository.WeekRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,16 +18,8 @@ import java.util.List;
 @RequestMapping("/ajax")
 public class AlgemeneController {
 
-    public static final int AANTAL_WEKEN_IN_JAAR = 52;
-
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
-    @Autowired
-    private WeekRepository weekRepo;
-    @Autowired
-    private IncidentregistratieRepository repoIncident;
-    @Autowired
-    private DagdeelRepository dagdeelRepository;
 
     @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
@@ -52,20 +39,8 @@ public class AlgemeneController {
     @RequestMapping(value = "/voorkeuren/{user}", method = RequestMethod.GET)
     public List<Voorkeur> showAllPreferences(@PathVariable User user) {
         List<Voorkeur> voorkeuren = voorkeurenRepository.findAllByUser(user);
-        System.out.println("******* " + voorkeuren + " *******");
         return voorkeuren;
     }
-
-//    @RequestMapping(value = "/incidenten-beheer/catch", method = RequestMethod.POST)
-//    public @ResponseBody List<Incident> haalLijstOp(){
-//        List<Incident> incidentList = repoIncident.findAllByStatusIsContaining("in behandeling");
-//
-//        return incidentList;}
-
-//    @RequestMapping(value = "/ajax/roosteraar/docent-koppelen/{cohortnummer}/{weeknummer}", method = RequestMethod.POST)
-//    public Week haalWeekOp(@PathVariable Cohort cohort, @PathVariable Week weeknummer) {
-//
-//    }
 
     @RequestMapping(value = "/{user}", method = RequestMethod.POST)
     public String testRest2(@PathVariable User user) {
