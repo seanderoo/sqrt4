@@ -3,7 +3,7 @@ package sqrt4.mijninzet.model;
 import javax.persistence.*;
 
 @Entity
-public class Sollicitatie {
+public class Sollicitatie implements Comparable<Sollicitatie>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sollicitatieId;
@@ -15,6 +15,11 @@ public class Sollicitatie {
     private Vacature vacature;
 
     private Status status;
+
+    @Override
+    public int compareTo(Sollicitatie o) {
+        return this.vacature.getVacatureNaam().compareTo(o.vacature.getVacatureNaam());
+    }
 
     public enum Status {
         IN_BEHANDELING,

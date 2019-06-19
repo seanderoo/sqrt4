@@ -11,6 +11,9 @@
     <div th:insert="~{header::copy}">Header</div>
 </header>
 
+<button onclick="printDiv('rooster')">Rooster opslaan of afdrukken</button>
+
+<div id = "rooster">
 <h2 id="gevuldeWeek3">Hieronder het rooster voor <span th:text="${cohort.getCohortNaam()}"></span> </h2>
 <th:block th:each="week: ${weken}">
     <table class="onderstreep">
@@ -73,6 +76,16 @@
         </tr>
     </table>
 </th:block>
+</div>
 
 </body>
+<script>
+    function printDiv(divName){
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
 </html>
