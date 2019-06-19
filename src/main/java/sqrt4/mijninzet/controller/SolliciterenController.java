@@ -63,9 +63,6 @@ public class SolliciterenController extends AbstractController{
         List<Sollicitatie> sollicitaties = solrepo.findAll();
         model.addAttribute("sollicitaties", sollicitaties);
         Sollicitatie.Status[] enums = Sollicitatie.Status.values();
-        for (Sollicitatie.Status statusnaam: enums) {
-            System.out.println(statusnaam);
-        }
         model.addAttribute("statussen", enums);
         return "coordinator/overzicht-sollicitaties";
     }
