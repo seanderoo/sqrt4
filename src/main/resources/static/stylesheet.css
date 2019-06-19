@@ -275,5 +275,8 @@ select select {
 .geenkeuze {
     background-color: white;
 }
+.onderstreep {
+    border-bottom: solid black 5px;
+}
 
 

@@ -69,7 +69,6 @@ public class SolliciterenController extends AbstractController{
     @PostMapping("/coordinator/overzicht-sollicitaties")
     public String coordinatorGetMeerSollicitaties(@ModelAttribute("sollicitatie") Sollicitatie sol,
                                                   Model model) {
-        System.out.println(sol);
         solrepo.save(sol);
         List<Sollicitatie> sollicitaties = solrepo.findAll();
         model.addAttribute("sollicitaties", sollicitaties);
