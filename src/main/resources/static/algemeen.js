@@ -109,7 +109,7 @@ function textCounter( field, countfield, maxlimit ) {
 }
 
 function bevestigVerwijderen() {
-    var antwoord = confirm("Weet u zeker dat u dit vak wilt verwijderen?");
+    var antwoord = confirm("Weet u zeker dat u dit item wilt verwijderen?");
     return antwoord;
 }
 
