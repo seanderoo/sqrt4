@@ -400,8 +400,8 @@
         for (var i = 0; i < array.length; i++) {
             if (array[i].id !== "week") {
                 console.log("Classes voor het verwijderen: " + array[i].className);
-                array[i].classList.remove("graag", "mwa", "lieverniet", "geenkeuze");
-                // array[i].removeClass("graag", "mwa", "lieverniet", "geenkeuze");
+                // array[i].classList.remove("graag", "mwa", "lieverniet", "geenkeuze");
+                array[i].className = "";
                 console.log("Classes na het verwijderen: " + array[i].className);
                 var nextArray = array[i].options;
                 if (nextArray instanceof Array) {
