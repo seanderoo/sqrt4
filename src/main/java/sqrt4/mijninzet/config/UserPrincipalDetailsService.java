@@ -37,28 +37,4 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
         return new UserPrincipal(user);
     }
-
-
-
-//    @Resource
-//    private AccountService accounts;
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//        Account account = accounts.findByUsername(username);
-//        if(null == account) {
-//            throw new UsernameNotFoundException("User " + username + " not found.");
-//        }
-//
-//        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-//        String[] authStrings = account.getAuthorities().split(", ");
-//        for(String authString : authStrings) {
-//            authorities.add(new SimpleGrantedAuthority(authString));
-//        }
-//
-//        UserDetails ud = new User(account.getUsername(), account.getPassword(), authorities);
-//        return ud;
-//    }
-
 }

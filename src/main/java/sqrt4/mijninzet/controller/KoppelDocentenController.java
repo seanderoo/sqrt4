@@ -45,7 +45,7 @@ public class KoppelDocentenController extends AbstractController {
 
         List<Cohort> cohortList = cohortRepository.findAllByStartJaarIsGreaterThanEqual(huidigeJaar);
         Predicate<Cohort> condition = cohort -> cohort.getStartJaar() == huidigeJaar && cohort.getStartWeek() <= huidigeWeek;
-//        cohortList.removeIf(condition);
+        cohortList.removeIf(condition);
 
         model.addAttribute("cohortList", cohortList);
         return "roosteraar/docenten-koppelen-kies-cohort";
@@ -142,7 +142,6 @@ public class KoppelDocentenController extends AbstractController {
         model.addAttribute("weken", weken);
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
-        model.addAttribute("docentList", docentList);
 
         model.addAttribute("MAO", getDocentenOpMaandagOchtend());
         model.addAttribute("MAM", getDocentenOpMaandagMiddag());

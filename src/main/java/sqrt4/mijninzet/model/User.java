@@ -27,8 +27,6 @@ public class User {
     private String lastName;
     private String profilePic;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private Week week;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Incident> incidentList;

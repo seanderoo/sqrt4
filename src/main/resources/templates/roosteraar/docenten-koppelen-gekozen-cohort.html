@@ -9,13 +9,11 @@
 <header>
     <div th:insert="~{header::copy}">Header</div>
 </header>
-
 <style>
     .TableFormatter td {
         border: 1px solid white;
     }
 </style>
-
 <h1>Koppel Docenten voor <span th:text="${cohort.getCohortNaam()}"></span></h1>
 <form id="gevuldeWeek1" action="#" th:action="@{/roosteraar/docenten-koppelen-gekozen-cohort}" th:object="${cohort}" method="POST">
     <table class="TableFormatter">
@@ -111,12 +109,9 @@
     </table>
     <br>
     <button id="submitButton" type="submit">Sla week op</span></button>
-
 </form>
-
 <h2 id="gevuldeWeek3">Hieronder een overzicht van alle weken van dit cohort</h2>
 <h3>Klik op de week waarvoor je een rooster wilt maken om het rooster zonder docenten in te laden. <br>Vervolgens kun je docenten koppelen aan de vakken die in het rooster staan.</h3>
-
 <th:block th:each="week: ${weken}">
     <table class="TableFormatter">
         <thead>
@@ -187,13 +182,11 @@
     </table>
     <br>
 </th:block>
-
 <script>
     function logWeekId() {
         var weekId = document.getElementById("week").value;
         console.log("weekId: " + weekId);
     }
-
     function loadVakken() {
         var request = new XMLHttpRequest();
         var selectedWeek = document.getElementById("week").value;
@@ -217,14 +210,11 @@
                 document.getElementById("vakVrO").innerHTML = data[12];
                 document.getElementById("vakVrM").innerHTML = data[13];
                 document.getElementById("vakVrA").innerHTML = data[14];
-
-
             }
         };
         request.open("GET", url, true);
         request.send();
     }
-
     function loadDocenten() {
         var request = new XMLHttpRequest();
         var weeknr = document.getElementById("week").value;
@@ -253,8 +243,6 @@
         request.open("GET", url, true);
         request.send();
     }
-
 </script>
-
 </body>
 </html>
