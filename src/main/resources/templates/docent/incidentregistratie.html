@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>SQRT4 | Incident Registreren</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
-    <!--    <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">-->
+    <!--        <link rel="stylesheet" type="text/css" href="/algemene-beschikbaarheid.css">-->
     <link rel="stylesheet" type="text/css" href="/header-stylesheet.css">
     <script src="/algemeen.js" type="text/javascript"></script>
 
 </head>
-<body onload="getVandaagDatum()">
+<body>
 <div>
     <header>
         <div th:insert="~{header::copy}">Header</div>
@@ -18,7 +18,7 @@
     <h2>Geef je incident op.</h2>
     <form id="reg_date" th:action="@{/docent/incidentregistratie}" th:object="${dag}" th:method="POST">
         <label for="selectedDate">Datum van incident</label>
-        <input class="input_gebruiker" type="date" id="selectedDate" name="datum" value="date">
+        <input class="input_gebruiker" id="selectedDate" name="datum" type="date" value="date">
 
         <br/>
         <br/>
