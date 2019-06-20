@@ -53,7 +53,7 @@ public class SolliciterenController extends AbstractController{
             solrepo.delete(sollicitatie);
         }
         model.addAttribute("sollicitaties", solrepo.findAllByUser(voegActiveUserToe()));
-        return "/docent/sollicitaties-overzicht";
+        return "docent/sollicitaties-overzicht";
     }
 
     @GetMapping("/docent/sollicitaties-overzicht")
