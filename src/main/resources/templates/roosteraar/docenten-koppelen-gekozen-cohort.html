@@ -366,7 +366,6 @@
         for (var j = 0; j < opties.length; j++) {
             if (opties[j].value == user) {
                 opties[j].classList.add(voorkeursklasse);
-                // opties[j].innerHTML = oudVoorkeurcijferVerwijderen(opties[j]);
                 if (voorkeur > 0) {
                     opties[j].innerHTML += ": " + voorkeur;
                 }
@@ -374,7 +373,6 @@
         }
     }
 
-    //Werkt ook nog niet. Waarom??
     function oudVoorkeurcijferVerwijderen(element) {
         var tekst = element.innerHTML;
         var lastChar = tekst.slice(-1);
@@ -393,28 +391,16 @@
         }
         return tekst;
     }
-//Er is een tweetal problemen op het moment:
-    //1. De Voorkeur ophalen loopt altijd één stap achter op ajax
-    //2. Onderstaande methode werkt nog niet.
+
     function wipeClassesSelectAndOptions(array) {
         for (var i = 0; i < array.length; i++) {
             if (array[i].id !== "week") {
                 console.log("Classes voor het verwijderen: " + array[i].className);
-                // array[i].classList.remove("graag", "mwa", "lieverniet", "geenkeuze");
                 array[i].className = "";
                 console.log("Classes na het verwijderen: " + array[i].className);
                 array[i].innerHTML = oudVoorkeurcijferVerwijderen(array[i]); //werkt dit?
 
                 var nextArray = array[i].options;
-
-                // try {
-                //     var nextArray = array[i].options;
-                //     Array.apply(null, nextArray);
-                // } catch (e) {
-                //     console.log("not an array x_x");
-                // }
-                // var checker = nextArray instanceof Array;
-                // console.log("Is nextArray een array..? " + checker); //is een array...
 
                 try {
                     if (nextArray.length > 1) {
