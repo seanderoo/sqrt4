@@ -178,7 +178,7 @@ public class KoppelDocentenController extends AbstractController {
             }
         }
         String string = bob.toString();
-        System.out.println("Odysseus sprak: \"Laten we onze lijst in een string verstoppen:\" " + string);
+        System.out.println("Odysseus sprak: \"Troje zal geen array in een string verwachten: " + string + "\"");
         return string;
     }
 
