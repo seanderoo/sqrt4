@@ -22,7 +22,7 @@
         <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
         <thead>
         <input type="hidden" th:value="${voorkeuren}" id="voorkeuren">
-        <th><select id="week" name="week" onchange="loadVakken();loadDocenten();voorkeurenLaden()">
+        <th><select id="week" name="week" onchange="loadVakken();loadDocenten()">
             <option value="geenKeuze">--Kies een week--</option>
             <option th:each="week : ${weken}" th:value="${week.getId()}" th:text="${week.getWeekNummerTekst()}"></option>
         </select></th>
@@ -218,8 +218,7 @@
                 document.getElementById("vakVrO").innerHTML = data[12];
                 document.getElementById("vakVrM").innerHTML = data[13];
                 document.getElementById("vakVrA").innerHTML = data[14];
-
-
+                voorkeurenLaden();
             }
         };
         request.open("GET", url, true);
@@ -249,6 +248,7 @@
                 document.getElementById("docVrO").value = data[12];
                 document.getElementById("docVrM").value = data[13];
                 document.getElementById("docVrA").value = data[14];
+                voorkeurenLaden();
             }
         };
         request.open("GET", url, true);
@@ -276,11 +276,6 @@
                     console.log("-->" + options[i].text + ", class: " + options[i].className);
                 }
             }
-        }
-        function krijgPrevNodeIndex(index) {
-            //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
-            //ook de lege tekstvelden worden in de childnode-array opgenomen.
-            return (index + 1) * 2 + 1;
         }
     });
 
@@ -345,35 +340,35 @@
                 }
             }
         };
+    }
 
-        function krijgPrevNodeIndex(index) {
-            //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
-            //ook de lege tekstvelden worden in de childnode-array opgenomen.
-            return (index + 1) * 2 + 1;
-        }
+    function krijgPrevNodeIndex(index) {
+        //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
+        //ook de lege tekstvelden worden in de childnode-array opgenomen.
+        return (index + 1) * 2 + 1;
+    }
 
-        function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
-            if (vak === checkVak) {
-                if (voorkeur == 3) {
-                    voorkeurAanhechten(voorkeur, opties, user, 'graag');
-                } else if (voorkeur == 2) {
-                    voorkeurAanhechten(voorkeur, opties, user, 'mwa');
-                } else if (voorkeur == 1) {
-                    voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
-                } else {
-                    voorkeurAanhechten(0, opties, user, 'geenkeuze');
-                }
+    function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
+        if (vak === checkVak) {
+            if (voorkeur == 3) {
+                voorkeurAanhechten(voorkeur, opties, user, 'graag');
+            } else if (voorkeur == 2) {
+                voorkeurAanhechten(voorkeur, opties, user, 'mwa');
+            } else if (voorkeur == 1) {
+                voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
+            } else {
+                voorkeurAanhechten(0, opties, user, 'geenkeuze');
             }
         }
+    }
 
-        function voorkeurAanhechten(voorkeur, opties, user, voorkeursklasse) {
-            for (var j = 0; j < opties.length; j++) {
-                if (opties[j].value == user) {
-                    opties[j].classList.add(voorkeursklasse);
-                    if (voorkeur > 0) {
-                        opties[j].innerHTML = oudVoorkeurcijferVerwijderen(opties[j]);
-                        opties[j].innerHTML += ": " + voorkeur;
-                    }
+    function voorkeurAanhechten(voorkeur, opties, user, voorkeursklasse) {
+        for (var j = 0; j < opties.length; j++) {
+            if (opties[j].value == user) {
+                opties[j].classList.add(voorkeursklasse);
+                if (voorkeur > 0) {
+                    opties[j].innerHTML = oudVoorkeurcijferVerwijderen(opties[j]);
+                    opties[j].innerHTML += ": " + voorkeur;
                 }
             }
         }
