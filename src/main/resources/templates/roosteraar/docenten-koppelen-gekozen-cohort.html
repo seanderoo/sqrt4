@@ -268,7 +268,7 @@
 
         if (selector.id !== "week") {
             if (selector.tagName === "SELECT") {
-                wipeClassesSelectAndOptions(selectors);
+                // wipeClassesSelectAndOptions(selectors);
 
                 var options = selector.options;
                 console.log("vak: " + kiendjeBoven.innerText);
@@ -289,7 +289,7 @@
         var gesplitsteVoorkeuren = voorkeuren.split(",");
 
         var selectors = window.document.getElementsByTagName("select");
-        // wipeClassesSelectAndOptions(selectors);
+        wipeClassesSelectAndOptions(selectors);
 
         for (var j = 0; j < selectors.length; j++) {
             if (selectors[j].id !== "week") {
@@ -328,7 +328,7 @@
                 var user = voorkeurgroep[USER];
                 var vak = voorkeurgroep[VAK];
 
-                console.log("Voorkeur nr. " + (i+1) + ": " + checkVakValue + " = " + vak);
+                // console.log("Voorkeur nr. " + (i+1) + ": " + checkVakValue + " = " + vak);
                 // console.log("");
 
                 toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
@@ -366,8 +366,8 @@
         for (var j = 0; j < opties.length; j++) {
             if (opties[j].value == user) {
                 opties[j].classList.add(voorkeursklasse);
+                opties[j].innerHTML = oudVoorkeurcijferVerwijderen(opties[j]);
                 if (voorkeur > 0) {
-                    opties[j].innerHTML = oudVoorkeurcijferVerwijderen(opties[j]);
                     opties[j].innerHTML += ": " + voorkeur;
                 }
             }
@@ -377,14 +377,17 @@
     //Werkt ook nog niet. Waarom??
     function oudVoorkeurcijferVerwijderen(string) {
         var tekst = string.innerHTML;
-        var lastChar = tekst.substr(tekst.length-1);
+        var lastChar = tekst.slice(-1);
         console.log("tekst: " + tekst + "; lastChar: " + lastChar);
         if (lastChar == 3) {
             tekst = tekst.replace(": 3", "");
+            console.log("aangepast naar: " + tekst);
         } else if (lastChar == 2) {
             tekst = tekst.replace(": 2", "");
+            console.log("aangepast naar: " + tekst);
         } else if (lastChar == 1) {
             tekst = tekst.replace(": 1", "");
+            console.log("aangepast naar: " + tekst);
         }
         return tekst;
     }
@@ -399,12 +402,26 @@
                 array[i].className = "";
                 console.log("Classes na het verwijderen: " + array[i].className);
                 var nextArray = array[i].options;
-                if (nextArray instanceof Array) {
-                    console.log("Ja, er zit nog een array in.");
-                    wipeClassesSelectAndOptions(nextArray);
-                } else {
-                    console.log("Dat was het: de arrays zijn op.");
+                // try {
+                //     var nextArray = array[i].options;
+                //     Array.apply(null, nextArray);
+                // } catch (e) {
+                //     console.log("not an array x_x");
+                // }
+                // var checker = nextArray instanceof Array;
+                // console.log("Is nextArray een array..? " + checker); //is een array...
+
+                try {
+                    if (nextArray.length > 1) {
+                        console.log("Ja, er zit nog een array in.");
+                        wipeClassesSelectAndOptions(nextArray);
+                    } else {
+                        console.log("Dat was het: de arrays zijn op.");
+                    }
+                } catch (error) {
+                    console.log("not an array x_x");
                 }
+
             }
         }
     }
