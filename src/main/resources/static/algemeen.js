@@ -40,6 +40,11 @@ function multiselectZonderCtrl(){
     }
 }
 
+function getVandaagDatum() {
+    var huidigeDatum = document.querySelector("#selectedDate").valueAsDate = new Date();
+    return huidigeDatum;
+}
+
 function isSelected() {
     var gebruikerrollen = document.getElementById("gebruikerrollen").getAttribute("value");
     var gesplitsteRollen = gebruikerrollen.split(",");
@@ -65,7 +70,7 @@ function isSelected() {
 }
 
 window.onload=function () {
-    document.querySelector("#selectedDate").valueAsDate = new Date();
+
     var deTabel = document.querySelector('#deTabel');
     var incidentOverzicht = document.querySelector('#hetIncident', '#overzicht');
     var beschikbaarheidsweergave;
@@ -74,6 +79,7 @@ window.onload=function () {
         beschikbaarheidsweergave = deTabel;
     } else if (incidentOverzicht) {
         beschikbaarheidsweergave = incidentOverzicht;
+        getVandaagDatum();
     }
 
     beschikbaarheidsweergave.addEventListener('click', function(e) {
@@ -104,7 +110,7 @@ function textCounter( field, countfield, maxlimit ) {
 }
 
 function bevestigVerwijderen() {
-    var antwoord = confirm("Weet u zeker dat u dit vak wilt verwijderen?");
+    var antwoord = confirm("Weet u zeker dat u dit item wilt verwijderen?");
     return antwoord;
 }
 
