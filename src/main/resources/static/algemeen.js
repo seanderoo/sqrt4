@@ -79,6 +79,7 @@ window.onload=function () {
         beschikbaarheidsweergave = deTabel;
     } else if (incidentOverzicht) {
         beschikbaarheidsweergave = incidentOverzicht;
+        getVandaagDatum();
     }
 
     beschikbaarheidsweergave.addEventListener('click', function(e) {
