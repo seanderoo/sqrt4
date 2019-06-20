@@ -14,10 +14,9 @@ import sqrt4.mijninzet.repository.DagdeelRepository;
 import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.WeekRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Predicate;
 
 @Controller
 public class RoosterController extends AbstractController {
@@ -34,7 +33,15 @@ public class RoosterController extends AbstractController {
 
     @GetMapping("/coordinator/rooster-maken")
     public String kiesCohort(Model model) {
-        List<Cohort> cohorten = cohortRepo.findAll();
+        Calendar calendar = new GregorianCalendar();
+        Date trialTime = new Date();
+        calendar.setTime(trialTime);
+        int huidigeJaar = LocalDate.now().getYear();
+        int huidigeWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+
+        List<Cohort> cohorten = cohortRepo.findAllByStartJaarIsGreaterThanEqual(huidigeJaar);
+        Predicate<Cohort> condition = cohort -> cohort.getStartJaar() == huidigeJaar && cohort.getStartWeek() <= huidigeWeek;
+        cohorten.removeIf(condition);
         model.addAttribute("cohorten", cohorten);
         return "coordinator/rooster-maken";
     }
