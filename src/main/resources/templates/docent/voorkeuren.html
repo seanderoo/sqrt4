@@ -23,7 +23,7 @@
                     <option th:each="vak: ${vakkenLijst}" th:value="${vak.vakId}" th:text="${vak.getVakNaam()}">
                 </select>
             </td>
-            <td><input class="input_gebruiker" onchange="checkPreference()" id="voorkeurGebruiker" type="number" th:field="*{voorkeurGebruiker}" min="1" max="3"/></td>
+            <td><input class="input_gebruiker" id="voorkeurGebruiker" max="3" min="1" th:field="*{voorkeurGebruiker}" type="number"/></td>
             <td><input id="knopOpslaan" type="submit" value="Opslaan"/></td>
         </tr>
     </table>
@@ -41,7 +41,7 @@
 
 
         var xhttp;
-        if (selectedCourse == "") {/*KILL JFK*/
+        if (selectedCourse == "") {
             document.getElementById("voorkeurGebruiker").innerHTML = "";
             return;
         }
@@ -83,31 +83,5 @@
         }
         overzichtVoorkeuren.insertAdjacentHTML("beforeend", htmlString);
     }
-
-    function Opslaan(){
-        this.click = function() {
-            alert('Hartelijk dank!\nVoorkeur is opgeslagen')
-        }
-    }
-
-
-    function checkPreference() {
-        var preference = document.getElementById('voorkeurGebruiker').value;
-        if (preference == 1) {
-            Opslaan();
-        } else if (preference == 2) {
-            Opslaan();
-        } else if (preference == 3) {
-            Opslaan();
-        } else {
-            alert('Voer een geldige voorkeur voor tussen de 1 en 3')
-        }
-    }
-
-    var knopOpslaan = new Opslaan();
-
-    var knopElement = document.getElementById('knopOpslaan');
-    knopElement.addEventListener('click', knopOpslaan.click);
-
 </script>
 </html>
