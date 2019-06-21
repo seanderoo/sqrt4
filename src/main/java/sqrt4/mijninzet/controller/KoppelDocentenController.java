@@ -163,7 +163,7 @@ public class KoppelDocentenController extends AbstractController {
         List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
         String voorkeurenString = zetOmNaarString(voorkeuren);
         model.addAttribute("voorkeuren", voorkeurenString);
-        
+
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
