@@ -63,21 +63,21 @@ public class KoppelDocentenController extends AbstractController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
-        model.addAttribute("MAO", getDocentenOpMaandagOchtend());
-        model.addAttribute("MAM", getDocentenOpMaandagMiddag());
-        model.addAttribute("MAA", getDocentenOpMaandagAvond());
-        model.addAttribute("DIO", getDocentenOpDinsdagOchtend());
-        model.addAttribute("DIM", getDocentenOpDinsdagMiddag());
-        model.addAttribute("DIA", getDocentenOpDinsdagAvond());
-        model.addAttribute("WOO", getDocentenOpWoensdagOchtend());
-        model.addAttribute("WOM", getDocentenOpWoensdagMiddag());
-        model.addAttribute("WOA", getDocentenOpWoensdagAvond());
-        model.addAttribute("DOO", getDocentenOpDonderdagOchtend());
-        model.addAttribute("DOM", getDocentenOpDonderdagMiddag());
-        model.addAttribute("DOA", getDocentenOpDonderdagAvond());
-        model.addAttribute("VRO", getDocentenOpVrijdagOchtend());
-        model.addAttribute("VRM", getDocentenOpVrijdagMiddag());
-        model.addAttribute("VRA", getDocentenOpVrijdagAvond());
+        model.addAttribute("MAO", getDocentenInOchtend("maandag"));
+        model.addAttribute("MAM", getDocentenInMiddag("maandag"));
+        model.addAttribute("MAA", getDocentenInAvond("maandag"));
+        model.addAttribute("DIO", getDocentenInOchtend("dinsdag"));
+        model.addAttribute("DIM", getDocentenInMiddag("dinsdag"));
+        model.addAttribute("DIA", getDocentenInAvond("dinsdag"));
+        model.addAttribute("WOO", getDocentenInOchtend("woensdag"));
+        model.addAttribute("WOM", getDocentenInMiddag("woensdag"));
+        model.addAttribute("WOA", getDocentenInAvond("woensdag"));
+        model.addAttribute("DOO", getDocentenInOchtend("donderdag"));
+        model.addAttribute("DOM", getDocentenInMiddag("donderdag"));
+        model.addAttribute("DOA", getDocentenInAvond("donderdag"));
+        model.addAttribute("VRO", getDocentenInOchtend("vrijdag"));
+        model.addAttribute("VRM", getDocentenInMiddag("vrijdag"));
+        model.addAttribute("VRA", getDocentenInAvond("vrijdag"));
 
 
         List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
@@ -144,21 +144,21 @@ public class KoppelDocentenController extends AbstractController {
 
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
 
-        model.addAttribute("MAO", getDocentenOpMaandagOchtend());
-        model.addAttribute("MAM", getDocentenOpMaandagMiddag());
-        model.addAttribute("MAA", getDocentenOpMaandagAvond());
-        model.addAttribute("DIO", getDocentenOpDinsdagOchtend());
-        model.addAttribute("DIM", getDocentenOpDinsdagMiddag());
-        model.addAttribute("DIA", getDocentenOpDinsdagAvond());
-        model.addAttribute("WOO", getDocentenOpWoensdagOchtend());
-        model.addAttribute("WOM", getDocentenOpWoensdagMiddag());
-        model.addAttribute("WOA", getDocentenOpWoensdagAvond());
-        model.addAttribute("DOO", getDocentenOpDonderdagOchtend());
-        model.addAttribute("DOM", getDocentenOpDonderdagMiddag());
-        model.addAttribute("DOA", getDocentenOpDonderdagAvond());
-        model.addAttribute("VRO", getDocentenOpVrijdagOchtend());
-        model.addAttribute("VRM", getDocentenOpVrijdagMiddag());
-        model.addAttribute("VRA", getDocentenOpVrijdagAvond());
+        model.addAttribute("MAO", getDocentenInOchtend("maandag"));
+        model.addAttribute("MAM", getDocentenInMiddag("maandag"));
+        model.addAttribute("MAA", getDocentenInAvond("maandag"));
+        model.addAttribute("DIO", getDocentenInOchtend("dinsdag"));
+        model.addAttribute("DIM", getDocentenInMiddag("dinsdag"));
+        model.addAttribute("DIA", getDocentenInAvond("dinsdag"));
+        model.addAttribute("WOO", getDocentenInOchtend("woensdag"));
+        model.addAttribute("WOM", getDocentenInMiddag("woensdag"));
+        model.addAttribute("WOA", getDocentenInAvond("woensdag"));
+        model.addAttribute("DOO", getDocentenInOchtend("donderdag"));
+        model.addAttribute("DOM", getDocentenInMiddag("donderdag"));
+        model.addAttribute("DOA", getDocentenInAvond("donderdag"));
+        model.addAttribute("VRO", getDocentenInOchtend("vrijdag"));
+        model.addAttribute("VRM", getDocentenInMiddag("vrijdag"));
+        model.addAttribute("VRA", getDocentenInAvond("vrijdag"));
 
         List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
         String voorkeurenString = zetOmNaarString(voorkeuren);
