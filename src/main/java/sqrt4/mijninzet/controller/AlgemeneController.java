@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
@@ -96,5 +97,13 @@ public class AlgemeneController {
         long vrAvo = week.getVrijdag().getAvond().getDocent().getId();
         long[] list = {maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo};
         return list;
+    }
+
+    @RequestMapping(value = "/roosteraar/docenten-koppelen-gekozen-cohort/{dagdeel}", method = RequestMethod.GET)
+    public long[] docentenOphalen(@PathVariable Dagdeel dagdeel) {
+
+        long[] beschikbareDocenten = {};
+
+        return beschikbareDocenten;
     }
 }
