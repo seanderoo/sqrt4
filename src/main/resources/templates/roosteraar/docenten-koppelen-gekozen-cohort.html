@@ -250,6 +250,23 @@
         request.send();
     }
 
+    function loadDocentenDagdeel() {
+        var request = new XMLHttpRequest();
+        var dagdeelnr = document.getElementById("docMaO").value;
+        var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + dagdeelnr;
+        console.log("load docenten: " + url);
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("docMaO").options = data;
+
+                voorkeurenLaden();
+            }
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+
     document.addEventListener("click", function (ev) {
         var selector = ev.target;
         var parent1 = selector.parentNode;

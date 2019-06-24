@@ -10,6 +10,7 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
+import sqrt4.mijninzet.repository.DagdeelRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 
 import java.util.Arrays;
@@ -17,10 +18,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ajax")
-public class AlgemeneController {
+public class AlgemeneController extends AbstractController {
 
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
+    @Autowired
+    private DagdeelRepository dagdeelRepository;
 
     @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
@@ -101,6 +104,8 @@ public class AlgemeneController {
 
     @RequestMapping(value = "/roosteraar/docenten-koppelen-gekozen-cohort/{dagdeel}", method = RequestMethod.GET)
     public long[] docentenOphalen(@PathVariable Dagdeel dagdeel) {
+//        dagdeelRepository. Hier verder!
+
 
         long[] beschikbareDocenten = {};
 
