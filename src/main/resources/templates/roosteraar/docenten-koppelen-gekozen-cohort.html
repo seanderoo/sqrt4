@@ -184,61 +184,38 @@
     <br>
 </th:block>
 <script>
-    function logWeekId() {
-        var weekId = document.getElementById("week").value;
-        console.log("weekId: " + weekId);
-    }
     function loadVakken() {
         var request = new XMLHttpRequest();
         var selectedWeek = document.getElementById("week").value;
         var url = '/ajax/coordinator/rooster-maken-cohort-gekozen-karin/' + selectedWeek;
-        console.log(url);
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
-                document.getElementById("vakMaO").innerHTML = data[0];
-                document.getElementById("vakMaM").innerHTML = data[1];
-                document.getElementById("vakMaA").innerHTML = data[2];
-                document.getElementById("vakDiO").innerHTML = data[3];
-                document.getElementById("vakDiM").innerHTML = data[4];
-                document.getElementById("vakDiA").innerHTML = data[5];
-                document.getElementById("vakWoO").innerHTML = data[6];
-                document.getElementById("vakWoM").innerHTML = data[7];
-                document.getElementById("vakWoA").innerHTML = data[8];
-                document.getElementById("vakDoO").innerHTML = data[9];
-                document.getElementById("vakDoM").innerHTML = data[10];
-                document.getElementById("vakDoA").innerHTML = data[11];
-                document.getElementById("vakVrO").innerHTML = data[12];
-                document.getElementById("vakVrM").innerHTML = data[13];
-                document.getElementById("vakVrA").innerHTML = data[14];
+                var i = 0;
+                var dagDelen = ["vakMaO", "vakMaM", "vakMaA", "vakDiO", "vakDiM", "vakDiA", "vakWoO", "vakWoM", "vakWoA",
+                    "vakDoO", "vakDoM", "vakDoA", "vakVrO", "vakVrM", "vakVrA"];
+                for (i = 0; i < dagDelen.length; i++) {
+                    document.getElementById(dagDelen[i]).innerHTML = data[i];
+                }
             }
         };
         request.open("GET", url, true);
         request.send();
     }
+
     function loadDocenten() {
         var request = new XMLHttpRequest();
         var weeknr = document.getElementById("week").value;
         var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + weeknr;
-        console.log("load docenten: " + url);
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
-                document.getElementById("docMaO").value = data[0];
-                document.getElementById("docMaM").value = data[1];
-                document.getElementById("docMaA").value = data[2];
-                document.getElementById("docDiO").value = data[3];
-                document.getElementById("docDiM").value = data[4];
-                document.getElementById("docDiA").value = data[5];
-                document.getElementById("docWoO").value = data[6];
-                document.getElementById("docWoM").value = data[7];
-                document.getElementById("docWoA").value = data[8];
-                document.getElementById("docDoO").value = data[9];
-                document.getElementById("docDoM").value = data[10];
-                document.getElementById("docDoA").value = data[11];
-                document.getElementById("docVrO").value = data[12];
-                document.getElementById("docVrM").value = data[13];
-                document.getElementById("docVrA").value = data[14];
+                var i = 0;
+                var dagDelen = ["docMaO", "docMaM", "docMaA", "docDiO", "docDiM", "docDiA", "docWoO", "docWoM", "docWoA",
+                    "docDoO", "docDoM", "docDoA", "docVrO", "docVrM", "docVrA"];
+                for (i = 0; i < dagDelen.length; i++) {
+                    document.getElementById(dagDelen[i]).value = data[i];
+                }
             }
         };
         request.open("GET", url, true);
