@@ -63,23 +63,23 @@ public class RoosterController extends AbstractController {
     }
     @PostMapping("coordinator/rooster-maken-cohort-gekozen")
     public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
-                              @RequestParam(value = "week", required = false) int weekId,
-                              @RequestParam("maOcht") String maOchtVak,
-                              @RequestParam("diOcht") String diOchtVak,
-                              @RequestParam("woOcht") String woOchtVak,
-                              @RequestParam("doOcht") String doOchtVak,
-                              @RequestParam("vrOcht") String vrOchtVak,
-                              @RequestParam("maMid") String maMidVak,
-                              @RequestParam("diMid") String diMidVak,
-                              @RequestParam("woMid") String woMidVak,
-                              @RequestParam("doMid") String doMidVak,
-                              @RequestParam("vrMid") String vrMidVak,
-                              @RequestParam("maAvo") String maAvoVak,
-                              @RequestParam("diAvo") String diAvoVak,
-                              @RequestParam("woAvo") String woAvoVak,
-                              @RequestParam("doAvo") String doAvoVak,
-                              @RequestParam("vrAvo") String vrAvoVak,
-                              Model model) {
+                                   @RequestParam(value = "week", required = false) int weekId,
+                                   @RequestParam("maOcht") String maOchtVak,
+                                   @RequestParam("diOcht") String diOchtVak,
+                                   @RequestParam("woOcht") String woOchtVak,
+                                   @RequestParam("doOcht") String doOchtVak,
+                                   @RequestParam("vrOcht") String vrOchtVak,
+                                   @RequestParam("maMid") String maMidVak,
+                                   @RequestParam("diMid") String diMidVak,
+                                   @RequestParam("woMid") String woMidVak,
+                                   @RequestParam("doMid") String doMidVak,
+                                   @RequestParam("vrMid") String vrMidVak,
+                                   @RequestParam("maAvo") String maAvoVak,
+                                   @RequestParam("diAvo") String diAvoVak,
+                                   @RequestParam("woAvo") String woAvoVak,
+                                   @RequestParam("doAvo") String doAvoVak,
+                                   @RequestParam("vrAvo") String vrAvoVak,
+                                   Model model) {
         Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
         model.addAttribute(cohort1);
         Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
@@ -135,19 +135,9 @@ public class RoosterController extends AbstractController {
     public HashMap<String, Integer> haalToegekendeUrenOp(Cohort cohort) {
         HashMap<String, Integer> vakUrenToegekend = new HashMap<>();
         List<Vak> vakken = vakRepo.findAll();
-        ArrayList<Integer> vakIds = new ArrayList<>();
-        for (Vak vak: vakken) {
-            vakIds.add(vak.getVakId());
-        }
+        ArrayList<Integer> vakIds = getVakIds(vakken);
         List<Week> weken = weekRepo.findWeeksByCohortId(cohort.getId());
-        ArrayList<Integer> dagIds = new ArrayList<>();
-        for (Week week: weken) {
-            dagIds.add(week.getDag("maandag").getId());
-            dagIds.add(week.getDag("dinsdag").getId());
-            dagIds.add(week.getDag("woensdag").getId());
-            dagIds.add(week.getDag("donderdag").getId());
-            dagIds.add(week.getDag("vrijdag").getId());
-        }
+        ArrayList<Integer> dagIds = getDagIds(weken);
         for (int vakId: vakIds) {
             int vakteller = 0;
             for (int dagId: dagIds) {
@@ -159,12 +149,32 @@ public class RoosterController extends AbstractController {
         return vakUrenToegekend;
     }
 
+    public ArrayList<Integer> getVakIds(List<Vak> vakken){
+        ArrayList<Integer> vakIds = new ArrayList<>();
+        for (Vak vak: vakken) {
+            vakIds.add(vak.getVakId());
+        }
+        return vakIds;
+    }
+
+    public ArrayList<Integer> getDagIds(List<Week> weken){
+        ArrayList<Integer> dagIds = new ArrayList<>();
+        for (Week week: weken) {
+            dagIds.add(week.getDag("maandag").getId());
+            dagIds.add(week.getDag("dinsdag").getId());
+            dagIds.add(week.getDag("woensdag").getId());
+            dagIds.add(week.getDag("donderdag").getId());
+            dagIds.add(week.getDag("vrijdag").getId());
+        }
+        return dagIds;
+    }
+
     public List<Vak> vakkenSorteren(List<Vak> vakkenlijst){
         Collections.sort(vakkenlijst);
         Vak geenLes = vakRepo.findByVakNaam("Geen les");
         vakkenlijst.remove(geenLes);
         vakkenlijst.add(0, geenLes);
-    return vakkenlijst;
+        return vakkenlijst;
     }
 
     public void saveVakkenPerDag(int weekId, String dagnaam, Vak ochtend, Vak middag, Vak avond) {
