@@ -13,10 +13,7 @@ import sqrt4.mijninzet.model.Voorkeur;
 import sqrt4.mijninzet.repository.*;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Controller
@@ -29,11 +26,12 @@ public class KoppelDocentenController extends AbstractController {
     @Autowired
     private WeekRepository weekRepository;
     @Autowired
-    private DagRepository dagRepository;
-    @Autowired
-    private DagdeelRepository dagdeelRepository;
-    @Autowired
     private VoorkeurenRepository voorkeurenRepository;
+
+    public static final String[] DAGEN = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
+    public static final String[] DAGDELENOCHTEND = {"MAO","DIO","WOO","DOO","VRO"};
+    public static final String[] DAGDELENMIDDAG = {"MAM","DIM","WOM","DOM","VRM"};
+    public static final String[] DAGDELENAVOND = {"MAA","DIA","WOA","DOA","VRA"};
 
     @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
@@ -86,79 +84,29 @@ public class KoppelDocentenController extends AbstractController {
     }
 
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
-    public String slaWeekOp(@RequestParam(value = "cohortNaam", required = false) String cohortNaam,
-                            @RequestParam(value = "week", required = false) int weekId,
-                            @RequestParam("maOch") long maOchtDoc,
-                            @RequestParam("diOch") long diOchtDoc,
-                            @RequestParam("woOch") long woOchtDoc,
-                            @RequestParam("doOch") long doOchtDoc,
-                            @RequestParam("vrOch") long vrOchtDoc,
-                            @RequestParam("maMid") long maMidDoc,
-                            @RequestParam("diMid") long diMidDoc,
-                            @RequestParam("woMid") long woMidDoc,
-                            @RequestParam("doMid") long doMidDoc,
-                            @RequestParam("vrMid") long vrMidDoc,
-                            @RequestParam("maAvo") long maAvoDoc,
-                            @RequestParam("diAvo") long diAvoDoc,
-                            @RequestParam("woAvo") long woAvoDoc,
-                            @RequestParam("doAvo") long doAvoDoc,
-                            @RequestParam("vrAvo") long vrAvoDoc,
-                            Model model) {
+    public String slaWeekOp(@RequestParam Map<String, String> allParams, Model model) {
+        Set<String> keys = allParams.keySet();
+        ArrayList<User> docenten = new ArrayList<>();
 
+        String[] array = keys.toArray(new String[keys.size()]);
+        for (int i = 2; i < array.length ; i++) {
+            docenten.add(userRepository.findUserById(Long.parseLong(allParams.get(array[i]))));
+        }
 
-        Cohort cohort = cohortRepository.findByCohortNaam(cohortNaam);
-        System.out.println(cohortNaam);
-        Week week = weekRepository.findById(weekId);
+        saveDocentPerWeek(Integer.parseInt(allParams.get(array[1])), DAGEN, docenten);
 
-        User docent1 = userRepository.findUserById(maOchtDoc);
-        User docent2 = userRepository.findUserById(maMidDoc);
-        User docent3 = userRepository.findUserById(maAvoDoc);
-
-        User docent4 = userRepository.findUserById(diOchtDoc);
-        User docent5 = userRepository.findUserById(diMidDoc);
-        User docent6 = userRepository.findUserById(diAvoDoc);
-
-        User docent7 = userRepository.findUserById(woOchtDoc);
-        User docent8 = userRepository.findUserById(woMidDoc);
-        User docent9 = userRepository.findUserById(woAvoDoc);
-
-        User docent10 = userRepository.findUserById(doOchtDoc);
-        User docent11 = userRepository.findUserById(doMidDoc);
-        User docent12 = userRepository.findUserById(doAvoDoc);
-
-        User docent13 = userRepository.findUserById(vrOchtDoc);
-        User docent14 = userRepository.findUserById(vrMidDoc);
-        User docent15 = userRepository.findUserById(vrAvoDoc);
-
-        saveDocentPerDag(weekId, "maandag", docent1, docent2, docent3);
-        saveDocentPerDag(weekId, "dinsdag", docent4, docent5, docent6);
-        saveDocentPerDag(weekId, "woensdag", docent7, docent8, docent9);
-        saveDocentPerDag(weekId, "donderdag", docent10, docent11, docent12);
-        saveDocentPerDag(weekId, "vrijdag", docent13, docent14, docent15);
-
+        Cohort cohort = cohortRepository.findByCohortNaam(allParams.get(array[0]));
         model.addAttribute("cohort", cohort);
-
         List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
 
-        List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
-
-        model.addAttribute("MAO", getDocentenInOchtend("maandag"));
-        model.addAttribute("MAM", getDocentenInMiddag("maandag"));
-        model.addAttribute("MAA", getDocentenInAvond("maandag"));
-        model.addAttribute("DIO", getDocentenInOchtend("dinsdag"));
-        model.addAttribute("DIM", getDocentenInMiddag("dinsdag"));
-        model.addAttribute("DIA", getDocentenInAvond("dinsdag"));
-        model.addAttribute("WOO", getDocentenInOchtend("woensdag"));
-        model.addAttribute("WOM", getDocentenInMiddag("woensdag"));
-        model.addAttribute("WOA", getDocentenInAvond("woensdag"));
-        model.addAttribute("DOO", getDocentenInOchtend("donderdag"));
-        model.addAttribute("DOM", getDocentenInMiddag("donderdag"));
-        model.addAttribute("DOA", getDocentenInAvond("donderdag"));
-        model.addAttribute("VRO", getDocentenInOchtend("vrijdag"));
-        model.addAttribute("VRM", getDocentenInMiddag("vrijdag"));
-        model.addAttribute("VRA", getDocentenInAvond("vrijdag"));
-
+        for (int i = 0; i < DAGDELENOCHTEND.length; i++) {
+            for (int j = 0; j < DAGEN.length ; j++) {
+                model.addAttribute(DAGDELENOCHTEND[i], getDocentenInOchtend(DAGEN[j]));
+                model.addAttribute(DAGDELENMIDDAG[i], getDocentenInMiddag(DAGEN[j]));
+                model.addAttribute(DAGDELENAVOND[i], getDocentenInAvond(DAGEN[j]));
+            }
+        }
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
@@ -179,11 +127,21 @@ public class KoppelDocentenController extends AbstractController {
         return string;
     }
 
-    public void saveDocentPerDag(int weekId, String dagnaam, User ochtend, User middag, User avond) {
+    private void saveDocentPerDag(int weekId, String dagnaam, User ochtend, User middag, User avond) {
         Week week = weekRepository.findById(weekId);
         week.getDag(dagnaam).getOchtend().setDocent(ochtend);
         week.getDag(dagnaam).getMiddag().setDocent(middag);
         week.getDag(dagnaam).getAvond().setDocent(avond);
         weekRepository.save(week);
     }
+
+    private void saveDocentPerWeek(int weekId, String[] dagen, ArrayList<User> docenten) {
+        saveDocentPerDag(weekId, dagen[0], docenten.get(0), docenten.get(5), docenten.get(11));
+        saveDocentPerDag(weekId, dagen[1], docenten.get(1), docenten.get(6), docenten.get(11));
+        saveDocentPerDag(weekId, dagen[2], docenten.get(2), docenten.get(7), docenten.get(12));
+        saveDocentPerDag(weekId, dagen[3], docenten.get(3), docenten.get(8), docenten.get(13));
+        saveDocentPerDag(weekId, dagen[4], docenten.get(4), docenten.get(9), docenten.get(14));
+    }
+
+
 }
