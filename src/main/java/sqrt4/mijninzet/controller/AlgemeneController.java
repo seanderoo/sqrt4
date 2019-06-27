@@ -104,7 +104,8 @@ public class AlgemeneController extends AbstractController {
 
     @RequestMapping(value = "/roosteraar/docenten-koppelen-gekozen-cohort/{dagdeel}", method = RequestMethod.GET)
     public long[] docentenOphalen(@PathVariable Dagdeel dagdeel) {
-//        dagdeelRepository. Hier verder!
+
+        dagdeelRepository.
 
 
         long[] beschikbareDocenten = {};

@@ -403,15 +403,15 @@
         return tekst;
     }
 
-    function wipeClassesSelectAndOptions(array) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].id !== "week") {
-                console.log("Classes voor het verwijderen: " + array[i].className);
-                array[i].className = "";
-                console.log("Classes na het verwijderen: " + array[i].className);
+    function wipeClassesSelectAndOptions(arrays) {
+        for (var i = 0; i < arrays.length; i++) {
+            if (arrays[i].id !== "week") {
+                console.log("Classes voor het verwijderen: " + arrays[i].className);
+                arrays[i].className = "";
+                console.log("Classes na het verwijderen: " + arrays[i].className);
                 // array[i].innerHTML = oudVoorkeurcijferVerwijderen(array[i]); //werkt dit?
 
-                var nextArray = array[i].options;
+                var nextArray = arrays[i].options;
 
                 try {
                     if (nextArray.length > 1) {
@@ -423,7 +423,6 @@
                 } catch (error) {
                     console.log("not an array x_x");
                 }
-
             }
         }
     }
