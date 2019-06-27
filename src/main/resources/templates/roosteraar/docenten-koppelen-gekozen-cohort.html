@@ -223,31 +223,45 @@
         request.send();
     }
 
-    function loadDocentenDagdeel() {
-        var request = new XMLHttpRequest();
-        var dagdeelnr = document.getElementById("docMaO").value;
-        var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + dagdeelnr;
-        console.log("load docenten: " + url);
-        request.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var data = JSON.parse(this.responseText);
-                document.getElementById("docMaO").options = data;
+    document.addEventListener("mouseover",
+        function loadDocentenDagdeel(e) {
+            var doel = e.target;
+            var bijbehorendVak = bijbehorendVakOphalen(doel);
 
-                voorkeurenLaden();
+            if (doel.tagName === 'SELECT') {
+                var request = new XMLHttpRequest();
+                var selectId = doel.id;
+                var vaknaam = bijbehorendVak.innerHTML;
+                var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + vaknaam + '/' + selectId;
+                console.log("load docenten: " + url);
+                request.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = JSON.parse(this.responseText);
+                        doel.options.value = data; //let op: dit moet wss in een loop gebeuren!
+
+                        // voorkeurenLaden();
+                    }
+                };
+                request.open("GET", url, true);
+                request.send();
             }
-        };
-        request.open("GET", url, true);
-        request.send();
-    }
 
-    document.addEventListener("click", function (ev) {
-        var selector = ev.target;
-        var parent1 = selector.parentNode;
+        });
+
+
+    function bijbehorendVakOphalen(doel) {
+        var parent1 = doel.parentNode;
         var parent1CellIndex = parent1.cellIndex;
         var parent2 = parent1.parentNode;
         var vorigeTableRow = parent2.previousElementSibling;
         var kiendjes = vorigeTableRow.childNodes;
         var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1CellIndex)];
+        return kiendjeBoven;
+    }
+
+    document.addEventListener("click", function (ev) {
+        var selector = ev.target;
+        var bijbehorendVak = bijbehorendVakOphalen(selector);
 
         var selectors = window.document.getElementsByTagName("select");
 
@@ -256,7 +270,7 @@
                 wipeClassesSelectAndOptions(selectors);
 
                 var options = selector.options;
-                console.log("vak: " + kiendjeBoven.innerText);
+                console.log("vak: " + bijbehorendVak.innerText);
                 for (var i = 0; i < options.length; i++) {
                     console.log("-->" + options[i].text + ", class: " + options[i].className);
                 }
