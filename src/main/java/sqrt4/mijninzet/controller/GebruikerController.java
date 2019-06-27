@@ -40,8 +40,8 @@ public class GebruikerController extends AbstractController {
         user.setRoles(user.getRoles().toUpperCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(ACTIVE);
-        addWeek(user);
         userRepository.save(user);
+        addWeek(user);
         List<User> users = gebruikersLijstZonder("No");
         model.addAttribute("gebruikers", users);
         return "admin/overzicht-gebruikers";
