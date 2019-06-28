@@ -32,6 +32,7 @@ public class KoppelDocentenController extends AbstractController {
     public static final String[] DAGDELENOCHTEND = {"MAO","DIO","WOO","DOO","VRO"};
     public static final String[] DAGDELENMIDDAG = {"MAM","DIM","WOM","DOM","VRM"};
     public static final String[] DAGDELENAVOND = {"MAA","DIA","WOA","DOA","VRA"};
+    public static final ArrayList<User> docenten = new ArrayList<>();
 
     @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
@@ -60,22 +61,8 @@ public class KoppelDocentenController extends AbstractController {
         List<User> docentList = userRepository.findAllByRolesContaining("DOCENT");
         model.addAttribute("docentList", docentList);
 
-        model.addAttribute("MAO", getDocentenInOchtend("maandag"));
-        model.addAttribute("MAM", getDocentenInMiddag("maandag"));
-        model.addAttribute("MAA", getDocentenInAvond("maandag"));
-        model.addAttribute("DIO", getDocentenInOchtend("dinsdag"));
-        model.addAttribute("DIM", getDocentenInMiddag("dinsdag"));
-        model.addAttribute("DIA", getDocentenInAvond("dinsdag"));
-        model.addAttribute("WOO", getDocentenInOchtend("woensdag"));
-        model.addAttribute("WOM", getDocentenInMiddag("woensdag"));
-        model.addAttribute("WOA", getDocentenInAvond("woensdag"));
-        model.addAttribute("DOO", getDocentenInOchtend("donderdag"));
-        model.addAttribute("DOM", getDocentenInMiddag("donderdag"));
-        model.addAttribute("DOA", getDocentenInAvond("donderdag"));
-        model.addAttribute("VRO", getDocentenInOchtend("vrijdag"));
-        model.addAttribute("VRM", getDocentenInMiddag("vrijdag"));
-        model.addAttribute("VRA", getDocentenInAvond("vrijdag"));
-
+        Map<String, List<User>> map = mapMaker(DAGDELENOCHTEND, DAGDELENMIDDAG, DAGDELENAVOND, DAGEN);
+        model.addAllAttributes(map);
 
         List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
         String voorkeurenString = zetOmNaarString(voorkeuren);
@@ -86,7 +73,6 @@ public class KoppelDocentenController extends AbstractController {
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
     public String slaWeekOp(@RequestParam Map<String, String> allParams, Model model) {
         Set<String> keys = allParams.keySet();
-        ArrayList<User> docenten = new ArrayList<>();
 
         String[] array = keys.toArray(new String[keys.size()]);
         for (int i = 2; i < array.length ; i++) {
@@ -100,13 +86,8 @@ public class KoppelDocentenController extends AbstractController {
         List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
 
-        for (int i = 0; i < DAGDELENOCHTEND.length; i++) {
-            for (int j = 0; j < DAGEN.length ; j++) {
-                model.addAttribute(DAGDELENOCHTEND[i], getDocentenInOchtend(DAGEN[j]));
-                model.addAttribute(DAGDELENMIDDAG[i], getDocentenInMiddag(DAGEN[j]));
-                model.addAttribute(DAGDELENAVOND[i], getDocentenInAvond(DAGEN[j]));
-            }
-        }
+        Map<String, List<User>> map = mapMaker(DAGDELENOCHTEND, DAGDELENMIDDAG, DAGDELENAVOND, DAGEN);
+        model.addAllAttributes(map);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
@@ -141,6 +122,16 @@ public class KoppelDocentenController extends AbstractController {
         saveDocentPerDag(weekId, dagen[2], docenten.get(2), docenten.get(7), docenten.get(12));
         saveDocentPerDag(weekId, dagen[3], docenten.get(3), docenten.get(8), docenten.get(13));
         saveDocentPerDag(weekId, dagen[4], docenten.get(4), docenten.get(9), docenten.get(14));
+    }
+
+    private Map<String, List<User>> mapMaker(String[] dagdelenOchtend, String[] dagdelenMiddag, String[] dagdelenAvond, String[] dagen) {
+        Map<String, List<User>> map = new HashMap<>();
+        for (int i = 0; i < DAGEN.length; i++) {
+            map.put(dagdelenOchtend[i], getDocentenInOchtend(dagen[i]));
+            map.put(dagdelenMiddag[i], getDocentenInMiddag(dagen[i]));
+            map.put(dagdelenAvond[i], getDocentenInAvond(dagen[i]));
+        }
+        return map;
     }
 
 
