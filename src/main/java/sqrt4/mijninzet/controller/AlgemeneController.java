@@ -108,17 +108,26 @@ public class AlgemeneController extends AbstractController {
     public String[] docentenOphalen(@PathVariable String vaknaam, @PathVariable String dagdeelnaam) {
         Vak vak = vakRepository.findByVakNaam(vaknaam);
         List<User> docenten = haalDocentenJuistDagdeel(dagdeelnaam);
-
         String[] docentnamenMetVoorkeur = new String[docenten.size()];
 
         for (int i = 0; i < docenten.size(); i++) {
-            String naam = docenten.get(i).getFullName();
-            Voorkeur voorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vak, docenten.get(i));
-            docentnamenMetVoorkeur[i] = naam + ": " + voorkeur.getVoorkeurGebruiker();
-            System.out.println(docentnamenMetVoorkeur[i]);
+            docentnamenMetVoorkeur[i] = voorkeurToevoegen(docenten.get(i), vak);
         }
-
         return docentnamenMetVoorkeur;
+    }
+
+    private String voorkeurToevoegen(User docent, Vak vak) {
+        String naamEnVoorkeur = "";
+        Voorkeur voorkeur = null;
+        voorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vak, docent);
+        if (voorkeur != null) {
+            if (voorkeur.getVoorkeurGebruiker() > 0 && voorkeur.getVoorkeurGebruiker() < 4) {
+                naamEnVoorkeur = docent.getFullName() + ": " + voorkeur.getVoorkeurGebruiker();
+            }
+        } else {
+            naamEnVoorkeur = docent.getFullName();
+        }
+        return naamEnVoorkeur;
     }
 
     private List<User> haalDocentenJuistDagdeel(String dagdeelnaam) {
@@ -128,7 +137,7 @@ public class AlgemeneController extends AbstractController {
 
         for (int i = 0; i < dagDelen.length; i++) {
             if (dagDelen[i].equals(dagdeelnaam)) {
-                String dagnaam = getDagnaam(dagdeelnaam.substring(3,4));
+                String dagnaam = getDagnaam(dagdeelnaam.substring(3,5));
                 if (dagdeelnaam.substring(5).equals("O")) {
                     docenten = getDocentenInOchtend(dagnaam);
                 } else if (dagdeelnaam.substring(5).equals("M")) {

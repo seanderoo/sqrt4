@@ -42,19 +42,19 @@
         </tr>
         <tr>
             <td><select id="docMaO" th:name="maOch" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${MAO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${MAO}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDiO" th:name="diOch" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DIO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DIO}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docWoO" th:name="woOch" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${WOO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${WOO}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDoO" th:name="doOch" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DOO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DOO}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docVrO" th:name="vrOch" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${VRO}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${VRO}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
         </tr>
         <tr>
@@ -67,19 +67,19 @@
         </tr>
         <tr>
             <td><select id="docMaM" th:name="maMid" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${MAM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${MAM}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDiM" th:name="diMid" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DIM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DIM}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docWoM" th:name="woMid" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${WOM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${WOM}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDoM" th:name="doMid" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DOM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DOM}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docVrM" th:name="vrMid" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${VRM}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${VRM}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
         </tr>
         <tr>
@@ -92,19 +92,19 @@
         </tr>
         <tr>
             <td><select id="docMaA" th:name="maAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${MAA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${MAA}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDiA" th:name="diAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DIA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DIA}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docWoA" th:name="woAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${WOA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${WOA}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docDoA" th:name="doAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${DOA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${DOA}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
             <td><select id="docVrA" th:name="vrAvo" onchange="this.className=this.options[this.selectedIndex].className">
-                <option th:each="docent: ${VRA}" th:value="${docent.getId()}" th:text="${docent.getFirstName() + ' ' + docent.getLastName()}" th:name="${docent.getId()}">
+                <option th:each="docent: ${VRA}" th:value="${docent.getId()}" th:text="${docent.getFullName()}" th:name="${docent.getId()}">
             </select></td>
         </tr>
         </tbody>
@@ -222,13 +222,14 @@
         request.open("GET", url, true);
         request.send();
     }
-
     document.addEventListener("mouseover",
         function loadDocentenDagdeel(e) {
             var doel = e.target;
-            var bijbehorendVak = bijbehorendVakOphalen(doel);
+            var opties = doel.options;
 
-            if (doel.tagName === 'SELECT') {
+                if (doel.tagName === 'SELECT' && doel.id !== "week") {
+                var bijbehorendVak = bijbehorendVakOphalen(doel);
+
                 var request = new XMLHttpRequest();
                 var selectId = doel.id;
                 var vaknaam = bijbehorendVak.innerHTML;
@@ -237,8 +238,10 @@
                 request.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         var data = JSON.parse(this.responseText);
-                        doel.options.value = data; //let op: dit moet wss in een loop gebeuren!
-
+                        console.log("opgehaalde data: " + data);
+                        for (var i = 0; i < opties.length; i++) {
+                            opties[i].innerText = data[i];
+                        }
                         // voorkeurenLaden();
                     }
                 };
@@ -259,7 +262,7 @@
         return kiendjeBoven;
     }
 
-    document.addEventListener("click", function (ev) {
+    document.addEventListener("", function (ev) {
         var selector = ev.target;
         var bijbehorendVak = bijbehorendVakOphalen(selector);
 

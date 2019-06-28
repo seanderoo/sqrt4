@@ -103,7 +103,7 @@ button:not(.dropbtn):not(.collapsible), input {
     background:-ms-linear-gradient(top, #25167a 5%, #7892c2 100%);
     background:linear-gradient(to bottom, #25167a 5%, #7892c2 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7892c2', endColorstr='#476e9e',GradientType=0);
-    background-color:#25167a;
+    background-color:#ffffff;
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
     border-radius:10px;
@@ -133,7 +133,7 @@ button:hover:not(.dropbtn):not(.collapsible), input:hover {
     background:-ms-linear-gradient(top, #25167a 5%, #7892c2 100%);
     background:linear-gradient(to bottom, #25167a 5%, #7892c2 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
-    background-color:#25167a;
+    background-color:#ffffff;
     outline: none;
 }
 
