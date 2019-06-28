@@ -1,14 +1,15 @@
 package sqrt4.mijninzet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sqrt4.mijninzet.model.Beschikbaarheid.Dagdeel;
 import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.model.Vak;
 import sqrt4.mijninzet.model.Voorkeur;
+import sqrt4.mijninzet.repository.DagdeelRepository;
+import sqrt4.mijninzet.repository.UserRepository;
+import sqrt4.mijninzet.repository.VakRepository;
 import sqrt4.mijninzet.repository.VoorkeurenRepository;
 
 import java.util.Arrays;
@@ -16,10 +17,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ajax")
-public class AlgemeneController {
+public class AlgemeneController extends AbstractController {
 
     @Autowired
     private VoorkeurenRepository voorkeurenRepository;
+    @Autowired
+    private VakRepository vakRepository;
 
     @RequestMapping(value = "/voorkeuren/{user}/{vak}", method = RequestMethod.POST)
     public Integer testRest(@PathVariable User user, @PathVariable Vak vak) {
@@ -96,5 +99,65 @@ public class AlgemeneController {
         long vrAvo = week.getVrijdag().getAvond().getDocent().getId();
         long[] list = {maOcht, maMid, maAvo, diOcht, diMid, diAvo, woOcht, woMid, woAvo, doOcht, doMid, doAvo, vrOcht, vrMid, vrAvo};
         return list;
+    }
+
+    @RequestMapping(value = "/roosteraar/docenten-koppelen-gekozen-cohort/{vaknaam}/{dagdeelnaam}", method = RequestMethod.GET)
+    public String[] docentenOphalen(@PathVariable String vaknaam, @PathVariable String dagdeelnaam) {
+        Vak vak = vakRepository.findByVakNaam(vaknaam);
+        List<User> docenten = haalDocentenJuistDagdeel(dagdeelnaam);
+        String[] docentnamenMetVoorkeur = new String[docenten.size()];
+
+        for (int i = 0; i < docenten.size(); i++) {
+            docentnamenMetVoorkeur[i] = voorkeurToevoegen(docenten.get(i), vak);
+        }
+        return docentnamenMetVoorkeur;
+    }
+
+    private String voorkeurToevoegen(User docent, Vak vak) {
+        String naamEnVoorkeur = "";
+        Voorkeur voorkeur = null;
+        voorkeur = voorkeurenRepository.findVoorkeurByVakAndUser(vak, docent);
+        if (voorkeur != null) {
+            if (voorkeur.getVoorkeurGebruiker() > 0 && voorkeur.getVoorkeurGebruiker() < 4) {
+                naamEnVoorkeur = docent.getFullName() + ": " + voorkeur.getVoorkeurGebruiker();
+            }
+        } else {
+            naamEnVoorkeur = docent.getFullName();
+        }
+        return naamEnVoorkeur;
+    }
+
+    private List<User> haalDocentenJuistDagdeel(String dagdeelnaam) {
+        String[] dagDelen = {"docMaO", "docMaM", "docMaA", "docDiO", "docDiM", "docDiA", "docWoO", "docWoM", "docWoA",
+                "docDoO", "docDoM", "docDoA", "docVrO", "docVrM", "docVrA"};
+        List<User> docenten = null;
+
+        for (int i = 0; i < dagDelen.length; i++) {
+            if (dagDelen[i].equals(dagdeelnaam)) {
+                String dagnaam = getDagnaam(dagdeelnaam.substring(3,5));
+                if (dagdeelnaam.substring(5).equals("O")) {
+                    docenten = getDocentenInOchtend(dagnaam);
+                } else if (dagdeelnaam.substring(5).equals("M")) {
+                    docenten = getDocentenInMiddag(dagnaam);
+                } else if (dagdeelnaam.substring(5).equals("A")) {
+                    docenten = getDocentenInAvond(dagnaam);
+                }
+                break;
+            }
+        }
+        return docenten;
+    }
+
+    private String getDagnaam(String string) {
+        String[] dagnaamKort = {"Ma", "Di", "Wo", "Do", "Vr"};
+        String[] dagnaamLang = {"maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"};
+        String dagnaam = "";
+
+        for (int i = 0; i < dagnaamKort.length; i++) {
+            if (string.equals(dagnaamKort[i])){
+                dagnaam = dagnaamLang[i];
+            }
+        }
+        return dagnaam;
     }
 }

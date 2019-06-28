@@ -20,6 +20,7 @@
     <table class="TableFormatter">
         <input name="cohortNaam" type="hidden" th:value="${cohort.getCohortNaam()}">
         <thead>
+        <input type="hidden" th:value="${voorkeuren}" id="voorkeuren">
         <th><select id="week" name="week" onchange="loadVakken();loadDocenten()">
             <option value="geenKeuze">--Kies een week--</option>
             <option th:each="week : ${weken}" th:value="${week.getId()}" th:text="${week.getWeekNummerTekst()}"></option>
@@ -204,6 +205,9 @@
     }
 
     function loadDocenten() {
+        var selectors = window.document.getElementsByTagName("select");
+        wipeClassesSelectAndOptions(selectors);
+
         var request = new XMLHttpRequest();
         var weeknr = document.getElementById("week").value;
         var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + weeknr;
@@ -220,6 +224,122 @@
         };
         request.open("GET", url, true);
         request.send();
+    }
+
+    document.addEventListener("mouseover",
+        function loadDocentenDagdeel(e) {
+
+            var doel = e.target;
+            var opties = doel.options;
+
+                if (doel.tagName === 'SELECT' && doel.id !== "week") {
+                var bijbehorendVak = bijbehorendVakOphalen(doel);
+
+                var request = new XMLHttpRequest();
+                var selectId = doel.id;
+                var vaknaam = bijbehorendVak.innerHTML;
+                var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + vaknaam + '/' + selectId;
+                request.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = JSON.parse(this.responseText);
+                        for (var i = 0; i < opties.length; i++) {
+                            opties[i].innerText = data[i];
+                        }
+                        voorkeurenLaden(doel);
+                    }
+                };
+                request.open("GET", url, true);
+                request.send();
+            }
+        });
+
+    function bijbehorendVakOphalen(doel) {
+        var parent1 = doel.parentNode;
+        var parent1CellIndex = parent1.cellIndex;
+        var parent2 = parent1.parentNode;
+        var vorigeTableRow = parent2.previousElementSibling;
+        var kiendjes = vorigeTableRow.childNodes;
+        var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1CellIndex)];
+        return kiendjeBoven;
+    }
+
+    function voorkeurenLaden(doel) {
+        //De trojaanse string wordt opgehaald en gesplitst in Vookeur-objectcombinaties.
+        var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
+        var gesplitsteVoorkeuren = voorkeuren.split(",");
+        getVoorkeuren(doel, gesplitsteVoorkeuren);
+    }
+
+    function getVoorkeuren(tagname, gesplitsteVoorkeuren) {
+        var selector = tagname;
+        var bijbehorendVak = bijbehorendVakOphalen(selector);
+        var checkVakValue = bijbehorendVak.innerText;
+        var opties = selector.options;
+
+        var VOORKEUR = 0;
+        var USER = 1;
+        var VAK = 2;
+
+        //Hier worden de Voorkeurscombi's opgesplitst en de css-classes toegewezen aan de bijbehorende docenten
+        for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
+            var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
+            var voorkeur = voorkeurgroep[VOORKEUR];
+            var user = voorkeurgroep[USER];
+            var vak = voorkeurgroep[VAK];
+            toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+        }
+
+        //De overige docenten krijgen de class 'geenkeuze'
+        for (var j = 0; j < opties.length; j++) {
+            if (opties[j].className === '') {
+                opties[j].classList.add('geenkeuze');
+            }
+        }
+    };
+
+    function krijgPrevNodeIndex(index) {
+        //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
+        //ook de lege tekstvelden worden in de childnode-array opgenomen.
+        return (index + 1) * 2 + 1;
+    }
+
+    function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
+        if (vak === checkVak) {
+            if (voorkeur == 3) {
+                voorkeurAanhechten(opties, user, 'graag');
+            } else if (voorkeur == 2) {
+                voorkeurAanhechten(opties, user, 'mwa');
+            } else if (voorkeur == 1) {
+                voorkeurAanhechten(opties, user, 'lieverniet');
+            }
+        }
+    }
+
+    function voorkeurAanhechten(opties, user, voorkeursklasse) {
+        for (var j = 0; j < opties.length; j++) {
+            if (opties[j].value == user) {
+                opties[j].classList.add(voorkeursklasse);
+            }
+        }
+    }
+
+    function wipeClassesSelectAndOptions(arrays) {
+        for (var i = 0; i < arrays.length; i++) {
+            if (arrays[i].id !== "week") {
+                arrays[i].className = "";
+                var nextArray = arrays[i].options;
+                try {
+                    if (nextArray.length > 1) {
+                        console.log("Ja, er zit nog een array in.");
+                        wipeClassesSelectAndOptions(nextArray);
+                    } else {
+                        console.log("Dat was het: de arrays zijn op.");
+                    }
+                } catch (error) {
+                    console.log("not an array x_x");
+                }
+            }
+        }
     }
 </script>
 </body>
