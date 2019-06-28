@@ -11,6 +11,8 @@ import sqrt4.mijninzet.model.Beschikbaarheid.Week;
 import sqrt4.mijninzet.model.User;
 import sqrt4.mijninzet.repository.WeekRepository;
 
+import java.util.Map;
+
 @RequestMapping("/docent")
 @Controller
 public class AlgemeneBeschikbaarheidController extends AbstractController {
@@ -34,7 +36,6 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
         }
 
         User actieveUser = voegActiveUserToe();
-//        actieveUser.setWeek(algemeneWeek);
         algemeneWeek.setUser(actieveUser);
         weekRepo.save(algemeneWeek);
 
@@ -44,7 +45,8 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
     }
 
     @PostMapping(value = "/algemene-beschikbaarheid-updaten")
-    public String updateAlgemeneBeschikbaarheid(@RequestParam("maandagochtend") boolean maOBeschikbaar,
+    public String updateAlgemeneBeschikbaarheid(@RequestParam Map<String, Boolean> allParams,
+                                                @RequestParam("maandagochtend") boolean maOBeschikbaar,
                                                 @RequestParam("maandagmiddag") boolean maMBeschikbaar,
                                                 @RequestParam("maandagavond") boolean maABeschikbaar,
                                                 @RequestParam("dinsdagochtend") boolean diOBeschikbaar,
@@ -61,6 +63,7 @@ public class AlgemeneBeschikbaarheidController extends AbstractController {
                                                 @RequestParam("vrijdagavond") boolean vrABeschikbaar,
                                                 Model model) {
 
+        System.out.println(allParams);
         Week algemeneWeek = weekRepo.findByWeekNummerAndUser(NUMMER_ALGEMENE_WEEK,voegActiveUserToe());
 
         algemeneWeek.getDag("maandag").getOchtend().setBeschikbaar(maOBeschikbaar);
