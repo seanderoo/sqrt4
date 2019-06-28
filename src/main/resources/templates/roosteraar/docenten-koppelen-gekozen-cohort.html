@@ -205,6 +205,9 @@
     }
 
     function loadDocenten() {
+        var selectors = window.document.getElementsByTagName("select");
+        wipeClassesSelectAndOptions(selectors);
+
         var request = new XMLHttpRequest();
         var weeknr = document.getElementById("week").value;
         var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + weeknr;
@@ -222,8 +225,10 @@
         request.open("GET", url, true);
         request.send();
     }
+
     document.addEventListener("mouseover",
         function loadDocentenDagdeel(e) {
+
             var doel = e.target;
             var opties = doel.options;
 
@@ -234,23 +239,19 @@
                 var selectId = doel.id;
                 var vaknaam = bijbehorendVak.innerHTML;
                 var url = '/ajax/roosteraar/docenten-koppelen-gekozen-cohort/' + vaknaam + '/' + selectId;
-                console.log("load docenten: " + url);
                 request.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         var data = JSON.parse(this.responseText);
-                        console.log("opgehaalde data: " + data);
                         for (var i = 0; i < opties.length; i++) {
                             opties[i].innerText = data[i];
                         }
-                        // voorkeurenLaden();
+                        voorkeurenLaden(doel);
                     }
                 };
                 request.open("GET", url, true);
                 request.send();
             }
-
         });
-
 
     function bijbehorendVakOphalen(doel) {
         var parent1 = doel.parentNode;
@@ -262,86 +263,39 @@
         return kiendjeBoven;
     }
 
-    document.addEventListener("", function (ev) {
-        var selector = ev.target;
+    function voorkeurenLaden(doel) {
+        //De trojaanse string wordt opgehaald en gesplitst in Vookeur-objectcombinaties.
+        var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
+        var gesplitsteVoorkeuren = voorkeuren.split(",");
+        getVoorkeuren(doel, gesplitsteVoorkeuren);
+    }
+
+    function getVoorkeuren(tagname, gesplitsteVoorkeuren) {
+        var selector = tagname;
         var bijbehorendVak = bijbehorendVakOphalen(selector);
+        var checkVakValue = bijbehorendVak.innerText;
+        var opties = selector.options;
 
-        var selectors = window.document.getElementsByTagName("select");
-
-        if (selector.id !== "week") {
-            if (selector.tagName === "SELECT") {
-                wipeClassesSelectAndOptions(selectors);
-
-                var options = selector.options;
-                console.log("vak: " + bijbehorendVak.innerText);
-                for (var i = 0; i < options.length; i++) {
-                    console.log("-->" + options[i].text + ", class: " + options[i].className);
-                }
-            }
-        }
-    });
-
-    function voorkeurenLaden() {
         var VOORKEUR = 0;
         var USER = 1;
         var VAK = 2;
 
-        //De trojaanse string wordt opgehaald en gesplitst in Vookeur-objectcombinaties.
-        var voorkeuren = document.getElementById("voorkeuren").getAttribute("value");
-        var gesplitsteVoorkeuren = voorkeuren.split(",");
-
-        var selectors = window.document.getElementsByTagName("select");
-        wipeClassesSelectAndOptions(selectors);
-
-        for (var j = 0; j < selectors.length; j++) {
-            if (selectors[j].id !== "week") {
-                getVoorkeuren(selectors[j]);
-            }
+        //Hier worden de Voorkeurscombi's opgesplitst en de css-classes toegewezen aan de bijbehorende docenten
+        for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
+            var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
+            var voorkeur = voorkeurgroep[VOORKEUR];
+            var user = voorkeurgroep[USER];
+            var vak = voorkeurgroep[VAK];
+            toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
         }
 
-        function getVoorkeuren(tagname) {
-            //De onderstaande vars zijn nodig om de id van de vaknaam boven de SELECT op te halen. Deze is nodig om met de
-            //vakId in de Voorkeurscombinatie op te halen.
-            var selector = tagname;
-            var parent1 = selector.parentNode;
-            var parent1CellIndex = parent1.cellIndex;
-            var parent2 = parent1.parentNode;
-            var vorigeTableRow = parent2.previousElementSibling;
-            var kiendjes = vorigeTableRow.childNodes;
-            // console.log("parent: "+ parent1 + ", index: " + parent1CellIndex);
-            // for (var i = 0; i < kiendjes.length; i++) {
-            //     console.log("kiendje " + (i+1) + ": " + kiendjes[i].textContent);
-            // }
-            var kiendjeBoven = kiendjes[krijgPrevNodeIndex(parent1CellIndex)];
-            // console.log("kiendje boven: " + kiendjeBoven);
-            // console.log("index = " + krijgPrevNodeIndex(parent1CellIndex));
-            // console.log("kiendje boven: " + kiendjes[krijgPrevNodeIndex(parent1CellIndex)]);
-            // console.log("kiendje boven: " + kiendjeBoven.textContent);
-
-            var checkVakValue = kiendjeBoven.innerText;
-            var opties = selector.options;
-
-
-            //Hier worden de Voorkeurscombi's opgesplitst.
-            for (var i = 0; i < gesplitsteVoorkeuren.length; i++) {
-                var voorkeurgroep = gesplitsteVoorkeuren[i].split("_");
-                var voorkeur = voorkeurgroep[VOORKEUR];
-                var user = voorkeurgroep[USER];
-                var vak = voorkeurgroep[VAK];
-
-                // console.log("Voorkeur nr. " + (i+1) + ": " + checkVakValue + " = " + vak);
-                // console.log("");
-
-                toonVoorkeur(voorkeur, user, vak, checkVakValue, opties);
+        //De overige docenten krijgen de class 'geenkeuze'
+        for (var j = 0; j < opties.length; j++) {
+            if (opties[j].className === '') {
+                opties[j].classList.add('geenkeuze');
             }
-
-            for (var j = 0; j < opties.length; j++) {
-                if (opties[j].className === '') {
-                    opties[j].classList.add('geenkeuze');
-                }
-            }
-        };
-    }
+        }
+    };
 
     function krijgPrevNodeIndex(index) {
         //Deze curieuze berekening is nodig omdat het aantal childnodes in de vak-regels in de tabel hoger is:
@@ -352,57 +306,28 @@
     function toonVoorkeur(voorkeur, user, vak, checkVak, opties) {
         if (vak === checkVak) {
             if (voorkeur == 3) {
-                voorkeurAanhechten(voorkeur, opties, user, 'graag');
+                voorkeurAanhechten(opties, user, 'graag');
             } else if (voorkeur == 2) {
-                voorkeurAanhechten(voorkeur, opties, user, 'mwa');
+                voorkeurAanhechten(opties, user, 'mwa');
             } else if (voorkeur == 1) {
-                voorkeurAanhechten(voorkeur, opties, user, 'lieverniet');
-            } else {
-                voorkeurAanhechten(0, opties, user, 'geenkeuze');
+                voorkeurAanhechten(opties, user, 'lieverniet');
             }
         }
     }
 
-    function voorkeurAanhechten(voorkeur, opties, user, voorkeursklasse) {
+    function voorkeurAanhechten(opties, user, voorkeursklasse) {
         for (var j = 0; j < opties.length; j++) {
             if (opties[j].value == user) {
                 opties[j].classList.add(voorkeursklasse);
-                if (voorkeur > 0) {
-                    opties[j].innerHTML += ": " + voorkeur;
-                }
             }
         }
-    }
-
-    function oudVoorkeurcijferVerwijderen(element) {
-        var tekst = element.innerHTML;
-        var lastChar = tekst.slice(-1);
-        console.log("tekst: " + tekst + "; lastChar: " + lastChar);
-        if (lastChar == 3) {
-            tekst = tekst.replace(": 3", "");
-            console.log("aangepast naar: " + tekst);
-        } else if (lastChar == 2) {
-            tekst = tekst.replace(": 2", "");
-            console.log("aangepast naar: " + tekst);
-        } else if (lastChar == 1) {
-            tekst = tekst.replace(": 1", "");
-            console.log("aangepast naar: " + tekst);
-        } else {
-            console.log("niet aangepast, blijft: " + tekst);
-        }
-        return tekst;
     }
 
     function wipeClassesSelectAndOptions(arrays) {
         for (var i = 0; i < arrays.length; i++) {
             if (arrays[i].id !== "week") {
-                console.log("Classes voor het verwijderen: " + arrays[i].className);
                 arrays[i].className = "";
-                console.log("Classes na het verwijderen: " + arrays[i].className);
-                // array[i].innerHTML = oudVoorkeurcijferVerwijderen(array[i]); //werkt dit?
-
                 var nextArray = arrays[i].options;
-
                 try {
                     if (nextArray.length > 1) {
                         console.log("Ja, er zit nog een array in.");
@@ -416,8 +341,6 @@
             }
         }
     }
-
-
 </script>
 </body>
 </html>
