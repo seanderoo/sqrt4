@@ -86,8 +86,7 @@ public class KoppelDocentenController extends AbstractController {
         List<Week> weken = weekRepository.findWeeksByCohortId(cohort.getId());
         model.addAttribute("weken", weken);
 
-        Map<String, List<User>> map = mapMaker(DAGDELENOCHTEND, DAGDELENMIDDAG, DAGDELENAVOND, DAGEN);
-        model.addAllAttributes(map);
+        model.addAllAttributes(mapMaker(DAGDELENOCHTEND, DAGDELENMIDDAG, DAGDELENAVOND, DAGEN));
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
