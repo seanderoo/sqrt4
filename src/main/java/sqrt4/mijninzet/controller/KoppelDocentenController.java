@@ -118,7 +118,7 @@ public class KoppelDocentenController extends AbstractController {
     }
 
     private void saveDocentPerWeek(int weekId, String[] dagen, ArrayList<User> docenten) {
-        saveDocentPerDag(weekId, dagen[0], docenten.get(0), docenten.get(5), docenten.get(11));
+        saveDocentPerDag(weekId, dagen[0], docenten.get(0), docenten.get(5), docenten.get(10));
         saveDocentPerDag(weekId, dagen[1], docenten.get(1), docenten.get(6), docenten.get(11));
         saveDocentPerDag(weekId, dagen[2], docenten.get(2), docenten.get(7), docenten.get(12));
         saveDocentPerDag(weekId, dagen[3], docenten.get(3), docenten.get(8), docenten.get(13));
