@@ -84,55 +84,55 @@
         </tr>
         <tr>
             <td th:value="ochtend">9:00 - 13:00</td>
-            <td><select id="maOcht" name="maOcht">
+            <td><select id="maOcht" th:name="maOcht">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="diOcht" name="diOcht">
+            <td><select id="diOcht" th:name="diOcht">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="woOcht" name="woOcht">
+            <td><select id="woOcht" th:name="woOcht">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="doOcht" name="doOcht">
+            <td><select id="doOcht" th:name="doOcht">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="vrOcht" name="vrOcht">
+            <td><select id="vrOcht" th:name="vrOcht">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
         </tr>
         <tr>
             <td th:value="middag">13:00 - 17:00</td>
-            <td><select id="maMid" name="maMid">
+            <td><select id="maMid" th:name="maMid">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="diMid" name="diMid">
+            <td><select id="diMid" th:name="diMid">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="woMid" name="woMid">
+            <td><select id="woMid" th:name="woMid">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="doMid" name="doMid">
+            <td><select id="doMid" th:name="doMid">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="vrMid" name="vrMid">
+            <td><select id="vrMid" th:name="vrMid">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
         </tr>
         <tr>
             <td th:value="avond">17:00 - 21:00</td>
-            <td><select id="maAvo" name="maAvo">
+            <td><select id="maAvo" th:name="maAvo">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="diAvo" name="diAvo">
+            <td><select id="diAvo" th:name="diAvo">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="woAvo" name="woAvo">
+            <td><select id="woAvo" th:name="woAvo">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="doAvo" name="doAvo">
+            <td><select id="doAvo" th:name="doAvo">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
-            <td><select id="vrAvo" name="vrAvo">
+            <td><select id="vrAvo" th:name="vrAvo">
                 <option th:each="vak: ${vakken}" th:value="${vak.getVakNaam()}" th:text="${vak.getVakNaam()}"></option>
             </select> </td>
         </tr>
