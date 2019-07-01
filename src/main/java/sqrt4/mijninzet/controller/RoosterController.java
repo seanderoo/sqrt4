@@ -62,41 +62,26 @@ public class RoosterController extends AbstractController {
         return "coordinator/rooster-maken-cohort-gekozen";
     }
     @PostMapping("coordinator/rooster-maken-cohort-gekozen")
-    public String weekOpslaanKarin(@RequestParam("cohortNaam") String cohortnaam,
-                                   @RequestParam(value = "week", required = false) int weekId,
-                                   @RequestParam("maOcht") String maOchtVak,
-                                   @RequestParam("diOcht") String diOchtVak,
-                                   @RequestParam("woOcht") String woOchtVak,
-                                   @RequestParam("doOcht") String doOchtVak,
-                                   @RequestParam("vrOcht") String vrOchtVak,
-                                   @RequestParam("maMid") String maMidVak,
-                                   @RequestParam("diMid") String diMidVak,
-                                   @RequestParam("woMid") String woMidVak,
-                                   @RequestParam("doMid") String doMidVak,
-                                   @RequestParam("vrMid") String vrMidVak,
-                                   @RequestParam("maAvo") String maAvoVak,
-                                   @RequestParam("diAvo") String diAvoVak,
-                                   @RequestParam("woAvo") String woAvoVak,
-                                   @RequestParam("doAvo") String doAvoVak,
-                                   @RequestParam("vrAvo") String vrAvoVak,
+    public String weekOpslaanKarin(@RequestParam Map<String, String> allParam,
                                    Model model) {
-        Cohort cohort1 = cohortRepo.findByCohortNaam(cohortnaam);
+        Cohort cohort1 = cohortRepo.findByCohortNaam(allParam.get("cohortNaam"));
         model.addAttribute(cohort1);
-        Vak vakMaOcht = vakRepo.findByVakNaam(maOchtVak);
-        Vak vakDiOcht = vakRepo.findByVakNaam(diOchtVak);
-        Vak vakWoOcht = vakRepo.findByVakNaam(woOchtVak);
-        Vak vakDoOcht = vakRepo.findByVakNaam(doOchtVak);
-        Vak vakVrOcht = vakRepo.findByVakNaam(vrOchtVak);
-        Vak vakMaMid = vakRepo.findByVakNaam(maMidVak);
-        Vak vakDiMid = vakRepo.findByVakNaam(diMidVak);
-        Vak vakWoMid = vakRepo.findByVakNaam(woMidVak);
-        Vak vakDoMid = vakRepo.findByVakNaam(doMidVak);
-        Vak vakVrMid = vakRepo.findByVakNaam(vrMidVak);
-        Vak vakMaAvo = vakRepo.findByVakNaam(maAvoVak);
-        Vak vakDiAvo = vakRepo.findByVakNaam(diAvoVak);
-        Vak vakWoAvo = vakRepo.findByVakNaam(woAvoVak);
-        Vak vakDoAvo = vakRepo.findByVakNaam(doAvoVak);
-        Vak vakVrAvo = vakRepo.findByVakNaam(vrAvoVak);
+        Vak vakMaOcht = vakRepo.findByVakNaam(allParam.get("maOcht"));
+        Vak vakDiOcht = vakRepo.findByVakNaam(allParam.get("diOcht"));
+        Vak vakWoOcht = vakRepo.findByVakNaam(allParam.get("woOcht"));
+        Vak vakDoOcht = vakRepo.findByVakNaam(allParam.get("doOcht"));
+        Vak vakVrOcht = vakRepo.findByVakNaam(allParam.get("vrOcht"));
+        Vak vakMaMid = vakRepo.findByVakNaam(allParam.get("maMid"));
+        Vak vakDiMid = vakRepo.findByVakNaam(allParam.get("diMid"));
+        Vak vakWoMid = vakRepo.findByVakNaam(allParam.get("woMid"));
+        Vak vakDoMid = vakRepo.findByVakNaam(allParam.get("doMid"));
+        Vak vakVrMid = vakRepo.findByVakNaam(allParam.get("vrMid"));
+        Vak vakMaAvo = vakRepo.findByVakNaam(allParam.get("maAvo"));
+        Vak vakDiAvo = vakRepo.findByVakNaam(allParam.get("diAvo"));
+        Vak vakWoAvo = vakRepo.findByVakNaam(allParam.get("woAvo"));
+        Vak vakDoAvo = vakRepo.findByVakNaam(allParam.get("doAvo"));
+        Vak vakVrAvo = vakRepo.findByVakNaam(allParam.get("vrAvo"));
+        int weekId = Integer.parseInt(allParam.get("week"));
         saveVakkenPerDag(weekId, "maandag", vakMaOcht,vakMaMid, vakMaAvo);
         saveVakkenPerDag(weekId, "dinsdag", vakDiOcht, vakDiMid, vakDiAvo);
         saveVakkenPerDag(weekId, "woensdag", vakWoOcht, vakWoMid, vakWoAvo);
