@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 @Entity
-public class Dag extends Week {
+public class Dag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
