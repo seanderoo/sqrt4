@@ -7,7 +7,7 @@ import sqrt4.mijninzet.model.Vak;
 import javax.persistence.*;
 
 @Entity
-public class Dagdeel {
+public class Dagdeel extends Dag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

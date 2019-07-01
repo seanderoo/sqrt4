@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Week {
+public class Week extends Cohort {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
