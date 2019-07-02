@@ -33,7 +33,6 @@ public class KoppelDocentenController extends AbstractController {
     public static final String[] DAGDELENOCHTEND = {"MAO","DIO","WOO","DOO","VRO"};
     public static final String[] DAGDELENMIDDAG = {"MAM","DIM","WOM","DOM","VRM"};
     public static final String[] DAGDELENAVOND = {"MAA","DIA","WOA","DOA","VRA"};
-    public static final ArrayList<User> docenten = new ArrayList<>();
 
     @GetMapping("roosteraar/docenten-koppelen-kies-cohort")
     public String koppelDocenten(Model model) {
@@ -74,7 +73,7 @@ public class KoppelDocentenController extends AbstractController {
     @PostMapping("roosteraar/docenten-koppelen-gekozen-cohort")
     public String slaWeekOp(@RequestParam Map<String, String> allParams, Model model) {
         Set<String> keys = allParams.keySet();
-
+        ArrayList<User> docenten = new ArrayList<>();
         String[] array = keys.toArray(new String[keys.size()]);
         for (int i = 2; i < array.length ; i++) {
             docenten.add(userRepository.findUserById(Long.parseLong(allParams.get(array[i]))));
