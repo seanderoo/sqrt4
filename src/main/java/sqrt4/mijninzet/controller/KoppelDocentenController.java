@@ -88,6 +88,10 @@ public class KoppelDocentenController extends AbstractController {
         model.addAttribute("weken", weken);
 
         model.addAllAttributes(mapMaker(DAGDELENOCHTEND, DAGDELENMIDDAG, DAGDELENAVOND, DAGEN));
+
+        List<Voorkeur> voorkeuren = voorkeurenRepository.findAll();
+        String voorkeurenString = zetOmNaarString(voorkeuren);
+        model.addAttribute("voorkeuren", voorkeurenString);
         return "roosteraar/docenten-koppelen-gekozen-cohort";
     }
 
