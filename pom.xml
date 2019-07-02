@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>sqrt4</groupId>
-    <artifactId>mijninzet</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>SQRT4-MijnInzet</artifactId>
+    <version>JarVersion</version>
     <name>mijninzet</name>
     <description>Onze versie van MijnInzet</description>
 
