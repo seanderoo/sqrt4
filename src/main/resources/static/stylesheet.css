@@ -225,24 +225,6 @@ select select {
     font-size: 16px;
 }
 
-/*#overzicht tr td {*/
-/*    table-layout: fixed;*/
-/*    word-wrap: break-word;*/
-/*    background-color: white;*/
-/*    border: 1px solid black;*/
-/*    color: black !important;*/
-/*    margin-outside: 30px;*/
-/*}*/
-
-/*#overzichtAfgehandeld tr td {*/
-/*    margin-top: 30px;*/
-/*    table-layout: fixed;*/
-/*    word-wrap: break-word;*/
-/*    background-color: white;*/
-/*    border: 1px solid black;*/
-/*    color: black !important;*/
-/*}*/
-
 td.true {
     background-color: green !important;
 }
